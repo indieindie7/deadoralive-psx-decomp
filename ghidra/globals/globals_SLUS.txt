@@ -392,7 +392,7 @@
 0x80049748 snd_fn_reverb_depth_l_dup
 0x8004974c tbl_gs_buf_origin_y
 0x8004974e g_gs_buf_origin_y_alt
-0x80049758 snd_voice_seq_id DOA_SndVoice
+0x80049758 snd_voice_seq_id DOA_SndVoice[24]
 0x8004975a snd_voice_state
 0x8004975c snd_voice_flags
 0x8004975e snd_voice_vol_left
@@ -417,7 +417,7 @@
 0x80049786 snd_voice_slot_9786
 0x80049788 snd_voice_slot_9788
 0x8004978a snd_voice_slot_978a
-0x80049c38 spu_voice_bit_table
+0x80049c38 spu_shadow_regs_dead_80049c38
 0x80049c6c pad_fn_ptr_com_start
 0x80049c78 g_snd_reverb_mode
 0x80049c7c g_snd_reverb_type_val
@@ -776,7 +776,7 @@
 0x80069360 s_entry_survival_a
 0x80069364 s_entry_survival_b
 0x800833bc tbl_pad_act_align_cmd
-0x800833c8 tbl_fighter_slot_map
+0x800833c8 tbl_fighter_slot_map byte[14]
 0x800833c9 tbl_fighter_slot_map_1
 0x800833ca tbl_fighter_slot_map_2
 0x800833cc tbl_fighter_slot_map_4
@@ -789,7 +789,7 @@
 0x800833d5 tbl_fighter_costume_id_b
 0x80083400 tbl_option_default_values
 0x80083424 tbl_option_default_values_b
-0x80083434 tbl_stage_data_cd_index
+0x80083434 tbl_stage_data_cd_index short[16]
 0x800837d4 tbl_fighter_model_ptr uint[2]
 0x800837dc tbl_fighter_tim_offset
 0x80083824 tbl_menu_default_a
@@ -801,23 +801,20 @@
 0x80083964 tbl_menu_default_g
 0x800839b4 tbl_menu_default_h
 0x80083a04 tbl_menu_default_i
-0x80083a54 tbl_stage_anim_tex_enable
-0x80083a6c tbl_stage_anim_tex_frames
-0x80083a84 tbl_stage_anim_tex_b
-0x80083ab0 tbl_stage_anim_tex_vram
-0x80083adc tbl_stage_anim_tex_seq
-0x80083d54 tbl_stage_anim_tex_frames_b
-0x80083d6c tbl_stage_anim_tex_c
-0x80083d6e tbl_stage_anim_tex_d
-0x80083dc0 tbl_sfx_a DOA_SfxEntry
+0x80083a54 tbl_stage_anim_tex_enable byte[21]
+0x80083a6c tbl_stage_anim_tex_frames byte[21]
+0x80083a84 tbl_stage_anim_tex_b ushort[21]
+0x80083ab0 tbl_stage_anim_tex_vram ushort[21]
+0x80083adc tbl_stage_anim_tex_seq byte[630]
+0x80083d54 tbl_stage_anim_tex_frames_b byte[21]
+0x80083d6c tbl_stage_anim_tex_c DOA_AnimTexPair[21]
+0x80083dc0 tbl_sfx_a DOA_SfxEntry[46]
 0x80083ed4 tbl_sfx_b DOA_SfxEntry
 0x80083f04 tbl_sfx_c DOA_SfxEntry
 0x80083f34 tbl_sfx_d DOA_SfxEntry
 0x80084260 tbl_sfx_e DOA_SfxEntry
-0x80084c6c tbl_snd_vab_load_flags
-0x80084c70 tbl_snd_vab_dest_ptr
-0x80084c78 tbl_snd_vab_load_b
-0x80084cac tbl_snd_vab_prog_map
+0x80084c6c tbl_snd_vab_load_flags DOA_VabLoadRec[4]
+0x80084cac tbl_snd_vab_prog_map ushort[42]
 0x80084dd4 tbl_title_menu_y
 0x80084df4 tbl_title_logo_sprites short[90]
 0x80084eac tbl_movie_a
@@ -1095,10 +1092,7 @@
 0x8008e468 buf_spu_key_status
 0x8008e480 g_ranking_scroll_timer
 0x8008e482 g_clear_color_b0
-0x8008e4c8 buf_stage_anim_tex_rect_x
-0x8008e4ca buf_stage_anim_tex_rect_y
-0x8008e4cc buf_stage_anim_tex_rect_w
-0x8008e4ce buf_stage_anim_tex_rect_h
+0x8008e4c8 buf_stage_anim_tex_rect_x DOA_Rect[16]
 0x8008e6c8 g_stage_anim_tex_id
 0x8008e724 g_exit_mode_dialog_flag
 0x8008e725 g_main_loop_exit_flag
@@ -1392,3 +1386,6 @@
 0x80093c68 g_player1_header
 0x80093c14 g_fighter_state
 0x80092898 tbl_motion_joint_flags short[2]
+0x80083454 tbl_fighter_cd_idx_by_player_char short[28]
+0x8008348c tbl_fighter_cd_idx_c short[28]
+0x800834c4 tbl_fighter_cd_idx_by_char_costume_player short[392]

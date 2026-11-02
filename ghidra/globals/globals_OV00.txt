@@ -980,3 +980,4 @@
 0x8018a800 g_team_battle_buf_b
 0x801eb638 g_dbgpad_frame_counter
 0x801f1600 g_gte_vertex_buf
+0x800ee504 tbl_stage_anim_tex_id_by_stage byte[16]

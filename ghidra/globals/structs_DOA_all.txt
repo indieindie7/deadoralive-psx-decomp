@@ -155,3 +155,22 @@ struct DOA_AnimInit 8
 1 byte costume
 2 ushort pad
 4 pointer data
+
+# Evidence: stage_UpdateAnimatedTextures: tbl c/d interleaved ushort pair, stride 4, 21*4=0x54 to 0x80083dc0
+struct DOA_AnimTexPair 4
+0 ushort c
+2 ushort d
+
+# Evidence: buf_stage_anim_tex_rect: RECT stride 8, 8 slots x 2 draw buffers (g_gfx_draw_buffer_idx*0x40)
+struct DOA_Rect 8
+0 short x
+2 short y
+4 short w
+6 short h
+
+# Evidence: snd_LoadVab record stride 0x10, 4 records (callers 0,1,2,(p1&0xff)+2), ends at prog_map 0x80084cac
+struct DOA_VabLoadRec 0x10
+0 byte slot
+4 uint dest
+8 uint f_8
+0xc uint size

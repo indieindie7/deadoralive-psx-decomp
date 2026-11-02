@@ -1,0 +1,22 @@
+NAME	ADDR	TYPE	READER	PROOF	STATUS
+snd_voice_seq_id	0x80049758	DOA_SndVoice[24]	spu_SetVoiceBitmask 0x80032cfc; init loop	24*0x36=0x510 ends 0x80049c68; voice[23].f_32 IS 0x80049c38. spu_voice_bit_table read only when spu_voice_attr_flags(0x80042518)&1; flag written only =0 at init, never set -> branch dead, symbol phantom (callers idx 0xca..0xcd would span >0x19a bytes). Renamed spu_shadow_regs_dead_80049c38, untyped	PROVEN
+tbl_sfx_a	0x80083dc0	DOA_SfxEntry[46]	sound_PlaySfx const callers	const call idx 0x2d=45 used; next table tbl_sfx_b at 0x80083ed4, 0x114=46*6	PROVEN
+tbl_sfx_b/c/d/e	0x80083ed4..	DOA_SfxEntry	select_sfx_entry_by_bank_and_id 0x8006f0b4	spacing 0x30=8 entries by tiling but index is runtime bank/id; max not provable	BLOCKED: runtime index
+tbl_stage_anim_tex_enable/frames/frames_b	0x80083a54/6c/d54	byte[21]	stage_UpdateAnimatedTextures 0x8006d688	enable[id]=slot count of group at id; max id+enable-1=13+8-1=20 -> 21 entries	PROVEN
+tbl_stage_anim_tex_b/vram	0x80083a84/ab0	ushort[21]	stage_UpdateAnimatedTextures	same index id+k, 21 entries	PROVEN
+tbl_stage_anim_tex_seq	0x80083adc	byte[630]	stage_UpdateAnimatedTextures	stride 0x1e x 21	PROVEN
+tbl_stage_anim_tex_c/d	0x80083d6c	DOA_AnimTexPair[21]	stage_UpdateAnimatedTextures	stride 4, 21*4=0x54 ends exactly 0x80083dc0	PROVEN
+buf_stage_anim_tex_rect	0x8008e4c8	DOA_Rect[16]	stage_UpdateAnimatedTextures	RECT stride 8, 8 slots x 2 buffers (draw_buffer_idx*0x40)	PROVEN
+tbl_stage_anim_tex_id_by_stage	0x800ee504	byte[16]	get_clear_rect_index_clamped (clamps >15 to 0)	16 bytes in PS_DOA.BIN data: 08 08 08 ff ff ff 08 ff ff 03 ff ff 08 08 ff ff	PROVEN
+tbl_fighter_cd_idx_by_player_char	0x80083454	short[28]	fighter_LoadModel 0x8006cce8	[player*0x1c+char*2], 2x14	PROVEN
+tbl_fighter_cd_idx_c	0x8008348c	short[28]	fighter_LoadModel	[char*4+player*2], 14 chars, ends 0x800834c4	PROVEN
+tbl_fighter_cd_idx_by_char_costume_player	0x800834c4	short[392]	fighter_LoadModel	[char*0x38+costume*4+player*2]=14*14*2, ends exactly 0x800837d4; row 14 is garbage -> 14 chars	PROVEN
+tbl_fighter_slot_map	0x800833c8	byte[14]	fighter_LoadModel	index=char id, domain 14 by A/B/C tiling	PROVEN
+tbl_stage_data_cd_index	0x80083434	short[16]	stage_LoadStageData 0x8006cbb4	values 0xe8..0xf7 consecutive, adjacent table at 0x80083454; index g_continue_count/g_fade_color_r unbounded in code, so extent by adjacency + data run, not reader bound	PROVEN (extent by adjacency)
+tbl_snd_vab_load_flags	0x80084c6c	DOA_VabLoadRec[4]	snd_LoadVab 0x8006ee54	stride 0x10; callers pass 0,1,2,(p1&0xff)+2 (p1 0/1) -> 4; ends at prog_map 0x80084cac	PROVEN
+tbl_snd_vab_prog_map	0x80084cac	ushort[42]	snd_LoadVab	index (p&0xff) runtime; extent by data (perm of 0x125..0x14e) + string at 0x80084d00	PROVEN (extent by data)
+tbl_movie_a/tbl_movie_b	0x80084eac/b0	uint (scalar)	SLUS dec13 39754-39755	copied to exec header +0x30/+0x34 (PSX-EXE sp base/offs): values 0x801ff000, 0 -> scalars, not tables	PROVEN scalar (types left untyped)
+tbl_movie_file_entry / tbl_movie_play_frames	0x80084ec8/ee0	?	dec13 SLUS 39806, 39931	stride 0x30 indexed by movie id; count of movies not bounded by reader; not typed	BLOCKED: count runtime
+tbl_part_flags_by_move_a	0x800ea6b8	byte[N]	OV00	N=*(byte*)(model_hdr+9) runtime	BLOCKED: runtime size
+tbl_effect_piece_set	0x800ee008	?	effect_InitPieceSet (OV00)	16 bytes/set, sets spaced 0x18; set count not proven	BLOCKED: count unproven
+tbl_vibration_script_0..9	0x800eca28	?	OV00	scalar words read individually; no stride/index proven	BLOCKED: no indexed reader
