@@ -12,7 +12,7 @@ Hand-named function map, naming prompts, globals and tools for **Dead or Alive**
 | OV02 | 87 | 0 | 25 | 24 | 38 | 97 |
 | OV04 | 15 | 0 | 2 | 9 | 4 | 69 |
 
-Every hand line ends in `[ev:...]`. Only 926 of 2,181 names are anchored (string, hw register, GTE, byte-identical library twin in another PS1 game, Saturn match). The other 1,255 are NOT proven and are open. See NOTES.md (evidence audit).
+Every hand line ends in `[ev:...]`. 926 of 2,181 names are anchored externally (string, hw register, GTE, byte-identical library twin in another PS1 game, Saturn match). The other 1,255 are tier BODY: checked only against the function own decompile (642 verified, 613 renamed to neutral behaviour-only names), single reader, not independently reviewed. See NOTES.md (Round 3).
 0 `FUN_` and 0 `DAT_` left. Method as in shamanking-decomp: Ghidra headless seeds functions, `psxrules.py` names BIOS stubs,
 hinted dumps are sliced and named by agents, orphan scan for missed code, two review rounds, then globals and structs.
 Non-commercial, for study and preservation. **No game data is included** (no disc, exe, overlays, decompiled C or game text).
