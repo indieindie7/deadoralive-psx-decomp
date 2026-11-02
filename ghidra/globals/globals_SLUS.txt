@@ -583,7 +583,7 @@
 0x8004b930 tbl_gs_local_world_ptr
 0x8004b9b0 g_gs_light_mode_a
 0x8004b9b4 g_gs_light_mode_b
-0x8004b9b8 tbl_snd_seq_base
+0x8004b9b8 tbl_snd_seq_base pointer
 0x8004c238 g_snd_seq_max_count
 0x8004c23a g_snd_seq_slot_count
 0x8004c23c g_gs_frame_counter
@@ -790,7 +790,7 @@
 0x80083400 tbl_option_default_values
 0x80083424 tbl_option_default_values_b
 0x80083434 tbl_stage_data_cd_index
-0x800837d4 tbl_fighter_model_ptr
+0x800837d4 tbl_fighter_model_ptr uint[2]
 0x800837dc tbl_fighter_tim_offset
 0x80083824 tbl_menu_default_a
 0x80083839 tbl_menu_default_b
@@ -819,7 +819,7 @@
 0x80084c78 tbl_snd_vab_load_b
 0x80084cac tbl_snd_vab_prog_map
 0x80084dd4 tbl_title_menu_y
-0x80084df4 tbl_title_logo_sprites
+0x80084df4 tbl_title_logo_sprites short[90]
 0x80084eac tbl_movie_a
 0x80084eb0 tbl_movie_b
 0x80084ec8 tbl_movie_file_entry
@@ -1106,7 +1106,7 @@
 0x8008fc8c g_play_time_seconds
 0x800907d8 g_sound_init_param
 0x800907da g_stage_index
-0x80091cf8 tbl_ranking_entries
+0x80091cf8 tbl_ranking_entries ushort[15]
 0x80092858 g_play_time_hours
 0x80092859 g_clear_color_r1
 0x8009285a g_ranking_confirm_flag
@@ -1388,6 +1388,7 @@
 0x80102294 g_ai_cmd_state
 0x80103732 g_pause_menu_flag_3732
 0x801037de g_mode_type_prev
-0x80093c10 g_player0_header DOA_PlayerHeader
-0x80093c68 g_player1_header DOA_PlayerHeader
-0x80093c14 g_fighter_state DOA_FighterState
+0x80093c10 g_player0_header DOA_Player[2]
+0x80093c68 g_player1_header
+0x80093c14 g_fighter_state
+0x80092898 tbl_motion_joint_flags short[2]

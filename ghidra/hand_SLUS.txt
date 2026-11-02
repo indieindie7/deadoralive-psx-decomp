@@ -819,7 +819,7 @@
 0x800703d8 func call_snd_seqplayseq0_g_snd_current_seq_1_800703d8 hand BODY-proof: snd_SeqPlaySeq0(g_snd_current_seq,1,param_1) (prior unproven guess: sound_StopVoice) [ev:BODY]
 0x80070420 func call_snd_seqclose0_80070420 hand BODY-proof: body only calls snd_SeqClose0() (prior unproven guess: sound_StopAll) [ev:BODY]
 0x80070440 func sound_LoadAndPlayBgm hand loads track with FUN_8004c8e4 to 0x801f3e00, starts via FUN_8002c6fc at volume 0x7f | BODY-proof: cd_FadeAndReadFile to 0x801f3e00, SsSeqOpen, snd_SeqSetVolume0, g_bgm_track_current [ev:ctxGLOB,BODY]
-0x800704f8 func sound_SetMasterVolume hand stores volume in g_snd_master_volume and applies it through FUN_8002d34c | BODY-proof: stores g_snd_master_volume and calls snd_SetReverbVolume with it [ev:ctxGLOB,BODY]
+0x800704f8 func store_byte_call_snd_set_reverb_volume_800704f8 hand stores volume in g_snd_master_volume and applies it through FUN_8002d34c | BODY-proof: stores g_snd_master_volume and calls snd_SetReverbVolume with it [ev:ctxGLOB,BODY]
 0x80070524 func sound_SetCdVolumeA hand sets CD volume bytes g_cd_vol_left_l to 7f,0,7f,0 then FUN_80024664 and FUN_80030c7c | BODY-proof: sets g_cd_vol_* to 7f,0,7f,0, cd_SetMode, snd_SetMonoOff [ev:ctxGLOB,BODY]
 0x80070574 func sound_SetCdVolumeB hand sets CD volume bytes to 0x5f each then calls FUN_80030c6c | BODY-proof: sets g_cd_vol_* to 0x5f, cd_SetMode, snd_SetMonoOn [ev:ctxGLOB,BODY]
 0x800705c4 func call_snd_seqclose0_allvoicesreset_zero_8_buf_sfx_voice_a_800705c4 hand BODY-proof: loop 8 zeroing buf_sfx_voice_active, g_sfx_queue_count=0 (prior unproven guess: sound_ResetVoices) [ev:BODY]

@@ -145,3 +145,13 @@ a0 int f_a0
 a4 int f_a4
 a8 int f_a8
 ac int f_ac
+# Evidence: evid/tables_proof.tsv (index (&g_player0_header)[x*0x16] of 4-byte elems = 0x58, byte idx *0x58; header 4 + state 0x54 = 0x58)
+struct DOA_Player 58
+0 DOA_PlayerHeader hdr
+4 DOA_FighterState st
+# Evidence: tables_proof.tsv tbl_fighter_anim_init scan loop pcVar10+=8 until char_id==-1 (dec9_OV00.c:12062-12075)
+struct DOA_AnimInit 8
+0 byte char_id
+1 byte costume
+2 ushort pad
+4 pointer data

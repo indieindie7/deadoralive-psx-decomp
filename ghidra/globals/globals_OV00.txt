@@ -439,7 +439,7 @@
 0x80094714 tbl_freecam_pad_limit_2
 0x80094718 tbl_freecam_pad_limit_3
 0x80094978 tbl_random_table16
-0x800949b8 tbl_random_table_rows
+0x800949b8 tbl_random_table_rows uint[80]
 0x80094af8 tbl_random_table_rows_end
 0x80094c88 s_team_roster_panel_a
 0x80094c94 s_team_roster_panel_b
@@ -469,16 +469,16 @@
 0x800e53ac tbl_fighter_effect_param_a
 0x800e53b0 tbl_fighter_effect_param_b
 0x800e53b4 tbl_fighter_effect_param_c
-0x800e5690 tbl_motion_pointers_a
+0x800e5690 tbl_motion_pointers_a int[4]
 0x800e56a0 tbl_motion_pointers_b
 0x800e56b0 tbl_motion_pointers_c
 0x800e56ec tbl_motion_pointers_d
-0x800e5898 tbl_posture_data
+0x800e5898 tbl_posture_data uint[124]
 0x800e5d9c g_anim_event_offset_ptr
-0x800e5e88 tbl_shadow_player_data
+0x800e5e88 tbl_shadow_player_data byte[9]
 0x800e795c g_taunt_voice_id
 0x800e94b0 g_pose_update_limit
-0x800ea5a8 tbl_fighter_anim_init
+0x800ea5a8 tbl_fighter_anim_init DOA_AnimInit[33]
 0x800ea6b0 tbl_pose_part_flags_base
 0x800ea6b8 tbl_part_flags_by_move_a
 0x800ea6c0 tbl_part_flags_by_move_b
@@ -529,7 +529,7 @@
 0x800ef8a8 g_cam_attract_orbit_a
 0x800ef8ac g_cam_attract_orbit_b
 0x800ef8b0 g_cam_closeup_index
-0x800ef8d0 tbl_airborne_state_data
+0x800ef8d0 tbl_airborne_state_data int[2]
 0x800ef8d8 g_task_state_flag_a
 0x800ef8d9 g_task_state_flag_b
 0x800ef8da g_task_state_word
@@ -544,7 +544,7 @@
 0x800ef939 g_round_end_react_pick_p2
 0x800ef958 g_round_end_setup_mode
 0x800ef959 g_round_end_setup_mode_copy
-0x800ef970 tbl_dust_triggers
+0x800ef970 tbl_dust_triggers char[2]
 0x800ef972 g_fx_spawn_counter
 0x800ef974 g_fx_dust_speed_threshold
 0x800ef978 g_task_toggle

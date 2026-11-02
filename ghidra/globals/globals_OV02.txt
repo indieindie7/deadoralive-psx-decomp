@@ -76,7 +76,7 @@
 0x800949a4 s_footer_exit_b
 0x800949ac s_footer_play
 0x800949b0 s_footer_stop
-0x800949b8 tbl_random_table_end
+0x800949b8 tbl_random_table_end uint[80]
 0x800a05b4 s_option_menu_item_list
 0x800a17b8 g_versus_ranking_scroll
 0x800a17bc g_versus_data_scroll
