@@ -1,0 +1,15 @@
+0x801e8288 func fx_UpdateOrbitPosition hand rotates two position fields by angle deltas, sets third via sine table scaled 2000 plus 1000
+0x801e83dc func fx_InitOrbitTarget hand computes angle deltas from 6000 and -5000 targets, divides by 0x28, sets state flags on 0x58 byte entry
+0x801e84b0 func gpu_ClearOrderingTables hand for current draw buffer calls ot clear helper four times with sizes then links tables
+0x801e85f8 func gfx_BuildVertexFromTables hand builds small vertex packet from two lookup tables by index and passes to helper with param_4
+0x801e9190 func dbgpad_Init hand calls init helpers, resets input history, clears pad debug counters, sets flag DAT_800939aa
+0x801e9214 func dbgpad_Update hand selects pad port from mode byte, updates input history and draws, submits two ordering table packets
+0x801e9328 func dbgpad_UpdateHistoryStub hand mis-split head of input history update; duplicate prologue of following function
+0x801e9338 func dbgpad_UpdateHistoryDraw hand appends pad button bits to 16 entry history ring, draws four text rows of direction and button letters via char output
+0x801e982c func dbgpad_ClearHistory hand zeroes 16 entry pad input history buffer and its count
+0x801e9858 func dbgpad_DrawFrameCounters hand reads fighter state frame counters, converts to decimal digits, draws three numbers via small text drawer
+0x801e9d34 func dbgpad_PutChar hand handles control codes and arrow letter glyphs, advances cursor, draws one char via text drawer
+0x801e9e7c func dbgpad_DrawString hand draws zero terminated string as textured sprites per char using font coordinate table, queues each primitive
+0x801ea024 func dbgpad_DrawSmallString hand draws zero terminated string with 12 pixel advance, sprite per char from font table, queues each
+0x801ea1e0 func dbgpad_DrawHexGrid hand draws 44 entry word grid as GT4 tiles, 31 columns by 2 rows, glyph uv from value
+0x801ea614 func dbgpad_InitFontTables hand fills font position tables, sets texture page and clut values, calls setup helpers, falls into bad data (name confirmed in review: function body is a font-table init, trailing bytes are data)

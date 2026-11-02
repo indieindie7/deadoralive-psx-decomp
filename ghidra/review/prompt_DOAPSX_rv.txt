@@ -1,0 +1,13 @@
+Review of provisional function names in a game decompile: Dead or Alive (Tecmo, 1998, PlayStation, SLUS-00606, main exe at 0x80010000, MOVIE.EXE at 0x80100000, overlays at 0x80093420 and 0x801e8000, MIPS R3000 with GTE, PsyQ GCC; 3D fighting game ported from the Saturn version, whose hand names are in C:SERSJOHNDOCUMENTSDEADORALIVEGHIDRAHAND_00DOA.TXT: GREP IT, SAME MODULE PREFIXES). Research only.
+These names were marked provisional by a first naming pass. Now each entry also has its callers.
+Entry layout: "#### PROG 0x<addr> <name> | <comment>", then the function decompile, then "---- callers: N (names)", then up to 3 caller decompiles.
+Name from what the code does; never copy text from any leaked source.
+Rule: read EVERY entry's body and its callers before deciding. Do not decide from the name or comment alone; do not skim.
+For each entry decide, using the body AND how callers use it (arguments passed, result used, the caller's own name and job):
+- CONFIRM: the name fits.
+- RENAME: a clearly better name (same style: lowercase module prefix + CamelCase, letters digits underscore, no _<number> suffix; PsyQ library names (GsXxx, CdXxx, SpuXxx, PadXxx) only when the behaviour clearly matches).
+- UNSURE: still not enough evidence. Keep it.
+Write each verdict line exactly:
+<PROG> 0x<addr> <oldname> CONFIRM|RENAME|UNSURE <newname or oldname> <short reason, one line>
+Every entry gets exactly one line. Do not quote game text longer than 3 words.
+PROG is as in the entry header. Read FILE in pieces of about 600 lines with offset/limit until the end; write all verdict lines to OUT (plain text, one line per entry, nothing else).

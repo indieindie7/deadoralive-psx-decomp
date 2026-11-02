@@ -1,0 +1,12 @@
+MOVIE 0x8010c764 pad_SetMainModeStep CONFIRM pad_SetMainModeStep checks pad state bytes, calls callback if +0x53 clear else returns 1 on state 2 or sets 0xfe; no callers, pad prefix fits and body is too small to name better
+OV00 0x800a689c fighter_CheckClothSprings RENAME fighter_UpdatePartFlagsByPairValue sums two fighters' table bytes with thresholds 0x94/0x8e then disables/clears model part flags; no spring math; callers are fight setup and fighter change
+OV00 0x800be0a8 math_ProjectSinCosToXZ CONFIRM math_ProjectSinCosToXZ indexes sin/cos table by angle&0xfff, scales by amount, >>12, stores three velocity globals; no callers
+OV00 0x800c4910 mem_CopyTeamBattleTable CONFIRM mem_CopyTeamBattleTable copies 0x19 words from 0x8012d000 to 0x80102738; sole caller fight_InitMatchOpponents (match start setup), team meaning is best guess
+OV00 0x800a5ac8 math_ScaleParamsByQuotient CONFIRM math_ScaleParamsByQuotient computes (hi>>6)-v0, stores it, multiplies two table entries by it; no callers, matches current name
+SLUS 0x800273dc etc_Wrapper_800273dc RENAME etc_IntServiceCall4 calls int-service table slot 0x14 with (4,arg); callers pass 0 to stop tick timer or init graphics events
+SLUS 0x80027418 etc_InterruptEnableWrapper RENAME etc_IntServiceSlot14Call tail-calls table slot 0x14 through in_v0; no callers, enable meaning unproven
+SLUS 0x80027440 etc_InterruptDisableWrapper RENAME etc_SetDefaultExitFromExceptionWrap calls table slot 0x10; callee name and sole caller exe_LoadAndExec (before exec of next exe) fit exit-handler setup
+SLUS 0x80027478 etc_Wrapper_80027478 RENAME etc_SetCustomExitFromExceptionWrap calls table slot 0x18; callee is SetCustomExitFromException wrapper, no callers
+SLUS 0x80028d7c snd_VoiceAllocate RENAME snd_SeqCmdSetTrackParam1A sequence command: writes track state bytes at 0x1a/0x1d, optional callback at state 0x28, reads next delta time; no SPU voice search
+SLUS 0x80028fec snd_SetVoiceVolume RENAME snd_SeqCmdSetTrackField18 sequence command: stores byte at track+0x18, bumps counter, reads delta time; no SPU register write
+SLUS 0x8002905c snd_SetVoicePitch RENAME snd_SeqCmdSetTrackField19 sequence command: stores byte at track+0x19, bumps counter, reads delta time; no SPU register write

@@ -1,0 +1,767 @@
+0x8009554c func gfx_InitBufferPair hand initializes the double-buffered display and draw environment pair at overlay start
+0x80095644 func fighter_SetupModelPointers hand builds per-fighter model, bone and texture pointer tables from loaded character data
+0x800957e8 func fighter_DispatchModelDraw hand selects fighter model variant and dispatches joint-by-joint draw calls with GTE transforms
+0x80095b44 func fighter_GetModelDataPtr hand returns pointer to a fighter's model data block by character index
+0x80095b84 func fighter_UpdateAction hand per-frame fighter action update choosing motion, state transitions and calling motion stepping
+0x80095f40 func fighter_StepMotionFrames hand advances the fighter motion by the frame count and runs per-frame stream steps
+0x800961a4 func motion_AdvanceFrameFixed hand advances motion frame counter using fixed point speed and handles end of segment
+0x800963ac func motion_StepJointPolynomials hand evaluates per-joint polynomial curves ((a*t+b)*t>>10)+(c>>2) for the next frame
+0x800963f4 func motion_StepJointPolynomialsTail hand second polynomial joint stepping variant for the extra channel group (was motion_StepJointPolynomials_2)
+0x80096820 func motion_LoadPoseKeyframes hand loads packed pose keyframe angles for all joints and blends them with the previous pose
+0x80097428 func motion_ReadStreamAngleOffsets hand reads angle offset words from the motion stream and adds them to joint targets
+0x80097638 func motion_LoadPoseKeyframesNoBlend hand loads pose keyframes directly into joint state without blending
+0x80097a48 func fighter_EndMotion hand finishes the current motion, clears motion state and requests the follow-up action
+0x80097a94 func motion_SkipToFrame hand fast-forwards motion streams to a requested frame number
+0x80097bf8 func fighter_ConsumePendingFlags hand applies and clears queued pending flags such as hit, throw and guard requests
+0x80097d28 func fighter_FinishFrameUpdate hand end-of-frame housekeeping after motion step, updates facing and timers
+0x80097e80 func fighter_UpdateFacingAngle hand turns fighter toward opponent with clamped turn rate using angle table
+0x8009830c func fighter_RotateJointChain hand rotates a chain of joint points around a pivot by given angles
+0x800983d0 func math_BuildAxisAngleMatrix hand builds 3x3 fixed point rotation matrix from axis and angle using sine table
+0x800987dc func math_RotateYMatrixNeg hand rotates a matrix around the Y axis by the negated angle
+0x80098834 func math_DirectionToEulerAngles hand converts a direction vector into yaw and pitch angles via atan helper
+0x800989e8 func fighter_RotateJointPointsY hand rotates fighter joint points around Y by facing angle using sine table
+0x80098a98 func fighter_IsFlinchState hand returns whether the fighter action index is a flinch or hit stagger state
+0x80098bd8 func fighter_UpdateDistanceFlag hand sets near or far flag from distance between the two fighters
+0x80098c4c func fighter_TriggerTauntVoice hand picks and triggers a taunt or voice sound for the fighter
+0x80098d80 func motion_AdvanceTimedTable hand steps a timed event table and fires entries when their frame arrives
+0x80098e6c func fighter_HandleMoveTransition hand handles transition from current move into the next queued move including cancel windows
+0x80099814 func fighter_StartMotionHeader hand starts a motion by reading its header, setting frame counts, flags and stream pointers
+0x80099dcc func fighter_RecordHitHistory hand pushes hit data into a small history ring for combo and damage tracking
+0x80099f30 func fighter_ResetPlayerState hand clears one fighter's state block to defaults at round start
+0x8009a14c func fighter_IsDownedState hand returns whether fighter is in a knocked down or lying state
+0x8009a1c4 func fighter_GetHitReactionIndex hand maps hit type, height and strength to a hit reaction action index
+0x8009a330 func fighter_MotionCommandDispatch hand big switch executing motion script opcodes for hit boxes, sounds, flags and effects
+0x8009bc04 func fighter_SelectMotionPointer hand selects motion data pointer for an action index from the character motion tables
+0x8009bd74 func fighter_InitMotionPointers hand fills per-fighter motion pointer table from loaded motion archive
+0x8009c2d0 func fighter_InitMotionPointersAlt hand alternate motion pointer table init for a second motion archive layout
+0x8009cadc func motion_StepKeyframeInterp hand steps keyframe interpolation for one frame across joint channels
+0x8009ccec func motion_SeekChannelsToFrame hand steps five groups of three channel streams until the target frame is reached
+0x8009cf00 func motion_InitSegmentPos16 hand decodes a segment start reading 16-bit positions and computes per-frame slope
+0x8009cfd0 func motion_InitSegmentPos16Tail hand variant of position segment decoder with different slope rounding (was motion_InitSegmentPos16_2)
+0x8009d0a0 func motion_InitSegmentNoRamp hand decodes a segment with slope equal to delta over length without offset ramp
+0x8009d148 func motion_InitSegmentHold hand decodes a hold segment with zero slope keeping the value constant
+0x8009d244 func motion_InitSegmentLenPos hand decodes a segment with explicit length word followed by positions
+0x8009d324 func motion_InitSegmentLenShort hand decodes a segment with explicit length and short packed values
+0x8009d404 func motion_InitSegmentLenNoRamp hand decodes explicit length segment without ramp offset
+0x8009d4bc func motion_InitSegmentSingleFrame hand decodes a single frame segment setting value directly
+0x8009d544 func motion_CheckMotionFinished hand checks whether all channel streams of a fighter motion have ended
+0x8009d6a8 func motion_StepChannelStreams hand steps every channel stream by one frame refilling segments when exhausted
+0x8009d8e4 func fighter_UpdateTransform hand applies per-frame position and velocity then GTE push pop and calls hit sphere update
+0x8009e01c func fighter_ComputeOpponentAngles hand computes yaw and pitch angles from this fighter toward the opponent
+0x8009e1f0 func fighter_UpdateHitSpheres hand transforms four joint points and updates hit sphere positions and radii
+0x8009e4b4 func fighter_StepAnimationFrames hand runs animation step repeatedly for the frame budget of this tick
+0x8009e5cc func fighter_StepAnimationOnce hand runs one animation step updating channels, joints and transform
+0x8009ee84 func fighter_SetupJointRotations hand builds joint rotation angles from channel values into per-joint rotation records
+0x8009fa78 func motion_CalcAngleStepDeltas hand computes per-frame angle deltas between current and target packed joint angles
+0x8009fab8 func motion_CalcAngleStepDeltasTail hand fragment of angle step delta computation using leftover registers (was motion_CalcAngleStepDeltas_2)
+0x8009fca0 func fighter_LoadPostureTable hand loads standing posture joint table for the fighter's current stance
+0x8009fdf4 func fighter_SetupJointRotationsAlt hand alternate joint rotation setup used for blended or secondary pose
+0x800a0624 func fighter_PackStateSnapshot hand packs fighter state into a compact record for replay or rollback
+0x800a0b64 func fighter_UnpackStateSnapshot hand restores fighter state from a packed snapshot record
+0x800a1278 func math_BlendAngleTriple hand blend of three packed joint angles toward target values
+0x800a13fc func fighter_TransformJointMatrices hand builds and transforms matrices for fifteen fighter joints with GTE
+0x800a14e8 func fighter_BuildLimbMatrices hand builds limb rotation matrices from joint angles and parent matrices
+0x800a182c func stub_800a182c hand rules: empty: jr ra
+0x800a1834 func math_AngleDeltaBetweenVectors hand computes angle difference between two direction vectors in 4096 units
+0x800a1890 func fighter_UpdateSwayEffect hand updates body sway offset effect applied to joints
+0x800a1988 func fighter_ComputeVelocityDelta hand computes change in velocity between frames for sway driving
+0x800a1a84 func fighter_UpdateSwayParams hand updates sway amplitude and speed parameters from motion state
+0x800a1bf8 func fighter_ComputeSwayDirection hand computes sway direction angle from velocity and facing
+0x800a1d70 func fighter_StepSwayPhysics hand integrates sway spring physics one step
+0x800a1e50 func fighter_UpdateSwaySpeed hand adjusts sway speed toward a target with limits
+0x800a200c func fighter_FlipSwayDirection hand flips sway direction when fighter turns around
+0x800a2040 func fighter_GetSwayTableValue hand looks up a sway value from the sine style table by phase
+0x800a2060 func fighter_GetSwayRiseValue hand returns sway curve value during the rising phase
+0x800a20b0 func fighter_GetSwayFallValue hand returns sway curve value during the falling phase
+0x800a2100 func fighter_GetSwayDirectionalSpeed hand returns sway speed signed by current direction
+0x800a2148 func fighter_InitSwayState hand resets sway state variables for a fighter
+0x800a223c func fighter_LoadSecondaryAnimTable hand loads secondary animation table pointers for a fighter such as hair or cloth
+0x800a23c4 func fighter_InterpSecondaryAnim hand interpolates the secondary animation between two table keys
+0x800a247c func fighter_LookupAnimEventOffset hand looks up event frame offset in the animation event table
+0x800a25f0 func camera_UpdateViewMatrix hand builds camera view matrix from camera position and angles and loads it to GTE
+0x800a2714 func fighter_DrawShadowsBoth hand draws shadows for both fighters calling per-player shadow routine
+0x800a276c func fighter_DrawShadowPlayer hand builds shadow quad for one fighter projected to the floor
+0x800a29dc func gte_LoadControlRegs hand loads rotation translation control registers into GTE from memory
+0x800a2a24 func gte_StoreControlRegs hand stores GTE rotation and translation control registers to memory
+0x800a2a6c func math_MulMatrixGte hand multiplies two 3x3 matrices using GTE and stores the result
+0x800a2c6c func gpu_AddShadowPolyG4 hand GTE NCLIP and average Z then links a G4 shadow polygon packet
+0x800a2d60 func math_RotateYMatrixGte hand rotates a matrix around Y by angle using GTE multiply
+0x800a2e14 func fighter_SelectReactionTables hand selects hit reaction tables by character and calls table loaders
+0x800a3164 func fighter_LoadHitTable13 hand loads hit data table index 0x13 for a player
+0x800a3230 func fighter_LoadReactionTableA hand loads reaction table group A pointers for a fighter
+0x800a32d8 func fighter_LoadReactionTableB hand loads reaction table group B pointers for a fighter
+0x800a3380 func fighter_LoadReactionTableC hand loads reaction table group C pointers for a fighter
+0x800a3420 func fighter_IsHeadTrackingBlocked hand returns whether current action disables head look tracking
+0x800a3680 func fighter_UpdateHeadTracking hand computes opponent angle, clamps turn rate and builds head rotation matrices
+0x800a40b4 func fighter_ComputeHeadTrackAngles hand computes yaw and pitch to opponent minus current head angles into tracking arrays
+0x800a4228 func fighter_ApplyHeadTrackMatrix hand builds head rotation matrix from stored angles and updates shadow angle words
+0x800a43bc func stub_800a43bc hand empty function returning immediately
+0x800a43cc func fighter_InitGlobalState hand zeroes all per-fighter globals, loads hit tables and initializes both players at match start
+0x800a4ec0 func game_ResetPairSlotTables hand calls helper then zeroes two 12-byte slot entries in fight slot table
+0x800a4f1c func game_ClearPlayerEffectTables hand zeroes fifteen 12-byte effect entries plus per-player 12-byte slots
+0x800a5030 func sys_InitTwoSlots hand calls slot init for player 0 and 1, returns zero
+0x800a5058 func stub_800a5058 hand tiny stub that only returns zero
+0x800a5068 func stub_800a5068 hand rules: empty: jr ra
+0x800a5070 func game_UpdateFightSetupState hand state machine on fight setup variable, state 1 sets up, 2 clears
+0x800a5260 func game_InitFightSetup hand sets setup flag, resets tables, caches fighter and costume ids per player
+0x800a5388 func game_ClearHitSparkTable hand zeroes shorts in two-entry table with 0x10 stride
+0x800a53ec func game_LoadFighterModel hand loads fighter model data via loader callees for current fighter
+0x800a5424 func game_CheckFighterChange hand reloads fighter model when fighter id or costume id changed
+0x800a5508 func game_FightMainLoop hand main frame loop: VSync, draw environment, ordering table clear and submit
+0x800a5884 func fighter_UpdatePlayerFrame hand per-player frame update calling pose and effect helpers
+0x800a5924 func fighter_SpawnHitEffect hand spawns hit effect entry from player state
+0x800a5a10 func game_FlipFrameBuffer hand toggles double-buffer index and swaps draw and display environments
+0x800a5a5c func game_ResetFightTables hand clears fight tables and per-player counters at round start
+0x800a5ce0 func game_UpdatePlayerMirrorState hand updates mirrored facing flags between the two players
+0x800a5ea8 func fighter_UpdateBlendRamp hand per-player 0x1000 blend ramp driven by move ids 0x28 and 0x65
+0x800a611c func camera_SetupFightCamera hand computes camera distance and angles using divisor 0xa7
+0x800a641c func fighter_SelectPaletteTable hand picks palette table by fighter and costume id
+0x800a648c func model_InitFighterParts hand copies bone parts with 0x63c per-player stride
+0x800a678c func model_ResetPartSprings hand resets spring state for model parts
+0x800a689c func fighter_UpdatePartFlagsByPairValue hand spring threshold test using 0x94 and 0x8e (was fighter_CheckClothSprings)
+0x800a68ac func fighter_CheckClothSpringsTail hand duplicate spring threshold test with register inputs (was fighter_CheckClothSprings_2)
+0x800a6a2c func model_DisableParts hand clears enable flags on model parts
+0x800a6b48 func model_ClearPartFlag hand clears one flag across model parts
+0x800a6c24 func math_CalcPitchToCamera hand computes pitch angle from part position toward camera
+0x800a6d34 func model_UpdatePartSprings hand per-frame spring update of model part offsets
+0x800a73c8 func gte_ApplyYawPitchRot hand builds yaw and pitch rotation matrix and applies via GTE
+0x800a7414 func model_UpdateSpringAxis hand spring update along one axis for first spring item
+0x800a78b0 func model_UpdateSpringChain hand chained spring update propagating along linked parts
+0x800a7c20 func gte_RotateVecByMatrix hand rotates vector by matrix using GTE MVMVA no translation
+0x800a7cc4 func gte_LoadRotTrans hand loads rotation matrix and translation vector into GTE registers
+0x800a7d0c func gte_StoreRotTrans hand stores GTE rotation matrix and translation into memory
+0x800a7d50 func gte_RotateVec3 hand rotates three-component vector with GTE and stores result
+0x800a7d8c func math_Atan2 hand computes angle from two components using atan table, 4096 per turn
+0x800a7f08 func gte_RotMatrixYaw hand builds yaw rotation matrix from sin cos table
+0x800a7fc4 func gte_RotMatrixPitch hand builds pitch rotation matrix from sin cos table
+0x800a8070 func gte_TranslateByRotatedVec hand adds rotated vector into GTE translation register
+0x800a80ac func gpu_LinkDepthMarkers hand patches ordering table entries by depth for marker prims
+0x800a8360 func model_DrawFighterParts hand dispatches per-part primitive type 0x801a 0x8018 0x29 0x803a and draws
+0x800a881c func gte_BuildLightMatrix hand builds light matrix and loads it into GTE
+0x800a88f4 func gte_LoadRotTrans_2 hand loads rotation and translation into GTE, variant with pointer inputs
+0x800a893c func gte_MulMatrixLoad hand multiplies matrices using GTE and loads result
+0x800a8a50 func gte_LoadRotMatrix hand loads rotation matrix only into GTE
+0x800a8a80 func gte_TransformVerticesRTPT hand transforms vertex triples with GTE RTPT into scratch
+0x800a8bf8 func model_DrawGT4Lit hand builds lit gouraud textured quad packets from model vertices
+0x800a8eb4 func model_DrawGT3Alpha hand builds alpha gouraud textured triangle packets
+0x800a9104 func model_DrawGT3Tex hand builds gouraud textured triangle packets code 0x34
+0x800a92d4 func model_DrawGT4Flat hand builds gouraud textured quad packets code 0x3c with flat 0x808080 color
+0x800a94b0 func model_DrawGT3Flat hand builds gouraud textured triangle packets code 0x34 with flat color
+0x800a965c func model_DrawPolyF3 hand builds flat triangle packets from model vertices
+0x800a97bc func model_DrawFT4 hand builds flat textured quad packets code 0x2c with 0x808080 color
+0x800a98f0 func model_DrawFT3 hand builds flat textured triangle packets
+0x800a9a10 func camera_UpdatePlayerTracking hand computes distance and angles to targets and builds camera matrices
+0x800a9ec4 func gte_TranslateByRotatedVec_2 hand adds rotated vector into GTE translation, duplicate variant
+0x800a9f04 func gte_SetTransIdentity hand sets GTE translation and identity rotation
+0x800a9f68 func gte_StoreRotTrans_2 hand stores GTE rotation and translation to memory, duplicate variant
+0x800a9fb8 func gte_LoadRotTrans_3 hand loads rotation and translation into GTE, duplicate variant
+0x800aa008 func gte_ScaleMatrix hand scales rotation matrix rows by vector using fixed point
+0x800aa0a8 func gte_RotMatrixYaw_2 hand builds yaw rotation matrix, duplicate variant
+0x800aa168 func gte_RotMatrixPitch_2 hand builds pitch rotation matrix, duplicate variant
+0x800aa218 func gte_RotMatrixRoll hand builds roll rotation matrix from sin cos table
+0x800aa2d8 func math_Atan2_3 hand atan2 using atan table, duplicate variant
+0x800aa454 func math_SqrtLZCS hand integer square root using table and GTE leading-zero count
+0x800aa4c4 func fighter_UpdateLimbPosHistory hand shifts and stores camera target position history (was camera_UpdateTargetHistory)
+0x800aa640 func camera_ComputeLookAngles hand computes yaw and pitch look angles toward a target
+0x800aa794 func camera_SetTargetFromTable hand sets camera target from per-player table entry
+0x800aa820 func fighter_SetHandTargetAndLoadRot hand sets camera target from table, variant (was camera_SetTargetFromTable_2)
+0x800aa8e8 func fighter_IsDownedGetUpMove hand tests move ids 0x76 and 0x77 with state 9 (was fighter_IsMoveInRange)
+0x800aa930 func fighter_LoadBoneRotTables hand loads bone rotation tables for a fighter pose
+0x800aaa24 func fighter_LoadBoneRotTable_A hand loads bone rotation table variant A
+0x800aab2c func fighter_LoadBoneRotSingleOrPair hand loads bone rotation table variant B (was fighter_LoadBoneRotTable_B)
+0x800aaba4 func fighter_LoadBoneRotTable_C hand loads bone rotation table variant C
+0x800aacac func fighter_LoadBoneRotSingle hand loads rotation for a single bone
+0x800aad88 func fighter_LoadBoneRotPair hand loads rotations for a pair of bones
+0x800aae98 func fighter_LoadHandRotTables hand loads hand bone rotation tables
+0x800aaf10 func fighter_LoadHandRotSingle hand loads rotation for a single hand bone
+0x800aafdc func fighter_LoadHandRotPair hand loads rotations for a pair of hand bones
+0x800ab0dc func gte_LoadRotTrans_4 hand loads rotation and translation into GTE, duplicate variant
+0x800ab12c func gte_StoreTrans hand stores GTE translation vector to memory
+0x800ab14c func gte_RotateVec3_2 hand rotates three-component vector with GTE, duplicate variant
+0x800ab190 func model_InitFighterAnim hand looks up fighter anim data by id in table and initializes animation state
+0x800ab554 func model_ClearAnimState hand zeroes animation state fields
+0x800ab584 func model_ClearAnimState_2 hand zeroes animation state fields, variant
+0x800ab620 func model_ResetPartAngles hand resets part rotation angles to defaults
+0x800ab73c func model_SetBoneTranslation hand sets bone translation offsets in model part table
+0x800ab840 func model_LoadPartFlagsByMove hand loads model part flags selected by current move id
+0x800ab86c func model_LoadPartFlagsByMove_2 hand loads model part flags by move id, variant
+0x800ab9a4 func model_UpdateFighterPose hand large per-frame pose update of all fighter bones and parts
+0x800aca60 func gte_RotateVecByMatrix_2 hand rotates vector by matrix using GTE, duplicate variant
+0x800acb04 func gte_LoadRotTrans_5 hand loads rotation and translation into GTE, duplicate variant
+0x800acb4c func gte_StoreRotTrans_3 hand stores GTE rotation and translation, duplicate variant
+0x800acb90 func gte_RotateVec3_3 hand rotates three-component vector with GTE, duplicate variant
+0x800acbcc func math_Atan2_2 hand atan2 using atan table, duplicate variant
+0x800acd48 func gte_RotMatrixYaw_3 hand builds yaw rotation matrix, duplicate variant
+0x800ace04 func gte_RotMatrixRoll_2 hand builds roll rotation matrix, duplicate variant
+0x800aceb8 func gte_SetTransIdentity_2 hand sets GTE translation and identity rotation, duplicate variant
+0x800acee8 func gpu_LinkOTPrim hand links a primitive into the ordering table entry
+0x800acf24 func game_DrawMainLoop hand runs HUD update, bounded draw list and ordering table insert
+0x800ad164 func hud_ProcessEventQueue hand maps queued event ids to HUD message ids
+0x800ad454 func hud_BuildTimerDigits hand builds round timer digit sprites
+0x800ad7f8 func hud_BuildScoreDigits hand builds score digit sprites
+0x800ada44 func hud_BuildLifeBars hand builds life bar prim draw-list entries
+0x800addac func hud_AddFixedPrims hand adds fixed HUD primitives to draw list
+0x800ade20 func hud_UpdateLifeGaugeWidths hand scales life values to gauge widths per player and queues gauge prims
+0x800ae0c8 func hud_ResetPlayerFlags hand clears per-player HUD flags and message state
+0x800ae138 func hud_InitPrimitives hand initializes all HUD sprites, gauges, digits and name plate primitives
+0x800aed50 func hud_InitFighterNames hand copies name table, sets name sprites by fighter id and timer digits
+0x800af064 func hud_SetRoundWinMarkers hand sets round win marker sprite colors from per-player win counts
+0x800af20c func hud_UpdateMessageBanner hand loads layout on trigger, runs banner slide, draws message sprites
+0x800af3cc func hud_LoadMessageLayout hand fills message sprite entries from layout table by message id
+0x800af600 func hud_SlideMessageBanner hand slides message sprites horizontally in and out over frames
+0x800af72c func hud_UpdateLifeTrail hand updates trailing damage bar width and queues two gauge prims
+0x800af8c0 func fx_StepSpriteAnim hand steps per-player sprite animation script and emits two sprites
+0x800afbec func fx_ResetSpriteAnims hand resets sprite animation ids for both players
+0x800afc30 func fx_SetSpriteAnimId hand stores sprite animation id for player slot
+0x800afc54 func fx_SetSpriteAnimIdBiased hand stores sprite animation id minus 0x80 for player slot
+0x800afc7c func menu_DrawPauseMenu hand draws paused player, continue and quit items with highlight
+0x800aff20 func game_RunFrameLoop hand initializes then loops forever calling per-frame update
+0x800aff58 func game_ClearPlayerSlotPtrs hand clears four per-player pointer tables for two players
+0x800affd0 func game_InitRoundVars hand copies round carry-over globals to backups, clears player state bytes and flags at round start
+0x800b0074 func game_UpdateRoundOutcome hand per-player score and damage accumulation, round win lose draw decision, sets result state codes, calls game_ApplyPendingDamage
+0x800b07e0 func game_TickRoundTimer hand frame counter to seconds countdown with 99 cap, computes display percent value
+0x800b0994 func game_ApplyPendingDamage hand per-player moves pending damage into health shorts, accumulating totals for two players
+0x800b0b44 func game_RunMainLoop hand endless per-frame loop calling state dispatch, camera, hud, copies player state snapshot, memcpy
+0x800b0ecc func game_RunStateMachine hand switch on match state 0 to 0x11 calling camera setups per state, title, intro, round, result handlers
+0x800b1348 func cam_LoadTargetPos hand stores computed look-at target x y z into camera globals via helper
+0x800b1380 func cam_ApproachTargetPos hand eases camera position x y z toward computed target using step approach helper
+0x800b1408 func cam_InitPitch hand sets camera pitch global to constant minus 22
+0x800b141c func cam_ClearRoll hand zeroes camera roll angle global
+0x800b142c func cam_ApproachPitch hand eases camera pitch angle toward 0xfea via angle approach helper
+0x800b1464 func cam_ApproachRoll hand eases camera roll angle toward zero via angle approach helper
+0x800b149c func cam_SetFacingAngleFromFighter hand yaw from base angle plus 0x800 if side flag, masked 0xfff
+0x800b14e4 func cam_ApproachFacingAngle hand recalculates yaw target when distance above 400 and eases yaw toward it
+0x800b1570 func cam_CalcFollowDistanceClamped hand calls distance helper on camera distance global and clamps to min and 12000
+0x800b15cc func cam_CalcFollowDistanceSmooth hand distance helper, clamp to 12000, eases camera distance toward result
+0x800b1644 func cam_RunCameraMode hand picks camera mode from fighter animation state via table, switch dispatch to mode handlers or default callback
+0x800b1ac0 func title_DrawLogoScreen hand title attract screen, cycles three sub-screens, draws two backdrop polys and DEAD OR ALIVE text
+0x800b1f38 func cam_SelectModeFromTable hand looks up camera mode for fighter animation id in per-character table, sets mode, timer, flag
+0x800b2010 func cam_UpdateDefaultFollow hand default two-fighter follow camera, eases distance, target pos, yaw and pitch, then applies camera
+0x800b2020 func cam_UpdateDefaultFollow_2 hand duplicate default follow camera body entered mid-function, same easing of distance and angles
+0x800b2380 func cam_UpdateDefaultFollow_3 hand third default follow camera variant using fighter side byte for yaw base
+0x800b262c func cam_UpdateMode0Orbit hand mode 0 random side orbit around fighter, random yaw offset, eases distance, applies camera
+0x800b2854 func cam_UpdateMode3RandomOrbit hand mode 3 camera with random yaw jitter and pitch from helper, eases yaw pitch and distance
+0x800b29d8 func cam_UpdateMode4SideView hand mode 4 fixed side offset 0x900 from fighter angle, distance from half arena value plus constant
+0x800b2aec func cam_UpdateMode5SideView hand mode 5 fixed side offset 0x100 from fighter angle, distance from half arena value plus constant
+0x800b2c10 func cam_UpdateMode1Orbit hand mode 1 random side orbit using pitch helper variant, eases distance, applies camera
+0x800b2e10 func cam_UpdateMode8Orbit hand mode 8 random orbit with fixed pitch 0x2d, height from higher fighter y, distance plus 800
+0x800b30a4 func cam_UpdateMode6SideA hand mode 6 variant A side camera offset 0x900, distance half arena plus 0x9c4
+0x800b31fc func cam_UpdateMode6SideB hand mode 6 variant B side camera offset 0x100, distance half arena plus 0x9c4
+0x800b3354 func cam_UpdateMode2Midpoint hand mode 2 camera at fighter midpoint, offset along yaw, eases positions, sqrt distance, calls camera build
+0x800b3710 func cam_UpdateMode7Midpoint hand mode 7 midpoint camera with y floor, eases pos, pitch from sqrt and atan helpers
+0x800b39a8 func cam_InitKOCamera hand round-end camera setup: random pitch jitter, midpoint target clamped within radius 0x4b0, sqrt distance
+0x800b3d78 func cam_UpdateKOCamera hand per-frame KO camera: midpoint target clamp radius 0x4b0, pitch and distance from fighter height
+0x800b4058 func cam_UpdateWinnerOrbit hand state 4 camera: continues orbit if same state else frames loser from winner angle, slow yaw spin
+0x800b4068 func cam_UpdateWinnerOrbit_2 hand duplicate of winner orbit camera entered mid-function, same angle setup using atan helper
+0x800b429c func cam_FrameBothFighters hand eases look target to both fighters via approach helper, angle from health diff, applies camera
+0x800b45c0 func cam_UpdatePresetCloseup hand per-character preset table camera for fighter, flips by side flag, eases to preset pos and angle
+0x800b4c80 func cam_StepShakeTable hand advances camera shake script table by index, writes shake value, ends on 0xffff terminator
+0x800b4d40 func cam_UpdateTrackFighterA hand state 0xc camera tracking fighter pos plus offsets clamped, eases pos angles distance, runs shake table
+0x800b4d50 func cam_UpdateTrackFighterA_2 hand duplicate of fighter tracking camera entered mid-function with same clamps and shake step
+0x800b5030 func cam_UpdateTrackFighterB hand state 0xd camera tracking fighter pos plus offsets, eases pos angles distance, runs shake table
+0x800b52c8 func cam_UpdateOrbitAroundFighter hand snapshots polar offset from fighter on first call then rotates camera around fighter with yaw
+0x800b55ec func cam_UpdateIntroPan hand intro camera 600 frame pan easing to default view then switch, runs shake table
+0x800b58f8 func cam_UpdateAttractOrbitA hand attract camera orbit shrinking distance, yaw decrement, returns true after 480 frames
+0x800b5ae0 func cam_UpdateAttractOrbitB hand attract camera slow yaw spin fixed distance, returns true after 240 frames
+0x800b5c68 func cam_UpdateAttractFollow hand attract follow camera eases to default view with random yaw offset, returns done flag
+0x800b5fe8 func cam_RunFreeCameraLoop hand debug loop while flag set, reads pad for free camera, copies camera globals, memcpy, waits frame
+0x800b61dc func cam_UpdateFreeCameraPad hand free camera pad control: d-pad yaw pitch, buttons move distance, speed table cycle, preset snap fighters
+0x800b6798 func game_RunViewerState hand viewer states 0xf8 to 0xfa dispatch, camera reset, pad control, shake step
+0x800b6930 func cam_ResetViewerCamera hand resets camera yaw -0x400, pitch 0, distance 0xdac
+0x800b6978 func cam_UpdateViewerFollow hand viewer camera positioned over first fighter plus 1000 height, shake step
+0x800b6a94 func cam_UpdateViewerPadControl hand pad d-pad adjusts camera yaw pitch, shoulder buttons change distance, button resets view
+0x800b6bd8 func cam_UpdateViewerPadMove hand pad moves camera position relative to yaw by step 0x32, height and angle adjust, reset button
+0x800b6fd0 func cam_UpdateModelViewerCamera hand state 0xfa model viewer camera via GTE matrix helpers, pad adjusts offsets, shake step
+0x800b6fe0 func cam_UpdateModelViewerCamera_2 hand duplicate of model viewer camera entered mid-function
+0x800b7244 func cam_UpdateViewerPadYawZoom hand per-pad d-pad yaw 0x10 steps, buttons zoom 0x40, clamps pitch against ground height via sine table
+0x800b752c func camscr_InitScriptState hand resets camera mode 0xff, clears flags, copies fighter ids, sets camera distance from per-fighter size table plus 4000
+0x800b76f4 func camscr_StartOrContinue hand if state unchanged continue camera apply else init script state, then run script
+0x800b7704 func camscr_StartOrContinue_2 hand duplicate entered mid-function with registers preset, same start or continue logic
+0x800b7750 func camscr_ClearTrackFlags hand clears camera script active flags and counters, sets run flag 1
+0x800b77b4 func camscr_RunScript hand interpreter loop dispatching opcode byte 0 to 0x1c until yield flag, then applies track targets and camera
+0x800b7b84 func camscr_OpZeroAll hand opcode 0 zeroes camera position target pitch yaw roll distance, advances script pointer
+0x800b7bf0 func camscr_OpZeroPos hand opcode 1 zeroes camera position only, advances script pointer
+0x800b7c24 func camscr_OpZeroAngles hand opcode 2 zeroes pitch yaw roll, advances script pointer
+0x800b7c58 func camscr_OpZeroDistance hand opcode 3 zeroes camera distance, advances script pointer
+0x800b7c7c func camscr_OpSetPosTrack hand opcode 0xc reads track id byte, calls position track setup
+0x800b7ccc func camscr_OpSetTargetTrack hand opcode 0xd reads track id byte, calls target track setup
+0x800b7d1c func camscr_OpSetAngleTrack hand opcode 0xe reads track id byte, calls angle track setup
+0x800b7d6c func camscr_OpSetDistTrack hand opcode 0xf reads track id byte, calls distance track setup
+0x800b7dbc func camscr_OpSetTargetAngleMode0 hand opcode 4 sets target and angle tracks, track mode 0
+0x800b7e34 func camscr_OpSetPosTargetMode1 hand opcode 5 sets position and target tracks, track mode 1
+0x800b7eb0 func camscr_OpSetPosAngleDistMode2 hand opcode 6 sets position angle distance tracks, track mode 2
+0x800b7f50 func camscr_SetPosTrack hand id below 0x80 selects key table and resets position track state, else selects alternate table
+0x800b8004 func camscr_SetTargetTrack hand id below 0x80 selects key table and resets target track state, else alternate table
+0x800b80b8 func camscr_SetAngleTrack hand id below 0x80 selects key table and resets angle track state, else alternate table
+0x800b8148 func camscr_SetDistTrack hand selects distance key table by id and resets distance track state
+0x800b8190 func camscr_OpRunSubA hand opcode 0x10 skips operand word, calls handler 800b8440, skips again
+0x800b81dc func camscr_OpRunSubB hand opcode 0x11 skips operand word, calls handler 800b84b4, skips again
+0x800b8228 func camscr_OpRunSubC hand opcode 0x12 skips operand word, calls handler 800b8528, skips again
+0x800b8274 func camscr_OpRunSubD hand opcode 0x13 skips operand word, calls handler 800b857c, skips again
+0x800b82c0 func camscr_OpSetTargetAngleInline hand opcode 7 inline operands set target and angle tracks, track mode 0
+0x800b8330 func camscr_OpSetPosTargetInline hand opcode 8 inline operands set position and target tracks, track mode 1
+0x800b83a4 func camscr_OpSetPosAngleDistInline hand opcode 9 inline operands set position angle distance tracks, track mode 2
+0x800b8438 func stub_800b8438 hand rules: empty: jr ra
+0x800b8440 func camscr_StartPosTrackFromPtr hand resets position track state, loads track pointer from script stream
+0x800b84b4 func camscr_StartTargetTrackFromPtr hand resets target track state, loads track pointer from script stream
+0x800b8528 func camscr_StartAngleTrackFromPtr hand resets angle track state, loads track pointer from script stream
+0x800b857c func camscr_StartDistTrackFromPtr hand resets distance track state, loads track pointer from script stream
+0x800b85c0 func camscr_OpRunAltPosTrack hand opcode 0x14 skips operand word, calls alternate position track start, skips again
+0x800b860c func camscr_OpRunAltTargetTrack hand opcode 0x15 skips operand, calls alternate target track start, skips again
+0x800b8658 func camscr_OpRunAltAngleTrack hand opcode 0x16 skips operand, calls alternate angle track start, skips again
+0x800b86a4 func camscr_OpSkipTwoWords hand opcode 0x17 no-op, advances script pointer by eight bytes
+0x800b86c4 func camscr_StartAltPosTrackFromPtr hand sets alternate position track active flag, loads pointer from script stream
+0x800b86f4 func camscr_StartAltTargetTrackFromPtr hand sets alternate target track active flag, loads pointer from script stream
+0x800b8724 func camscr_StartAltAngleTrackFromPtr hand sets alternate angle track active flag, loads pointer from script stream
+0x800b8754 func camscr_OpSetFighterByte hand opcode 0x18 stores byte value into fighter struct field, stride 0x58, advances script
+0x800b87a8 func camscr_OpSetTrackMode hand opcode 0xb reads operand into track mode byte, advances script pointer
+0x800b87e0 func camscr_OpWaitTracksDone hand opcode 0x19 advances only when all track active flags clear, else yields
+0x800b889c func camscr_OpWaitFrames hand opcode 0x1a counts frames to operand, then advances, always yields
+0x800b88f0 func camscr_OpEndScriptSetState hand opcode 0x1b ends script, sets main state byte from operand, yields
+0x800b892c func camscr_OpEndScript hand default opcode, stops script run flag and yields
+0x800b8960 func camscr_ApplyPosTracks hand runs track interpreter with position set globals for primary camera position
+0x800b8a20 func camscr_ApplyTargetTracks hand runs track interpreter with target look-at globals for secondary camera set
+0x800b8ae0 func camscr_RunTrackInterpreter hand loads track state from pointers, dispatches key opcodes until yield, eases values via approach, stores back
+0x800b8f84 func camscr_KeySetXYZ hand key opcode 0 loads target xyz from stream, advances 0x10, yields
+0x800b8ff8 func camscr_KeyAddXYZOverTime hand key opcode 1 adds delta xyz per frame until frame count reached
+0x800b9094 func camscr_KeyAddXYZAccel hand key opcode 2 adds delta plus accumulating velocity xyz per frame until count
+0x800b919c func camscr_KeyLerpToXYZ hand key opcode 3 linear interpolation toward target xyz over frame count via division
+0x800b92d8 func camscr_KeyLerpFixedXYZ hand key opcode 4 interpolates offset xyz from start using 4096 fraction over frame count
+0x800b9450 func camscr_KeyEaseInXYZ hand key opcode 5 interpolates xyz offset with one minus cosine ease-in over frame count
+0x800b95e0 func camscr_KeyEaseOutXYZ hand key opcode 6 interpolates xyz offset with sine ease-out over frame count
+0x800b976c func camscr_KeyOrbitOffsetConst hand key opcode 7 subtracts spherical offset from yaw pitch with fixed radius per frame
+0x800b98e0 func camscr_KeyOrbitOffsetGrow hand key opcode 8 spherical offset from yaw pitch with radius growing by delta per frame
+0x800b9a68 func camscr_KeySnapToCurrent hand key opcode 9 copies current xyz into target, advances stream by four bytes
+0x800b9ab4 func camscr_KeyFollowFighterHold hand key opcode 0x10 loads target from fighter point, holds until frame count
+0x800b9b30 func camscr_KeyFollowFighterAddXYZ hand key opcode 0x11 fighter point target plus constant delta per frame
+0x800b9bf4 func camscr_KeyFollowFighterAccel hand key opcode 0x12 fighter point target plus delta and accelerating velocity per frame
+0x800b9d24 func camscr_KeyFollowFighterLerp hand key opcode 0x13 fighter point target plus offset, current value lerps toward it over frame count
+0x800b9ebc func camscr_KeySmoothOn hand key opcode 0x20 enables smoothing, reads approach step and limit from stream
+0x800b9f14 func camscr_KeySmoothOff hand key opcode 0x21 disables smoothing, advances stream by four bytes
+0x800b9f38 func camscr_SelectFighterPoint hand picks fighter point by mode: midpoint of both, fighter 0, 1, current, or other; calls point fetch
+0x800ba144 func camscr_KeyWaitFrames hand key opcode 0x30 waits frame count then advances stream, yields
+0x800ba198 func camscr_KeyEndTrack hand default key opcode clears track active byte and yields
+0x800ba1b4 func camscr_RunAngleTrack hand angle track interpreter loop dispatching opcodes 0 to 6, 0x10, 0x20 until yield
+0x800ba340 func camscr_AngKeySet hand angle key opcode 0 loads pitch yaw roll from stream, yields
+0x800ba3b4 func camscr_AngKeyAddOverTime hand angle key opcode 1 adds delta pitch yaw roll per frame until count
+0x800ba450 func camscr_AngKeyAddAccel hand angle key opcode 2 adds delta plus accumulating velocity to angles per frame
+0x800ba558 func camscr_AngKeyLerp hand angle key opcode 3 interpolates angle offsets from start using 4096 fraction over frame count
+0x800ba6d0 func camscr_AngKeyEaseIn hand angle key opcode 4 interpolates angle offsets with one minus cosine ease-in over frame count
+0x800ba860 func camscr_AngKeyEaseOut hand angle key opcode 5 interpolates angle offsets with sine ease-out over frame count
+0x800ba9ec func camscr_AngKeyLerpToTarget hand angle key opcode 6 linear steps current angles toward target over remaining frames
+0x800bab28 func camscr_AngKeyFaceFighter hand angle key opcode 0x10 reads fighter selector, calls facing select, advances stream by eight
+0x800bab6c func camscr_SelectFacingByMode hand selector 0 to 5 picks fighter, aligns yaw to fighter facing minus 0x400, clears pitch and roll
+0x800bac88 func camscr_SetYawFromFighter hand sets camera yaw from fighter facing angle minus 0x400 masked to 12 bits
+0x800bacc8 func camscr_AngKeyWaitFrames hand angle key opcode 0x20 waits frame count then advances stream, yields
+0x800bad1c func camscr_AngKeyEnd hand default angle opcode clears angle track active flag and yields
+0x800bad38 func camscr_RunDistTrack hand distance track interpreter loop dispatching opcodes 0 to 8, 0x10 until yield
+0x800bae68 func camscr_DistKeySet hand distance key opcode 0 sets camera distance from stream value minus 4000 plus base distance
+0x800baec4 func camscr_DistKeyAddOverTime hand distance key opcode 1 adds constant delta per frame until count
+0x800baf30 func camscr_DistKeyAddAccel hand distance key opcode 2 adds delta plus accumulating velocity per frame until count
+0x800bafc0 func camscr_DistKeyLerp hand distance key opcode 3 linear interpolation of distance offset over frame count
+0x800bb090 func camscr_DistKeyEaseIn hand distance key opcode 4 ease-in via one minus cosine over frame count
+0x800bb188 func camscr_DistKeyEaseOut hand distance key opcode 5 ease-out via sine over frame count
+0x800bb27c func camscr_DistKeyLerpToTarget hand distance key opcode 6 steps distance toward target over remaining frames
+0x800bb328 func camscr_DistKeyCallStub hand distance key opcode 8 calls stub with byte operand, counts frames then advances
+0x800bb3a0 func stub_800bb3a0 hand rules: empty: jr ra
+0x800bb3a8 func camscr_DistKeyWaitFrames hand distance key opcode 0x10 waits frame count then advances stream, yields
+0x800bb3fc func camscr_DistKeyEnd hand default distance opcode clears distance track active flag and yields
+0x800bb418 func cam_ClearAllCameraVars hand zeroes camera position target yaw pitch distance and saved camera globals
+0x800bb480 func cam_CalcFighterPairAngleDist hand computes angle and distance between the two fighters from ground plane x z positions
+0x800bb504 func cam_SnapSmoothedFighterPos hand copies both fighters xyz positions into smoothed camera follow state
+0x800bb56c func cam_SmoothFighterPositions hand eases smoothed positions toward both fighters, height from table when airborne, via value approach
+0x800bb6c8 func math_ApproachValue hand moves int toward target by quotient step with deadzone, clamps step between zero and limit
+0x800bb7ac func cam_CalcFramingCenter hand outputs mid x and z of both fighters and look height from larger of two heights, minimum 0x7b7
+0x800bb86c func cam_SetSideFlagFromYaw hand sets side flag when camera yaw relative to stored angle is past 0x800
+0x800bb8b4 func cam_SetSideFlagFromAngles hand sets side flag from difference of two fighter facing angles over 0x800
+0x800bb8c4 func cam_SetSideFlagFromAngles_2 hand variant, angle of fighter one minus fighter two over 0x800 sets side flag
+0x800bb92c func cam_CalcFollowDistanceByHeightGap hand distance from fighter spread times 0x1666 and height sum, takes max with 0x9c4 floor, sets mode flag
+0x800bba38 func cam_CalcFollowDistanceByHeightDiff hand distance from fighter spread and height difference times 0x2800, max with 0x9c4 floor
+0x800bbb38 func cam_ApplyFollowEyeClamped hand eye from target plus spherical offset by yaw pitch distance, clamps eye height 0x640 and recomputes pitch
+0x800bbc98 func cam_ApplyFollowEyeMinHeight hand raises target height to minimum, computes eye from spherical offset, updates camera matrix
+0x800bbca0 func cam_ApplyFollowEyeMinHeight_2 hand duplicate entered mid-function with min height preset in register
+0x800bbde4 func cam_ApplyFollowEye hand computes eye from target plus spherical offset by yaw pitch distance, updates camera matrix
+0x800bbf18 func cam_ApplyTargetAsEye hand copies secondary camera position globals into eye and updates matrix
+0x800bbf30 func cam_SetEyeAndApply hand sets eye xyz from register args and updates camera matrix
+0x800bbf68 func math_RandomFromTable16 hand random word from 16 entry data table via rand index low nibble
+0x800bbf9c func math_RandomFromTable16Copy hand copies 16 word table to stack, returns entry picked by random low nibble
+0x800bc008 func math_RandomFromTableRow hand copies 5 by 16 table to stack, returns entry by row index and random nibble
+0x800bc090 func math_RandomFromTableRow_2 hand copies 2 by 16 table to stack, returns entry by row index and random nibble
+0x800bc118 func math_RandomRange12 hand returns first plus random modulo masked 12 bit span second minus first
+0x800bc188 func fighter_GetCameraPoint hand outputs xyz point of fighter by index from table, or fighter position with fixed or live height for 0xfe 0xff
+0x800bc294 func cam_CalcPitchYawToward hand computes camera pitch and yaw looking from point toward target via ground distance and arctan
+0x800bc408 func fighter_GetFacingMinus400 hand fighter facing angle field minus 0x400 masked to 12 bits
+0x800bc43c func math_ApproachAngle hand eases 12 bit angle toward target the short way with deadzone, step by quotient, clamped
+0x800bc690 func cam_SetLookAtMatrix hand builds eye and look-at vectors with floor offset, calls GTE camera setup helper
+0x800bc6b0 func cam_SetLookAtMatrix_2 hand duplicate entered mid-function with eye x and z preset in registers
+0x800bc720 func stage_InitTileWrap hand sets stage tile index 12, clears tile column and row offsets
+0x800bc744 func stage_CalcTileWrapShift hand when fighters pass 3000 either axis picks 4000 shift and steps tile index, ring wrap scrolling
+0x800bc9f0 func stage_ApplyTileWrapShift hand adds wrap shift to fighters camera and 15 object entries on x and z
+0x800bcc08 func stage_UpdateTileFromCameraYaw hand picks adjacent stage tile by camera yaw quadrant, applies shift via GTE matrix, returns tile
+0x800bcc28 func stage_UpdateTileFromCameraYaw_2 hand duplicate entered mid-function with tile and column preset in registers
+0x800bce8c func fighter_RunTaskLoop hand endless loop, waits one frame, per mode updates fighters, ground friction and push, flips frame parity
+0x800bcf3c func fighter_ClearTaskState hand zeroes per-fighter push, speed and flag arrays for both fighters and parity flags
+0x800bd01c func fighter_UpdateBothFighters hand for two fighters in active states, runs hit check and move update, else clears push values
+0x800bd108 func fighter_CalcPushApartSpeeds hand from fighter distance, state and facing table picks push speeds, special cases zero them, then applies via helper
+0x800bd850 func fighter_UpdateAirborneStates hand loops both fighters, dispatches by state byte to launch and knockback step functions
+0x800bdae8 func fighter_ApplyFacingPush hand adds sin/cos of facing times amount to fighter x and z relative to opponent
+0x800bddec func hit_ResolveTradePriority hand compares per-move priority values of both fighters, stores trade result bytes 0, 1 or 2
+0x800be0a8 func math_ProjectSinCosToXZ hand orphan fragment scaling sin/cos by amount into velocity globals
+0x800be14c func fighter_InitKnockbackVelocity hand sets initial knockback velocity from hit data and facing
+0x800be494 func fighter_StepKnockbackFlight hand per-frame knockback flight with gravity, ring edge clamp, landing state change
+0x800be6c0 func fighter_InitHoldThrowVelocity hand sets velocity for hold or throw victim movement
+0x800be71c func fighter_InitThrowVelocityFragment hand orphan tail duplicate of throw velocity setup
+0x800be84c func ring_ClipMoveToWallBoundary hand clips movement distance against ring half extents, returns clipped distance
+0x800bf348 func fighter_StepLaunchedFlight hand per-frame launched flight with gravity and ring clamp
+0x800bf680 func fighter_InitLaunchVelocity hand sets launch velocity and height impulse from attack data
+0x800bfa50 func fighter_StepSlideFlight hand per-frame sliding movement after knockdown with friction
+0x800bfc0c func fighter_InitRecoilVelocity hand sets short recoil velocity from hit direction
+0x800bfd98 func fighter_StepRecoilDecay hand decays recoil velocity each frame until zero
+0x800bfe78 func fighter_RestorePositionIfTooFar hand saves positions when distance under limit else restores saved positions
+0x800bff2c func fight_MainLoop hand runs fight loop yielding frames via task helper
+0x800bffe8 func fight_InitMatchByMode hand switches on game mode byte, registers fight task callbacks
+0x800c0504 func fight_HandleMatchEndTimer hand handles end of match timer and result transitions
+0x800c07c4 func fight_TickContinueCountdown hand ticks continue countdown and plays tick sound
+0x800c08f8 func fight_ClearPauseFlag hand clears pause flag byte
+0x800c0908 func fight_DispatchRoundState hand dispatches on round state variable to round state handlers
+0x800c09a4 func fight_InitMatchOpponents hand random opponent order and per-mode setup at match start
+0x800c113c func fight_SelectStageIndex hand picks stage index by mode and opponent number
+0x800c12e0 func fight_InitMaxHealthFromHandicap hand sets max health values from handicap settings
+0x800c1390 func fight_DisableTaskSlots hand disables fight task slots via task disable helper
+0x800c13f0 func fight_EnableTaskSlots hand enables fight task slots via task enable helper
+0x800c1448 func fighter_ResetBothStructs hand clears and initializes both fighter structs at round start
+0x800c1aac func fight_RoundStateIntro hand round state 0 intro: camera, round text, waits then starts fight
+0x800c1e84 func fight_RoundStateWaitKO hand round state 1 waits for KO or timeout, decides winner
+0x800c2088 func fight_RoundStatePostKoDelay hand round state 2 delay after KO before result
+0x800c2114 func fight_RoundStateContinuePrompt hand round state 3 continue prompt with countdown
+0x800c2688 func fight_RoundStateMatchEnd hand round state 4 match end, win text, advances to next match or results
+0x800c381c func fight_SelectOpponentFighters hand chooses opponent character per mode and match number
+0x800c3f94 func fight_LoadFightersIfChanged hand reloads fighter data when selected characters change
+0x800c43b8 func stat_RecordMatchResult hand records win loss counters per character after a match
+0x800c4498 func stat_CountFighterPlays hand counts total plays across characters
+0x800c44a8 func stat_CountFighterPlaysTail hand orphan tail of play count loop
+0x800c47b0 func stat_SaveTimeAttackTime hand stores time attack result time if better
+0x800c4824 func fight_InitRoundTimeLimit hand sets round time limit using float constants by mode
+0x800c4910 func mem_CopyTeamBattleTable hand copies a small word table for team battle setup
+0x800c496c func fight_PlayStageBgm hand selects and starts stage background music track
+0x800c4a0c func gpu_LoadStagePortraitTim hand loads portrait image data into VRAM for result screens
+0x800c4dd0 func fight_PollContinueTimerStep hand polls continue timer step and advances state
+0x800c4e34 func fighter_PickRandomCostume hand picks random costume index for a fighter
+0x800c4f9c func team_ClearBattleResults hand sets team battle result bytes to 0xff
+0x800c4fc4 func team_StoreBattleResult hand stores one team battle match result byte
+0x800c4ff4 func team_DrawBattleReportLoop hand draws team battle report screen loop, text via draw helper
+0x800c5094 func team_DrawBattleResult hand draws team battle result screen text
+0x800c50fc func team_DrawRosterPanels hand draws team roster panels for both sides
+0x800c510c func team_DrawRosterPanelsTail hand duplicate tail with player and cpu labels
+0x800c5548 func team_DrawNextMatchLabel hand draws next match label with fighter names
+0x800c576c func team_DrawResultText hand draws win or lose or draw text for team battle
+0x800c590c func team_ClearWinCounts hand clears team win counters
+0x800c5938 func team_RecordRoundWin hand increments team win count for round winner
+0x800c59b4 func kumite_DrawResultScreen hand draws kumite result screen with total, exit labels
+0x800c5eb0 func timeattack_ClearStageTimes hand clears per-stage time attack times
+0x800c5f00 func timeattack_RecordStageTime hand records clear time for current stage
+0x800c5fac func timeattack_CalcSegmentTimeTail hand orphan tail of stage time record (was timeattack_RecordStageTimeTail)
+0x800c6094 func timeattack_DrawResultScreen hand draws time attack result with stage times and total time
+0x800c63c8 func gpu_DrawFighterIconSprite hand draws fighter icon sprite primitive at position
+0x800c64d4 func text_DrawNumber2Digits hand draws two digit number via digit helper
+0x800c654c func text_DrawDigit hand draws a single digit glyph
+0x800c655c func text_DrawDigitMod10 hand draws digit of value modulo ten
+0x800c65ac func unlock_CheckAllConditions hand runs all unlock condition checks in order
+0x800c65fc func unlock_CheckCostumeAndSecretFlags hand checks costume and secret unlock flags from stats
+0x800c68f4 func unlock_CheckArcadeFlag1 hand checks arcade clear condition sets unlock flag 1
+0x800c6974 func unlock_CheckTimeAttackFlag2 hand checks time attack condition sets unlock flag 2
+0x800c6a0c func unlock_CheckSurvivalFlag4 hand checks survival condition sets unlock flag 4
+0x800c6a90 func unlock_CheckKumiteFlag8 hand checks kumite condition sets unlock flag 8
+0x800c6b44 func unlock_CheckPlayCountFlag10 hand checks total play count sets unlock flag 0x10
+0x800c6c24 func unlock_CheckAllCostumesFlag40 hand checks all costumes collected sets unlock flag 0x40
+0x800c6df8 func fight_UpdateAllFighters hand per-frame fighter task: input history, state edges, calls per-fighter updates, copies shadow state
+0x800c7df4 func fight_ResetOnRoundStateChange hand clears timers and cpu state when state changes
+0x800c7e04 func fight_ResetOnRoundStateChangeTail hand duplicate tail of round state change reset
+0x800c7f9c func fighter_UpdateFacingBothSides hand updates facing flags for both fighters, second offset by half turn
+0x800c7fec func fighter_UpdateFacingFlags hand sets mirror and side flags from relative angle windows
+0x800c8144 func cpu_InitMoveCommandTimer hand looks up per-move table to set command delay timer for fighter
+0x800c83f0 func cpu_CheckMoveCondition hand tests opponent state and distance against move table row, returns 1 or 0
+0x800c87b4 func fighter_SetCounterSide hand sets move side byte from opponent state value
+0x800c8848 func fighter_IsStateInRange1a hand returns true if value in 0x1a to 0x31
+0x800c8858 func fighter_IsStateInRangeNeg hand returns true if value in range after offset 0x99
+0x800c8868 func fighter_IsStateInRange34 hand returns true if value in 0x34 to 0x38
+0x800c8928 func fighter_IsNeutralState hand returns 1 for idle state or certain move flagged states
+0x800c8980 func ring_IsOutsideBoundsAtAngle hand projects fighter by sin/cos at angle, returns 1 if outside ring half extents
+0x800c89c4 func ring_IsOutsideBoundsAtAngleTail hand tail variant of ring bounds test
+0x800c8a9c func ring_IsPointOutsideBounds hand returns 1 if x,z point outside ring half extents
+0x800c8b28 func math_RandomMod hand random value modulo param using random helper
+0x800c8b90 func fighter_ClearAiCounters hand clears per-fighter ai counters, sets one value to 999
+0x800c8c3c func cpu_UpdateFighterAi hand big switch on ai mode state, runs scripts and input checks per fighter
+0x800c952c func cpu_ChooseActionFromInput hand picks action from buffered direction and button input
+0x800c984c func cpu_ParseInputHistory hand scans input ring buffer for command, selects action id
+0x800c9ed0 func cpu_ScanInputBufferForThrow hand scans input ring for throw flag, sets fighter flag 0x50
+0x800c9efc func cpu_ScanInputBufferForThrowTail hand tail duplicate of input scan
+0x800ca094 func cpu_HandleHitStunInput hand chooses recovery script by hit stun state and input
+0x800ca144 func cpu_HandleGuardInput hand handles guard state input, timers and script selection
+0x800ca154 func cpu_HandleGuardInputTail hand tail duplicate of guard input handler
+0x800ca2e4 func cpu_PickEscapeCommand hand picks escape command table by side and direction bits
+0x800ca408 func cpu_QueueGetUpCommand hand queues script 0xf if buffered direction present
+0x800ca43c func cpu_DecayCommandTimer hand decrements command timer, faster on single frame inputs, clamps at zero
+0x800ca4bc func cpu_RepeatRecoverPush hand applies push value repeatedly up to ten times while recovering
+0x800ca570 func cpu_UpdateFacingFromInput hand sets side byte from buffered direction and mirror state
+0x800ca74c func input_GetBufferedDirection hand walks input ring back by frame count, returns direction byte
+0x800ca7d8 func input_GetButtonsAtFrame hand walks input ring back, returns button byte at frame end
+0x800ca87c func input_GetButtonsPressedAtFrame hand returns button byte or combined with previous entry at frame
+0x800ca958 func cpu_RunMoveScript hand fetches move script pointer by id and executes it
+0x800ca9f0 func cpu_RunMoveScriptOpponent hand same as move script run but for opponent fighter index
+0x800caa88 func cpu_ExecScriptOpcodes hand interprets move script opcode list with switch of handlers
+0x800cae88 func input_SwapLeftRightIfMirrored hand swaps direction bits when fighter is mirrored
+0x800caed4 func cpu_MarkScriptFlag hand sets script flag bits and clears old flag via helper
+0x800caf60 func input_GetRingEntryDirBits hand syncs ring cursor then returns byte 3 of current 4-byte input history entry
+0x800cafa0 func input_GetBufferNibblePair hand returns buttons of current ring entry ORed with next or previous entry when hold count is one
+0x800cb0c4 func ai_ScriptAdvanceFramesChecked hand subtracts frames from remaining budget, sets end flag if negative, steps ring entries back
+0x800cb18c func ai_ScriptAdvanceFrames hand adds frame delta to cursor offsets and steps input ring back over elapsed entries
+0x800cb230 func ai_ScriptSyncRingCursor hand realigns frame cursor inside current ring entry, deducts remaining budget, may set end flag
+0x800cb2c4 func ai_ScriptPopWord hand reads one script byte backwards into frame budget field
+0x800cb2e0 func ai_ScriptPopWordStepBack hand pops script byte, subtracts from budget, adds to ring offset and steps ring back
+0x800cb3c4 func ai_ScriptWaitInputMask hand pops mask, mirrors bits by side flag, steps ring back until direction or button nibble matches
+0x800cb5e4 func ai_ScriptWaitInputAnyBit hand pops mask, steps ring back until any masked bit of entry byte 3 is set
+0x800cb748 func ai_ScriptWaitInputMaskNoSync hand pops mask, steps ring back until byte 2 nibble matches, without cursor sync
+0x800cb960 func ai_ScriptWaitInputAnyBitNoSync hand pops mask, steps ring back until any bit of entry byte 2 is set
+0x800cbabc func ai_ScriptWaitInputCombined hand pops mask, steps ring back until combined nibble of current entry matches
+0x800cbc34 func ai_ScriptWaitInputMaskThenSkip hand pops mask and frame count, finds match in ring, then skips frame count along ring
+0x800cbf58 func ai_ScriptWaitInputAllBitsThenSkip hand pops mask and frame count, seeks entry containing all mask bits then skips frames
+0x800cc1c8 func ai_ScriptWaitInputExact hand pops mask, steps ring back until nibble matches, aborts if other nibble nonzero
+0x800cc46c func ai_ScriptWaitInputExactMasked hand pops mask, selects nibble mask, steps back until masked entry matches, aborts on stray bits
+0x800cc62c func ai_ScriptWaitInputTable hand pops mask, steps ring back checking byte 2 nibble, aborts on other nibble bits
+0x800cc8b8 func ai_ScriptWaitInputTableExact hand pops mask, steps ring back until byte 2 equals mask, aborts if nonzero otherwise
+0x800cca54 func ai_ScriptWaitInputPair hand pops two masks, steps ring back until first high nibble seen, aborts if second seen first
+0x800ccc54 func ai_ScriptWaitInputPairMasked hand pops mask, steps ring back on combined nibble, aborts on mismatched stray bits
+0x800ccdec func ai_ScriptCheckMoveAndFrame hand pops move id, fails unless equals player move and frame window contains script cursor
+0x800cce60 func ai_ScriptCheckMoveEqual hand pops byte, sets end flag if it differs from player move byte
+0x800ccea0 func ai_ScriptCheckMoveStateWindow hand pops move id, fails unless move, queued move and frame window all match player one
+0x800ccf3c func ai_ScriptCheckCurrentMove hand sets flag if player move id differs from script byte, drops byte
+0x800ccf78 func ai_ScriptCheckMoveStateWindowAlt hand like state window check but uses other fighter pointer for queued move comparison
+0x800cd020 func ai_ScriptSetFlagIfNoHit hand if hit flag set ends script, else flag from helper call xor 1 stored in two places
+0x800cd0ac func ai_ScriptSetFlagIfSideZero hand sets script end flag when per-player side byte is zero
+0x800cd0d8 func ai_ScriptSetFlagIfSideOne hand sets script end flag when per-player side byte is one
+0x800cd104 func ai_ScriptCheckPosBelowLimit hand sets flag if player flag not 1 and cursor plus offset below per-player limit
+0x800cd16c func ai_ScriptCheckPosBelowLimitAlt hand sets flag if player flag nonzero and cursor plus offset below per-player limit
+0x800cd1d4 func ai_ScriptCheckStateAndQueuedMove hand sets flag unless fighter byte 0x35 is 2 and queued move is 0xff
+0x800cd20c func ai_ScriptCheckValueInRange hand pops min and max bytes, sets flag if per-player 16-bit value outside range
+0x800cd26c func ai_ScriptSetFlagIfNoField43 hand sets flag when other fighter struct byte 0x43 is zero
+0x800cd294 func ai_ScriptCheckFacingMode hand switch on script bits, compares facing angle to angle toward opponent, sets byte 0x4c
+0x800cd45c func ai_ScriptSetFacingFlag hand compares angle toward opponent via helper with facing angle, sets byte 0x4c to 0 or 1
+0x800cd4b8 func ai_ScriptSetFlagCopyByte hand sets flag to 1 and copies byte from script pointer into action global
+0x800cd4d8 func input_ClearMoveQueue hand sets four queued move bytes to 0xff and clears queue count
+0x800cd530 func ai_ScriptDequeueMove hand if queued move empty, moves first of 4-byte queue into fighter and shifts queue left
+0x800cd60c func ai_ClearFlagPair hand clears two per-player flag bytes
+0x800cd63c func ai_InitScriptContext hand clears 0x84-byte per-player AI context, sets 0xff/0x7f defaults, loads script table pointers by mode
+0x800cd854 func ai_UpdateCpuMain hand per-frame CPU fighter AI: state transition handling, picks action, steps timers, writes fighter move request
+0x800ceb94 func ai_SelectBehaviorByState hand switch on fighter state picks pick-action callee, handles block state and round setup flags
+0x800ced84 func ai_SelectBehaviorWithStyle hand like behavior select with style byte, adjusts side offset and chooses neutral or attack pick
+0x800cefc0 func ai_CheckInputCommandStart hand rolls random bit by fighter state to start command 0x1b or 0x1c
+0x800cf1ac func ai_PickAttackByDistanceState hand picks near or far attack picker by state and difficulty, then default neutral pick
+0x800cf33c func ai_PickAttackTierGround hand classifies distance tier, picks table entries 0-0xc by timing thresholds
+0x800cf5e4 func ai_PickAttackTierAlt hand like tier picker with different table order, selects tier helper by difficulty level
+0x800cf868 func ai_PickNeutralAction hand weights action choice by level scaled value, picks entry 0xd-0x16 by classified distance
+0x800cfb98 func ai_PickWakeupAction hand when time low and state 9 picks table entry 0x18-0x1a by position thresholds
+0x800cfc8c func ai_PickWeightedEntry hand rolls random vs level, scans byte-pair table until threshold exceeded, stores action
+0x800cfe20 func ai_StartMove4Or5Compare hand if state 2 or 3 compares random byte with player field and starts entry 4 or 5
+0x800cfec8 func ai_RunHandlerIfTableEntry hand if per-player table entry nonzero, runs script and stores returned action
+0x800cff2c func ai_RunHandlerIfGlobalEntry hand if global table entry nonzero, runs script and stores returned action
+0x800cff74 func ai_TickDelayedAction hand picks delay on low timer, decrements counter, runs table entry when it expires
+0x800d0100 func ai_LookupActionByMove hand scans 3-byte table for player move id, stores second byte as chosen action
+0x800d0160 func ai_TickDelayedActionAlt hand starts countdown from helper result, runs table entry via move lookup when counter expires
+0x800d0328 func ai_LookupActionByOpponentMove hand scans 3-byte table for opponent move id, stores third byte as chosen action
+0x800d03e0 func ai_RunScriptOpcodes hand big switch interpreting CPU script opcodes: wait, branch, call, return, set action, move conditions
+0x800d1450 func ai_StepHoldCounter hand decrements per-player hold counter, on zero clears it and advances script pointer by two
+0x800d1498 func ai_UpdateDefenseChoiceEntry hand small entry falling into defense chooser, calls reset helper when move differs from stored one
+0x800d14a8 func ai_UpdateDefenseChoice hand picks guard or evade action by random check, distance and timer, per-round override switch
+0x800d18a8 func ai_DecayDefenseTimer hand decrements per-player timer, extra decrement on random check, clamps at zero
+0x800d195c func ai_RollRecoverBoost hand when state 8 and random check passes sets fighter value 2000, capped at ten uses
+0x800d1a20 func ai_RollHoldDecision hand scales threshold by timer and param bytes, random check sets fighter flag 0x50 and context flag
+0x800d1b88 func ai_PickReactionFromMoveTable hand on random check finds player move in four-entry table, picks one of three actions
+0x800d1cd0 func ai_RollThreshold hand returns false for zero, else true when random byte is at most the threshold
+0x800d1d14 func ai_PickWeightedScriptEntry hand sums weights of difficulty-masked 4-byte entries, rolls, returns resolved action via condition resolver
+0x800d1e34 func ai_ResolveScriptParam hand maps script param type to action: checks side, state, queued move or runs script, with round-mode overrides
+0x800d28a8 func ai_PickRangeAction hand picks action 1, 5 or 0xb by opponent state and distance thresholds, falls back to reaction roll
+0x800d2b18 func ai_RollDistanceReaction hand on random check picks action 1, 3 or 5 by distance beyond given offset
+0x800d2bc8 func ai_PickApproachMove hand picks action 1, 2, 0xb or 0xc by distance and opponent side, clears in some rounds
+0x800d2ce4 func ai_CheckMoveReachEntry hand small entry computing per-player base address then falling into reach check switch
+0x800d2cf4 func ai_CheckMoveReach hand switch on chosen action, cancels it when target is out of range via range helper
+0x800d2ef8 func ai_UpdateAttackChoice hand decays attack timer by distance, on expiry runs weighted script table or neutral picker
+0x800d3208 func ai_SetAttackTimerByState hand sets attack timer from random plus base by fighter state, zero when style entry chosen
+0x800d3440 func ai_UpdateStyleWeight hand bumps current style weight with clamp, or shifts old style and divides weight by difficulty
+0x800d351c func ai_ChooseStyleFromWeights hand rolls current then previous style weights against random, else picks from table
+0x800d3778 func ai_CheckStateCondition hand switch on condition id testing opponent state and queued move, returns 1 if met
+0x800d38c8 func ai_ClassifyOpponentThreat hand returns 0/1 if opponent in hit state, 2 for throw moves, 3 for state 5 condition, else 0xff
+0x800d3988 func ai_WeightsInit hand copies four weight bytes into context and sums them into 16-bit total
+0x800d39cc func ai_WeightAdjustClamped hand adds signed delta to one weight byte clamped 0..255, updates total
+0x800d3a54 func ai_WeightsAddClamp hand adds four deltas to weight bytes, clamps each 1..255, recomputes total
+0x800d3b2c func ai_WeightsPickIndex hand rolls random up to total, returns index 0-3 by cumulative weights
+0x800d3bbc func ai_WeightsRollCheck hand returns true when random below sum of two bytes is less than first byte
+0x800d3bfc func ai_RollCounterHold hand copies level threshold table, rolls random against entry by score when opponent in state 2
+0x800d3d6c func ai_IsFighterFree hand returns true when fighter bytes 0x44 and 0x30 are both zero
+0x800d3d90 func ai_SetRoundModeAction hand sets action 0x12 or 0x13 by side and round mode, clears or sets 10 for some rounds
+0x800d3ec8 func fight_MainLoop_800d3ec8 hand infinite loop per frame: switch on fight phase, runs fighter updates, camera and draw, calls frame sync
+0x800d4200 func fight_InitRoundState hand first call clears round flags, health bars and counters, handles pending reset flags per player
+0x800d4360 func fight_PickRoundEndReaction hand when fighter idle sets hit reaction move 0x88, picks outcome by opponent move and rolls, stores in table
+0x800d4b28 func fight_ClearFrameFlags hand calls two helpers then zeroes per-fighter transient flags, clears extra byte unless state 8 to 11
+0x800d4bec func fight_DispatchPlayerStates hand loops both fighters, switches on state byte to per-state handler, stops early on flag
+0x800d4d0c func fight_UpdateIdleState hand state 0 handler: applies queued move, resolves clash between fighters by priority, picks next move or state
+0x800d53e4 func fight_UpdateAttackState hand state 1 and 2 handler: applies queued move on reset flag or counter, runs move setup helper
+0x800d5640 func fight_UpdateState3 hand state 3 handler applying queued move, flips facing by 0x800 on certain moves
+0x800d5714 func fight_UpdateHoldState hand states 4, 6, 10, 11 handler, resolves hold or counter pairs with opponent via helpers
+0x800d5bcc func fight_UpdateState7 hand state 7 handler, applies queued move, sets timer 14000 divided by round-score gap
+0x800d5d80 func fight_UpdateKnockdownState hand states 8 and 9 handler, turns toward opponent, picks get-up move 0x74-0x77, timer by score gap
+0x800d61f4 func fight_UpdateHoldEscapeState hand state 0xe handler, picks hold-escape move from table, sets flag and health 1000
+0x800d6400 func fight_UpdateTurnState hand state 0xc handler, applies queued move or sets facing flag for move 0x33
+0x800d6524 func fight_UpdateDefaultState hand default state handler: resolves pair of queued moves of type 4, random tie-break, applies move
+0x800d66c8 func fight_SelectMovesFromInput hand per frame decides each fighter move start by state pair, calls input resolver and move starter
+0x800d6e4c func fight_ChooseCounterMove hand picks counter, hold or reversal move from per-fighter table by opponent state, queues it and sets flags
+0x800d7bdc func fight_CommitQueuedState hand copies pending move, state, facing and hit fields into fighter struct, applies health-based stagger move
+0x800d7da4 func fight_StartHitReaction hand picks reaction move from table by hit height and strength, sets state, facing flip, stagger effect
+0x800d80b0 func fight_StartPairedMoves hand sets paired animations for both fighters, copies state flags, orients fighters and resets hit timers
+0x800d82b4 func ai_SelectReactionMove hand picks defender reaction move id from opponent state, angle window and move tables via func_0x8006adbc
+0x800d8834 func fighter_LookupMoveTable3 hand reads byte from per-player table 3 indexed by current move and column
+0x800d8898 func fight_ApplyHitDamage hand per player checks hit connect and arena bounds, adds damage to life fields, sets round end code
+0x800d8c74 func fight_ApplyPendingDamage hand consumes queued damage per player, scales by hit type, updates life fields and KO type
+0x800d8f4c func fight_CalcDamageScaled hand computes damage scaled by hit type multiplier per mille, via FUN_800daa04
+0x800d90d8 func fighter_IsHittable hand returns whether fighter state and flags allow being hit or countered
+0x800d91dc func fighter_CalcHitAngle hand computes facing angle masked 0xfff from opponent angle and move offset
+0x800d9344 func fighter_UpdateBothAngleFields hand loops both fighters, stores result of FUN_800dafd4 into angle field when flagged
+0x800d93bc func fighter_ResetToIdleMove hand selects idle or reaction move for fighter and clears move flags, sets state fields
+0x800d9518 func fighter_SetMoveSlot hand stores move id and side flag in slot arrays for player, loads move data
+0x800d95d8 func fighter_AdjustMoveForSide hand adjusts move id plus one depending on facing side flags of both fighters
+0x800d9728 func fight_ResolveMoveClash hand swaps both fighters to clash moves, resets move links, sets state types, calls FUN_800da240
+0x800d98a0 func stage_IsOutsideArenaBounds hand tests position against arena width and depth from stage globals, returns bool
+0x800d99d0 func move_GetTable2Byte0B hand reads byte 0xb from table 2 entry stride 0x13 for player
+0x800d9a1c func move_GetTable2Byte0A hand reads byte 0xa from table 2 entry stride 0x13 for player
+0x800d9a68 func move_GetCurrentTable0Byte4 hand reads byte 4 of current move entry in table 0 for fighter
+0x800d9ae0 func move_GetCurrentMoveByte4 hand reads byte 4 of current move entry via FUN_800dae3c
+0x800d9b44 func move_GetCurrentTable0Byte3 hand reads move type byte 3 of current move from table 0
+0x800d9bbc func move_GetCurrentMoveByte3 hand reads move type byte 3 of current move via FUN_800dae3c
+0x800d9c20 func move_GetTypeById hand reads move type byte 3 from table 0 for given move id and player
+0x800d9c8c func move_GetTypeById2 hand reads move type byte 3 for given move id via FUN_800dae3c
+0x800d9ce8 func fighter_LoadMoveTransition hand looks up next move transition entry for current move, stores move id returns flag
+0x800d9e10 func fighter_UpdateAutoFacing hand per fighter decides when to turn toward opponent from move ids and frame counter
+0x800d9fd4 func fighter_TurnToFaceOpponent hand rotates fighter angle toward opponent by step or snaps within window, mod 0x1000
+0x800da240 func fighter_AlignToOpponent hand sets fighter position relative to opponent by angle sine cosine table and offset
+0x800da3e8 func fighter_LoadMoveHitData hand loads hit level and damage bytes from move tables for strike or throw state
+0x800da5bc func fighter_StartMoveAndLoadHit hand sets move id, side, state type then calls FUN_800da3e8
+0x800da674 func fighter_StartMoveSided hand sets move id with side from id threshold, state type from move data
+0x800da738 func fighter_StartMoveLeft hand sets move id with side zero, state type from move data
+0x800da7cc func fight_ShiftStateHistory hand shifts previous move and state bytes into history globals for both fighters
+0x800da85c func move_GetOpponentHitParam4 hand reads byte 4 of hit table entry from opponent tables by previous move
+0x800da930 func move_GetOpponentHitParam5 hand reads byte 5 of hit table entry from opponent tables by previous move
+0x800daa04 func move_GetDamageValue hand returns damage byte from opponent hit tables by state type and attack strength flag
+0x800dabbc func move_GetTable2Byte12 hand reads byte 0x12 of table 2 entry for last move of player
+0x800dac14 func move_GetTable2Byte0C hand reads byte 0xc of table 2 entry for current move of fighter
+0x800daccc func move_ComparePriority hand compares byte 0xd of both fighters current move entries, returns 1 equal 2 first higher
+0x800dadd0 func hit_LoadBoxParams hand copies four shorts of hit box entry for move id into hit globals
+0x800dae3c func move_GetEntryPtr hand returns pointer to 16 byte move entry, main table or per-player table by move id range
+0x800daeb0 func move_GetEntryByte0C hand reads byte 0xc of current move entry for fighter
+0x800daf64 func fighter_IsFacingAway hand tests angle difference to stage angle exceeds half circle
+0x800dafd4 func move_GetEntryHalf0 hand reads first halfword of current move entry for fighter by state type
+0x800db104 func hit_LoadBoxParamsIfStrike hand clears hit globals then loads box params when move type is strike or throw
+0x800db1d0 func move_IsNeutralTransition hand returns whether next move transition entry is neutral type zero or ten
+0x800db354 func fighter_CalcAngleToTarget hand atan2 of offset to target position with grid jitter, masked 0xfff
+0x800db4b4 func pad_ClearVibrationScripts hand zeroes vibration channel state for both players and calls func_0x8006ac50
+0x800db578 func pad_UpdateVibrationScripts hand per fighter picks vibration script from move state, steps script bytes, calls func_0x8006ac50
+0x800dbce4 func fight_MainLoop_800dbce4 hand endless loop per frame calling fight init, camera, state update and FUN_800dbda8
+0x800dbda8 func fight_UpdateFrame hand per frame runs state, hit, camera updates, copies stage grid values, calls FUN_800dc144 and FUN_800dcae8
+0x800dc144 func hit_CheckAttackVsBody hand tests attacker hit volumes against defender body volumes, sphere or capsule, sets hit flags and level
+0x800dc4f8 func hit_SetHitLevelFromPart hand stores hit level 0 1 or 2 per fighter from body part index
+0x800dc590 func hit_SphereTestFromIndices hand sphere test using volume arrays and indices, wrapper of FUN_800dc604
+0x800dc604 func hit_SphereSphereTest hand box early out then squared distance test of two spheres, saves contact point
+0x800dc6f0 func hit_CapsuleSphereTest hand checks sphere position against capsule end planes, then segment distance test
+0x800dc85c func hit_CapsuleClosestPointTest hand closest point on capsule segment to sphere center, compares squared radii sum
+0x800dc868 func hit_CapsuleClosestPointTail hand register-fed tail of capsule closest point test, writes contact globals
+0x800dcae8 func hit_CheckBodyVsObjects hand tests fighter volumes against 15 object volumes in two lists, sets collision flags
+0x800dcfa0 func fight_Init hand sets up per-player buffers, clears state block, computes arena and camera distance limits from fighter sizes
+0x800dd1c8 func fx_ClearSlots hand clears active byte of 16 effect slots stride 0x34
+0x800dd1ec func fight_InitLightColors hand fills lighting color table by video mode and calls FUN_800de4c0 per player by game mode
+0x800dd4a8 func fx_FindFreeSlot hand returns first free effect slot index of 16, else slot with lowest priority
+0x800dd590 func fx_StartSlot hand allocates effect slot, sets duration 500, color word 0x2e808080 and clears fields
+0x800dd668 func fx_SpawnFighterEffects hand walks effect id list for fighter, spawns slots with camera-space position from joint data and mirror flag
+0x800ddad8 func fx_SpawnEffectListAtPos hand spawns effect slots from list for player at given xyz position, mode 4 sets lighting list
+0x800ddd08 func fx_SpawnEffectListAtFighter hand spawns effect slots from list 4 at fighter position, fixed height 1000
+0x800ddea8 func fx_UpdateAndDrawSlots hand activates new slots, builds active list, applies offsets, calls func_0x80012128 draw and limit check
+0x800de160 func fx_SpawnHitReactionEffects hand per player picks hit effect id by state and opponent state, calls FUN_800dd668
+0x800de4c0 func fx_SetEffectListPtr hand stores pointer from effect list table into per-player slot table
+0x800de4fc func light_UpdateFromEffects hand sums nearby effect slot colors by inverse squared distance, passes result to func_0x8001c9fc
+0x800de80c func light_ClearEffectColor hand calls func_0x8001c9fc with zero color struct
+0x800de84c func fight_InitEffectState hand clears effect flags, picks two random offsets modulo 90, clears timers
+0x800de96c func fx_ClearTimers hand clears four 16-byte-stride halfword timers
+0x800dea20 func fx_UpdateMotionDust hand tracks joint speed change per fighter, spawns dust via FUN_800df228, decrements timers
+0x800ded9c func fx_UpdateDustTriggers hand per fighter timers, triggers ground dust via FUN_800def44 on landing or knock states
+0x800def44 func fx_SpawnGroundDust hand checks effect budget by stage constants, computes foot position through GTE matrix, calls FUN_800df228
+0x800def64 func fx_SpawnGroundDustTail hand register-fed duplicate of FUN_800def44 body, spawns dust particle and sets timer 45 to 90
+0x800df228 func fx_AddParticleSlot hand finds free of 4 particle slots, stores position, velocity and type word, life 32
+0x800df2e8 func fx_UpdateParticles hand collects active particles, offsets by camera shift, draws via func_0x80013048, integrates velocity and life
+0x800df4c8 func stub_800df4c8 hand rules: empty: jr ra
+0x800df504 func fx_ClearPieceFlags hand clears active byte of two 24-byte entries
+0x800df530 func stub_800df530 hand rules: empty: jr ra
+0x800df538 func effect_UpdateByType hand dispatches on effect type to init, move, draw helpers, type 6 recurses on linked entry
+0x800df6a4 func effect_InitPieceSet hand fills eight 60-byte pieces with spread angles, speeds, random phase and type by effect kind
+0x800dfbf0 func effect_StepPieceMotion hand per piece integrates angle, radius, height using sine table per piece state
+0x800dfde8 func effect_UpdatePieceStates hand per-piece countdown state machine for eight pieces, advances states, clears effect when none active
+0x800e0244 func effect_InitSixteenPieces hand on start builds sixteen 60-byte pieces with angles, radii, random phase per effect kind
+0x800e08f0 func effect_StepSixteenPieces hand per-piece motion using sine table radius and angle, velocity and gravity by effect kind
+0x800e0e50 func effect_UpdatePieceTimers16 hand per-piece state machine across sixteen pieces, starts phases, reverses velocity, ends effect when idle
+0x800e1474 func effect_DrawSixteenPieces hand per piece loads GTE matrix, rotates, translates, draws quad via FUN_800e1d38, steps frame counters
+0x800e17c8 func effect_DrawEightPieces hand per piece builds GTE transform with camera offset and rotation, draws via FUN_800e1c34, steps animation frame
+0x800e1c34 func gpu_AddPolyFT4Sprite hand GTE RotTransPers on three vertices, builds textured quad packet code 0x2d, links into ordering table
+0x800e1d38 func gpu_AddPolyFT4SpriteSemiTrans hand same as FUN_800e1c34 but sets semi-transparent flag, packet code 0x2f
+0x800e1e40 func gte_LoadRotTransMatrix hand loads eight control words rotation matrix and translation into GTE
+0x800e1e90 func gte_SetTransFromRotatedVec hand rotates vector with current matrix via MVMVA, writes result into GTE translation registers
+0x800e1ed0 func gte_StoreRotTransMatrix hand stores GTE rotation matrix and translation into eight words
+0x800e1f20 func gte_ScaleMatrix_800e1f20 hand scales rotation matrix columns by three fixed-point factors using MVMVA
+0x800e1fc0 func gte_RotMatrixY hand multiplies current GTE matrix by rotation about one axis from sine table angle
+0x800e2080 func gte_RotMatrixX hand multiplies current GTE matrix by rotation of negated angle about second axis
+0x800e2130 func gte_RotMatrixZ hand multiplies current GTE matrix by rotation about third axis from sine table angle
+0x800e21f0 func game_MainRenderLoop hand forever sets draw env, calls update steps, draws, sets second env, waits one frame via func_0x8004d014
+0x800e22ac func gpu_ClearOrderingTables hand clears four per-frame ordering tables via func_0x8001d04c with sizes 2, 7, 3, 3
+0x800e2374 func camera_SetDepthRange hand distance from fighter midpoint to camera sets near and far clip via func_0x8001e58c
+0x800e2414 func stage_UpdateFrame hand per-frame stage tick, handles stage change, camera, background draw, advances scroll timers
+0x800e25bc func light_SetAmbientColor hand passes three ambient colour shorts to func_0x8001cfec
+0x800e25f4 func stage_DrawScrollLayers hand computes background scroll offsets from camera angle, fills sprite packets, wraps positions, links to ordering table
+0x800e2a98 func stub_800e2a98 hand rules: empty: jr ra
+0x800e2aa0 func obj_DrawModelList hand iterates object entries and dispatches on type 0,1,4,5,6,7 to model draw functions
+0x800e2c84 func gpu_InitOrderingTables hand initialises three double-buffered ordering table structs with size and buffers, clears each
+0x800e2dd8 func stage_RestartScene hand resets frame counter, camera reset, clears pending flag, reloads stage resources
+0x800e2e18 func stage_ResetCamera hand clears transition timer, sets mode 1, loads camera and light data for clamped stage id
+0x800e2e74 func stage_LoadCameraAndLights hand copies camera setup table row, sets three lights, fog colours, ambient and projection
+0x800e3214 func light_SetDirection hand builds direction vector from two sine table angles and colour bytes, sets light slot via func_0x8001c9fc
+0x800e32e0 func stage_InitResources hand loads stage sound, flags, background tiles and sprites then camera and lights
+0x800e33c0 func stage_LoadFlags hand copies six per-stage config bytes from table into globals
+0x800e3450 func stage_InitBackgroundTiles hand builds two grids of 25 tile pointers via FUN_80095b44
+0x800e3510 func stage_GetClampedId hand returns stage id byte or zero when above 15
+0x800e3540 func stage_InitBackgroundSprites hand sets up background sprite packets with uv, colour and flip handling, initialises small lists
+0x800e3a20 func stage_UpdateCameraFade hand counts down transition timer, blends camera angles and light colours toward target over 48 frames
+0x800e3cac func stage_TriggerHitFlashBothFighters hand for each active fighter calls FUN_800e3d64 and starts pad vibration unless paused
+0x800e3d64 func stage_SaveCameraAndBeginFlash hand saves or restores camera angles and light colours, sets camera mode, flash timer 96
+0x800e3f58 func camera_CalcAnglesToTarget hand computes yaw and pitch from offset vector via atan helper, stores in camera slot table
+0x800e403c func camera_AnglesToDirection hand converts two angles into direction vector using sine table, three fixed-point outputs
+0x800e40a0 func mem_StoreMulLowField8 hand fragment storing multiply-low result into field at offset 8 of third argument (was data_800e40a0)
+0x800e4144 func camera_AimAtPoint hand sets camera look direction by atan of offset from camera position, stores negated angle
+0x800e419c func stage_DrawFloorTiles hand draws tiled floor grid of 25 columns per ring, chooses variant by neighbours, adds shadow sprites
+0x800e4af4 func light_SetFloorTileLight hand sets light 1 colour from stage table when fighter stands on lit tile, checkerboard pick for one stage
+0x800e4ce0 func light_ClearFloorTileLight hand sets light 1 to black when stage has tile lighting
+0x800e4d3c func stage_GetCheckerIndex hand returns checkerboard cell parity index 0 to 3 from x and z in 2000-unit cells
+0x800e4e24 func gte_LoadRotTransMatrix_2 hand loads eight control words rotation matrix and translation into GTE
+0x800e4e74 func gte_SetTransFromRotatedVec_2 hand rotates vector with current matrix via MVMVA, writes result into GTE translation registers
+0x800e4eb4 func gte_StoreRotTransMatrix_2 hand stores GTE rotation matrix and translation into eight words
+0x800e4f04 func gpu_DrawTileMesh hand transforms quads with RotTransPers, culls by screen bounds, builds GT4 packets, subdivides near quads into four
+0x800e5350 func gpu_CalcQuadScreenXY hand loads vertices into GTE, runs RotTransPers4 and NormalClip, returns screen XY of last vertex
+0x800a5a8c func stub_800a5a8c hand empty function that only returns
+0x800a5ac8 func math_ScaleParamsByQuotient hand stores hi>>6 minus v0 result, multiplies two table entries by it
+0x800a6b00 func fighter_ClearSlotFlags hand per-player block index times 0x63c, clears byte at +1 of four 0x34-sized entries
+0x800a6b1c func fighter_ClearSlotFlagsIdx hand same four-entry flag clear, index taken from v0 times 4
+0x800a9f34 func gte_SetIdentityMatrix hand writes GTE control registers: rotation matrix identity 0x1000 diagonal, translation zero
+0x800b29ac func stub_800b29ac hand empty function that only returns
+0x800b29bc func stub_800b29bc hand empty function that only returns
+0x800b55e0 func cam_UpdateFightCamera hand smooths fighter positions, approaches framing center, yaw and distance, plays scripted camera table, applies follow eye clamp
+0x800bc31c func math_RotateOffsetAdd hand rotates x,y offset by angle via sine table fixed 12 bit, adds result into two pointers
+0x800bc54c func math_ClampIntPtr hand clamps int at pointer between min and max, stores back
+0x800bc5ac func math_ConvertUnitsScale hand halves input then scales by 0x3a7 over 0x160 ratio
+0x800c6c84 func game_CheckPlayTimeUnlocks hand sets unlock bits and flag when play time counter passes fixed thresholds
+0x800cd820 func ai_GetFighterTableEntry hand returns word from per-fighter table by fighter index and entry index
+0x800e40b8 func camera_IsOutsideViewBox hand tests abs x and z doubled against screen limit globals, returns outside flag
+0x800e4108 func camera_IsOutsideViewZ hand tests z against screen limit globals, returns flag

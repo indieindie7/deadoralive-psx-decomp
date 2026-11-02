@@ -1,0 +1,185 @@
+MOVIE 0x80106838 spu_SetInputMix CONFIRM spu_SetInputMix builds SpuSetCommonAttr mask 0x200/0x100/0x2000/0x1000 from CD/ext and on/off args
+MOVIE 0x801068f8 spu_SetInputVolume CONFIRM spu_SetInputVolume clamps L/R to 0x7f, scales, SpuSetCommonAttr CD or ext volume
+MOVIE 0x801075ac SpuWrite CONFIRM SpuWrite DMA transfer setup or spu_WritePio fallback; returns size
+MOVIE 0x80107630 SpuRead CONFIRM SpuRead sets transfer addr, read direction, starts transfer
+MOVIE 0x80107860 math_DelayLoop RENAME spu_DelayLoop only SPU routines call this fixed 0x3c-count busy loop
+MOVIE 0x80107fc0 CdMix CONFIRM CdMix writes mix regs via cd_WriteMixRegs, returns 1; movie_Main passes mix struct
+MOVIE 0x80109098 cd_WriteMixRegs CONFIRM writes 4 mix bytes to CD index 2 and 3 regs then 0x20 apply
+MOVIE 0x801091f4 cd_InitVolume CONFIRM sets SPU CD vol 0x3fff, enables CD audio, writes default mix regs; called by CdReset
+MOVIE 0x8010920c cd_InitVolume_2 RENAME cd_InitVolumeTail mid-function entry of cd_InitVolume with in_v1 register; no number suffix
+MOVIE 0x80109814 cd_GetSectorDma2_tail CONFIRM waits status bit 0x40 then starts DMA; tail entry
+MOVIE 0x80109870 cd_InterruptCallback CONFIRM loops cd_Interrupt and calls ready (4) and sync (2) callbacks
+MOVIE 0x80109878 cd_InterruptCallback_2 RENAME cd_InterruptCallbackTail mid-function entry of cd_InterruptCallback; no number suffix
+MOVIE 0x8010a0d4 cd_SetDmaFlags CONFIRM stores flags returns previous; CdInit sets 0
+MOVIE 0x8010a314 StGetBackloc CONFIRM returns last stream sector as pos, -1 when streaming off
+MOVIE 0x8010a31c StGetBackloc_2 RENAME StGetBackLocTail mid-function entry with flag in register; no number suffix
+MOVIE 0x8010a5b8 StSetMask CONFIRM stores three stream mask/start/end vars; StSetStream calls it
+MOVIE 0x8010b0dc st_SetUserCallback CONFIRM swaps callback pointer returns old; StUnSetRing clears it
+MOVIE 0x8010b104 DMACallback_Ch3 CONFIRM thin wrapper DMACallback(3,cb); caller StUnSetRing clears it
+MOVIE 0x8010b188 pad_IsPadTypeEight CONFIRM checks flag then pad struct type byte equals 8
+MOVIE 0x8010b190 pad_IsPadTypeEight_2 RENAME pad_IsPadTypeEightTail mid-function entry with flag in register; no number suffix
+MOVIE 0x8010b514 PadSetActAlign CONFIRM gets port struct via fn pointer, calls pad_SetActAlign
+MOVIE 0x8010b51c PadSetActAlign_2 RENAME PadSetActAlignTail mid-function entry with fn pointer in v0; no number suffix
+MOVIE 0x8010b72c pad_IrqCheck CONFIRM tests irq status and mask bit 0, calls callback, returns 1
+MOVIE 0x8010b734 pad_IrqCheck_2 RENAME pad_IrqCheckTail mid-function entry with ptr in v1; no number suffix
+MOVIE 0x8010ba54 pad_BeginPortPoll CONFIRM sets current port, starts transfer, calls error cb 0xffff on fail; caller vsync handler
+MOVIE 0x8010ba64 pad_BeginPortPoll_2 RENAME pad_BeginPortPollTail mid-function entry with regs as args; no number suffix
+MOVIE 0x8010bf34 pad_SetupConfigCmd CONFIRM dispatches on config state 2/3/4 to QueryModel/QueryMode/QueryComb commands
+MOVIE 0x8010bfb8 pad_ProcessConfigReply CONFIRM parses reply by state 2/3/4 into model, mode, act, comb fields
+MOVIE 0x8010c104 pad_CalcConfigSize CONFIRM sums config table sizes from pad struct fields; caller checks <0x81
+MOVIE 0x8010c13c pad_StartConfigLoad CONFIRM sets config table pointers, state 1, callbacks; returns 1 on success
+MOVIE 0x8010c210 pad_SetupConfigCmd2 RENAME pad_SetupLoadedCfgCmd state-driven request setup used as callback after pad_StartConfigLoad; digit suffix avoided
+MOVIE 0x8010c52c pad_SetActAlign CONFIRM starts request if idle, stores arg, sets state 1 and callbacks; caller PadSetActAlign
+MOVIE 0x8010c764 pad_SetMainModeStep UNSURE pad_SetMainModeStep flag at 0x53 picks error cb or state 0xfe/return 1; no callers shown
+MOVIE 0x8010c818 pad_CmdSetMode46 RENAME pad_CmdQueryAct46 builds command 0x46 with one index byte; reply fills act info, not a mode set
+MOVIE 0x8010c838 pad_CmdQueryComb47 CONFIRM builds command 0x47 with one index byte; reply loops comb tables
+MOVIE 0x8010c858 pad_CmdQuery4b CONFIRM builds command 0x4b with no data
+MOVIE 0x8010d06c pad_PollStep CONFIRM per-port step: enter config, idle states, runs request callback or setup
+OV00 0x800963f4 motion_StepJointPolynomials_2 RENAME motion_StepJointPolynomialsTail mid-function duplicate entry of the stepper, no callers
+OV00 0x8009cfd0 motion_InitSegmentPos16_2 RENAME motion_InitSegmentPos16Tail mid-function duplicate entry, no callers
+OV00 0x8009fab8 motion_CalcAngleStepDeltas_2 RENAME motion_CalcAngleStepDeltasTail mid-function duplicate entry, no callers
+OV00 0x800a1278 math_BlendAngleTriple CONFIRM math_BlendAngleTriple halves angle difference toward target for three angles
+OV00 0x800a2714 fighter_DrawShadowsBoth CONFIRM fighter_DrawShadowsBoth draws shadow for both players
+OV00 0x800a276c fighter_DrawShadowPlayer CONFIRM fighter_DrawShadowPlayer builds nine shadow quads for one fighter
+OV00 0x800a29dc gte_LoadControlRegs CONFIRM gte_LoadControlRegs loads eight GTE control words rotation and translation
+OV00 0x800a2a24 gte_StoreControlRegs CONFIRM gte_StoreControlRegs stores GTE control words back
+OV00 0x800a2c6c gpu_AddShadowPolyG4 CONFIRM gpu_AddShadowPolyG4 links a gouraud quad shadow packet
+OV00 0x800a3164 fighter_LoadHitTable13 CONFIRM fighter_LoadHitTable13 loads hit table index 0x13 for the motion dispatcher
+OV00 0x800a5070 game_UpdateFightSetupState CONFIRM game_UpdateFightSetupState steps pre-fight setup state
+OV00 0x800a5884 fighter_UpdatePlayerFrame CONFIRM fighter_UpdatePlayerFrame per-player frame update
+OV00 0x800a5924 fighter_SpawnHitEffect CONFIRM fighter_SpawnHitEffect spawns effect, arena-bounds check is only a condition
+OV00 0x800a5ce0 game_UpdatePlayerMirrorState CONFIRM game_UpdatePlayerMirrorState copies per-player state into mirror tables
+OV00 0x800a611c camera_SetupFightCamera CONFIRM camera_SetupFightCamera sets up fight camera
+OV00 0x800a641c fighter_SelectPaletteTable CONFIRM fighter_SelectPaletteTable picks palette table per fighter
+OV00 0x800a689c fighter_CheckClothSprings UNSURE fighter_CheckClothSprings compares fighter size bytes to thresholds, cloth link unproven
+OV00 0x800a68ac fighter_CheckClothSprings_2 RENAME fighter_CheckClothSpringsTail mid-function duplicate entry, no callers
+OV00 0x800a6a2c model_DisableParts CONFIRM model_DisableParts clears part enable flags
+OV00 0x800a6b48 model_ClearPartFlag CONFIRM model_ClearPartFlag clears a flag on a part
+OV00 0x800a6c24 math_CalcPitchToCamera CONFIRM math_CalcPitchToCamera computes pitch angle toward camera
+OV00 0x800a6d34 model_UpdatePartSprings CONFIRM model_UpdatePartSprings per-frame spring update of part offsets
+OV00 0x800a7414 model_UpdateSpringAxis CONFIRM model_UpdateSpringAxis yaw and pitch spring with velocity damping
+OV00 0x800a78b0 model_UpdateSpringChain CONFIRM model_UpdateSpringChain spring update using 16-entry history ring, called per part
+OV00 0x800a881c gte_BuildLightMatrix CONFIRM gte_BuildLightMatrix multiplies matrices and loads light control regs
+OV00 0x800a8bf8 model_DrawGT4Lit CONFIRM model_DrawGT4Lit builds textured gouraud quad packets with GTE
+OV00 0x800a8eb4 model_DrawGT3Alpha CONFIRM model_DrawGT3Alpha builds textured gouraud triangle packets with mode byte
+OV00 0x800a965c model_DrawPolyF3 CONFIRM model_DrawPolyF3 builds flat triangle packets with ordering table insert
+OV00 0x800a98f0 model_DrawFT3 CONFIRM model_DrawFT3 builds flat textured triangle packets
+OV00 0x800aa4c4 camera_UpdateTargetHistory RENAME fighter_UpdateLimbPosHistory loops 15 limbs storing translation and shifting position history, called by limb builder
+OV00 0x800aa794 camera_SetTargetFromTable CONFIRM camera_SetTargetFromTable rotates fixed offset via GTE and stores xyz into per-player camera slot
+OV00 0x800aa820 camera_SetTargetFromTable_2 RENAME fighter_SetHandTargetAndLoadRot rotates offset into slot, stores trans if downed move, then loads hand rot tables
+OV00 0x800aa8e8 fighter_IsMoveInRange RENAME fighter_IsDownedGetUpMove true when state 9 and move 0x76 or 0x77; used only by hand target caller
+OV00 0x800aaa24 fighter_LoadBoneRotTable_A CONFIRM fighter_LoadBoneRotTable_A reads rotation entry of table id 0xd, mirrors x by flag, GTE rotates
+OV00 0x800aab2c fighter_LoadBoneRotTable_B RENAME fighter_LoadBoneRotSingleOrPair dispatches on entry type 1 or 3 to single or pair loaders
+OV00 0x800aaba4 fighter_LoadBoneRotTable_C CONFIRM fighter_LoadBoneRotTable_C same as A with table id 0xf and separate output arrays
+OV00 0x800ab9a4 model_UpdateFighterPose CONFIRM model_UpdateFighterPose big per-fighter pose copy and bone rotation update called from limb matrix builder
+OV00 0x800bd108 fighter_CalcPushApartSpeeds CONFIRM fighter_CalcPushApartSpeeds computes per-fighter push speeds from distance and states, applies via facing push
+OV00 0x800be0a8 math_ProjectSinCosToXZ UNSURE math_ProjectSinCosToXZ orphan fragment scaling sin/cos table values into three globals, no callers
+OV00 0x800be71c fighter_InitThrowVelocityFragment CONFIRM fighter_InitThrowVelocityFragment orphan tail writing x/y/z velocity arrays from angle sin/cos
+OV00 0x800c44a8 stat_CountFighterPlaysTail CONFIRM stat_CountFighterPlaysTail increments per-character play counts by mode then checks unlocks
+OV00 0x800c4910 mem_CopyTeamBattleTable UNSURE mem_CopyTeamBattleTable copies 25 words from portrait-buffer address; team-battle link not shown by caller
+OV00 0x800c4a0c gpu_LoadStagePortraitTim CONFIRM gpu_LoadStagePortraitTim selects portrait buffer, loads image to VRAM and draws two sprites
+OV00 0x800c510c team_DrawRosterPanelsTail CONFIRM team_DrawRosterPanelsTail draws player labels, fighter icons and digits for both teams
+OV00 0x800c5fac timeattack_RecordStageTimeTail RENAME timeattack_CalcSegmentTimeTail subtracts previous h/m/s/centi values with borrow then saves current as previous
+OV00 0x800c7df4 fight_ResetOnRoundStateChange CONFIRM fight_ResetOnRoundStateChange countdown flags clear fighter and ai state on change
+OV00 0x800c7e04 fight_ResetOnRoundStateChangeTail CONFIRM fight_ResetOnRoundStateChangeTail same body as the reset with register inputs
+OV00 0x800c89c4 ring_IsOutsideBoundsAtAngleTail CONFIRM ring_IsOutsideBoundsAtAngleTail adds sin offset to position and compares with half ring size
+OV00 0x800c9efc cpu_ScanInputBufferForThrowTail CONFIRM cpu_ScanInputBufferForThrowTail walks input ring buffer for repeated direction 7 flag
+OV00 0x800ca154 cpu_HandleGuardInputTail CONFIRM cpu_HandleGuardInputTail guard timer decay, move script start and escape pick
+OV00 0x800d4360 fight_PickRoundEndReaction CONFIRM fight_PickRoundEndReaction sets hit move 0x88 and picks outcome by opponent move, called from main loop
+OV00 0x800d5640 fight_UpdateState3 CONFIRM fight_UpdateState3 dispatched for state 3, applies queued move and flips facing on moves 0x4d-0x52
+OV00 0x800d5714 fight_UpdateHoldState CONFIRM fight_UpdateHoldState dispatched for states 4,6,10,11, resolves hold pairs and clashes
+OV00 0x800d5bcc fight_UpdateState7 CONFIRM fight_UpdateState7 dispatched for state 7, applies queued move, timer from score gap
+OV00 0x800d5d80 fight_UpdateKnockdownState CONFIRM fight_UpdateKnockdownState dispatched for states 8,9, picks get-up moves 0x74-0x77
+OV00 0x800d61f4 fight_UpdateHoldEscapeState CONFIRM fight_UpdateHoldEscapeState dispatched for state 0xe, picks escape move, sets health 1000
+OV00 0x800d6400 fight_UpdateTurnState CONFIRM fight_UpdateTurnState dispatched for state 0xc, starts queued move or sets facing flags
+OV00 0x800d6e4c fight_ChooseCounterMove CONFIRM fight_ChooseCounterMove picks counter or reversal move slot from table, called from move selection
+OV00 0x800d7da4 fight_StartHitReaction CONFIRM fight_StartHitReaction picks reaction move by hit height and strength, sets state and facing
+OV00 0x800e40a0 data_800e40a0 RENAME mem_StoreMulLowField8 function fragment storing LO register into offset 8 of third arg
+OV00 0x800a5ac8 math_ScaleParamsByQuotient UNSURE math_ScaleParamsByQuotient register-input fragment, no callers, multiplies two table entries by hi>>6 minus v0
+OV00 0x800a6b00 fighter_ClearSlotFlags CONFIRM fighter_ClearSlotFlags per-player block 0x63c, clears byte +1 of four 0x34 entries; no callers
+OV00 0x800a6b1c fighter_ClearSlotFlagsIdx CONFIRM fighter_ClearSlotFlagsIdx same clear with index from v0*4, fragment variant; no callers
+SLUS 0x80024260 cd_Wrapper_80024260 RENAME cd_Ready body only calls cd_ReadyStep; caller cd_ReadFinish passes mode and result slot
+SLUS 0x80024684 cd_Wrapper_80024684 RENAME cd_GetSector calls cd_DataTransferStart; caller passes buffer and word count, result is success flag
+SLUS 0x800246a4 cd_Wrapper_800246a4 RENAME cd_GetSectorDma calls cd_DmaDone; DMA-flag branch twin of the PIO sector fetch
+SLUS 0x800246c4 cd_Wrapper_800246c4 RENAME cd_SetDmaCallback calls interrupt table with channel 3 and a callback; callers pass cd_ReadRetry or 0
+SLUS 0x800246e8 cd_Wrapper_800246e8 RENAME cd_DataSync only calls CdDataSync; used to wait for the DMA data transfer
+SLUS 0x80025898 cd_Wrapper_80025898 RENAME cd_EnableCdAudio writes SPU CD volume and enable regs and CD controller regs, returns 0; called by cd_InitMode
+SLUS 0x8002600c cd_Wrapper_8002600c RENAME cd_SearchFilePath walks backslash path, finds dir entry, copies 24-byte file record; callers are movie file search
+SLUS 0x8002734c etc_Wrapper_8002734c RENAME etc_ResetCallback calls slot that leads to InterruptCallbackInit; called from init and reset paths
+SLUS 0x8002737c etc_Wrapper_8002737c RENAME etc_InterruptCallback takes irq number and handler; callers register CD, timer and vblank handlers
+SLUS 0x800273ac etc_Wrapper_800273ac RENAME etc_DmaCallback takes dma channel 2 or 3 and handler; callers are GPU queue and CD
+SLUS 0x800273dc etc_Wrapper_800273dc UNSURE etc_Wrapper_800273dc slot at +0x14 with arg 4; exact table role unclear
+SLUS 0x80027418 etc_InterruptEnableWrapper UNSURE etc_InterruptEnableWrapper no callers, call through unset register slot +0x14
+SLUS 0x80027440 etc_InterruptDisableWrapper UNSURE etc_InterruptDisableWrapper slot +0x10 called once before exec; stop/restart role unproven
+SLUS 0x80027478 etc_Wrapper_80027478 UNSURE etc_Wrapper_80027478 no callers, call through slot +0x18
+SLUS 0x800274a0 etc_Wrapper_800274a0 RENAME etc_GetIntrFlag returns a state short checked before CD sync polling
+SLUS 0x800274c8 etc_Wrapper_800274c8 RENAME etc_SetIntrMask GPU callers save old value then restore it around critical section
+SLUS 0x800279e8 etc_Wrapper_800279e8 RENAME etc_ClearWordsIntr zeroes param_2 words at param_1; used to clear the interrupt state block
+SLUS 0x80027a4c etc_Wrapper_80027a4c RENAME etc_InitVSyncCallbacks sets mask reg, clears 8-entry table, registers irq 0 handler, returns handler stored in table
+SLUS 0x80027b3c etc_Wrapper_80027b3c RENAME etc_ClearWordsCbTable zeroes 8-word callback table, only caller is the vsync init
+SLUS 0x80027b6c etc_ClearCallbacks RENAME etc_InitDmaCallbacks clears 8-entry table, registers irq 3 handler, returns handler stored in slot +4
+SLUS 0x80027de4 etc_Wrapper_80027de4 RENAME etc_ClearWordsDma zeroes 8 words, same loop as the other clear helpers
+SLUS 0x80027e3c etc_Wrapper_80027e3c RENAME math_FloatToUint uses float compare with 2^31 and subtract, no DMA at all
+SLUS 0x80028018 snd_Wrapper_80028018 RENAME snd_SsInitHot only calls SsInitHot with a short argument; caller is bgm load
+SLUS 0x8002803c snd_Wrapper_8002803c RENAME snd_SsInitHotAlt identical body to the one used by bgm load, no callers
+SLUS 0x8002806c snd_VoiceKeyOnMask RENAME snd_RemoveTickCallback under critical section clears interrupt callback by flags; no SPU key writes; called in sound shutdown
+SLUS 0x8002811c snd_VoiceKeyOffMask RENAME snd_InitSpuRegs copies defaults into 24 voice register blocks and reverb area, inits voice manager, clears tables
+SLUS 0x8002820c snd_Wrapper_8002820c RENAME snd_InitSystem calls reset callback, snd_Init, SPU register init; caller is sound_Init
+SLUS 0x800289ac snd_EventNoteOff CONFIRM snd_EventNoteOff sets voice volume with velocity then reads next delta time
+SLUS 0x80028a7c snd_EventNoteOn CONFIRM snd_EventNoteOn stores velocity, sets voice volume, reads next delta time
+SLUS 0x80028b4c snd_EventControlChange CONFIRM snd_EventControlChange sets program volume from data byte, updates voice, reads delta time
+SLUS 0x80028c3c snd_EventProgramChange RENAME snd_EventPitchBiasSwitch data below 0x40 clears pitch bias else sets it, then reads delta time; no program select
+SLUS 0x80028cec snd_EventPitchBend RENAME snd_EventReverbVolume passes data byte to reverb volume setter for both sides, then reads delta time
+SLUS 0x80028d7c snd_VoiceAllocate UNSURE snd_VoiceAllocate no voice search; track state fields and callback on state 0x28, role unclear
+SLUS 0x80028eac snd_VoiceRelease RENAME snd_EventLoop state 0x14 saves stream pointer, state 0x1e counts down repeats and restores pointer; no voice release
+SLUS 0x80028fec snd_SetVoiceVolume UNSURE snd_SetVoiceVolume stores data byte in track field 0x18, no register write; field meaning unproven
+SLUS 0x8002905c snd_SetVoicePitch UNSURE snd_SetVoicePitch stores data byte in track field 0x19, no register write; field meaning unproven
+SLUS 0x800290cc snd_SetVoiceAdsr RENAME snd_EventResetControllers clears reverb and pitch bias, resets volume 0x7f and pan 0x40 defaults
+SLUS 0x8002918c snd_SetVoiceStartAddr RENAME snd_SetVagPriority get VAG attr, patch byte 0 from stack arg, set attr back
+SLUS 0x8002921c snd_UpdateVoiceVolume RENAME snd_SetVagMode patches byte 1 (mode) and switches reverb off for 0 or on for 4
+SLUS 0x800292dc snd_SetMasterVolume RENAME snd_SetVagVolume patches byte at offset 2 of the VAG attr struct
+SLUS 0x8002936c snd_SetReverbDepth RENAME snd_SetVagPan patches byte at offset 3 of the VAG attr struct
+SLUS 0x800293fc snd_SetSeqTempo RENAME snd_SetAttackRateLin unpack ADSR, set attack rate and attack mode 0, repack, write back
+SLUS 0x800294ac snd_SetSeqVolume RENAME snd_UnpackAdsr splits two packed ADSR words into 9 fields (rates, levels, modes); no sequence volume
+SLUS 0x80029508 snd_SeqPlayStart RENAME snd_PackAdsr packs 9 ADSR fields back into two 16-bit words; no playback start
+SLUS 0x800295ac snd_SeqPlayStop RENAME snd_SetAttackRateExp same as attack rate setter but attack mode 1
+SLUS 0x8002966c snd_SeqPause RENAME snd_SetDecayRate unpack ADSR, set decay field, repack, write back
+SLUS 0x8002971c snd_SeqResume RENAME snd_SetSustainLevel unpack ADSR, set sustain level field, repack
+SLUS 0x800297cc snd_SeqSetLoop RENAME snd_SetSustainRateLin sets sustain rate field and sustain mode 0
+SLUS 0x8002987c snd_SeqReadVarLen RENAME snd_SetSustainRateExp sets sustain rate field and sustain mode 1
+SLUS 0x8002993c snd_SeqSkipEvent RENAME snd_SetReleaseRateLin sets release rate field and release mode 0
+SLUS 0x800299ec snd_SeqMetaTempo RENAME snd_SetReleaseRateExp sets release rate field and release mode 1
+SLUS 0x80029a9c snd_SeqMetaEnd RENAME snd_SetSustainDirection param range picks sustain direction 0 or 1 in ADSR struct
+SLUS 0x80029b7c snd_SeqLoopBegin RENAME snd_SetVagShift patches byte at offset 5 of the VAG attr struct
+SLUS 0x80029c1c snd_SeqLoopEnd RENAME snd_SetVagMin patches byte at offset 6 of the VAG attr struct
+SLUS 0x80029cbc snd_Wrapper_80029cbc RENAME snd_UtSetReverbType passes stack arg to snd_SetReverbType
+SLUS 0x80029cec snd_Wrapper_80029cec RENAME snd_UtSetReverbVolume passes stack arg to reverb volume setter for both sides
+SLUS 0x80029d1c snd_Wrapper_80029d1c RENAME snd_UtSetReverbDepthR passes stack arg to right reverb depth setter
+SLUS 0x80029d4c snd_Wrapper_80029d4c RENAME snd_UtSetReverbDepthL passes stack arg to left reverb depth setter
+SLUS 0x80029d7c snd_Wrapper_80029d7c RENAME snd_UtSetReverbDepthLDup byte-identical copy of the left reverb depth wrapper
+SLUS 0x80029dac snd_SeqTickAll RENAME snd_EventPitchBendData reads data byte from stream, calls voice pitch bend, then reads delta time; no slot loop
+SLUS 0x80029e5c snd_UpdateAllVoices RENAME snd_SeqControlDispatch switches on controller number (7 volume, 10 pan, 11 expr, 0x40 sustain, 0x79 reset) to handler table, no voice loop
+SLUS 0x8002a08c snd_SeqDispatch RENAME snd_SeqSetTempo reads 3-byte tempo, 60000000/tempo, derives tick rates, then delta time
+SLUS 0x8002a25c snd_SeqRunningStatus RENAME snd_SeqNoteOnOff velocity zero calls snd_VmKeyOff else snd_VmKeyOn; no running-status logic
+SLUS 0x8002a33c snd_SeqReadByte RENAME snd_SeqProgramChange stores read byte as channel program slot then reads delta time
+SLUS 0x8002a3ac snd_SeqReadDeltaTime CONFIRM snd_SeqReadDeltaTime 7-bit variable length accumulate, scales and adds to tick counter; many event callers
+SLUS 0x800341bc spu_SetTransferIdle RENAME spu_SetTransferBusy param 1 sets flag to 0 (busy) at VAB open start, param 0 at init sets idle
+SLUS 0x800341e4 spu_IsTransferBusy CONFIRM spu_IsTransferBusy flag!=1 means busy, checked at VAB open entry
+SLUS 0x80034ce4 spu_PitchInterp CONFIRM spu_PitchInterp steps 0x103b/0x1000 (about 2^(1/48)) ratio per 32 units then linear interpolates
+SLUS 0x8004c53c sys_CallBootVector RENAME sys_StartCdStateMachine clears 10 bytes, sets flag, jumps to cd_InitStateMachineFromReset pointer; called once from sys_Main after CdInit
+SLUS 0x8004c8e4 sound_FadeOutAndWait RENAME cd_FadeAndReadFile ramps serial volume to zero then cd_RequestFileRead and pumps cd_UpdateAudio until idle; callers are all file loaders
+SLUS 0x8004cc60 sys_CheckBootCode RENAME cd_LoadIfNotResident compares 5-byte tag for file index with resident tag, loads via fade-read only if different; callers are mode entry points
+SLUS 0x8006d8e0 fighter_SelectVoiceSet CONFIRM fighter_SelectVoiceSet per-character switch by fighter id and opponent picks bank, snd_LoadVab if changed
+SLUS 0x8007d5ac fx_WipeLoopTail CONFIRM fx_WipeLoopTail fragment: gs_SortTile loop with thread_Sleep frames, tail of wipe routine
+SLUS 0x80082670 entry_DrawNextMatchFighters CONFIRM entry_DrawNextMatchFighters draws fade tiles, banner text and both fighter name strings; caller report_DispatchByMode for next match
+SLUS 0x8002a7a0 snd_SeqStopTrack CONFIRM snd_SeqStopTrack calls snd_SeqSetPlayState with state 0
+SLUS 0x8003905c gte_SortPolyFT3LitTail CONFIRM gte_SortPolyFT3LitTail RTPT loop, NCLIP cull, AVSZ3, NCCS, links packet with texture words
+SLUS 0x8003936c gte_SortPolyFT4LitTail CONFIRM gte_SortPolyFT4LitTail RTPT loop, NCLIP, RTPS fourth vertex, AVSZ4, NCCS packet link
+SLUS 0x800397cc gte_SortPolyF3LitTail CONFIRM gte_SortPolyF3LitTail flat triangle, NCCS and NCLIP, AVSZ3 min/max z select
+SLUS 0x80039a9c gte_SortPolyGT3LitTail CONFIRM gte_SortPolyGT3LitTail NCCT three vertex colours, AVSZ3, NCLIP loop
+SLUS 0x80039c1c gte_SortPolyG4LitTail CONFIRM gte_SortPolyG4LitTail four colours via NCCS+NCCT, NCLIP, AVSZ4, no texture words
+SLUS 0x80039d1c gte_SortPolyGT4LitTail RENAME gte_SortPolyGT4LitTailCull entry at NCLIP result test then AVSZ4 NCCT NCCS link; avoids numbered family
+SLUS 0x80039d4c gte_SortPolyGT4LitTail_2 RENAME gte_SortPolyGT4LitTailColor entry packs colour word from at/t9, then AVSZ4 NCCT NCCS link
+SLUS 0x80039d7c gte_SortPolyGT4LitTail_3 RENAME gte_SortPolyGT4LitTailLink entry at AVSZ4 result, then NCCT NCCS and packet link
+SLUS 0x80039dac gte_SortPolyGT4LitTail_4 RENAME gte_SortPolyGT4LitTailStore entry at colour register stores, NCCS link, then AVSZ4 NCCT for next quad
+SLUS 0x8003a08c gte_SortPolyGT3LitTail_2 RENAME gte_SortPolyGT3LitTailZMode full GT3 loop with mode flag selecting min or max of three z, NCCT, NCLIP

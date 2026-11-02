@@ -1,0 +1,87 @@
+0x80093530 func opt_PlayRandomStageSound hand clamps index to 21 random fallback, loads entry from 12 byte table, plays it with flag toggled by byte 80093e81
+0x800949d4 func opt_MenuMain hand Option menu top loop, cursor over eight items, dispatches to config submenus, plays 0x24 sound, stage list item 6
+0x80094ccc func opt_DrawMainMenu hand draws Option Menu title and item strings, highlights selected entry, shows stage name or RANDOM, draws cursor
+0x80094ee0 func opt_GameConfigMenu hand builds item tables for game config options from bytes at 80092ccc, loops with cursor update, saves values back
+0x8009527c func opt_AudioConfigMenu hand sets up audio option item tables, stereo and volume values, loops cursor and handlers, calls per item update
+0x80095510 func opt_ExtraConfigMenu hand sound and voice option menu, per item enable bits, reloads system voice banks showing loading text when set changes
+0x80095a5c func opt_MemoryCardMenu hand four item menu with save and load handlers via card helpers, plays 0x24 sound, repeat guard counter, stores selection byte
+0x80095cf8 func opt_RecordsMenu hand ten page records menu switching to time attack, character, ranking and stats screens, draws cursor panel
+0x80095e98 func opt_DrawGameConfig hand draws GAME CONFIG title, item labels, Default and Exit entries, value strings per option with highlight color
+0x800962d4 func opt_UpdateGameItem0 hand forwards item struct to generic menu cursor update with mode 2
+0x800962f8 func opt_UpdateGameItem1 hand forwards item struct to generic menu cursor update with mode 2
+0x8009631c func opt_UpdateGameItem3 hand forwards item struct to generic menu cursor update with mode 2
+0x80096340 func opt_UpdateGameItem4 hand forwards item struct to generic menu cursor update with mode 2
+0x80096364 func opt_UpdateGameItem5 hand forwards item struct to generic menu cursor update with mode 2
+0x80096388 func opt_UpdateGameItem6 hand forwards item struct to generic menu cursor update with mode 2
+0x800963ac func opt_UpdateGameItem7 hand forwards item struct to generic menu cursor update with mode 2
+0x800963d0 func opt_UpdateGameItem8 hand forwards item struct to generic menu cursor update with mode 2
+0x800963f4 func opt_UpdateGameItemUnused hand forwards item struct to generic menu cursor update with mode 2, unreferenced duplicate
+0x80096418 func opt_KeyConfigEntry hand if confirm button pressed plays 0x24 sound and enters the button config screen
+0x80096428 func opt_KeyConfigEntry_2 hand mis-split duplicate of entry body, same confirm check and button config call with register inputs
+0x80096460 func opt_GameConfigExitItem hand updates exit row cursor, back button plays sound, Default choice resets all game config options to defaults
+0x80096548 func opt_DrawAudioConfig hand draws Audio Config title, item labels, Default and Exit entries, speaker mode and volume values with highlight
+0x80096884 func opt_UpdateSpeakerOut hand updates speaker output item and calls stereo or monaural sound mode setter when value changes
+0x800968f0 func opt_UpdateBgmVolume hand updates cursor on BGM volume item and stores scaled volume into sound global DAT_80068b0e
+0x80096934 func opt_UpdateSeVolume hand updates cursor on effects volume item and stores scaled volume into global DAT_80093b48
+0x80096978 func opt_UpdateBgmTest hand cursor update, confirm button plays selected music track from table, back button stops music
+0x80096a30 func opt_UpdateVoiceTest hand cursor update, confirm selects voice bank from index and plays sample, back button stops sound
+0x80096ab4 func opt_SelectVoiceBank hand maps sound test index to character group via count table, loads that voice bank if not current
+0x80096c84 func opt_PlayVoiceSample hand picks voice sample table by loaded bank id, plays entry with current effects volume
+0x80096e90 func opt_AudioConfigExitItem hand updates exit row, Default choice resets speaker and volume options to defaults and reapplies them
+0x80096fc4 func opt_DrawExtraConfig hand draws Extra Config title, locked items as question marks, Default and Exit, shows safety zone and play time string
+0x80097660 func opt_UpdateExtraExclusiveItem hand cursor update, enforces mutual exclusion between choices using mask byte DAT_80092cdc
+0x80097748 func opt_UpdateExtraItem1 hand forwards item struct to generic menu cursor update with mode 2
+0x8009776c func opt_UpdateExtraItem2 hand forwards item struct to generic menu cursor update with mode 2
+0x80097790 func opt_UpdateExtraItem3 hand forwards item struct to generic menu cursor update with mode 2
+0x800977b4 func opt_LockedItemBeep hand on confirm button plays error sound 0x29 for locked extra option entry
+0x800977c4 func opt_LockedItemBeep_2 hand mis-split duplicate of locked item beep body with register inputs
+0x800977f4 func opt_ExtraSubmenuEntry hand on confirm plays 0x24 sound and opens secret extra submenu function
+0x80097804 func opt_ExtraSubmenuEntry_2 hand mis-split duplicate of submenu entry body with register inputs
+0x8009783c func opt_ExtraSecretMenu hand builds item table from unlock table bytes, loops cursor and drawing with Default and Exit, applies chosen entries
+0x80097ea8 func opt_StageListEntry hand on confirm plays 0x24 sound and opens the stage list menu
+0x80097eb8 func opt_StageListEntry_2 hand mis-split duplicate of stage list entry body with register inputs
+0x80097ef0 func opt_StageListMenu hand scrolling list of 22 stage names with Exit entry, confirm previews stage, back exits, draws title
+0x80098220 func opt_PreviewStage hand waits a frame then jumps through stage preview pointer to run selected stage viewer
+0x800983d4 func opt_UpdateExtraModeItem hand cursor update, stores selection into DAT_80092ccb, value 2 opens fighting order menu on confirm
+0x80098464 func opt_UpdateExtraItemUnused hand forwards item struct to generic menu cursor update with mode 2, unreferenced
+0x80098488 func opt_ExtraConfigExitItem hand updates exit row, Default choice resets extra options and clears eleven unlock bytes
+0x80098588 func opt_FightingOrderMenu hand lets user reorder nine fighters list, Default and Exit, draws FIGHTING ORDER, stores order bytes at 80092ce3
+0x80098bc4 func opt_DrawMemoryCard hand draws Memory Card title, Save Data and Load Data items with highlight, Exit entry and status string
+0x80098dc0 func menu_CheckBackButton hand returns false and plays 0x24 sound when triangle back button pressed, otherwise true
+0x80098e08 func opt_KeyConfigMenu hand two player button config loop, cycles button mapping per pad with hold repeat, cross toggles setting, exits on confirm
+0x800993e4 func opt_ButtonIndexRemap hand maps button code 1..7 to display order index via switch, default 7
+0x80099454 func opt_DrawKeyConfig hand draws KEY CONFIG title, action labels, per pad button assignments and Default Exit rows with highlight
+0x800998dc func menu_UpdateAutoRepeatValue hand left right value change with wrap and hold delay counter, plays 0x23 sound per step
+0x800999f4 func menu_UpdateCursor hand generic menu cursor update for pad mask, up down move with wrap, auto repeat delay, plays 0x23 sound
+0x80099bc4 func stub_80099bc4 hand rules: empty: jr ra
+0x80099bcc func opt_LoadStageBackground hand clamps stage index or picks random, loads stage image from table into 8012d000, sets highlight color
+0x80099c98 func opt_AddBackgroundTiles hand builds two textured 256 wide tile sprites for menu background and queues them in ordering table
+0x80099d98 func str_FormatDecimal hand writes decimal digits of int into buffer without padding using pow10 helper
+0x80099e68 func str_FormatDecimalPadded hand writes decimal digits of value into buffer left padded with spaces to given width
+0x80099f54 func math_Pow10 hand returns ten raised to the given small exponent by repeated multiply
+0x80099f94 func rec_DrawWinLossTable hand draws three blocks of per fighter win and loss counts as padded numbers with fighter names and headings
+0x8009a95c func rec_DrawBestTimes hand draws ten best time rows in minute second hundredth format with dashes for unset and fighter names, two modes
+0x8009b22c func rec_DrawVersusRanking hand draws VERSUS RANKING table, sorts fighters by win total, shows win loss bars and percentages with animated growth
+0x8009c24c func rec_DrawVersusData hand draws VERSUS DATA page for selected character, sorts fighters by wins, shows per opponent win loss counts, percent and animated bars
+0x8009d298 func rec_DrawCharacterUsage hand sorts fighters by usage counts, computes percent shares, draws usage rows with animated percent bars, sprites per row
+0x8009df44 func rec_DrawBestTimeRanking hand draws ranking page with per fighter best times split into minutes seconds hundredths, dashes if unset, plus names
+0x8009e508 func rec_DrawScoreRanking hand draws ranking with top entry number, plural suffix word, fighter name and initials, then nine further rows with counts
+0x8009eac0 func gfx_AddFighterPortrait hand builds GT4 poly from portrait table by fighter index, positions at x y, queues to ordering table
+0x8009ebb8 func opt_DrawPressStartPrompt hand draws two text lines at fixed positions, large heading and small subtitle prompt
+0x8009ec5c func str_FormatPercent hand computes rounded percentage of part over total, formats three digit padded number with percent sign into buffer
+0x8009ed28 func opt_ResetPageIndex hand tiny setter, clears page index global DAT_800a1860 to zero
+0x8009ed38 func opt_DrawButtonHint hand draws button glyph label for pad bit, one or two arrow lines for 0x1000 up case, plus text from table
+0x8009ef10 func gfx_AddHintBarTile hand builds F4 black tile polygon at x and row computed from index, width mirrored around screen width, queues it
+0x8009efd4 func opt_DrawConfirmExitFooter hand draws footer bar with button hints, CONFIRM or NO USE label by pad mask bits and EXIT label
+0x8009f29c func opt_DrawFooterBarIdle hand draws black footer bar and two idle button hints without labels
+0x8009f364 func opt_DrawConfirmExitFooter_2 hand variant footer, second hint uses glyph index 1 instead of 0, CONFIRM or NO USE and EXIT labels by mask
+0x8009f62c func opt_DrawExitFooter hand draws shorter footer bar with EXIT hint and NO USE label by pad mask, glyph indexes 2 and 3
+0x8009f7f8 func opt_DrawPlayStopFooter hand draws tall footer with EXIT, STOP and PLAY hints each showing NO USE when pad mask bit is clear
+0x8009fba8 func mc_RunStateMachine hand memory card style loop with state byte, dispatches five states per frame via switch, vsync call each pass
+0x8009fccc func mc_StateInitCard hand first state, issues card control command once then counts frames, resets four port registers, moves to next state
+0x8009fd78 func mc_StateOpenFile hand tries sixteen times to open file by name, sets sector counters, goes to read state or fails with error flag
+0x8009fe20 func mc_StateCloseFile hand closes pending transfer if flag set, issues close command, picks next state by error flag
+0x8009fe94 func mc_StateReadLoop hand loops reading frames, aborts on pad cancel bit, runs sector pump and decode, draws progress image per block
+0x8009ffb4 func mc_DecodeBlockToImage hand reads two cached sectors, interpolates bytes into 15 bit pixels, writes row of colors for one block, returns 0 if not ready
+0x800a02dc func mc_SectorPumpStep hand per frame sector read state machine, requests sector, issues read command, waits for finish, advances 0x20 offset
+0x800a0488 func mc_StateFinishUpload hand final state, loads 512 by 480 rect to video memory image and ends loop
