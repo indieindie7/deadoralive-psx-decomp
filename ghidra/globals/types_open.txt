@@ -1,0 +1,26 @@
+0x80049758 snd_voice_seq_id array length unproven: max 24 voices (dec8_SLUS.c:19016-19018) would overlap spu_voice_bit_table 0x80049c38; typed single element only
+0x8004b9b8 tbl_snd_seq_base pointer table to DOA_SndSeq arrays; entry count not proven in code
+0x80083dc0 tbl_sfx_a stride 6 proven but entry count not bounded in code (b,c,d,e same); typed single element
+0x80083d6c tbl_stage_anim_tex_c only one site (dec8_SLUS.c:34194), stride 4 not proven by 2 sites
+0x80083d6e tbl_stage_anim_tex_d only one site (dec8_SLUS.c:34195)
+0x8008e4c8 buf_stage_anim_tex_rect_x one site only (dec8_SLUS.c:34183-34196), stride 8
+0x80091cf8 tbl_ranking_entries is ushort[15] (loop 0xf), not a record array
+0x80083a54 tbl_stage_anim_tex_enable parallel scalar arrays (SoA), not records
+0x800833c8 tbl_fighter_slot_map byte index table, not records
+0x80083434 tbl_stage_data_cd_index short[] index table (one site 33745)
+0x800837d4 tbl_fighter_model_ptr int/pointer array, one site
+0x800e5690 tbl_motion_pointers_a int[4] index list, not records
+0x800ea6b8 tbl_part_flags_by_move_a pointer use only, layout not provable
+0x800ee008 tbl_effect_piece_set pointer use only, layout not provable
+0x800949b8 tbl_random_table_rows range-bounded only, stride not shown
+0x800eca28 tbl_vibration_script_0 single site
+0x800e5898 tbl_posture_data single site
+0x800e5e88 tbl_shadow_player_data single site
+0x800ef8d0 tbl_airborne_state_data single site
+0x800ef970 tbl_dust_triggers single site
+0x800ea5a8 tbl_fighter_anim_init single site
+0x80084df4 tbl_title_logo_sprites 2 sites, layout not examined
+0x80084eac tbl_movie_a movie tables not examined
+0x80084cac tbl_snd_vab_prog_map single site
+0x80084c78 tbl_snd_vab_load_b single site
+0x80092898 tbl_motion_joint_flags short[] flag index, not records

@@ -1,0 +1,86 @@
+# Evidence: dec8_SLUS.c:18352-18356,18528-18538,19026-19053,19155-19170,19321-19332,19924-19948 (stride: ushort idx*0x1b and byte idx*0x36 both = 0x36); widths: ushort/short casts 19324-19335,18907-18910, byte 19321,19948. Base 0x80049758 (snd_voice_seq_id). Offsets = global addr - 0x80049758.
+struct DOA_SndVoice 36
+0 ushort f_0
+2 ushort f_2
+4 ushort f_4
+6 ushort f_6
+8 ushort f_8
+a byte f_a
+c ushort f_c
+e ushort f_e
+10 ushort f_10
+12 ushort f_12
+14 ushort f_14
+16 ushort f_16
+18 ushort f_18
+1a ushort f_1a
+1d byte f_1d
+1e ushort f_1e
+20 ushort f_20
+22 ushort f_22
+24 ushort f_24
+26 ushort f_26
+2a ushort f_2a
+2c ushort f_2c
+2e ushort f_2e
+30 ushort f_30
+32 ushort f_32
+
+# Evidence: dec8_SLUS.c:35115+35341-35343, 35286-35290+35341, 35480+35628-35631, 35895-35913 (stride param*6 at all sites; in_t1[0],[1],[2],[3] byte, *(short*)(in_t1+4); [3] multiplied with g_sfx_master_volume)
+struct DOA_SfxEntry 6
+0 byte f_0
+1 byte f_1
+2 byte f_2
+3 byte vol_scale
+4 short f_4
+
+# Evidence: dec8_SLUS.c:28595-28604 (puVar4+=8, puVar3+=8, loop <0x200, +4 passed to CdPosToInt, [-2..0] = min,sec,frame), 31636-31640 (index*8; int at +0 ; >>0xb = sector count)
+struct DOA_CdFileEntry 8
+0 int size_bytes
+4 byte msf_min
+5 byte msf_sec
+6 byte msf_frame
+
+# Evidence: dec8_SLUS.c:28833-28847 (state/wake_arg at [i*2] of 4-byte elems), 28866-28867, 28893-28894, 28910-28912, 28934-28935, 29053-29061; 28995-29004 (step 2 words, count 0x10)
+struct DOA_ThreadSlot 8
+0 int state
+4 int wake_arg
+
+# Evidence: dec8_OV00.c:39634-39650,39657-39659,39697 (piVar15+=3 ints and byte offset +=0xc, loop <0xf), 39704-39719,39721-39726, 11804 (param_1*0xb4 + param_2*0xc); x/y/z compared with g_hit_point_x/y/z
+struct DOA_BodyPoint c
+0 int pos_x
+4 int pos_y
+8 int pos_z
+
+# Evidence: dec8_SLUS.c:15413-15437 (iVar3 += 0xb0, count g_snd_seq_slot_count), 15662,15699,15774,15798,15824,15850,15899,15920,15959,16012,16032,16052 (base[grp] + idx*0xb0); widths from casts in 15393-16065. f_17 indexes byte array at +27/+37 and ushort array at +60 (first elements only listed).
+struct DOA_SndSeq b0
+0 pointer f_0
+15 byte f_15
+17 byte f_17
+18 byte f_18
+19 byte f_19
+1a byte f_1a
+1b byte f_1b
+1c byte f_1c
+1d byte f_1d
+1e byte f_1e
+1f byte f_1f
+22 byte f_22
+23 byte f_23
+26 byte f_26
+27 byte f_27
+37 byte f_37
+48 short f_48
+4a short f_4a
+4c short f_4c
+4e short f_4e
+58 short f_58
+5a short f_5a
+60 ushort f_60
+90 int f_90
+98 int f_98
+9c int f_9c
+a0 int f_a0
+a4 int f_a4
+a8 int f_a8
+ac int f_ac

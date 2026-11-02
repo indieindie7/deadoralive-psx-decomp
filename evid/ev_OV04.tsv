@@ -1,0 +1,15 @@
+801e8288	fx_UpdateOrbitPosition	OPEN
+801e83dc	fx_InitOrbitTarget	ctxGLOB
+801e84b0	gpu_ClearOrderingTables	ctxGLOB
+801e85f8	gfx_BuildVertexFromTables	OPEN
+801e9190	dbgpad_Init	ctxCHAIN,ctxGLOB
+801e9214	dbgpad_Update	ctxCHAIN,ctxGLOB
+801e9328	dbgpad_UpdateHistoryStub	TRIV,ctxGLOB
+801e9338	dbgpad_UpdateHistoryDraw	STR,ctxGLOB
+801e982c	dbgpad_ClearHistory	ctxCHAIN,ctxGLOB
+801e9858	dbgpad_DrawFrameCounters	ctxGLOB
+801e9d34	dbgpad_PutChar	ctxGLOB
+801e9e7c	dbgpad_DrawString	OPEN
+801ea024	dbgpad_DrawSmallString	OPEN
+801ea1e0	dbgpad_DrawHexGrid	ctxGLOB
+801ea614	dbgpad_InitFontTables	ctxGLOB

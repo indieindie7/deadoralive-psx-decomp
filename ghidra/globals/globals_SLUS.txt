@@ -392,7 +392,7 @@
 0x80049748 snd_fn_reverb_depth_l_dup
 0x8004974c tbl_gs_buf_origin_y
 0x8004974e g_gs_buf_origin_y_alt
-0x80049758 snd_voice_seq_id
+0x80049758 snd_voice_seq_id DOA_SndVoice
 0x8004975a snd_voice_state
 0x8004975c snd_voice_flags
 0x8004975e snd_voice_vol_left
@@ -690,7 +690,7 @@
 0x800659e8 tbl_cd_track_pos
 0x80065aac g_cd_audio_pos_b
 0x80065ab0 buf_mcard_save_image
-0x80067ab0 tbl_cd_file_entry
+0x80067ab0 tbl_cd_file_entry DOA_CdFileEntry[512]
 0x80067ab4 tbl_cd_file_msf_min
 0x80067ab5 tbl_cd_file_msf_sec
 0x80067ab6 tbl_cd_file_msf_frame
@@ -719,7 +719,7 @@
 0x80068b0e g_cd_music_volume
 0x80068b10 tbl_cd_track_base
 0x80068b1a g_cd_init_state
-0x80068b20 tbl_thread_state
+0x80068b20 tbl_thread_state DOA_ThreadSlot[16]
 0x80068b24 tbl_thread_wake_arg
 0x80068ba0 buf_text_font_prims_c
 0x80068bc0 g_cd_audio_flag_e
@@ -809,11 +809,11 @@
 0x80083d54 tbl_stage_anim_tex_frames_b
 0x80083d6c tbl_stage_anim_tex_c
 0x80083d6e tbl_stage_anim_tex_d
-0x80083dc0 tbl_sfx_a
-0x80083ed4 tbl_sfx_b
-0x80083f04 tbl_sfx_c
-0x80083f34 tbl_sfx_d
-0x80084260 tbl_sfx_e
+0x80083dc0 tbl_sfx_a DOA_SfxEntry
+0x80083ed4 tbl_sfx_b DOA_SfxEntry
+0x80083f04 tbl_sfx_c DOA_SfxEntry
+0x80083f34 tbl_sfx_d DOA_SfxEntry
+0x80084260 tbl_sfx_e DOA_SfxEntry
 0x80084c6c tbl_snd_vab_load_flags
 0x80084c70 tbl_snd_vab_dest_ptr
 0x80084c78 tbl_snd_vab_load_b
@@ -1318,68 +1318,6 @@
 0x80093bf4 g_fade_tile_w
 0x80093bf6 g_fade_tile_h
 0x80093c08 g_title_menu_active
-0x80093c10 g_player_ctrl_type
-0x80093c11 g_player_char_id
-0x80093c12 g_player_costume
-0x80093c13 g_player_round_wins
-0x80093c14 g_fighter_pos_x
-0x80093c18 g_fighter_pos_y
-0x80093c1c g_fighter_pos_z
-0x80093c20 g_fighter_anim_speed
-0x80093c24 g_fighter_rot_a
-0x80093c28 g_fighter_rot_b
-0x80093c2c g_fighter_rot_y
-0x80093c30 g_fighter_hp
-0x80093c34 g_fighter_hp_delay
-0x80093c38 g_fighter_motion_id
-0x80093c3a g_fighter_state_main
-0x80093c3b g_fighter_side_flag
-0x80093c3c g_fighter_hit_id
-0x80093c3d g_fighter_action_state
-0x80093c3e g_fighter_facing_dir
-0x80093c3f g_fighter_distance_flag
-0x80093c40 g_fighter_motion_cmd_param
-0x80093c41 g_fighter_turn_flag
-0x80093c42 g_fighter_flag_3c42
-0x80093c43 g_fighter_flag_3c43
-0x80093c44 g_fighter_turn_state
-0x80093c45 g_fighter_flag_3c45
-0x80093c46 g_fighter_flag_3c46
-0x80093c47 g_fighter_flag_3c47
-0x80093c48 g_fighter_launched_flag
-0x80093c49 g_fighter_knockdown_flag
-0x80093c4a g_fighter_counter_flag
-0x80093c4b g_fighter_airborne_flag
-0x80093c4c g_fighter_hold_throw_type
-0x80093c4d g_fighter_hold_throw_variant
-0x80093c4e g_fighter_knockback_type
-0x80093c4f g_fighter_flag_3c4f
-0x80093c50 g_fighter_hit_reaction_flag
-0x80093c51 g_fighter_flag_3c51
-0x80093c52 g_fighter_flag_3c52
-0x80093c53 g_fighter_flag_3c53
-0x80093c54 g_fighter_hitsphere_active
-0x80093c55 g_fighter_flag_3c55
-0x80093c56 g_fighter_flag_3c56
-0x80093c57 g_fighter_flag_3c57
-0x80093c58 g_fighter_active_flag
-0x80093c59 g_fighter_hit_effect_flag
-0x80093c5a g_fighter_flag_3c5a
-0x80093c5b g_fighter_flag_3c5b
-0x80093c5c g_fighter_turn_src
-0x80093c5d g_fighter_move_hit_level
-0x80093c5e g_fighter_flag_3c5e
-0x80093c5f g_fighter_throw_flag
-0x80093c60 g_fighter_flag_3c60
-0x80093c61 g_fighter_damage_flag
-0x80093c62 g_fighter_damage_hit_flag
-0x80093c63 g_fighter_rounds_won
-0x80093c64 g_fighter_ko_flag
-0x80093c65 g_fighter_flag_3c65
-0x80093c68 g_player1_ctrl_type
-0x80093c69 g_player1_char_id
-0x80093c6a g_player1_costume
-0x80093c6b g_player1_round_wins
 0x80093c88 g_round_timer_cur
 0x80093cc2 g_free_cam_active
 0x80093cc4 g_free_cam_toggle
@@ -1450,3 +1388,6 @@
 0x80102294 g_ai_cmd_state
 0x80103732 g_pause_menu_flag_3732
 0x801037de g_mode_type_prev
+0x80093c10 g_player0_header DOA_PlayerHeader
+0x80093c68 g_player1_header DOA_PlayerHeader
+0x80093c14 g_fighter_state DOA_FighterState

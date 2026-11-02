@@ -41,3 +41,36 @@ Total 2181 functions. Names live in ghidra/hand_<prog>.txt; globals in ghidra/gl
 ## Roster and stages (from strings)
 - Roster, 11 fighters, same as Saturn: Kasumi, Ayane, Lei-Fang, Jann-Lee, Zack, Tina, Gen-Fu, Bayman, Raidou, Hayabusa, Bass. No PSX-only fighters in the strings; PSX extras are in modes: TOURNAMENT, VERSUS, TEAM BATTLE, TIME ATTACK, SURVIVAL, KUMITE (30/50/100 challenge), TRAINING, POPULARITY VOTE, reports (TOURNAMENT/VERSUS/TIME ATTACK/SURVIVAL/KUMITE REPORT), NEW COSTUME GET, EXTRA CONFIG OPEN, OPTION, memory card save/load. Disc OMAKE/ holds per-character costume BMP galleries (Kasumi 3, Leifang 3, Tina 3, Zack 3, Jann-Lee 2, Bass 2, Bayman 2, Gen-Fu 1, Raidou 1, Ryu 1).
 - Stages: no stage-name strings. Stage data is indexed by tbl_stage_data_cd_index (0x80083434) into PS_DOA.BIN with animated-texture tables (tbl_stage_anim_tex_*); stage loader stage_LoadAll. "SELECT RING TYPE" menu selects the ring.
+
+## Evidence audit (11-02, rule: no guesswork; tools/evid.py, psyq_match.py, constmatch.py; outputs in evid/)
+Every hand line now ends with `[ev:TAGS]`. Anchors: STR = function references a real text string; HW = touches a hw_ MMIO global; GTE = COP2 instructions; LIB = byte-pattern (immediates masked) identical to a function in another PS1 binary (SK, Rakugaki, Ducati); SAT = same name as a Saturn function AND shared callee names; TRIV = body <= 4 instructions (name restates the instruction). `ctx*` tags (name shares a token with a referenced global, or same-prefix call-graph neighbours) are NOT counted as proof (circular, the globals were named by the same readers).
+| Program | Functions | Anchored | Context only (unproven) | No anchor (OPEN) |
+|---|---|---|---|---|
+| SLUS | 1011 | 539 | 367 | 105 |
+| MOVIE | 301 | 213 | 62 | 26 |
+| OV00 | 767 | 147 | 401 | 219 |
+| OV02 | 87 | 25 | 24 | 38 |
+| OV04 | 15 | 2 | 9 | 4 |
+| Total | 2181 | 926 | 863 | 392 |
+**Unproven names (context only + OPEN = 1255) are still OPEN, not done.** List of the 392 with no anchor: evid/open_names.tsv. 48 names are still address-style (stub_/_<addr>).
+
+### PsyQ library identification
+No PsyQ .lib, signature file or SDK source exists on this PC (searched). Method used: masked byte-pattern match of every function >= 12 instructions against SK (SLPS), Rakugaki and Ducati World binaries. 394 DOA functions have a library-identical twin (SLUS 267, MOVIE 121, OV00 6): 165 match in 3 games, 141 in 2, 88 in 1. That proves they are shared library code. The exact PsyQ API name is proven only where a reference game's name agrees (SLUS 39, MOVIE 25 of the CamelCase PsyQ-style names); reference names are themselves hand names, so the other library names stay OPEN until a real libgpu/libgte/libspu/libcd/libetc/libapi/libc/libpress/libcard/libsnd binary is available. Full table: evid/psyq_matches.tsv. Libraries are not statically distinguishable per object here (no per-.obj boundaries).
+
+### Saturn name cross-check
+The PSX build is a different codebase from the Saturn one (different engine layer), so structural matching is weak. Results (evid/saturn_xcheck.tsv, evid/const_matches.tsv):
+| Method | Result |
+|---|---|
+| Same name and shared callee names | 37 functions confirmed (35 in OV00 fighter/AI code) |
+| Callee-set Jaccard >= 0.6, different name | 1 candidate (ai_PickAttackTierAlt vs Saturn ai_PickHitReactionAlt), unverified |
+| Numeric-constant set match (>=3 constants, Jaccard >= 0.5) | 42 candidates, only 7 agree by name; the rest are coincidental, rejected |
+Saturn names were reused only where the first row holds.
+
+### Types and globals
+- DAT_ in code and in comments: 0 in all five programs (SLUS 23, OV02 5, OV04 1 were hand-comment mentions, now replaced with global names).
+- Structs defined (/DeadOrAlivePSX): DOA_PlayerHeader (4), DOA_FighterState (0x54), DOA_SndVoice, DOA_SfxEntry, DOA_CdFileEntry, DOA_ThreadSlot, DOA_BodyPoint, DOA_SndSeq (the last six proven by strides in at least two code sites, evidence in structs_DOA2.txt). Applied: g_player0_header 0x80093c10, g_player1_header 0x80093c68, g_fighter_state 0x80093c14, tbl_sfx_a..e, snd_voice_seq_id (single element), tbl_cd_file_entry[512], tbl_thread_state[16], tbl_hit_body_objects[15], tbl_fighter_bone_rot[15]. Negative-offset field fixed (g_title_menu_active was outside the block).
+- The earlier 0x58 player stride is NOT proven (g_round_timer_cur sits at 0x80093c88, inside it), so no 0x58 struct is applied.
+- 26 tables/structs OPEN (stage, move, camera, sound entry counts or strides not provable from code): ghidra/types_open.txt.
+
+### Stages (data)
+tbl_stage_data_cd_index (0x80083434, 16-bit CD file indices, read by the stage loader): entries 0..15 = 0xe8..0xf7 (16 consecutive stage files), then a sparse block (0x10f 0x112 0x116 0x113 0x110 0x118 0x115 0x119 0x11a 0x11d 0x121 0x11e 0x11b 0x123 0x120 0x124, 0x101 0x10c 0xf9 0x104 ...). PS_DOA.BIN contains labels STAGE1..STAGE9 only. No stage names exist in the executable, overlays or OMAKE assets, so **stage names are OPEN** (not guessed). Stage count proven from the table: at least 16.
