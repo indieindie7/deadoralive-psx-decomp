@@ -74,3 +74,12 @@ Saturn names were reused only where the first row holds.
 
 ### Stages (data)
 tbl_stage_data_cd_index (0x80083434, 16-bit CD file indices, read by the stage loader): entries 0..15 = 0xe8..0xf7 (16 consecutive stage files), then a sparse block (0x10f 0x112 0x116 0x113 0x110 0x118 0x115 0x119 0x11a 0x11d 0x121 0x11e 0x11b 0x123 0x120 0x124, 0x101 0x10c 0xf9 0x104 ...). PS_DOA.BIN contains labels STAGE1..STAGE9 only. No stage names exist in the executable, overlays or OMAKE assets, so **stage names are OPEN** (not guessed). Stage count proven from the table: at least 16.
+
+## Round 3 (11-02): OPEN driven down (rule: no guesswork)
+Evidence tier BODY = the name's every claim was checked against the function's own decompile (Sonnet reader, proof phrase stored in the hand_*.txt line and evid/neutral_names.tsv, evid/ctx_verdicts.tsv). It is a single-reader check, weaker than STR/LIB/SAT/GTE/HW anchors (not independently reviewed yet).
+- 392 no-anchor names: all renamed to neutral behaviour-only names `<behaviour>_<addr>` (old guess kept in the hand line as "prior unproven guess"). PsyQ/API names that rested on nothing are gone.
+- 863 context-only names: 642 body-VERIFIED (tag BODY added), 221 OVERCLAIM renamed neutral `<behaviour>_<addr>`.
+- Result: 2181 functions = 926 externally anchored + 1255 BODY-only (642 verified names + 613 neutral names). Name guesses with no check: 0. Real PsyQ/game names for the 613 neutral ones stay unknown (need a real PsyQ lib or a second reader).
+- Tables (evid/tables_proof.tsv): 14 PROVEN from code (loop bounds / consistent strides / terminator), 13 BLOCKED with the missing evidence listed there. Player stride 0x58 PROVEN (index (&g_player0_header)[x*0x16] and byte *0x58 at several sites). Not yet applied to the Ghidra types.
+- Stages (evid/stages_proof.tsv, stages_proof.txt): stage id = byte at 0x80085a14 (written only in fight_SelectStageIndex 0x800c12cc); N=16 (clamp id>0xf, 16-entry cd table), ids 0..15 -> cd files 0xe8..0xf7, index names stage_00..stage_15. Reachable ids 0 and 3..13; no stage-select menu exists. No stage NAMES exist on disc (ASCII+cp932 searched SLUS, MOVIE, PS_DOA.BIN, OMAKE): names BLOCKED. Correction: PS_DOA.BIN header table has 512 entries, not 256.
+- Still BLOCKED: stage names; ids 1,2,14,15 have no producer; cd table entries >=16 no proven reader; library API names; 13 tables.

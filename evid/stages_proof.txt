@@ -1,0 +1,12 @@
+STAGES PROOF - blocked items (2026-11-02)
+Stage id = byte g_clear_rect_index (0x80085a14; hand name is a misnomer). Single store in all 5 binaries: 0x800c12cc inside fight_SelectStageIndex (dec9_OV00.c:24296). stage_LoadAll (dec9_SLUS.c:33925) and OV00 call (dec9_OV00.c:25715) pass it to stage_LoadStageData, which reads tbl_stage_data_cd_index[id&0xff] (16-bit).
+Selection: NO stage-select menu exists in code (no writer other than fight_SelectStageIndex). Modes: setup_mode 4 -> rand%11 into tblA; game_mode 6/9/5 or setup_mode 1 (game_mode!=2) -> g_stage_index 0..10 walks tblB (bound (idx+1)<0xb); game_mode 7 -> id 13; else tblA[g_continue_count]. tblA=tblB=05 0b 07 08 04 09 03 0a 00 0c 06 (PS_DOA.BIN 0x58834 / 0x58854, via OV00 base 0x80093420; mapping checked: 'STAGE' s_STAGE_80094d58 = PS_DOA 0x1938). Reachable ids: 0,3..13 (12). Table size N=16: file indices 0xe8..0xf7 (16 entries), clamp id>0xf in stage_GetClampedId, 16-byte per-id tables.
+PS_DOA header has 512 entries (indices to 0x1ff), cd index 0xe8..0xf7 sizes 0x19b54..0x22464 (arena data), 0xf8 common.
+
+BLOCKED
+1. Stage names: no on-disc name. Searched: ASCII + Shift-JIS (cp932) in SLUS_006.06 (SJIS only DEAD OR ALIVE fullwidth + memcard msg), MOVIE.EXE, whole PS_DOA.BIN (ASCII keyword scan; only STAGE1..STAGE9 labels at PS_DOA 0x8001c.. and 'STAGE' at 0x1938), stage files 0xe8..0xf9, OMAKE (BMP names are characters only). STAGE1..9 are ranking/time-attack row labels (neighbours 'Ranking', HOLD/PUNCH/KICK), not ring names. Missing evidence: a name string or font-text TIM listing arenas (none found); TIM/compressed stage files not text-decoded.
+2. Ids 1,2: cd files 0xe9,0xea exist and code tests id==1,2 but no store produces them. Missing: any other writer (memcard restore/overlay not loaded in the dumps, e.g. OV02/OV04 stores to 0x80085a14: none found by instruction scan).
+3. Ids 14,15 (cd 0xf6,0xf7): table slots and files exist, no producer; may be unused or hidden.
+4. tblA index g_continue_count: max value not proven; tblA bytes beyond idx 10 are 00 (id 0).
+5. tbl_stage_data_cd_index entries 16+ (0x10f 0x112 ...): not read by any proven path (ids <=13 from writer); treat as other data, not stages. Missing: reader with id>=16.
+6. Meaning of 'rand' call func_0x800161dc: unnamed in dump (used as %N random in dec9_OV00.c:24175,24307); not proven by name.

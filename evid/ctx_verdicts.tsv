@@ -1,0 +1,863 @@
+MOVIE	801014ec	VERIFIED	-	clears movie pad buffers; calls PadInitDirect and PadStartComWrap
+MOVIE	80107bdc	VERIFIED	-	stores g_cd_sync_callback, returns previous
+MOVIE	8010b0dc	VERIFIED	-	stores g_st_user_callback_prev, returns previous
+MOVIE	8010bbd4	VERIFIED	-	indexes function-pointer table by g_pad_step_idx, calls it, error fn on <0
+MOVIE	8010c898	VERIFIED	-	sio_XferByte of byte+0x36, default 0x42
+MOVIE	8010d134	VERIFIED	-	copies reply bytes, reads high nibble as type, advances state byte at +0x46
+MOVIE	8010d4a8	VERIFIED	-	stores timeout limit and hw_timer2 count
+OV00	80097a48	VERIFIED	-	sets g_p1_35_motion_end_flag=1 and clears halfword
+OV00	8009a330	VERIFIED	-	switch over opcodes read from per-fighter script pointer
+OV00	8009bc04	VERIFIED	-	indexes motion table by action idx, calls fighter_InitMotionPointers
+OV00	800a0b64	VERIFIED	-	unpacks fields from hit-history buffer record using continue timer/snapshot_frame_limit
+OV00	800a25f0	OVERCLAIM	light_dir_update_shadow_matrix	body only compares g_light_dir x/y with prev, sets g_shadow_enable_flag, builds g_shadow_matrix_0; no camera pos/angles
+OV00	800a4f1c	OVERCLAIM	game_clear_player_tables_12b	zeroes 15 triples of 12-byte entries plus 4 per-player 12-byte slots; nothing shows effects
+OV00	800a611c	VERIFIED	-	sets g_fight_cam_offset from stage_camera, scales fov by 0xa7, sets camera_fighter_dist
+OV00	800aaa24	VERIFIED	-	table lookup then gte_RotateVec3_2 into bone rot arrays; g_bone_rot_table_flag
+OV00	800b0b44	VERIFIED	-	endless do-while calling state dispatch, cam funcs, snapshot copy, memcpy
+OV00	800b0ecc	VERIFIED	-	switch(g_main_loop_state) cases calling cam_*/title/camscr handlers
+OV00	800b1570	VERIFIED	-	calls follow-distance helper, clamps g_cam_follow_dist to min and 12000
+OV00	800b2380	VERIFIED	-	follow-dist/target/yaw approach with g_cam_default_follow_flag; _3 is variant label
+OV00	800b2e10	OVERCLAIM	cam_update_random_orbit	sets orbit angle with random offset, pitch 0x2d, dist+800; no mode 8 visible
+OV00	800b58f8	VERIFIED	-	g_cam_attract_orbit_a counter, yaw-2 per frame, returns true after 0x1e0
+OV00	800b5c68	OVERCLAIM	cam_update_follow_random_yaw	eases follow dist/target/yaw, random yaw offset; no attract global/state; return expr unaff_s1+1 not an attract signal
+OV00	800b61dc	VERIFIED	-	pad held bits change cam yaw/pitch/dist, g_free_cam_speed_idx cycles on press
+OV00	800b7244	VERIFIED	-	g_viewer_pad_p1 gate, pad bits yaw +-0x10, dist +-0x40, pitch clamp via sine table
+OV00	800b7c7c	VERIFIED	-	advances script ptr, passes byte to camscr_SetPosTrack
+OV00	800b8148	VERIFIED	-	resets dist track state, selects _ptr_camscr_dist_track from table by id
+OV00	800b8190	VERIFIED	-	skips 4, calls camscr_StartPosTrackFromPtr, skips 4
+OV00	800b8274	VERIFIED	-	skips 4, calls camscr_StartDistTrackFromPtr, skips 4
+OV00	800b9d24	VERIFIED	-	camscr_SelectFighterPoint then per-axis lerp toward target over key frame count
+OV00	800ba198	VERIFIED	-	clears g_camscr_track_active, sets script_running
+OV00	800ba860	OVERCLAIM	camscr_ang_key_table_interp	interpolates angle offsets scaled by table value indexed by frame*0x400/dur; table shape/ease-out not shown
+OV00	800bb328	VERIFIED	-	calls stub_800bb3a0 with byte operand, frame count then advance
+OV00	800bc008	VERIFIED	-	copies tbl_random_table_rows to stack, indexes by row*16 + (rand&0xf)
+OV00	800bc090	VERIFIED	-	copies second table to stack, indexes by row*16 + (rand&0xf)
+OV00	800be494	VERIFIED	-	pos += knock_vel/1000, vel_y -0xdac, decay x/z, stage half-width clamp, flag set
+OV00	800be6c0	OVERCLAIM	fighter_init_knock_vel_from_table	indexes table by flags 3c/3d, writes knock_vel x/y/z from facing sine/cos; no hold or throw shown
+OV00	800bf680	VERIFIED	-	computes and writes g_fighter_knock_vel x/y/z using g_launch_gravity and attack table data
+OV00	800bff2c	VERIFIED	-	calls fight_InitMatchByMode then loop of fight_* calls with frame yield
+OV00	800c113c	VERIFIED	-	chooses g_clear_rect_index/g_stage_index from mode and stage tables
+OV00	800c381c	VERIFIED	-	writes opponent char ids into p1/p2 slots by game mode and g_continue_count, random pick
+OV00	800c65ac	VERIFIED	-	calls unlock_Check* functions in sequence
+OV00	800c9ed0	VERIFIED	-	scans input ring up to g_cpu_throw_scan_window, sets fighter byte +0x50 on nibble 7
+OV00	800cfb98	OVERCLAIM	ai_pick_table_entry_by_opp_height	picks 0x18/0x19/0x1a from opponent +8 vs table thresholds; wakeup/state 9 not shown
+OV00	800d28a8	VERIFIED	-	sets g_cpu_action_id 1/5/0xb by distance g_cam_fight_dist thresholds, else ai_RollDistanceReaction
+OV00	800d3d6c	OVERCLAIM	ai_fighter_bytes_44_30_zero	returns +0x44==0 && +0x30==0; "free" meaning not shown
+OV00	800d5d80	OVERCLAIM	fight_update_fighter_move_by_life	handles flags, life_pending vs life, starts moves 0x74-0x77; knockdown/states 8-9 not shown in body
+OV00	800d6524	OVERCLAIM	fight_resolve_queued_move_pair	compares prev_move of both fighters, type 4 tie-break by rand, fight_ResolveMoveClash; "default state" not shown
+OV00	800d8c74	VERIFIED	-	consumes g_p1_4b_flag, move_GetDamageValue, scales, adds to life_pending/trail
+OV00	800d9b44	VERIFIED	-	reads byte+3 of table 0 entry indexed by current move id
+OV00	800da7cc	VERIFIED	-	shifts g_state_history globals for both fighters
+OV00	800da85c	OVERCLAIM	move_get_opp_table67_byte4	reads byte 4 of entry in opponent table 6/7; hit table meaning not shown
+OV00	800dae3c	VERIFIED	-	returns main-table or per-player-table pointer, entry<<4 (16 bytes)
+OV00	800dafd4	VERIFIED	-	returns halfword at entry start, table by state
+OV02	8009d298	VERIFIED	-	sorts g_char_usage entries, computes percent, loops drawing setup
+OV02	8009fba8	VERIFIED	-	g_memcard_* state byte, loop with switch of mc_State* and vsync call
+OV04	801e84b0	OVERCLAIM	gfx_init_four_tables_for_draw_buffer	calls unnamed funcs 8001d04c x4 and 8001d0ac x2 on per-buffer addresses; ordering tables not shown
+SLUS	8001371c	VERIFIED	-	calls pad_StopComImpl
+SLUS	80014d78	VERIFIED	-	writes 0x45 to +0x36, clears +0x2c,+0x35
+SLUS	80014e68	VERIFIED	-	pad_SioExchangeByte first byte, reply bytes left from low nibble
+SLUS	80015a48	VERIFIED	-	compares hw_timer2 elapsed with g_timeout_duration, wrap handled
+SLUS	8001760c	VERIFIED	-	sets g_fnt_current_stream and printf hook ptr if in range
+SLUS	80018230	VERIFIED	-	replaces low 24 bits of word with param
+SLUS	8001c554	VERIFIED	-	stores clear rgb, draw area rect, AddPrim
+SLUS	80023d9c	OVERCLAIM	cd_get_toc2_wrapper	body only calls CdGetToc2(1,param); no init
+SLUS	80026f3c	OVERCLAIM	cd_start_read_with_callback	stores callback/dest/mode, calls CdControl(9) and CdRead(0)
+SLUS	8002a25c	VERIFIED	-	calls snd_VmKeyOff when param_4==0 else snd_VmKeyOn if voice bit clear
+SLUS	8002a82c	VERIFIED	-	calls spu_Quit
+SLUS	8002b7bc	VERIFIED	-	decrements delta counter, calls snd_SeqReadEvent when due
+SLUS	8002cedc	VERIFIED	-	returns tbl_snd_vab_alloc_ptr if open flag==1 else -1
+SLUS	8002d8dc	VERIFIED	-	per-tick SpuSetVoiceAttr from voice flag bytes, noise voices
+SLUS	8002fddc	VERIFIED	-	stores L/R seq vol clamped 0x7f, recomputes voice volumes
+SLUS	800330d8	OVERCLAIM	spu_malloc_table_addr_check	walks spu_malloc_table_ptr entries; not strict containment
+SLUS	8003568c	VERIFIED	-	exponent subtract, sign xor, shift-subtract mantissa loop
+SLUS	8004c6dc	OVERCLAIM	cd_init_state3_to_state4	loops CdControl_Internal(2,..), g_cd_init_state=4, tail-calls StartRead; no seek shown
+SLUS	8004d2d4	OVERCLAIM	thread_set_state_bit_8000	ORs 0x8000 into tbl_thread_state[i].state; suspend not shown
+SLUS	80050294	VERIFIED	-	snd_SetSerialAttr, g_cd_audio_state=0, music volume, cd_InitWrapper(track pos)
+SLUS	8006a73c	VERIFIED	-	raw pad buffers to held/press/release, pad_MapButtons
+SLUS	8006c5c0	OVERCLAIM	battle_scene_tick_reset_to_title_a	keys on g_battle_scene_active; mode 4 not shown
+SLUS	8006c8f0	OVERCLAIM	battle_scene_tick_reset_to_title_b	keys on g_battle_scene_active; mode 7 not shown
+SLUS	8006cb2c	OVERCLAIM	cd_load_if_not_resident_slot1	only call cd_LoadIfNotResident(1,ptr); task start not shown
+SLUS	8006df04	VERIFIED	-	counts frames while held&0x900==0x900, resets, opens title_ModeLoop
+SLUS	800709f0	VERIFIED	-	snd_InitSystem, tables, reverb, volumes, vab slots init
+SLUS	80070c5c	OVERCLAIM	spu_transfer_fixed_block_12c00	SpuSetTransferStartAddr + spu_ReadClamped(p,0x12c00); no CD access shown
+SLUS	80071b60	VERIFIED	-	pad bits 0x1000/0x4000 move cursor with wrap, sound_PlaySfx 0x23
+SLUS	80072464	VERIFIED	-	9 iterations over tbl_title_logo_sprites, gs_SortSprite
+SLUS	80072c6c	VERIFIED	-	player active flags, g_match_active=1, opens fight thread
+SLUS	800811bc	VERIFIED	-	switch g_game_mode calling entry_Draw*
+MOVIE	801038e0	VERIFIED	-	packs x,y 11-bit with 0xe5000000 constant
+MOVIE	80105040	VERIFIED	-	calls DMACallback(2,gpu_RunQueue) only
+MOVIE	80109ef8	VERIFIED	-	sets sector words, mode, count, buf ptr, calls cd_ReadStart
+MOVIE	8010b190	OVERCLAIM	pad_check_state_byte_eq8_tail	only compares byte at state+0xe8 to 8 via g_pad_get_state_fn; pad type not shown
+MOVIE	8010b700	VERIFIED	-	assigns g_pad_vsync_handler_fn and irq check fn, clears counters
+MOVIE	8010b794	VERIFIED	-	sets g_pad_vsync_flag, counts timeouts, calls pad_BeginPortPoll/actuator fn
+MOVIE	8010c7c4	OVERCLAIM	pad_set_cmd43_one_byte	writes 0x43 and one data byte; config mode meaning not shown
+MOVIE	8010c944	VERIFIED	-	calls fn from v0 then sio_XferByte with result
+MOVIE	8010ca18	VERIFIED	-	zeroes buf_pad_port_reply, sets g_pad_buf_a/b_ptr, installs pad fn pointers
+OV00	80097e80	VERIFIED	-	writes g_p1_14_facing_angle from angle func of positions and turn step
+OV00	80098a98	OVERCLAIM	fighter_state_move_match_check	returns 1/0 from g_p1_2d_state/move_id ranges; flinch not shown
+OV00	8009a14c	OVERCLAIM	fighter_state3_or_5_check	returns 1 if g_p1_2d_state==3 with move>=0x52 or ==5; downed not shown
+OV00	8009ee84	OVERCLAIM	fighter_decode_packed_motion_values	body truncated; decodes packed bytes via 0xffc masks and negates fields; joint rotation records not shown
+OV00	800a247c	VERIFIED	-	scans g_anim_event_offset_ptr table by motion/char id, returns param_3 minus offset
+OV00	800ab554	VERIFIED	-	zeroes nested fields, sets g_model_anim_reset_flag
+OV00	800aed50	VERIFIED	-	copies tbl_fighter_name_strings, uses g_p1_01_char_id, win streak digits
+OV00	800b1348	VERIFIED	-	cam_CalcFramingCenter into g_cam_target_x/y/z
+OV00	800b1380	VERIFIED	-	math_ApproachValue on g_cam_target_x/y/z toward computed center
+OV00	800b45c0	VERIFIED	-	g_cam_closeup_angle/index preset table, math_ApproachValue on cam targets
+OV00	800b77b4	VERIFIED	-	switch on script opcode calling camscr_Op*, loops until g_camscr_script_running
+OV00	800b7d1c	VERIFIED	-	advances script ptr, passes byte to camscr_SetAngleTrack
+OV00	800b8004	VERIFIED	-	id<0x80 sets target track state else alt track ptr
+OV00	800b86f4	VERIFIED	-	sets alt target track active, idx 0, ptr from script
+OV00	800b8ff8	VERIFIED	-	adds key xyz delta per frame until frame count reached
+OV00	800b9450	OVERCLAIM	camscr_key_table_interp_xyz	weight 0x1000 minus table lookup; cosine ease not visible
+OV00	800b9f38	VERIFIED	-	switch mode: midpoint of fighter 0/1 or single via fighter_GetCameraPoint
+OV00	800ba450	VERIFIED	-	adds delta and accumulating velocity to pitch/yaw/roll
+OV00	800ba558	VERIFIED	-	frame*0x1000/count fraction times delta added to start angles
+OV00	800ba6d0	OVERCLAIM	camscr_ang_key_table_interp	weight 0x1000 minus table lookup; cosine ease not visible
+OV00	800baf30	VERIFIED	-	adds delta plus velocity to g_cam_follow_dist per frame
+OV00	800bb3a8	VERIFIED	-	increments frame, advances ptr at count, sets running=1
+OV00	800bd108	VERIFIED	-	computes g_push_apart_a/b from distance, trade flags, tables
+OV00	800c0504	VERIFIED	-	g_match_end_timer countdown, g_fight_end_flag, result flags
+OV00	800c2088	OVERCLAIM	fight_set_round_state_after_delay	loops 0x78 frames then sets g_fight_round_state 3/4; KO not shown
+OV00	800c4f9c	VERIFIED	-	fills g_team_battle_results with 0xff
+OV00	800c5938	VERIFIED	-	increments g_team_win_count_tbl and conditionally loss table
+OV00	800ceb94	VERIFIED	-	switch on state byte calling ai_Pick* callees
+OV00	800cf33c	OVERCLAIM	ai_pick_entry_by_distance	compares g_cam_fight_dist to table thresholds; ground not shown
+OV00	800cfec8	VERIFIED	-	if table entry nonzero sets g_cpu_action_id from ai_PickWeightedScriptEntry
+OV00	800d03e0	VERIFIED	-	switch on script opcode byte setting g_cpu_action_id, advancing script ptr
+OV00	800d3d90	OVERCLAIM	ai_set_cpu_action_by_option_index	sets g_cpu_action_id 0x12/0x13/10/0xff from g_option_screen_index; round not shown
+OV00	800d53e4	OVERCLAIM	fight_update_state1_2_queued_move	checks state 1/2, motion_end_flag, starts prev_move; attack not shown
+OV00	800d5640	VERIFIED	-	motion_end_flag handling, facing +0x800, starts move
+OV00	800d9c20	VERIFIED	-	returns byte 3 of 8-byte table entry by move id
+OV00	800d9ce8	VERIFIED	-	reads table byte, sets g_p1_2a_move_id from mapped table, returns flag
+OV00	800da3e8	VERIFIED	-	writes g_p1_4d_move_hit_data and flags from move tables
+OV00	800da930	OVERCLAIM	move_get_opp_table_byte5	reads byte 5 of 12-byte entry from opponent tables; hit not shown
+OV00	800daa04	OVERCLAIM	move_get_opp_table_byte_by_state	returns bytes 6/7/8 or other of opponent tables; damage not shown
+OV00	800db578	VERIFIED	-	g_pad_vib_active, tbl_vibration_script selection and stepping
+OV00	800dea20	VERIFIED	-	g_fx_motion_dust_tbl, speed-squared change, fx_AddParticleSlot
+OV00	800e32e0	VERIFIED	-	calls stage_LoadFlags, InitBackgroundTiles, Sprites, LoadCameraAndLights
+OV02	80097660	VERIFIED	-	menu_UpdateCursor then exclusion via g_opt_unlock_flags_b mask
+SLUS	8001439c	OVERCLAIM	pad_wait_sio_bit80_or_timeout	polls *pad_sio_stat_ptr&0x80 until timer timeout; DSR not shown
+SLUS	800176ec	VERIFIED	-	allocates stream slot, SetDrawMode, SetTile, SetSprt8 per char
+SLUS	800197b0	VERIFIED	-	sets code byte 2 and gpu_MakeTexWindowWord
+SLUS	80019f04	VERIFIED	-	packs x,y 11-bit with 0xe5000000 constant
+SLUS	8001a874	VERIFIED	-	calls gpu_QueueOrRunCmd with 0 as third arg
+SLUS	8001d31c	VERIFIED	-	builds view matrix from eye/target/twist, MulMatrix
+SLUS	800241a4	OVERCLAIM	cd_wait_media_thunk	only calls cd_WaitMedia; reset not shown
+SLUS	80024294	VERIFIED	-	stores new ptr to cd_ready_callback returns old
+SLUS	80028c3c	VERIFIED	-	branches param_3<0x40 clear else set pitch bias
+SLUS	8003119c	VERIFIED	-	SpuSetTransferMode/StartAddr, vab tables
+SLUS	80034ce4	OVERCLAIM	exp_table_interp_ratio_103b	multiplies by 0x103b>>12 per step and interpolates; spu/pitch not shown
+SLUS	8004d7e0	VERIFIED	-	loops mcard_WaitReady, dispatches mcard load/msg callees
+SLUS	8004da24	VERIFIED	-	polls driver fn pointers with retry counter
+SLUS	8004ea4c	VERIFIED	-	mcard_BuildSaveHeader then 0x7e-byte blocks with sum and xor
+SLUS	800500c4	VERIFIED	-	biosB0_firstfile/nextfile loop, returns 0xf minus blocks
+SLUS	80050324	VERIFIED	-	sets g_cd_track_index/playing, audio state 4, volume
+SLUS	800503b0	OVERCLAIM	cd_set_audio_state_clear_track	sets g_cd_audio_state 4, init_state 0xf, track 0xffff; stop not shown
+SLUS	8006bb34	VERIFIED	-	calls CD volume fn by g_cfg_audio_mode, sets music/sfx volume
+SLUS	8006c824	OVERCLAIM	scene_pause_update_reset_on_result5	keyed on g_battle_scene_active, mode 6 not shown
+SLUS	80070ce8	VERIFIED	-	switch on g_menu_state calling title_State* with thread_Sleep
+SLUS	8007157c	VERIFIED	-	g_title_menu_cursor, menu_UpdateCursor, sets g_title_menu_mode
+SLUS	80074a3c	VERIFIED	-	inits flags, switch on g_battle_scene_active calling game_StateSurvivalFight
+SLUS	80074cc8	OVERCLAIM	game_state_match_end_update	g_battle_done_flag/match_type handling; survival not shown in body
+SLUS	80077f30	VERIFIED	-	up/down repeat on g_option_cursor_row wrap 0-6, sfx 0x23
+SLUS	8007877c	OVERCLAIM	option_resume_threads_redraw	calls option_StageTypeChange, draws, thread_ClearSuspended; apply not shown
+SLUS	800797dc	VERIFIED	-	inits g_ranking_*, tbl_ranking_entries copy, player headers
+SLUS	80079c20	VERIFIED	-	sets player char_id/costume from g_sel_char_slots, g_char_costume_p1
+SLUS	80079d10	VERIFIED	-	fills buf_sel_cursor_sprite_* then gs_SortSprite
+SLUS	8007afac	VERIFIED	-	fills tbl_sel_portrait_sprites packets per slot
+SLUS	8007d610	VERIFIED	-	returns tbl_vs_wipe_color[min(idx,15)]
+SLUS	8007e8a4	VERIFIED	-	sums buf_survival_win_counts into g_survival_wins_total capped 99
+SLUS	800810bc	OVERCLAIM	pad_wait_press_bit20_play_track	waits g_pad_press &0x20 while cd_PlayTrack(0x1b); confirm not shown
+SLUS	80083080	VERIFIED	-	inits two buf_text_font_prims entries, calls text_BuildFontTable
+SLUS	80083124	VERIFIED	-	GetTPage and fills tbl_font_glyph UV entries
+MOVIE	801010f8	VERIFIED	-	loops StGetNext until success or counter expires; on success reads frame w/h from result, ClearImage on size change, returns frame
+MOVIE	801075b4	VERIFIED	-	calls spu_TransferCtrl sequence or spu_WritePio with data args: SPU write
+MOVIE	801079dc	OVERCLAIM	bios_deliver_event_f0000003_20	body only calls biosB0_DeliverEvent(0xf0000003,0x20); CD class and sync meaning not visible
+MOVIE	80107b9c	VERIFIED	-	only calls cd_SyncWait
+MOVIE	80108000	VERIFIED	-	calls cd_GetSectorDma2, returns result==0
+MOVIE	8010b128	VERIFIED	-	only calls pad_ReadAndClearVsyncFlag
+MOVIE	8010c7e4	OVERCLAIM	pad_set_cmd_0x45_no_data	writes 0x45 to +0x36, zero to +0x2c/+0x35; query-model meaning not shown
+MOVIE	8010d398	VERIFIED	-	increments error counter +0x4c, retry limits, calls g_pad_connect_fn, writes reply byte and clears
+OV00	80098bd8	VERIFIED	-	sets g_p1_2f_near_flag 1/0 from position difference of fighters
+OV00	800a3680	VERIFIED	-	calls fighter_IsHeadTrackingBlocked, fighter_ComputeHeadTrackAngles, fighter_ApplyHeadTrackMatrix; opponent head pos atan
+OV00	800a5424	VERIFIED	-	compares g_p1/p2 char_id/costume to prev ids, calls fighter_SetupModelPointers, model_InitFighterParts
+OV00	800a68ac	OVERCLAIM	fighter_part_size_threshold_disable	body sums two table bytes, compares to 0x94/0x8e, calls model_DisableParts/ClearPartFlag; no spring math
+OV00	800a7414	VERIFIED	-	velocity/position update toward target with shift damping, clamp to limits param_4, atan2 angles per axis
+OV00	800a80ac	VERIFIED	-	patches OT link words using depth values from buf_depth_markers
+OV00	800aab2c	VERIFIED	-	calls fighter_LoadBoneRotSingle if type 1, fighter_LoadBoneRotPair if type 3
+OV00	800ade20	VERIFIED	-	scales g_p1_20_life*0xd0/g_life_max into gauge widths, writes prim fields, queues via scratchpad ptr
+OV00	800b2aec	OVERCLAIM	cam_update_orbit_offset_0x100	body sets orbit angle facing+-0x100, follow dist half fight dist+0xce4; mode 5 and side view not shown
+OV00	800b30a4	OVERCLAIM	cam_update_orbit_offset_0x900	body sets orbit angle facing+0x900/0x700, dist half+0x9c4; mode 6/variant A not shown
+OV00	800b7e34	VERIFIED	-	calls camscr_SetPosTrack and camscr_SetTargetTrack from script ptr, sets g_camscr_mode_flag=1
+OV00	800b8528	VERIFIED	-	sets angle track active, zeroes start/frame/step, loads track ptr from script ptr
+OV00	800b8658	VERIFIED	-	advances script ptr, calls camscr_StartAltAngleTrackFromPtr, advances again
+OV00	800b9b30	VERIFIED	-	camscr_SelectFighterPoint then adds xyz delta from key to pos cur each frame
+OV00	800b9bf4	VERIFIED	-	SelectFighterPoint, adds delta plus cam_pos velocity, velocity += accel from key
+OV00	800ba144	VERIFIED	-	increments key frame, advances key ptr when frame count reached
+OV00	800bb188	OVERCLAIM	camscr_dist_track_table_step	multiplies amount by table value indexed by frame*0x400/dur; table identity and ease-out shape not visible
+OV00	800c2688	OVERCLAIM	fight_set_substate_by_round_wins	body sets g_screen_mode/g_game_substate/main loop state by ranking index, round wins, mode; no win text visible
+OV00	800c4824	VERIFIED	-	sets g_timer_p1_start/p2_start from float constants chosen by g_fight_setup_mode and control mode
+OV00	800c4a0c	OVERCLAIM	gfx_build_two_sprite_prims_from_buf	builds two prim structs, unknown callees, uses g_team_battle_buf; portrait/TIM/VRAM not shown
+OV00	800c952c	VERIFIED	-	input_GetButtonsAtFrame/BufferedDirection, maps to g_cpu_action_id, calls cpu_RunMoveScript
+OV00	800ca958	VERIFIED	-	gets table ptr by id, calls cpu_ExecScriptOpcodes
+OV00	800cff74	VERIFIED	-	rolls delay, decrements counter, calls ai_LookupActionByMove at expiry
+OV00	800d1d14	VERIFIED	-	sums weights masked by g_cpu_difficulty bit, math_RandomMod roll, ai_ResolveScriptParam
+OV00	800d2ef8	VERIFIED	-	timer decreased by g_cam_fight_dist ranges, on expiry ai_PickWeightedScriptEntry or ai_PickNeutralAction
+OV00	800d4360	VERIFIED	-	g_round_end_react_flag set, move 0x88 on loser, outcome picked from pad input and moves
+OV00	800d7da4	VERIFIED	-	fighter_IsHittable, g_p1_40_hit_level_flag select index into move table, sets move id and state
+OV00	800da738	OVERCLAIM	fighter_start_move_side0	sets move_flag=0 and move id; left not shown
+OV00	800dac14	VERIFIED	-	reads byte +0xc of entry from func(id,2) table indexed by current move
+OV00	800dbda8	VERIFIED	-	calls fx_Update*, hit_CheckAttackVsBody, hit_CheckBodyVsObjects, copies stage tile globals
+OV00	800dcae8	VERIFIED	-	capsule-sphere and sphere tests over 15 entries, sets g_p1_38_flag
+OV00	800ded9c	VERIFIED	-	per fighter timers g_fx_dust_timer_tbl, calls fx_SpawnGroundDust by state
+OV00	800e3a20	VERIFIED	-	_g_camera_fade_timer countdown 0x30 scales light colors, light_SetDirection
+OV02	80095a5c	VERIFIED	-	loop with opt_DrawMemoryCard, menu_UpdateCursor, g_opt_memcard_flag, pad press handling
+OV02	80099c98	VERIFIED	-	loop of two prims, width 0x100, queued via func into OT
+OV04	801e9d34	VERIFIED	-	control code switch, advances _g_dbgpad_prim_x, calls dbgpad_DrawString
+SLUS	80013ee4	VERIFIED	-	returns pad_vsync_flag and zeroes it
+SLUS	80014018	VERIFIED	-	sets pad state index 0, cur port, calls pad_StartPortComm, callback 0xffff on fail
+SLUS	80015a2c	VERIFIED	-	stores duration and _hw_timer2_count
+SLUS	80015e2c	VERIFIED	-	kernel_AllocChecked tables into krn_init_tables_ptr, kernel_StoreInitParams
+SLUS	80016fcc	VERIFIED	-	jumps via krn_pad_patch_start_fn
+SLUS	8001a898	VERIFIED	-	runs callback now if idle else copies args into ring, index &0x3f
+SLUS	8001c69c	VERIFIED	-	SetGeomOffset or PutDrawEnv with center plus buffer origin
+SLUS	8001c82c	VERIFIED	-	PutDispEnv, SetDispMask, frame counter, toggles active buffer, gs_UpdateDrawArea/Offset
+SLUS	80024098	OVERCLAIM	bios_deliver_event_f0000003_40	body only calls biosB0_DeliverEvent(0xf0000003,0x40); CD/ready not visible
+SLUS	800246c4	OVERCLAIM	dma_set_callback_chan3	body only etc_DmaCallback(3,param); CD association not shown
+SLUS	80029dac	VERIFIED	-	reads byte from seq data, calls snd_VmPitchBend, snd_SeqReadDeltaTime
+SLUS	80029e5c	VERIFIED	-	switch on controller number calls tbl_snd_seq_cb_* callbacks
+SLUS	8002c66c	VERIFIED	-	calls snd_VmSetSeqVolume if playing else stores L/R at +0x58/+0x5a
+SLUS	8002eb5c	VERIFIED	-	tbl_snd_note_pitch lookup with note, fine, octave shift
+SLUS	8002ec30	VERIFIED	-	tbl_snd_note_pitch lookup with fine tune from vag table and octave shift
+SLUS	8002ee1c	VERIFIED	-	computes L/R volume, spu_SetNoiseClock, sets snd_noise_voices masks
+SLUS	8002f3dc	OVERCLAIM	snd_voice_clear_state_set_mask	clears voice fields and ORs voice bit into g_snd_noise_mask; key-off not shown
+SLUS	80030360	VERIFIED	-	reads L/R from seq +0x58/+0x5a into outputs
+SLUS	80033c1c	OVERCLAIM	spu_set_voice_bitmask_cc_cd	only calls spu_SetVoiceBitmask(...,0xcc,0xcd); reverb meaning not shown
+SLUS	80036c54	VERIFIED	-	tim_ReadInfo at g_tim_read_ptr, advances pointer
+SLUS	8004c8e4	VERIFIED	-	fades g_cd_music_volume to 0, cd_RequestFileRead, waits g_cd_audio_state
+SLUS	8004cc24	VERIFIED	-	zeros 5 bytes of buf_boot_code
+SLUS	8004d1a8	VERIFIED	-	clears slot state, biosB0_CloseThread
+SLUS	8004d3a4	VERIFIED	-	loops slots 1..15, ChangeThread, sleep counters, sys_EndFrame
+SLUS	8004d520	VERIFIED	-	strcpy/strcat save path, mcard_WaitReady dispatch to save/format/error handlers
+SLUS	8004fd7c	VERIFIED	-	mcard_PollEvents, biosB0_FileClose on completion
+SLUS	80069be4	VERIFIED	-	builds rect prims with code 0x02 and clear color, AddPrim
+SLUS	8006a264	VERIFIED	-	adjusts rect a/b y and h, forces odd y
+SLUS	8006a430	VERIFIED	-	adjusts rect a/b y and h, forces even y
+SLUS	8006ae38	VERIFIED	-	zero clear colors, ClearImage2 rect 0,0,0x200,0x1e0, DrawSync
+SLUS	8006af00	VERIFIED	-	clears colors, ResetGraph, fade state, thread_Open(fade_TaskLoop)
+SLUS	8006b000	VERIFIED	-	gpu_AddFadeOverlay with changing brightness over frames, thread_ExitSelf
+SLUS	8006cbb4	VERIFIED	-	cd_FadeAndReadFile by tbl_stage_data_cd_index, tim_UploadChain, two 0x19x0x200 bcopy
+SLUS	800704f8	VERIFIED	-	stores g_snd_master_volume and calls snd_SetReverbVolume with it
+SLUS	80070524	VERIFIED	-	sets g_cd_vol_* to 7f,0,7f,0, cd_SetMode, snd_SetMonoOff
+SLUS	80070bac	OVERCLAIM	spu_write_aligned_wait	body uses SpuSetTransferStartAddr, spu_WriteClamped, SpuIsTransferCompleted; no CD read
+SLUS	80071960	OVERCLAIM	title_idle_timeout_reset_screen	g_title_idle_timer countdown/pad check then clears screen/fade; demo not shown
+SLUS	800740ec	VERIFIED	-	adds g_play_time_frames to g_total_score, increments g_win_count_by_char
+SLUS	80076b7c	VERIFIED	-	CD seek, cd_ReadAndWait 0x800 into buffer, g_exec_header_ptr, reads using header fields
+SLUS	80079740	VERIFIED	-	calls ranking_InitState, sel_InitPlayerCursors, sel_InitPortraitSprites, cd_PlayTrack
+SLUS	80079aa0	VERIFIED	-	sets +8/+10/+0x18/+0x1a fields from g_battle_active_flag, ctrl_type, game mode; costume swap
+SLUS	8007c454	VERIFIED	-	text_DrawString of digits, PLAYER1/PLAYER2 strings with g_vs_report_total globals
+MOVIE	801012c4	OVERCLAIM	movie_wait_flag_timeout_flip	spins on field +0x78; no slice shown; timeout sets flag and toggles +0x6c
+MOVIE	80101c0c	OVERCLAIM	set_low24_bits_keep_top_byte	only *p=(*p&0xff000000) or (v&0xffffff); no gpu/primitive evidence
+MOVIE	80107bf0	VERIFIED	-	stores arg in g_cd_ready_callback, returns previous
+MOVIE	8010c838	OVERCLAIM	set_cmd_0x47_one_byte_arg	writes 0x47 and one data byte into struct; pad query comb not shown
+MOVIE	8010cbd0	VERIFIED	-	calls pad_ReadPortReply/pad_PortError, increments g_pad_cur_port
+OV00	800963ac	VERIFIED	-	per-joint (a*t+b)*t>>10 + c>>2 with tbl_motion_joint_flags
+OV00	80099dcc	VERIFIED	-	writes 0x7777 into hit history buf indexed by g_fighter_hit_history_index capped at 3
+OV00	8009e5cc	OVERCLAIM	step_accumulate_fixed_point_tables	adds table values with >>5 and &0x1f remainders; animation not shown
+OV00	800a1d70	VERIFIED	-	calls fighter_UpdateSwaySpeed/FlipSwayDirection, integrates pos+=vel, clamps via g_fighter_sway_state_tbl
+OV00	800a223c	OVERCLAIM	copy_model_sway_entries	copies entry ranges into g_fighter_sway_effect_tbl; secondary anim/hair not shown
+OV00	800a8360	VERIFIED	-	per-part dispatch on prim type 0x801a/0x8018 to model_DrawGT3Alpha/model_DrawFT3
+OV00	800b142c	VERIFIED	-	math_ApproachAngle(&g_cam_pitch,0xfea,...)
+OV00	800b31fc	OVERCLAIM	cam_orbit_offset_half_fightdist	orbit angle +/-0x100 and follow dist g_cam_fight_dist/2+0x9c4; mode 6 side B not shown
+OV00	800b5ae0	VERIFIED	-	uses g_cam_attract_orbit_b, yaw-=2, returns counter>0xf0
+OV00	800b6798	VERIFIED	-	dispatches g_main_loop_state 0xf8-0xfa to viewer camera functions
+OV00	800b6fe0	VERIFIED	-	uses _g_modelviewer_cam_x/y/z
+OV00	800b752c	VERIFIED	-	resets cam mode flags and camscr init flag, sets follow dist +4000
+OV00	800b7eb0	VERIFIED	-	calls camscr_SetPosTrack/SetAngleTrack/SetDistTrack, g_camscr_mode_flag=2
+OV00	800b81dc	VERIFIED	-	advances _ptr_camscr_script, calls camscr_StartTargetTrackFromPtr
+OV00	800b85c0	VERIFIED	-	advances script ptr, calls camscr_StartAltPosTrackFromPtr
+OV00	800b860c	VERIFIED	-	advances script ptr, calls camscr_StartAltTargetTrackFromPtr
+OV00	800b8ae0	VERIFIED	-	switch dispatch on key opcode to camscr_Key* until yield
+OV00	800b8f84	VERIFIED	-	loads xyz from key stream, ptr+=0x10, running=1
+OV00	800b92d8	VERIFIED	-	offset*frac(0x1000)/frames added to start xyz
+OV00	800b9f14	VERIFIED	-	g_camscr_key_smooth=0, ptr+=4
+OV00	800bacc8	VERIFIED	-	increments ang frame counter, advances when count reached
+OV00	800bad1c	VERIFIED	-	g_camscr_ang_track_active=0
+OV00	800baec4	VERIFIED	-	adds delta to _g_cam_follow_dist per frame until count
+OV00	800bb27c	VERIFIED	-	dist += (target-dist)/frames remaining
+OV00	800bb8c4	OVERCLAIM	set_flag_from_angle_diff_gt_800	sets g_main_loop_extra_flag from (a-b)&0xfff>0x800; side not shown
+OV00	800bbf9c	VERIFIED	-	copies tbl_random_table16, returns entry [rand&0xf]
+OV00	800bc408	VERIFIED	-	returns g_p1_1c_target_facing minus 0x400 masked 0xfff
+OV00	800bf348	VERIFIED	-	pos_y += vel, _g_launch_gravity, decay, clamp
+OV00	800bfd98	VERIFIED	-	pos += g_recoil_vel, vel decays by _g_recoil_decay_const
+OV00	800c09a4	VERIFIED	-	shuffles opponent ids, sets g_match_opponent_p1/p2, calls fight_SelectOpponentFighters
+OV00	800ca408	OVERCLAIM	cpu_run_script_f_if_buffered_dir	cpu_RunMoveScript(0xf) when input_GetBufferedDirection(1)!=0; get up not shown
+OV00	800cd854	VERIFIED	-	uses g_cpu_action_id, ai_WeightsInit, ai_RollThreshold, state switch; body truncated
+OV00	800ced84	OVERCLAIM	ai_select_pick_by_opponent_state	branches on opponent state calling ai_Pick* callees; style not shown
+OV00	800d5714	OVERCLAIM	fight_resolve_paired_move_end	motion end flag 1/2, move types 4/6, calls ResolveMoveClash/StartPairedMoves; hold not shown
+OV00	800d61f4	OVERCLAIM	fight_state_e_pick_move_from_table	reads move table bytes, sets flag and pos_y=1000, starts move; hold escape not shown
+OV00	800d9728	OVERCLAIM	fight_swap_paired_move_ids	sets move ids to prev_move and prev_move+1, g_paired_move_flag=1; clash not shown
+OV00	800d9a68	VERIFIED	-	reads byte 4 of entry in func table 0
+OV00	800db4b4	OVERCLAIM	pad_clear_vibration_state	zeroes g_pad_vib_* globals; no scripts shown
+OV00	800dc4f8	VERIFIED	-	stores 0/1/2 into g_p1_40_hit_level_flag by part index
+OV00	800dc6f0	VERIFIED	-	end-plane tests then hit_CapsuleClosestPointTest
+OV00	800e2dd8	VERIFIED	-	frame counter=0, stage_ResetCamera, stage_InitResources
+OV00	800e2e74	VERIFIED	-	copies g_stage_light_block, light_SetDirection x3, ambient
+OV00	800e3cac	OVERCLAIM	stage_begin_flash_each_flagged_fighter	loops 2 fighters, calls stage_SaveCameraAndBeginFlash; hit not shown
+OV00	800e4ce0	OVERCLAIM	light_set_light1_black_if_entry_valid	zero color for light 1 when table byte != -1; floor tile not shown
+OV02	80095cf8	VERIFIED	-	switch calling rec_Draw* functions by menu cursor
+SLUS	80013cb4	VERIFIED	-	stores pad_VsyncHandler and pad_CheckVblankIrq pointers
+SLUS	80013d48	VERIFIED	-	sets pad_vsync_flag, timeout counters, pad_BeginTransfer
+SLUS	800155f0	VERIFIED	-	calls pad_SetCmd43 or callback at +0x14
+SLUS	80016218	VERIFIED	-	parses % flags width precision conversions
+SLUS	8001b6d4	VERIFIED	-	tests DMA busy/mode bits, clears busy
+SLUS	80024664	OVERCLAIM	call_cd_reset_state_return_one	body only calls cd_ResetState and returns 1; no mode set
+SLUS	80026bec	OVERCLAIM	cd_advance_sector_finish_callbacks	advances dest/sector/lba counters, finishes callbacks; no retry shown
+SLUS	8002b03c	VERIFIED	-	steps volume toward 0x7f via snd_VmSetSeqVolume
+SLUS	8002b78c	VERIFIED	-	calls snd_SeqTickDeltaCore
+SLUS	8002c51c	VERIFIED	-	mode 0-5 sets g_snd_seq_tempo_base 0x3c/0xf0/0x78/0x32
+SLUS	8002cb8c	VERIFIED	-	copies bytes from g_snd_cur_prog_table record
+SLUS	8002d6dc	OVERCLAIM	snd_voice_set_addr_adsr	writes snd_spu_voice_addr/adsr; no key-on write shown
+SLUS	8002f97c	VERIFIED	-	recomputes pitch via snd_NotePitchFine, writes snd_spu_voice_pitch
+SLUS	80030c8c	VERIFIED	-	sets g_snd_voice_count if arg in 1..24
+SLUS	8003299c	VERIFIED	-	allocates in spu_malloc_table at requested start
+SLUS	80035bdc	VERIFIED	-	double to int, math_RaiseFpError on overflow
+SLUS	800367e0	VERIFIED	-	tim_SetPtr, tim_ReadNext, LoadImage
+SLUS	8004cc60	OVERCLAIM	compare_code_then_fade_read	compares 5-byte code then cd_FadeAndReadFile; resident not shown
+SLUS	8004d238	OVERCLAIM	set_thread_flag_change_thread	state
+SLUS	8004dfd4	VERIFIED	-	s_mcard_msg_format_* prompts, driver format call
+SLUS	8004f83c	VERIFIED	-	biosB0_FileOpen/Seek/Read in 128-byte units
+SLUS	8004fc40	VERIFIED	-	creates file if missing, biosB0_FileWrite, pending flag
+SLUS	8006a71c	VERIFIED	-	calls pad_StopCom
+SLUS	8006b5b4	VERIFIED	-	init calls then g_game_mode switch to mode_Tick*
+SLUS	8006b830	VERIFIED	-	sets g_cfg_* defaults
+SLUS	8006c758	VERIFIED	-	pause, stage_UpdateAnimatedTextures, reset when g_battle_scene_active==5
+SLUS	8006c9bc	VERIFIED	-	only the ==5 reset
+SLUS	8006ee54	VERIFIED	-	cd_FadeAndReadFile, snd_VabOpenHeadAt, snd_VabTransBody
+SLUS	80071404	VERIFIED	-	g_title_idle_timer 0x708, start bit 0x800
+SLUS	800728bc	VERIFIED	-	zeroes six named globals
+SLUS	80073848	VERIFIED	-	sets mode globals and 24000/12000
+SLUS	800758b0	OVERCLAIM	ranking_pad_wait_start_match	pad input loop at ranking; name entry not shown
+SLUS	80076d5c	VERIFIED	-	CdReadCallback then cd_ReadFinish loop
+SLUS	800794ac	OVERCLAIM	select_screen_main_loop	calls sel_* character-select functions; ranking only from globals
+SLUS	80079828	OVERCLAIM	init_char_select_slots	sets char select slot globals; ranking tables copy only
+SLUS	8007e18c	VERIFIED	-	gs_SortTile fades, vs_DrawResultTable, vs_DrawReportScreen
+MOVIE	80107bbc	VERIFIED	-	only calls cd_ReadyWait
+MOVIE	80109e64	VERIFIED	-	zeroes sectors_left, restores saved sync/ready/data callbacks, CdControlF(9)
+MOVIE	8010d06c	OVERCLAIM	pad_dispatch_cmd_by_state	branches on state byte to pad_CmdEnterConfig/pad_SetupConfigCmd/fn ptr; no polling shown
+OV00	80097638	OVERCLAIM	unpack_words_bytes_to_tables	unpacks 32-bit and 5-byte records into tables; no pose/keyframe/blend/joint semantics visible
+OV00	80098e6c	OVERCLAIM	fighter_update_move_state_flags	writes move/state/flag tables via StartMotionHeader/GetHitReactionIndex; no transition queue or cancel window shown
+OV00	80099f30	VERIFIED	-	zeroes many per-fighter table entries indexed by param
+OV00	800a1e50	VERIFIED	-	g_fighter_sway_state_tbl, GetSway*Value callees, clamps field to +-0x3c
+OV00	800a43cc	VERIFIED	-	zeroes many g_fighter_* globals, calls gfx_InitBufferPair and game_ClearHitSparkTable
+OV00	800a5260	VERIFIED	-	g_fight_setup_state=1, fighter_InitGlobalState, caches p1/p2 char_id and costume, model load calls
+OV00	800a73c8	VERIFIED	-	gte_RotMatrixYaw, gte_RotMatrixPitch, gte_StoreRotTrans
+OV00	800aa4c4	OVERCLAIM	fighter_store_pos_and_prev_pos	GTE store trans to g_fighter_world_pos, copies pos to prev_pos; no limb/history ring shown
+OV00	800aa8e8	OVERCLAIM	fighter_is_state9_move_76_77	only tests state==9 and move id-0x76<2; downed/get-up meaning not shown
+OV00	800ab584	VERIFIED	-	zeroes nested fields, sets g_model_anim_reset_flag
+OV00	800ab620	VERIFIED	-	writes g_part_angle_default values into per-part entries
+OV00	800ab840	VERIFIED	-	copies tbl_part_flags_by_move_a/b/c chosen by g_p1_28_motion_id
+OV00	800af20c	VERIFIED	-	hud_LoadMessageLayout, hud_SlideMessageBanner, g_hud_message_state/timer
+OV00	800b07e0	VERIFIED	-	g_round_time_counter, g_round_timer decrement, display percent
+OV00	800b1464	VERIFIED	-	math_ApproachAngle(&g_cam_ang_z_roll,0,...)
+OV00	800b1644	VERIFIED	-	switch g_cam_mode_prev to cam_UpdateModeN handlers, cam_SelectModeFromTable
+OV00	800b3354	VERIFIED	-	center = average of two fighter positions, eases targets, camera look-at
+OV00	800b3d78	VERIFIED	-	_g_cam_ko_state global, midpoint target clamped radius 0x4b0, pitch from height
+OV00	800b82c0	VERIFIED	-	advances script ptr, StartTargetTrackFromPtr, StartAngleTrackFromPtr, mode flag 0
+OV00	800b86c4	VERIFIED	-	sets g_camscr_alt_pos_track_active/idx, loads ptr from script
+OV00	800ba340	VERIFIED	-	loads pitch/yaw/roll from angle track
+OV00	800bb480	VERIFIED	-	angle and distance from p1/p2 x,z positions
+OV00	800bb92c	VERIFIED	-	distance from xz spread and y of both smoothed fighters, writes g_cam_height_gap_flag
+OV00	800bc294	VERIFIED	-	pitch/yaw from deltas between two points
+OV00	800bc744	VERIFIED	-	g_stage_tile_wrap_count, _g_tile_wrap_shift_x/z, 3000/4000 offsets
+OV00	800bd850	VERIFIED	-	loops both fighters, g_p1_3b_airborne_flag, calls Launch/Knockback/Slide step functions
+OV00	800bfa50	VERIFIED	-	adds knock_vel to pos, _g_slide_flight_gravity, sets airborne flag 3
+OV00	800c1390	OVERCLAIM	call_8004d2d4_nine_ids	nine calls to unnamed func_0x8004d2d4; disable/task semantics not visible
+OV00	800c590c	VERIFIED	-	zeroes g_team_win_count_tbl 14 pairs
+OV00	800c5f00	VERIFIED	-	writes g_timeattack_stage_* from g_play_time_*
+OV00	800c6974	OVERCLAIM	set_unlock_flag_a_bit2_by_play_time	sets g_opt_unlock_flags_a bit2 set when mode==3, end flag, hours<5 or counter>0x5460; time attack not shown
+OV00	800cd020	OVERCLAIM	ai_script_store_move_condition_inverted	g_cpu_input_parsed_flag==1 sets 1 else cpu_CheckMoveCondition^1; not a hit flag
+OV00	800cf1ac	OVERCLAIM	ai_pick_attack_tier_by_state	branches on state byte and g_cpu_difficulty to ai_PickAttackTier*; distance not used
+OV00	800cf868	OVERCLAIM	ai_pick_handler_by_style_roll	rolls threshold, classifies, runs handler id 0xd-0x16 by style; neutral not shown
+OV00	800d3b2c	VERIFIED	-	math_RandomMod(total), cumulative byte weights index 0-3
+OV00	800d4bec	VERIFIED	-	loops 2 fighters, switch g_p1_2d_state to fight_Update*State
+OV00	800d7bdc	OVERCLAIM	fight_copy_fields_to_fighter_check_life	copies fields from separate table to g_p1_* and compares fight_CalcDamageScaled to life; queue not shown
+OV00	800d93bc	OVERCLAIM	fighter_reset_move_from_table	picks move via table lookups/LoadMoveTransition, clears flags; idle not shown
+OV00	800d98a0	OVERCLAIM	pos_exceeds_half_limits_with_tile_shift	compares abs(pos+tile shift) to g_timer_p1_start/2 and g_timer_p2_start/2; arena not shown
+OV00	800d9e10	VERIFIED	-	calls fighter_TurnToFaceOpponent per fighter, g_auto_facing_tbl
+OV00	800da5bc	VERIFIED	-	sets move id, state from table, calls fighter_LoadMoveHitData
+OV00	800da674	VERIFIED	-	sets move id, side flag if id>=0xb6, state from move entry
+OV00	800daccc	OVERCLAIM	move_compare_entry_byte_0d	compares byte 0xd of both entries, returns 1 equal 2 first greater; priority meaning not shown
+OV00	800e22ac	OVERCLAIM	call_8001d04c_four_buffers	four calls to unnamed func_0x8001d04c; clear/OT semantics not visible
+OV02	80094ee0	VERIFIED	-	g_cfg_* values, opt_DrawGameConfig loop
+OV02	80098e08	VERIFIED	-	tbl_keyconfig_label, g_pad_press_p1 button loop, menu callees
+OV02	8009a95c	VERIFIED	-	g_time_attack_best_a, formats digits with dashes for 360000, draws rows
+OV02	8009fccc	VERIFIED	-	g_memcard_card_ready/state, retry count, advance state 2
+SLUS	800155cc	VERIFIED	-	stores pad_fn_send_cmd and pad_fn_is_idle
+SLUS	800156b8	VERIFIED	-	copies reply bytes, nibble of first byte, advances state byte
+SLUS	80019db4	VERIFIED	-	builds 0xe1xxxxxx word from args
+SLUS	8001a784	VERIFIED	-	writes gp1 reg ptr and shadow table by command byte
+SLUS	8001b760	VERIFIED	-	polls bit 0x4000000, limit, 0/-1
+SLUS	8001c7ac	VERIFIED	-	sets gpu_draw_env clip from g_gs_draw_area, PutDrawEnv
+SLUS	80024684	OVERCLAIM	cd_data_transfer_start_is_ok	returns cd_DataTransferStart()==0; sector not shown
+SLUS	800265c8	VERIFIED	-	scans tbl_cd_path_cache with biosA0_strcmp
+SLUS	80028a7c	OVERCLAIM	snd_seq_set_voice_volume_read_delta	calls snd_VmSetVoiceVolume and snd_SeqReadDeltaTime; no key-on shown
+SLUS	8002c6fc	VERIFIED	-	snd_VmSetSeqVolume or stores two volume fields
+SLUS	8002cf2c	VERIFIED	-	g_snd_keyon_* and snd_VoiceSetupKeyOn
+SLUS	8002d4ec	VERIFIED	-	spu_SetReverb(1)
+SLUS	8002ed38	VERIFIED	-	tbl_snd_note_pitch lookup, octave shifts
+SLUS	80030cbc	VERIFIED	-	spu_Free, clears tbl_snd_vab_open_flag
+SLUS	80031f4c	VERIFIED	-	etc_DmaCallback(4,cb)
+SLUS	80032ccc	OVERCLAIM	spu_set_voice_bitmask_ca_cb	calls spu_SetVoiceBitmask with 0xca,0xcb; noise not visible
+SLUS	8003875c	VERIFIED	-	RotTransPers4, packet code 0x2c, gs_AddPrimToOT
+SLUS	8004c480	VERIFIED	-	CdInit loop, thread table clear, thread_Open main loop
+SLUS	8004c608	VERIFIED	-	only calls cd_BuildMsfTable
+SLUS	8004c728	OVERCLAIM	cd_init_state4_set_state5	zeroes retry, loops CdReadCallback(2,..), sets g_cd_init_state=5; no read start shown
+SLUS	8004d8cc	VERIFIED	-	s_mcard_msg_load_menu, mcard_LoadCheckAndRead, returns g_mcard_read_ok flag
+SLUS	8004dafc	VERIFIED	-	mcard_MsgWaitButton(no_card msg), returns 0
+SLUS	8004e4a8	VERIFIED	-	polls driver, maps result to no_card/error msg or mcard_FormatPrompt
+SLUS	8004ffac	OVERCLAIM	mcard_test_four_events	only calls biosB0_TestEvent on 4 handles; clearing not shown
+SLUS	80050460	VERIFIED	-	g_cd_vol_fade_cur/step toward g_cd_vol_fade_dir, snd_SetSerialVolume
+SLUS	8006a238	VERIFIED	-	updates buf_clear_rect y/h from g_gpu_clear_rects, forces odd y
+SLUS	8006a64c	VERIFIED	-	zeroes rumble, pad_InitDirect, pad_StartCom, zeroes prev/held/press/release
+SLUS	8006ac50	VERIFIED	-	stores two values to rumble small/large motor buffers
+SLUS	8006ac80	VERIFIED	-	copies 12 bytes from tbl_pad_cfg_reset to g_pad_button_config, sets rumble enable
+SLUS	8006cfc8	VERIFIED	-	g_game_paused, start bit 0x800, game_EnterPause/ExitPause, QuitToTitle
+SLUS	80070c18	OVERCLAIM	spu_malloc_fixed_block_or_halt	calls spu_MallocWithStart(0x53800,0x25800), sys_IdleForever(0x321) if mismatch; no cd load
+SLUS	80074330	VERIFIED	-	g_team_mode_flag=1, clears versus table, state loop
+SLUS	80075f68	VERIFIED	-	g_after_fight_flag, closes threads, thread_Open next or ranking
+SLUS	80078990	OVERCLAIM	option_update_action_list_unlock_flags	sets g_option_action_* and unlock flags; draw is via unnamed func_0x801ea1e0
+SLUS	80079008	OVERCLAIM	option_call_801ea1e0_four_rows	builds four entries from tbl_option_char_action_limit, calls unnamed func_0x801ea1e0
+SLUS	80079f64	VERIFIED	-	loops g_char_select_slot_count, gs_SortSprite with tbl_sel_portrait_sprites
+MOVIE	80100f38	VERIFIED	-	LoadImage next slice, slice idx++, flips g_movie draw page
+MOVIE	8010318c	VERIFIED	-	writes tag 2, stores gpu_PackTexWindow result
+MOVIE	80109ba8	OVERCLAIM	cd_read_advance_sector_finish	advances ptr/lba, decrements sectors, restores callbacks; no DMA op visible
+MOVIE	8010b59c	OVERCLAIM	call_fnptr_then_pad_set_act_data	calls function pointer then pad_SetActData
+MOVIE	8010b930	VERIFIED	-	returns g_pad_vsync_flag and zeroes it
+MOVIE	8010c818	OVERCLAIM	pad_set_cmd_46_one_byte	stores 0x46 + one data byte; query/act not shown
+MOVIE	8010c858	OVERCLAIM	pad_set_cmd_4b_no_data	stores 0x4b, len 0; query not shown
+MOVIE	8010d4c4	VERIFIED	-	hw timer2 count compared to timeout limit
+OV00	800963f4	VERIFIED	-	quadratic step ((a*t+b)*t>>10) over joint-flag table channels
+OV00	8009bd74	VERIFIED	-	fills motion pointer tables from param array
+OV00	8009d544	OVERCLAIM	motion_advance_pos_check_limit	accumulates position by speed, compares to limit; no stream end test
+OV00	8009d8e4	VERIFIED	-	updates g_p1 pos_x/pos_z from velocity via sin/cos
+OV00	8009fca0	VERIFIED	-	copies tbl_posture_data entries into per-player tables
+OV00	800a0624	VERIFIED	-	bit-packs g_p1 pos/facing words into buffer record
+OV00	800a14e8	OVERCLAIM	fighter_pose_and_draw_parts	calls model_UpdateFighterPose and DrawFighterParts plus unnamed GTE funcs; matrices not shown
+OV00	800a5070	VERIFIED	-	g_fight_setup_state 1 runs init then =2; 2 clears and =0
+OV00	800a5508	VERIFIED	-	infinite loop with camera, fighter updates, OT clear
+OV00	800a5884	VERIFIED	-	calls fighter_UpdateTransform, SpawnHitEffect, UnpackStateSnapshot per player
+OV00	800a5ce0	OVERCLAIM	copy_player_state_to_prev_arrays	copies fields to prev arrays; mirror logic not shown
+OV00	800af064	VERIFIED	-	writes 0xb0 per g_p1_03_round_wins, 0xc0 for remainder of 5
+OV00	800aff20	VERIFIED	-	ClearPlayerSlotPtrs then loops game_UpdateRoundOutcome
+OV00	800b14e4	VERIFIED	-	retargets g_cam_target_facing, math_ApproachAngle on g_cam_yaw
+OV00	800b2854	OVERCLAIM	cam_random_orbit_follow_update	random angle via table row; mode 3 not shown
+OV00	800b2c10	OVERCLAIM	cam_random_side_orbit_update	random orbit angle; mode 1 not shown
+OV00	800b3710	OVERCLAIM	cam_fighter_midpoint_follow	averages two fighter positions with y floor; mode 7 not shown
+OV00	800b429c	VERIFIED	-	eases both fighters smoothed pos, averages center
+OV00	800b55ec	OVERCLAIM	cam_idle_timer_ease_shake	600-frame timer easing and shake table; intro not shown
+OV00	800b7dbc	VERIFIED	-	calls camscr_SetTargetTrack and SetAngleTrack, mode flag=0
+OV00	800b87e0	VERIFIED	-	advances script ptr only if all camscr track active flags 0
+OV00	800b892c	VERIFIED	-	g_camscr_script_enable=0
+OV00	800b8a20	VERIFIED	-	calls camscr_RunTrackInterpreter with target globals
+OV00	800b9094	VERIFIED	-	adds key delta and accumulating velocity to xyz per frame
+OV00	800b976c	VERIFIED	-	sin/cos yaw/pitch offset times key radius subtracted from pos
+OV00	800ba1b4	VERIFIED	-	loop dispatching opcodes 0-6,0x10,0x20
+OV00	800bab28	VERIFIED	-	reads selector, calls camscr_SelectFacingByMode, ptr+=8
+OV00	800bab6c	VERIFIED	-	switch 0-5 picks fighter, clears pitch/roll
+OV00	800bad38	VERIFIED	-	loop dispatching distance track opcodes
+OV00	800bafc0	VERIFIED	-	g_cam_follow_dist linear interpolation over frame count
+OV00	800c12e0	VERIFIED	-	writes _g_life_max_p1/p2 from g_handicap_p1/p2 table
+OV00	800c6a0c	VERIFIED	-	g_game_mode==5 and g_survival_win_count>9 or time sets flag 4
+OV00	800c6b44	OVERCLAIM	unlock_check_counter_or_roster_set_flag10	table word >99 or time, plus roster page branch; play count not shown
+OV00	800c6c24	OVERCLAIM	unlock_check_equal_bytes_set_flag40	compares two table bytes; costume collection not shown
+OV00	800c6df8	VERIFIED	-	per-frame loop over both players with AI params
+OV00	800c984c	VERIFIED	-	scans input ring buffer, sets g_cpu_action_id
+OV00	800d0160	VERIFIED	-	countdown then ai_LookupActionByOpponentMove at expiry
+OV00	800d4d0c	OVERCLAIM	fight_apply_queued_move_resolve_clash	prev_move queue and fight_ResolveMoveClash; idle state not shown
+OV00	800d9ae0	VERIFIED	-	move_GetEntryPtr(...)+4 byte returned
+OV00	800def44	OVERCLAIM	fx_spawn_particle_with_budget_check	counts active slots then fx_AddParticleSlot; ground dust not shown
+OV00	800df538	VERIFIED	-	switch on effect type calling init/step/draw
+OV00	800e2414	VERIFIED	-	DrawScrollLayers, DrawFloorTiles, frame counters++
+OV00	800e2e18	VERIFIED	-	timer=0, scene_state=1, stage_LoadCameraAndLights
+OV02	8009f29c	OVERCLAIM	opt_draw_black_rect_two_hints	black rect plus two opt_DrawButtonHint; footer/idle not shown
+OV02	800a0488	OVERCLAIM	mc_load_rect_512x480_clear_state	rect 512x480 call, g_memcard_state=0; upload not shown
+OV04	801e9214	VERIFIED	-	dbgpad globals, submits packets when enabled
+OV04	801e9858	VERIFIED	-	counters to decimal digits, dbgpad_DrawSmallString
+SLUS	800136dc	VERIFIED	-	calls pad_ReadClearVsyncFlag_impl
+SLUS	80013744	VERIFIED	-	compares pad info byte +0xe8 to 8
+SLUS	80014188	VERIFIED	-	indexes fn table by pad_state_fn_index, abort on negative
+SLUS	80014dac	VERIFIED	-	stores 0x46 and one data byte
+SLUS	80014e0c	OVERCLAIM	pad_sio_exchange_byte_fffffffe	only calls pad_SioExchangeByte(0xfffffffe); abort not shown
+SLUS	800179a4	VERIFIED	-	walks text stream, AddPrim per char, colour codes, newline
+SLUS	8001ab48	VERIFIED	-	drains gpu queue when DMA idle, drawsync callback
+SLUS	8001e4ec	VERIFIED	-	sin table lookup with phase offset, 4096 per turn
+SLUS	800246a4	OVERCLAIM	cd_dma_done_is_zero	returns cd_DmaDone()==0; no sector get
+SLUS	800289ac	OVERCLAIM	snd_seq_set_voice_volume_read_delta	calls snd_VmSetVoiceVolume and delta read; note off not shown
+SLUS	80028fec	VERIFIED	-	writes field 0x18, increments 0x1e, reads delta time
+SLUS	8002d50c	VERIFIED	-	copies attr record into vab tone table when open flag set
+SLUS	800341e4	OVERCLAIM	spu_dma_mode_flag_ne_1	returns flag != 1; busy not shown
+SLUS	80034d68	VERIFIED	-	note/fine to pitch, clamp 0x3fff
+SLUS	8004c77c	VERIFIED	-	cd_ReadFinish compare, retry counter, state switch
+SLUS	8004d4bc	VERIFIED	-	mcard_DriverCreate(&g_mcard_driver), clears open flag
+SLUS	8004e618	OVERCLAIM	pad_classify_press_mask_f0_or_800	returns 1 if press&0xf0, 2 if 0x800; confirm not shown
+SLUS	8004f468	VERIFIED	-	sprintf of device string with port, stores port*16+slot
+SLUS	80050cf0	VERIFIED	-	state machine with CdReadCallback, cd_ReadFinish, retry
+SLUS	800693ac	VERIFIED	-	ResetGraph, SetDefDrawEnv, OpenEvent
+SLUS	8006a970	VERIFIED	-	loops 12 entries over g_pad_button_config
+SLUS	8006aa50	VERIFIED	-	PadSetAct with small/large motor buffers
+SLUS	8006b394	VERIFIED	-	SetTile/SetDrawMode on fade tile prims
+SLUS	8006f088	VERIFIED	-	stores param to sfx queue, count=in_v0+1
+SLUS	80073918	VERIFIED	-	zeroes continue count and play time
+SLUS	80073964	VERIFIED	-	result timer countdown, task teardown, thread open
+SLUS	80075808	OVERCLAIM	close_threads_then_name_entry	closes threads, ranking_NameEntryLoop; ModeC not shown
+SLUS	80079128	VERIFIED	-	sets g_option_stage_type_new when values differ, resets AI ctx
+SLUS	8007a0f4	VERIFIED	-	pad dir changes cursor index, sound_PlaySfx
+SLUS	8007de20	VERIFIED	-	gpu_BuildImageBlockCmd + AddPrim over repeated spans
+SLUS	8007e5d0	VERIFIED	-	fx_WipeScreenQuads with tbl_vs_wipe_color index clamped
+MOVIE	80100d84	VERIFIED	-	20-entry pointer array stride from buf_movie_str_frames, ring a/b ptrs, 0x140/0x1e0 widths
+MOVIE	801015dc	VERIFIED	-	cur&(cur^prev) pressed, prev&~cur released
+MOVIE	80104250	VERIFIED	-	calls gpu_QueueCmdCopy with 0 third arg
+MOVIE	80107928	VERIFIED	-	stores g_st_ring_base/size, calls st_ClearRing
+MOVIE	80107a04	OVERCLAIM	deliver_event_f0000003_40	only biosB0_DeliverEvent(0xf0000003,0x40); callback/ready not shown
+MOVIE	80107fc0	OVERCLAIM	write_mix_regs_return_one	calls cd_WriteMixRegs returns 1; CdMix API not shown
+MOVIE	8010a5b8	VERIFIED	-	stores 3 args to g_st_mask_mode/enable/frame_count_max
+MOVIE	8010ba64	VERIFIED	-	sets g_pad_step_idx/cur_port, pad_StartTransfer, g_pad_sio_xfer_fn(0xffff)
+MOVIE	8010c7f8	OVERCLAIM	set_cmd_byte_4c_one_data	writes 0x4c plus one data byte; QueryMode not shown
+OV00	8009e01c	OVERCLAIM	fighter_angles_from_pos_diffs	func_0x80023b3c on pos diffs from head/opp pos globals; opponent angle meaning inferred
+OV00	800a1a84	VERIFIED	-	zeroes params by motion id, calls ComputeSwayDirection/StepSwayPhysics/InterpSecondaryAnim, g_fighter_sway_param_a
+OV00	800a2e14	VERIFIED	-	picks ids by g_p1_2d_state/char/move, calls LoadReactionTableA/B/C
+OV00	800a3230	OVERCLAIM	load_byte_pair_table_by_id	clears 15 byte pairs then fills from 0xff-terminated table; reaction not shown
+OV00	800a40b4	VERIFIED	-	tbl_head_track_origin_*, g_fighter_head_pos, angle diffs &0xfff stored
+OV00	800aacac	VERIFIED	-	g_bone_rot_table_flag negates x, gte_RotateVec3_2 on short triple
+OV00	800aad88	VERIFIED	-	two vectors per entry via 2 gte_RotateVec3_2, flag negation
+OV00	800aaf10	OVERCLAIM	load_rot_vec_table_0x12_flip_x	same pattern with table index 0x12; hand not shown
+OV00	800ab73c	VERIFIED	-	g_bone_translation_x/y globals, gte_SetTransIdentity_2 with offsets
+OV00	800acf24	VERIFIED	-	infinite loop calling hud_* fns, gpu_LinkOTPrim, OT submit
+OV00	800b15cc	VERIFIED	-	cam_CalcFollowDistanceByHeightGap, clamp 12000, math_ApproachValue on g_cam_follow_dist
+OV00	800b2020	VERIFIED	-	g_cam_default_follow_flag, follow dist/yaw/pitch approach
+OV00	800b4d50	OVERCLAIM	cam_track_player_pos_clamped_2	clamps center x +-5000 z +-0xdac from g_p1 pos; A/fighter tracking not shown
+OV00	800b7d6c	OVERCLAIM	script_read_byte_call_set_dist_track	reads script byte, calls camscr_SetDistTrack; opcode not visible
+OV00	800b84b4	VERIFIED	-	sets target_track globals, loads _ptr_camscr_target_track from *_ptr_camscr_script
+OV00	800b87a8	VERIFIED	-	writes g_camscr_mode_flag from script stream, ptr += 8
+OV00	800b98e0	OVERCLAIM	camscr_key_spherical_offset_radius_step	sin/cos offset from pitch/yaw, radius += delta per frame; orbit not shown
+OV00	800bae68	VERIFIED	-	g_cam_follow_dist = stream value - 4000 + base
+OV00	800bb56c	VERIFIED	-	math_ApproachValue on g_smooth_fighter_x/y/z_p1 for 2 players
+OV00	800bb86c	OVERCLAIM	set_flag_if_yaw_delta_over_0x800	g_main_loop_extra_flag = 0x800 < ((yaw-(facing-0x400))&0xfff); side not shown
+OV00	800be14c	VERIFIED	-	writes g_fighter_knock_vel_x/y/z_tbl from tables times sin/cos
+OV00	800be71c	OVERCLAIM	fragment_store_knock_vel_tbl_from_regs	orphan tail with in_v0/in_v1/in_lo writing knock_vel tables; throw not shown
+OV00	800c1aac	OVERCLAIM	set_round_globals_wait_frames_state1	sets g_round_* globals, frame waits, state=1; intro camera/text not shown
+OV00	800c1e84	VERIFIED	-	returns unless g_ko_flag==1, increments g_p*_03_round_wins, state 2
+OV00	800c4910	VERIFIED	-	copies 0x19 words g_team_battle_buf_a to g_team_battle_table_a
+OV00	800c5eb0	VERIFIED	-	clears 14 g_timeattack_stage_* entries plus ref/count/start
+OV00	800c63c8	OVERCLAIM	build_sprite_packet_from_byte_table_submit	builds local primitive submits via func_0x8001babc; fighter icon not shown
+OV00	800c68f4	OVERCLAIM	set_unlock_bit0_on_mode2_end_or_time	tests g_opt_unlock_flags_a bit0, g_game_mode==2 with g_fight_end_flag, time>0x2a30; arcade not shown
+OV00	800ca094	OVERCLAIM	choose_script_by_fighter_byte_run	branches on fighter+0x3b/0x3d bytes, cpu_RunMoveScript(7..10) then ai_ScriptDequeueMove; hit stun not shown
+OV00	800ca9f0	VERIFIED	-	uses g_opponent_index, cpu_ExecScriptOpcodes, fallback on g_cpu_action_id==-1
+OV00	800d0100	VERIFIED	-	scans 3-byte table for byte at fighter+0x2a, stores byte1 to g_cpu_action_id
+OV00	800d4200	OVERCLAIM	init_once_clear_state_history_reset_idle	g_round_init_done guard, clears g_p*/state_history, fighter_ResetToIdleMove; health bars/counters not shown
+OV00	800def64	VERIFIED	-	counts active g_fx_particle_slot_active, fx_AddParticleSlot, g_fx_dust_timer_tbl
+OV00	800df228	VERIFIED	-	finds free of 4 slots, active=0x20, stores pos/vel/type
+OV00	800df6a4	OVERCLAIM	init_effect_records_by_kind	fills record loop from tbl_effect_piece_set by param_1[1]; spread angles/random phase not shown
+OV00	800e3d64	OVERCLAIM	swap_light_globals_set_timer_0x60	saves/restores light dir/colour globals, light_SetDirection, _g_camera_fade_timer=0x60; flash not shown
+OV02	80096a30	VERIFIED	-	menu_UpdateCursor, opt_SelectVoiceBank, opt_PlayVoiceSample on 0x40, stop on 0x80
+OV02	8009ed38	VERIFIED	-	draws s_button_hint_a/b/c via func_0x80082e64 and table text by param_1
+SLUS	80014480	VERIFIED	-	spins on status halfword at pad_sio_data_ptr+4 bit2
+SLUS	80014d58	OVERCLAIM	set_cmd_byte_43_one_data	writes 0x43 plus one data byte; enter-config not shown
+SLUS	80014dec	VERIFIED	-	writes 0x4b no data
+SLUS	80019fa0	VERIFIED	-	returns *gpu_gp1_status_reg_ptr
+SLUS	800262e4	OVERCLAIM	strncmp12_equal	biosA0_strncmp(a,b,0xc)==0; cd/name not shown
+SLUS	80028b4c	OVERCLAIM	set_prog_volume_voice_volume_read_delta	calls snd_SetProgVolume, snd_VmSetVoiceVolume, snd_SeqReadDeltaTime; control change not shown
+SLUS	8002a3ac	VERIFIED	-	variable-length 7-bit continuation read from stream ptr
+SLUS	8002ca4c	VERIFIED	-	loops g_snd_voice_count voices not in spu_voice_reserved_mask, SpuSetVoiceAttr, snd_VoiceKeyOff
+SLUS	800305dc	VERIFIED	-	recomputes snd_spu_voice_vol_l/r for voices matching seq/prog/note
+SLUS	80030d6c	OVERCLAIM	call_vab_open_head_common_flag1	calls snd_VabOpenHeadCommon(p1,p2,1,p3); no fixed address visible
+SLUS	80030dcc	VERIFIED	-	checks magic 0x564142, links tbl_snd_vab_* ptrs, spu_Malloc
+SLUS	8004c53c	OVERCLAIM	memset_set_cd_state1_jump_boot_vector	memset, g_cd_init_state=1, indirect call via PTR_cd_InitStateMachineFromReset
+SLUS	8004c670	OVERCLAIM	cd_init_state_switch_fragment	switch on g_cd_init_state with cd calls; FromQuery not shown
+SLUS	8004d330	VERIFIED	-	zeroes wake_arg in 16 tbl_thread_state slots
+SLUS	8004d374	VERIFIED	-	biosB0_ChangeThread(tbl_thread_stack_ptr[in_v0])
+SLUS	8004e964	VERIFIED	-	g_mcard_msg_* globals, text_DrawString per byte until 0xff, y+=0x18
+SLUS	8004eddc	VERIFIED	-	S and C header bytes, title strncpy 0x40, three 128-byte copies from g_mcard_hdr_ptr_a/b/c
+SLUS	8004f7d8	VERIFIED	-	biosB0_FormatDevice then mcard_WaitAnyEvent, returns 0/-1/-2
+SLUS	8004fe08	VERIFIED	-	biosB0_FileOpen, FileSeek 4, FileWrite 0x40 bytes
+SLUS	80050688	OVERCLAIM	cd_state_switch_issue_control_commands	switch on g_cd_init_state with CdControlB codes and g_cd_audio_* globals; audio semantics not shown
+SLUS	8006bc84	VERIFIED	-	maps g_title_menu_mode to g_game_mode, copies g_player0_header to g_player1_header
+SLUS	8006d39c	VERIFIED	-	thread_ClearSuspended slots 3,6,5,4,7, g_game_paused=0
+SLUS	8006d3e4	VERIFIED	-	copies tbl_menu_default_* to g_time_attack_best/g_survival_score_rank/g_kumite_record
+SLUS	8006d8e0	OVERCLAIM	pick_index_by_char_and_opponent	switch on g_player_char_id sets param_4 by opponent char and g_voice_set_flags; no voice load visible
+SLUS	8006ec08	VERIFIED	-	iterates buf_sfx_queue_*, snd_PlayEffect, delayed snd_PlayEffectVol via slot timers
+SLUS	8006f0b4	OVERCLAIM	select_sfx_entry_by_bank_and_id	branches on param_2&0xff00 and tbl_snd_vab_ids to pick table ptrs; no voice start visible
+SLUS	80070440	VERIFIED	-	cd_FadeAndReadFile to 0x801f3e00, SsSeqOpen, snd_SeqSetVolume0, g_bgm_track_current
+SLUS	800708b8	VERIFIED	-	tbl_sfx_a..e lookup, snd_KeyOnVoice with g_sfx_master_volume
+SLUS	80072c28	OVERCLAIM	set_fade_rgb_ff0000_reset_prev_chars	sets g_fade_color_r/g/b=ff/0/0 and four g_prev_*=0xff
+SLUS	80072e00	VERIFIED	-	g_prefight_flag, g_match_start_flag, thread_Open(0x800bff2c,3), cd_LoadIfNotResident
+SLUS	800746ec	OVERCLAIM	post_match_record_close_threads_run_result	stat_RecordMatchup, thread_Close x9, vs_RunResultScreen; team not shown
+SLUS	8007493c	VERIFIED	-	increments g_versus_stats_table and g_versus_matchup_wins by char slot index
+SLUS	800782fc	VERIFIED	-	fills buf_option_sel_b_*, gs_SortFastSprite x2
+SLUS	80078710	VERIFIED	-	g_game_paused=1, thread_SetSuspended 6 slots, g_option_pause_flag=1, option_DrawMenuRows
+SLUS	800799d0	OVERCLAIM	init_two_player_char_slots_from_globals	sets g_player_char_id/costume from g_sel_char_slots/g_char_costume_p1 for 2 players; cursor positions not shown
+SLUS	8007ad00	VERIFIED	-	copies g_player_char_id/costume back into g_sel_char_slots/g_char_costume_p1
+SLUS	8007d64c	VERIFIED	-	switch on param_1 state returns next state, vs_DrawReportScreen, vs_DrawResultTable
+SLUS	8007f458	VERIFIED	-	switch on g_game_mode calling report_DrawTournament/TimeAttack/Survival/Kumite, report_StartWipeTeam
+SLUS	80082e64	VERIFIED	-	per-char gpu_SortSpriteFT4 with tbl_font_glyph_table, spacing by size param_2
+MOVIE	8010a0c0	VERIFIED	-	swaps g_cd_read_callback with param, returns old
+MOVIE	8010a0d4	OVERCLAIM	cd_swap_read_flags	swaps g_cd_read_flags; no DMA shown
+MOVIE	8010b51c	VERIFIED	-	indirect call via in_v0 then calls pad_SetActAlign
+MOVIE	8010c8d4	OVERCLAIM	pad_xfer_first_byte_reply_len	sio_XferByte, low nibble*2 into g_pad_reply_count; no id use shown
+MOVIE	8010d048	VERIFIED	-	stores pad_PollStep and pad_IsIdle into two fn pointer globals
+MOVIE	8010d470	OVERCLAIM	pad_check_fields_e6_46	returns 1 if short+0xe6==0 or byte+0x46 != -1; idle not shown
+OV00	80095f40	VERIFIED	-	calls motion_AdvanceFrameFixed, fighter_EndMotion, per-frame pose loads
+OV00	800961a4	VERIFIED	-	adds speed*(sum)/1000 to 0x1000-scaled counter, steps streams
+OV00	80097428	VERIFIED	-	reads stream words into tbl_motion_angle_offset slots with >>4
+OV00	800a1890	VERIFIED	-	g_fighter_sway_effect_tbl gate, calls fighter_UpdateSwayParams
+OV00	800a2148	VERIFIED	-	zeroes g_fighter_sway_param_a/b and sway state fields
+OV00	800a32d8	OVERCLAIM	fighter_fill_reaction_flags	clears tbl_reaction_enable_flags then fills byte pairs from 0xff-terminated list; B not shown
+OV00	800a678c	VERIFIED	-	zeroes per-part fields, sets g_part_spring_reset_flag
+OV00	800a6a2c	VERIFIED	-	clears flag bytes for 4 parts, sets g_fighter_p1_parts_disabled_flag
+OV00	800ad164	OVERCLAIM	hud_map_substate_to_message	switch on g_game_substate sets g_hud_message_state; no queue
+OV00	800af72c	OVERCLAIM	hud_queue_life_gauge_prims	clamps counter up to life_max, scales by 180/200, writes two prim entries; no trail decay
+OV00	800b1f38	VERIFIED	-	scans table by g_p1_2a_move_id, sets g_cam_mode_state and timer
+OV00	800b4068	VERIFIED	-	g_cam_winner_index, yaw approach around target fighter
+OV00	800b52c8	VERIFIED	-	polar offset from fighter pos, yaw = target_facing + fighter facing
+OV00	800b7750	VERIFIED	-	zeroes g_camscr_*_track_active flags, sets script_enable 1
+OV00	800b80b8	VERIFIED	-	id<0x80 picks angle track table else alt, sets active flags
+OV00	800b8228	OVERCLAIM	camscr_skip_start_angle_track	adds 4 to script ptr, calls camscr_StartAngleTrackFromPtr, adds 4; opcode 0x12 not shown
+OV00	800b8724	VERIFIED	-	sets alt_ang_track_active, loads ptr from script
+OV00	800b9ebc	VERIFIED	-	sets g_camscr_key_smooth=1, reads two values from key ptr
+OV00	800ba3b4	VERIFIED	-	adds pitch/yaw/roll deltas per frame, advances at count
+OV00	800ba9ec	VERIFIED	-	divides target-current by remaining frames
+OV00	800bc188	OVERCLAIM	fighter_get_point_xyz	writes fighter world pos by index or smoothed pos; camera use not shown
+OV00	800bc9f0	VERIFIED	-	adds offset x/z to positions and tbl_stage_wrap_shift entries
+OV00	800c3f94	VERIFIED	-	compares g_prev_char/costume to current, reloads on change
+OV00	800c6a90	VERIFIED	-	g_kumite_menu_step, sets g_opt_unlock_flags_a bit 8
+OV00	800ca570	VERIFIED	-	sets side byte at +0x3a from buffered input, g_cpu_facing_flag
+OV00	800d0328	VERIFIED	-	scans 3-byte table for opponent move id, stores g_cpu_action_id
+OV00	800d1b88	VERIFIED	-	random roll then 4-entry table, math_RandomMod(3) pick
+OV00	800d3208	OVERCLAIM	ai_set_timer_by_state	sets timer from math_RandomMod plus base or 7-difficulty; attack not shown
+OV00	800d5bcc	VERIFIED	-	acts on g_p1_2d_state==7, speed 14000/gap
+OV00	800d66c8	OVERCLAIM	fight_select_reaction_moves	branches on states, calls fight_ChooseCounterMove, ai_SelectReactionMove; no input read
+OV00	800d6e4c	VERIFIED	-	g_fighter_counter_state=3, move slot from per-fighter table
+OV00	800d8898	VERIFIED	-	adds damage to life fields, sets g_damage_state
+OV00	800daf64	VERIFIED	-	angle diff vs g_cam_facing_angle compared to 0x800
+OV00	800dd668	VERIFIED	-	walks effect id list, fx_FindFreeSlot, fills slot fields
+OV00	800e2c84	OVERCLAIM	init_three_double_buffer_structs	sets size 1 and buffer ptr in 3 pairs, calls func 8001d04c; ordering table not shown
+OV02	800968f0	OVERCLAIM	opt_update_cd_music_volume	menu_UpdateCursor then writes g_cd_music_volume; BGM not shown
+OV02	8009fe20	OVERCLAIM	mc_state_end_pump_pick_next	clears pump busy, calls unnamed fn, sets g_memcard_state by g_memcard_file_open; close not shown
+OV02	8009fe94	VERIFIED	-	loop calls mc_SectorPumpStep, mc_DecodeBlockToImage, pad bit 0x10 abort
+OV04	801e9190	VERIFIED	-	dbgpad_ClearHistory, zeroes _g_dbgpad_* counters
+OV04	801ea614	VERIFIED	-	writes tbl_dbgpad_font_u/v and glyph count, tpage
+SLUS	800136fc	VERIFIED	-	only calls pad_StartComImpl
+SLUS	80014070	VERIFIED	-	pad_sio_data_ptr writes, pad_cur_port_index select, calls send fn
+SLUS	80014d8c	VERIFIED	-	stores 0x4c at +0x36 and one data byte at +0x24
+SLUS	80014e2c	VERIFIED	-	byte+0x36 or default 0x42 to pad_SioExchangeByte
+SLUS	80015164	OVERCLAIM	pad_finish_port_start_next	pad_ProcessReply or pad_HandleTimeout then pad_StartPortComm next port; task not shown
+SLUS	80016fe0	VERIFIED	-	calls krn_pad_patch_stop_fn
+SLUS	80024070	VERIFIED	-	biosB0_DeliverEvent(0xf0000003,0x20)
+SLUS	80024240	OVERCLAIM	cd_call_sync_step	only calls cd_SyncStep; reset not shown
+SLUS	80024280	VERIFIED	-	swaps cd_sync_callback with param, returns old
+SLUS	800284dc	OVERCLAIM	snd_seq_read_byte_delta	reads byte from stream ptr, stores at +0x26, snd_SeqReadDeltaTime; no close
+SLUS	8002855c	VERIFIED	-	reads delta time via snd_SeqReadDeltaTime, per-seq state dispatch
+SLUS	80028cec	VERIFIED	-	calls snd_SetReverbVolume then reads delta time
+SLUS	8002c764	VERIFIED	-	calls snd_VmSetSeqVolume if +0x98==1 else stores L/R
+SLUS	8002cc9c	VERIFIED	-	copies bytes from g_snd_cur_vag_table record to buffer
+SLUS	8002e0bc	VERIFIED	-	g_snd_keyon_* set, snd_VmSelectTones, snd_FindFreeVoice
+SLUS	8002e8cc	VERIFIED	-	scans voices for idle or lowest f_1a, increments f_2
+SLUS	80030454	VERIFIED	-	loops voices with f_10==param, calls snd_VoiceKeyOff
+SLUS	800341bc	OVERCLAIM	spu_set_dma_mode_flag	spu_dma_mode_flag = (param != 1); busy not shown
+SLUS	8004e848	VERIFIED	-	loop of 0x78 iterations thread_Sleep(1), text_DrawString
+SLUS	8004f9a8	VERIFIED	-	biosB0_FileOpen create, FileSeek, FileWrite of 0x80-byte chunks
+SLUS	800501a0	VERIFIED	-	biosA0_strncmp over linked list up to 15 entries
+SLUS	8006c500	OVERCLAIM	game_update_pause_exit_to_title	game_UpdatePause, stage_UpdateAnimatedTextures, at scene 5 thread_Open(title_ModeLoop); mode 2 not compared
+SLUS	8006ca60	OVERCLAIM	game_update_pause_save_exit	same plus mcard_RunSaveMenuChecked; mode 9 not compared
+SLUS	8006cb8c	OVERCLAIM	file_load_entry_f8	cd_FadeAndReadFile(0xf8,0x80105000); common not shown
+SLUS	8006d320	VERIFIED	-	thread_SetSuspended x5, pad_SetRumble 0, g_game_paused=1
+SLUS	8006ddd8	VERIFIED	-	closes threads, opens title_ModeLoop, g_menu_state=3
+SLUS	8006e110	VERIFIED	-	clears battle flags, g_game_mode_type=4
+SLUS	8006fa44	OVERCLAIM	snd_select_sfx_table	branches on param_2 high byte and tbl_snd_vab_ids to pick table ptr; truncated, no voice start visible
+SLUS	80070ff0	VERIFIED	-	g_title_logo_* sprites via gs_SortSprite, button ends
+SLUS	800727b0	VERIFIED	-	g_vs_mode_flag=0, loop switch on g_battle_scene_active
+SLUS	800741cc	VERIFIED	-	sets g_player_control_mode from pad bits and g_opt_player_control
+SLUS	800745a0	OVERCLAIM	game_reset_close_threads_open	resets flags, closes 9 threads, opens ranking_ScreenMain or fight entry; sets g_return_title_flag
+SLUS	800750a4	OVERCLAIM	game_init_loop_dispatch_state	init many globals then loops on g_battle_scene_active; B not shown
+SLUS	80075284	OVERCLAIM	game_fight_end_update_scores	updates g_total_score, win counts, scene state; B not shown
+SLUS	8007a3ec	VERIFIED	-	g_player_costume +-1 with sound_PlaySfx, wraps by g_costume_count_by_char
+SLUS	8007a7a0	VERIFIED	-	pad press bits, sfx_QueueRequest, commits char/costume
+SLUS	8007c0f4	VERIFIED	-	vs_ComputeResultTotals, loops vs_ResultScreenStateMachine until button
+SLUS	80082aa8	VERIFIED	-	gpu_BuildImageBlockCmd with 0x2c0 width, links into OT head
+SLUS	80082b78	OVERCLAIM	gfx_sort_sprite_and_tile	gs_SortFastSprite and gs_SortTile at fixed rect; font not shown
+SLUS	80082d4c	VERIFIED	-	g_font_page_flag selects offset, two gs_SortSprite calls
+MOVIE	8010173c	OVERCLAIM	gpu_clear_480_square_black	ClearImage rect 0,0,0x1e0,0x1e0 color 0; no screen/display proof
+MOVIE	80103790	VERIFIED	-	e1000000 constant, 0x200 and 0x400 flag bits OR'd with param&0x9ff
+MOVIE	80107fe0	VERIFIED	-	calls cd_GetSectorDma returns ==0
+MOVIE	80108044	VERIFIED	-	calls cd_DataSyncWait
+MOVIE	8010c974	VERIFIED	-	g_pad_reply_count decrement, stores byte to reply buffer, sio_XferByte
+OV00	80096820	OVERCLAIM	motion_unpack_angle_words	reads packed uint words, shifts/masks to three values stored in tables; keyframe/blend with previous pose not visible
+OV00	8009c2d0	VERIFIED	-	builds pointer tables from param_2 using tbl_motion_pointers_a-d
+OV00	8009fdf4	OVERCLAIM	fighter_flip_and_step_deltas	negates table values when flag set, divides position diffs by short; no joint rotation proof (truncated)
+OV00	800aa930	VERIFIED	-	calls fighter_LoadBoneRotTable_A, SingleOrPair, C
+OV00	800aaba4	VERIFIED	-	reads tbl_reaction_enable_flags, gte_RotateVec3_2 into tbl_fighter_bone_rot and buf_bone_rot_table_c
+OV00	800ab190	VERIFIED	-	loops tbl_fighter_anim_init matching char_id and costume then copies fields
+OV00	800ab86c	VERIFIED	-	copies tbl_part_flags_by_move_a/b/c selected by move id
+OV00	800ad7f8	OVERCLAIM	hud_build_timer_digit_sprites	digits from g_round_timer and g_round_timer_setting /10 %10 into draw buffer; no score value used
+OV00	800aff58	VERIFIED	-	zeroes g_player_slot_ptr_tbl, buf_player_slot_ptrs_a/b, g_player_damage_tbl for 2 entries
+OV00	800b262c	OVERCLAIM	cam_update_random_orbit	random orbit angle and pitch row, follow distance approach; no mode 0 shown
+OV00	800b29d8	OVERCLAIM	cam_update_fixed_side_offset	orbit angle = facing+0x900/0x700; no mode 4 shown
+OV00	800b39a8	VERIFIED	-	uses g_ko_cam_state_counter, _g_cam_ko_state, _g_cam_ko_pos_*
+OV00	800b4c80	VERIFIED	-	g_camera_shake_index, shake table step, 0xffff terminator
+OV00	800b7704	VERIFIED	-	calls camscr_InitScriptState, camscr_ClearTrackFlags, camscr_RunScript
+OV00	800b8440	VERIFIED	-	sets g_camscr_pos_track_* and loads _ptr_camscr_pos_track from script ptr
+OV00	800b88f0	VERIFIED	-	g_camscr_script_enable=0, advances script ptr, sets g_main_loop_state from operand
+OV00	800b8960	VERIFIED	-	calls camscr_RunTrackInterpreter with g_camscr_pos_* globals
+OV00	800b919c	VERIFIED	-	key ptr frame count division, interpolates start to target xyz
+OV00	800b9ab4	VERIFIED	-	calls camscr_SelectFighterPoint, increments frame until count
+OV00	800bb504	VERIFIED	-	copies g_p1/p2 pos x,y,z into _g_smooth_fighter_*
+OV00	800bb7ac	VERIFIED	-	midpoint x,z of smoothed fighter positions, y from max with 0x7b7 floor
+OV00	800bba38	VERIFIED	-	distance from fighter spread and y difference, max of two
+OV00	800bbde4	VERIFIED	-	eye = target + sin/cos of yaw/pitch times distance, calls cam_SetLookAtMatrix
+OV00	800bc690	OVERCLAIM	cam_pass_eye_target_vectors	builds eye and target vectors and calls unnamed func_0x8001d31c; matrix not shown
+OV00	800bcc28	VERIFIED	-	g_stage_tile_id updated from yaw ranges
+OV00	800bdae8	VERIFIED	-	adds sin/cos table of facing angle times param_3 to g_p1 pos_x and pos_z
+OV00	800bfc0c	VERIFIED	-	sets g_recoil_vel_x/z from facing angle and table scale
+OV00	800c07c4	VERIFIED	-	g_continue_countdown decrement per 0x3c delay
+OV00	800c496c	OVERCLAIM	fight_pick_track_or_restore_volume	indexes byte table by g_clear_rect_index, calls unnamed func_0x80050324, or sets g_cd_music_volume; stage not shown
+OV00	800c4e34	VERIFIED	-	random modulo into g_p1_02_costume
+OV00	800c4fc4	VERIFIED	-	writes g_team_battle_results indexed by round wins
+OV00	800c5fac	VERIFIED	-	g_timeattack_stage_* subtraction with borrow, resets from g_play_time_*
+OV00	800c65fc	OVERCLAIM	cfg_update_costume_counts_roster_flags	increments byte counters and sets g_cfg_roster_page_a/b, g_title_bg_variant; unlock/secret not shown
+OV00	800d1cd0	VERIFIED	-	returns random byte <= threshold, false for zero
+OV00	800d3bfc	VERIFIED	-	copies tbl_ai_counter_hold, random compare against entry, opponent state 2
+OV00	800d9c8c	OVERCLAIM	move_get_entry_byte3	returns byte at offset 3 of move_GetEntryPtr result; type claim unproven
+OV00	800dc144	VERIFIED	-	sphere/capsule tests via hit_SphereSphereTest/hit_CapsuleSphereTest, hit_SetHitLevelFromPart
+OV00	800e25f4	OVERCLAIM	stage_build_scroll_layer_packets	computes scroll offsets from _g_cam_yaw_saved and fills packet fields by draw buffer idx; ordering table link not visible (truncated)
+OV02	800949d4	VERIFIED	-	switch on cursor dispatching opt_GameConfigMenu, opt_AudioConfigMenu, etc.
+OV02	8009527c	VERIFIED	-	g_cfg_audio_mode, g_cfg_music_volume, opt_UpdateBgmVolume/SeVolume calls
+OV02	80096934	VERIFIED	-	menu_UpdateCursor then sets g_sfx_master_volume
+OV02	80096e90	VERIFIED	-	Default branch resets values and writes g_cfg_audio_mode, volumes
+OV04	801e83dc	VERIFIED	-	g_orbit_fighter_index, _g_orbit_angle_a/b computed from 6000/-5000 targets
+OV04	801ea1e0	VERIFIED	-	buf_dbgpad_hexgrid packets, glyph u/v from value nibbles
+SLUS	8001394c	VERIFIED	-	pad_fn_get_info, returns count at +0xe9 or byte per 5-byte entry
+SLUS	80014dcc	VERIFIED	-	writes 0x47 to +0x36 and data byte
+SLUS	80014ed8	VERIFIED	-	calls fn pointer then pad_SioExchangeByte
+SLUS	80014fac	VERIFIED	-	buf_pad_reply_table bzero, pad callbacks, pad_InitVsyncCallbacks
+SLUS	800159f4	OVERCLAIM	pad_check_count_or_state_not_ff	returns 1 if +0xe6 count zero or +0x46 != 0xff; idle semantics not shown
+SLUS	80017cd0	VERIFIED	-	appends text to stream buffer, handles %d %x %X %c
+SLUS	800246e8	VERIFIED	-	calls CdDataSync
+SLUS	80027104	VERIFIED	-	stores new cd_data_callback returns old
+SLUS	80028d7c	OVERCLAIM	snd_seq_set_state_byte_read_delta	conditionally sets bytes at +0x1a/+0x1d/+0x1c, calls optional fn ptr, snd_SeqReadDeltaTime; track param not shown
+SLUS	800290cc	VERIFIED	-	resets +0x18/+0x19, 0x7f at +0x60 and 0x40 at +0x27, calls snd_ReverbOff and snd_ClearPitchBias
+SLUS	8002a33c	OVERCLAIM	snd_seq_store_channel_byte	stores param_3 into per-channel byte then snd_SeqReadDeltaTime; MIDI program change not shown
+SLUS	8002b34c	VERIFIED	-	decrements counter, snd_VmGetSeqVolume/snd_VmSetSeqVolume fade toward 0
+SLUS	8002e630	VERIFIED	-	matches voices by note/vab/program then snd_VoiceKeyOff
+SLUS	8002f4ac	VERIFIED	-	writes snd_spu_voice_vol_l/r and pitch, reverb and pitchmod masks
+SLUS	8004c618	VERIFIED	-	g_cd_init_state switch with CdControl, cd_ReadFinish
+SLUS	8004d128	VERIFIED	-	biosB0_CloseThread, ChangeThread, clears tbl_thread_state
+SLUS	8004d4f0	VERIFIED	-	mcard_CloseEvents, g_mcard_driver_open=0
+SLUS	8004db38	VERIFIED	-	mcard_MsgTimed(s_mcard_msg_error)
+SLUS	8004f4f4	VERIFIED	-	biosA0__card_info, card_load state machine with mcard_PollEvents
+SLUS	8004f754	OVERCLAIM	mcard_list_files_find_named	stores mcard_ListFiles result, calls mcard_FindFileInList; free block count not shown
+SLUS	8004fb94	VERIFIED	-	biosB0_FileOpen and biosB0_FileRead, pending flag
+SLUS	8004fff8	VERIFIED	-	biosB0_TestEvent on four events
+SLUS	80050218	VERIFIED	-	dispatches on g_cd_audio_state, cd_UpdateVolumeFade
+SLUS	8006a45c	VERIFIED	-	writes buf_clear_rect_b_y/h from g_gpu_clear_rects, rounds odd y up
+SLUS	8006a754	VERIFIED	-	press/release edge from held/prev, pad_MapButtons
+SLUS	8006b1f0	OVERCLAIM	gpu_add_gray_tile_full_rect	writes tile packet 0x200x0x1e0 gray rgb param_3, gs_SortTile; semi-transparency/fade not shown
+SLUS	8006bbf4	VERIFIED	-	sets g_menu_state, thread_Open(title_ModeLoop,2)
+SLUS	8006d688	VERIFIED	-	steps tbl_stage_anim_tex_frame counters, gpu_BuildImageBlockCmd and AddPrim
+SLUS	80070574	VERIFIED	-	sets g_cd_vol_* to 0x5f, cd_SetMode, snd_SetMonoOn
+SLUS	80070eb8	VERIFIED	-	player header copy, g_title_fight_flag, thread_Open fight task
+SLUS	8007260c	VERIFIED	-	cd_FadeAndReadFile, tim_UploadChain, g_title_bg_variant/g_title_bg_data
+SLUS	80072ff4	VERIFIED	-	g_battle_done_flag/g_fight_end_flag checks, advances g_battle_scene_active
+SLUS	80073ca0	VERIFIED	-	thread_SetSuspended on slots, sets g_game_paused
+SLUS	80075628	VERIFIED	-	initializes mode globals then loops on g_battle_scene_active
+SLUS	80075bb4	VERIFIED	-	clears buf_mode_loop_d_flags, calls game_StateTimeAttackEnd, loop on g_battle_scene_active
+SLUS	80075e40	VERIFIED	-	rank_ComputeRankIndex, thread_Close slots, survival_RunResultScreen
+SLUS	80078858	OVERCLAIM	option_open_task3_clear_pause_flag	thread_Open(0x800bff2c,3) and g_option_pause_flag=0; exit-to-fight not shown
+MOVIE	80101084	VERIFIED	-	calls movie_WaitFrameReady then DecDCTvlc and StFreeRing, toggles index at +8
+MOVIE	80107a2c	OVERCLAIM	bios_deliver_event_f0000003_40	body only calls DeliverEvent(0xf0000003,0x40); no CD or read callback shown
+OV00	80097d28	VERIFIED	-	end-of-frame sequence: UpdateFacingAngle, UpdateDistanceFlag, AdvanceTimedTable, decrements timer
+OV00	800a3380	VERIFIED	-	copies byte pairs from 0xff-terminated list into reaction table C
+OV00	800a3420	VERIFIED	-	returns 0/1 using g_head_track_enable and g_head_track_block_timer
+OV00	800a5924	OVERCLAIM	fighter_spawn_effect_outside_bounds	calls fx_SpawnEffectListAtPos only when outside arena bounds; no hit shown
+OV00	800a5ea8	OVERCLAIM	fighter_ramp_yaw_speed_by_motion	adjusts g_fighter_yaw_speed_tbl toward 0x1000 or 0 by motion ids; no blend shown
+OV00	800aae98	VERIFIED	-	dispatches on type byte 1 or 3 to LoadHandRotSingle/Pair
+OV00	800aafdc	OVERCLAIM	fighter_rotate_vec_pair_to_table	two gte_RotateVec3_2 calls with optional sign flip; no hand shown
+OV00	800b5030	VERIFIED	-	fighter pos plus offsets, math_Approach easing, shake table, cam_ApplyFollowEyeClamped
+OV00	800b6978	VERIFIED	-	smoothed fighter x/y+1000/z target, shake step, cam_ApplyFollowEye
+OV00	800b7ccc	VERIFIED	-	reads byte from script ptr, calls camscr_SetTargetTrack
+OV00	800b7f50	VERIFIED	-	id<0x80 sets pos track and resets state else alt track
+OV00	800b8330	VERIFIED	-	calls StartPosTrackFromPtr and StartTargetTrackFromPtr, mode_flag=1
+OV00	800b83a4	VERIFIED	-	calls pos, angle, dist track starters, mode_flag=2
+OV00	800b857c	VERIFIED	-	resets dist track state and loads pointer from script
+OV00	800b95e0	OVERCLAIM	camscr_key_interp_xyz_table	interpolates xyz via sine table over frame count; ease-out not shown
+OV00	800bb090	OVERCLAIM	camscr_dist_key_interp_table	0x1000 minus table value over frame count; ease-in not shown
+OV00	800bb3fc	VERIFIED	-	clears dist_track_active, sets script_running
+OV00	800bbb38	VERIFIED	-	spherical offset, clamps y at 0x640, cam_CalcPitchYawToward and cam_SetLookAtMatrix
+OV00	800bc720	VERIFIED	-	sets g_stage_tile_wrap_count=12, clears shifts
+OV00	800bcc08	VERIFIED	-	picks tile id by yaw quadrant, applies GTE shift
+OV00	800bce8c	VERIFIED	-	loop with frame wait, switch g_screen_mode, toggles g_task_toggle
+OV00	800bcf3c	VERIFIED	-	zeroes per-fighter arrays and task flags
+OV00	800bd01c	OVERCLAIM	update_recoil_both_fighters	only InitRecoilVelocity/StepRecoilDecay per fighter or zero recoil vel; no hit/move update
+OV00	800bddec	VERIFIED	-	compares table values, writes g_trade_priority_p1/p2 as 0/1/2
+OV00	800c0908	VERIFIED	-	switch on _g_fight_round_state calling round state functions
+OV00	800c2114	VERIFIED	-	g_fight_continue_prompt_flag and countdown timer
+OV00	800c47b0	OVERCLAIM	store_play_time_by_continue_count	stores time into array only if g_game_mode==3; no better-than check, no time attack shown
+OV00	800c7e04	OVERCLAIM	reset_round_flags_tail	uses round_reset_flag and round_state_reset_flag; duplicate/tail claim unverifiable
+OV00	800c7f9c	VERIFIED	-	calls UpdateFacingFlags(0,..) and (1,..+0x800)
+OV00	800c8c3c	VERIFIED	-	big switch on state byte calling cpu_RunMoveScript etc
+OV00	800cfc8c	VERIFIED	-	math_RandomMod roll, scans byte-pair table against threshold
+OV00	800d3ec8	VERIFIED	-	infinite loop switching on g_screen_mode
+OV00	800d80b0	VERIFIED	-	sets move ids id and id+1 for both fighters, calls fighter_AlignToOpponent
+OV00	800d82b4	OVERCLAIM	select_move_id_from_opponent_state	returns move id from table lookups; defender reaction not shown
+OV00	800d9bbc	VERIFIED	-	returns byte 3 of move_GetEntryPtr()
+OV00	800daeb0	VERIFIED	-	returns byte 0xc of entry
+OV00	800db1d0	OVERCLAIM	table_values_zero_or_ten	returns 1 when table values are 0 or 10; neutral/transition not shown
+OV00	800dbce4	VERIFIED	-	infinite loop calling fight_Init and fight_UpdateFrame
+OV00	800e0244	OVERCLAIM	init_sixteen_piece_array	loops 0x10 times over 0x3c-byte entries; effect not shown
+OV00	800e3510	OVERCLAIM	get_clear_rect_index_clamped	returns g_clear_rect_index or 0 if >15; not visibly a stage id
+OV02	80096ab4	VERIFIED	-	maps index through count table, loads bank if id differs from tbl_snd_vab_ids
+OV02	800983d4	VERIFIED	-	stores g_cfg_extra_mode; value 2 plus button calls opt_FightingOrderMenu
+OV02	8009e508	VERIFIED	-	draws g_survival_score_rank entries and digit strings
+OV04	801e982c	VERIFIED	-	zeroes 16 history entries and count
+SLUS	8001421c	OVERCLAIM	sio_exchange_byte_fragment	split-fragment variant claim unseen; body exchanges a byte over SIO
+SLUS	80014f08	OVERCLAIM	read_reply_byte_fragment	variant claim unseen; body reads a reply byte
+SLUS	8001591c	VERIFIED	-	increments counter, resets at retry threshold
+SLUS	8001b664	VERIFIED	-	etc_DmaCallback(2, gpu_ProcessQueue)
+SLUS	8001bfbc	OVERCLAIM	sort_sprite_packet_to_ot	builds packet with code 0x64 and tpage word, links into OT; fast not shown
+SLUS	8001e0e4	VERIFIED	-	loops TMD packets, dispatches 16 primitive types
+SLUS	800240c0	OVERCLAIM	bios_deliver_event_f0000003_40	body only DeliverEvent(0xf0000003,0x40); data callback not shown
+SLUS	80024260	OVERCLAIM	call_cd_ready_step	wrapper around cd_ReadyStep
+SLUS	80025898	VERIFIED	-	writes volume registers and cd_audio_enable_flag
+SLUS	80026ea8	OVERCLAIM	cd_restore_callbacks_pause	restores saved callbacks, CdControlB(9,0), conditional cd_DataSync(0); no sync wait shown
+SLUS	80028eac	OVERCLAIM	set_seq_track_state_by_code	sets track state by code 0x14/0x1e/other; no event loop
+SLUS	8002905c	VERIFIED	-	writes byte at +0x19
+SLUS	8002a08c	VERIFIED	-	reads 3 tempo bytes, 60000000/value
+SLUS	8002d4cc	VERIFIED	-	calls spu_SetReverb(0)
+SLUS	8002dd6c	VERIFIED	-	clears tables, sets voice count, SpuSetVoiceAttr
+SLUS	80030b9c	VERIFIED	-	sets current vab/prog table pointers
+SLUS	8003128c	VERIFIED	-	calls snd_InitCommon(0)
+SLUS	8003263c	VERIFIED	-	splits spu free-list entries at an address
+SLUS	80036cb8	VERIFIED	-	calls tmd_GetObjectTable, stores globals
+SLUS	80036cf8	VERIFIED	-	decodes prim and copies indexed vertex triples
+SLUS	8004c83c	VERIFIED	-	0x200 entries via CdPosToInt/CdIntToPos
+SLUS	8004d300	VERIFIED	-	clears bit 0x8000 in thread state
+SLUS	8004d66c	VERIFIED	-	runs save menu only when g_opt_memcard_flag==1
+SLUS	8004d9e4	VERIFIED	-	sets block count, size 0x52c, pointer
+SLUS	8004f17c	VERIFIED	-	stores pointer and pointer+0x290
+SLUS	8004ff2c	VERIFIED	-	TestEvent on 4 events, returns 1-4 or 0
+SLUS	800502e4	VERIFIED	-	sets g_cd_file_read_index and g_cd_file_read_buf
+SLUS	8006b260	VERIFIED	-	copies draw env rects, AddPrim
+SLUS	8006b4b0	VERIFIED	-	sets fade tile r/g/b to param when gpu_WaitCmdReady==0
+SLUS	8006c68c	OVERCLAIM	battle_scene_tick_dispatch	pause and animated-texture calls, reset when g_battle_scene_active==5; mode 3 not shown
+SLUS	8006f064	VERIFIED	-	appends to queue, increments count
+SLUS	800728f4	VERIFIED	-	sets player active flags and g_continue_input_flag on pad press
+SLUS	80073554	VERIFIED	-	zeroes fields of 0x58-byte record, a few constants
+SLUS	80073d00	VERIFIED	-	compares score/time against tables per g_game_mode
+SLUS	80074018	VERIFIED	-	accumulates seconds from time source /0x3c
+SLUS	80077420	VERIFIED	-	g_option cursor/state handling and draws
+SLUS	8007811c	VERIFIED	-	sets selector sprites, sorts 7 sprites
+SLUS	800788a8	VERIFIED	-	loops 9 sprites from init tables
+SLUS	8007c244	VERIFIED	-	sums 11 values per row capped at 99 into buf_vs_result_scores
+SLUS	8007d42c	OVERCLAIM	sort_tiles_stepped_loop	0x11 iterations of gs_SortTile with sleeps; wipe not shown
+SLUS	80081060	OVERCLAIM	start_wipe_then_call	calls fx_WipeScreenQuads then func_0x800c4ff4; team not shown

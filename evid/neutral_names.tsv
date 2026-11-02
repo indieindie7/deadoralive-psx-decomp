@@ -1,0 +1,392 @@
+MOVIE	80105fe8	call_mdec_dma_out_wrapper	body only calls mdec_DmaOut()
+OV00	80098c4c	conditional_set_flags_by_char_id_mod	checks char id 5/12/1, rand % table[char] ==0, sets byte flags and stores g_taunt_voice_id
+OV00	8009cadc	loop3_indirect_dispatch_interp_poly	do-loop 3 iterations, function-pointer tables indexed by *ptr&7, cubic poly (a*t+b)*t>>10
+OV00	8009cf00	decode_fields_then_divide_slope	reads param_2 shorts into param_1 fields, indirect call, divides by param_1[4]
+OV00	800a53ec	call_setup_model_pointers_and_secondary_table	calls fighter_SetupModelPointers(p,0) and fighter_LoadSecondaryAnimTable(p)
+OV00	800a641c	store_table_ptr_indexed_by_char_id_and_bits	stores word from table at char_id*0x40+((u16&0xf00)>>6) into per-index array
+OV00	800aa794	rotate_vec_then_copy_three_words	calls gte_RotateVec3_2 on tbl_head_track_origin_x entry then copies x,y,z to stride-0xb4 array
+OV00	800acbcc	atan_lookup_from_two_abs_args	abs of both args, ratio via >>10 divide, short table lookup, 0x400/0x800 octant fixups
+OV00	800ad454	write_time_digit_bytes_and_push_ptrs	derives digits from g_play_time_* *10 bytes with 0x48, pushes 8+3 ptrs to g_scratchpad_ptr
+OV00	800addac	push_two_ptrs_to_scratchpad	loop 2 iterations storing computed ptr into _g_scratchpad_ptr stride 0x14
+OV00	800bb418	zero_twelve_g_cam_globals	assigns 0 to g_cam_* globals
+OV00	800bbf30	store_three_regs_to_g_cam_param_targets_then_call	stores in_v0,in_v1,param_1 to g_cam_param_*_target, calls cam_SetLookAtMatrix
+OV00	800bc118	return_arg0_plus_rand_mod_masked_span	arg0 + rand % ((arg1-arg0)&0xfff)
+OV00	800bc31c	add_rotated_offset_to_two_ptrs_sintable	(a*s1+b*s2)>>12 added to *p1, (a*s2+b*s1)>>12 to *p2, angle&0xfff*4 table
+OV00	800bc43c	step_angle_toward_target_clamped	diff&0xfff, divides by param_4, clamps to [1,param_5], wraps &0xfff
+OV00	800be84c	clip_distance_vs_stage_half_extents	uses g_p1_04_pos_x/0c_pos_z, _g_stage_half_width/depth /2, bounds +-700, returns param_1 or 0 or divided value
+OV00	800c43b8	reset_play_time_add_total_inc_two_counters	zeroes _g_play_time_frames, adds to _g_total_score, increments two table counters by g_ranking_player_index
+OV00	800c4dd0	increment_continue_timer_until_limit	_g_continue_timer compared to 0x3e or 0xb2 by arg<2, returns 1 else increments returns 0
+OV00	800c83f0	check_opponent_fields_vs_table_row_return_bool	many byte compares on _ptr_opponent_fighter offsets vs table row index*8, g_cam_fight_dist compare, returns 0/1
+OV00	800c87b4	set_byte_0x3a_from_opponent_byte_0x46	switch on opponent+0x46 value 1/2/3 stores 1 or 2 to cur_fighter+0x3a
+OV00	800ca154	timer_state_machine_run_script_or_pick_command	branches on byte at g_cur_player_idx+0x800fffaa, calls cpu_DecayCommandTimer/cpu_RunMoveScript/cpu_PickEscapeCommand/ai_ScriptDequeueMove
+OV00	800ca2e4	store_byte_from_table_chosen_by_input_high_nibble	input byte&0xf0 compared 0x90/0x50/0x10, selects table addr, stores indexed byte to cur_fighter+0x2c
+OV00	800ca43c	decrement_per_player_short_clamp_zero	subtracts 1 (or 5 if input short==1) from short[g_cur_player_idx], clamps at 0
+OV00	800caf60	call_sync_then_return_input_ring_byte3	calls ai_ScriptSyncRingCursor, returns byte at input+param[7]*4+3
+OV00	800cafa0	call_sync_then_combine_ring_entry_bytes	calls ai_ScriptSyncRingCursor, ORs/and-xors bytes of ring entries by short==1 tests
+OV00	800cd60c	clear_two_per_player_bytes	stores 0 at g_cur_player_idx+0x800fd528 and +0x801001da
+OV00	800d1a20	scaled_threshold_roll_set_flag_bytes	computes clamped threshold from shorts/_g_ai_params_ptr bytes, calls ai_RollThreshold, sets +0x50 and +0x16 bytes
+OV00	800d2b18	rand_check_then_set_g_cpu_action_id_by_distance	rand<=ai_params byte, compares g_cam_fight_dist-arg to 0x7d1/0x191, writes g_cpu_action_id 1/3/5
+OV00	800d2cf4	switch_g_cpu_action_id_cancel_if_outside_bounds	switch on g_cpu_action_id, calls ring_IsOutsideBoundsAtAngle, writes 0xff or 10
+OV00	800d9fd4	adjust_facing_angle_toward_cam_angle	uses g_p1_14_facing_angle and _g_cam_facing_angle, &0xfff, switch on move id bytes, adds step*0x1000/0x168
+OV00	800db104	zero_hitbox_params_then_load_four_shorts_if_type	zeroes _g_hitbox_param_a..d, calls func_0x8006adbc, loads 4 shorts when byte is 2,3 or 5
+OV00	800de4fc	sum_slot_colors_by_inv_sq_dist_call_func	loop 16 slots stride 0x34, dist squared, divides byte<<20 by it, calls func_0x8001c9fc(2,..)
+OV00	800dfbf0	loop8_switch_state_update_fields_sintable	loop 8 stride 0x3c, switch on state byte 1-3,5-9, sin/cos table lookups
+OV00	800e403c	write_three_words_from_sintable_two_angles	three outputs from sin table entries of (a&0xfff),(b&0xfff), negated products
+OV02	80096340	call_menu_UpdateCursor_with_2	body is menu_UpdateCursor(2,param_1)
+OV02	80096428	if_inreg_bit0x40_call_func_and_opt_KeyConfigMenu	(in_v0|in_v1)&0x40 then func_0x800708b8(0,0x24) and opt_KeyConfigMenu()
+OV02	80097804	if_inreg_bit0x40_call_func_and_opt_ExtraSecretMenu	(in_v0|in_v1)&0x40 then func_0x800708b8(0,0x24) and opt_ExtraSecretMenu()
+OV02	80097eb8	if_inreg_bit0x40_call_func_and_opt_StageListMenu	(in_v0|in_v1)&0x40 then func_0x800708b8(0,0x24) and opt_StageListMenu()
+OV02	800999f4	pad_mask_update_short_index_wrap_with_repeat	picks _g_pad_held/press_p1/p2, bit tests 0x1000/0x4000/0x2000/0x8000, inc/dec param_2[2] wrapping, calls func_0x800708b8(0,0x23)
+OV02	8009ec5c	write_rounded_percent_string_three_digits	200*a/b rounded, func_0x8007f638(buf,v,3), writes '%' and NUL, leading zeros to spaces
+OV04	801e9e7c	loop_chars_queue_sprite_fields_from_font_table	iterates string bytes, skips 0x20, writes fields at draw buffer, calls func_0x800181b8, uses _g_dbgpad_string_cursor
+SLUS	80016068	jump_to_address_0xc0	body is call of LAB_000000c0
+SLUS	800160a0	jump_to_address_0xc0	body is call of LAB_000000c0
+SLUS	800160d8	call_bios_TailB0_return_zero_if_minus1	calls bios_TailB0_8001610c, returns 0 when result -1
+SLUS	80016128	store_three_args_into_table_slot	writes params to puVar1[0..2] computed from in_zero+0x474
+SLUS	800180c8	pack_clut_word_y_shl6_or_x_shr4	(y&0x3ff)<<6 | (x>>4)&0x3f
+SLUS	8001826c	set_or_clear_bit1_of_byte7	byte[7] |=2 if arg nonzero else &=0xfd
+SLUS	800183d4	store_3_at_byte3_and_0x60_at_byte7	stores constants 3 and 0x60
+SLUS	80027b3c	zero_n_words_at_ptr	loop writes 0 to param_2 words
+SLUS	80029cbc	call_snd_SetReverbType_with_stack_arg	passes in_stack_00000030 to snd_SetReverbType
+SLUS	80029d7c	call_snd_SetReverbDepthL_with_stack_arg	passes in_stack_00000030 to snd_SetReverbDepthL
+SLUS	8002c18c	call_snd_SeqCloseReset_arg_and_0	snd_SeqCloseReset(p,0)
+SLUS	8002c1b4	call_snd_SeqCloseReset_two_args	snd_SeqCloseReset(p1,p2)
+SLUS	80030d3c	call_snd_VabOpenHeadCommon_with_zeros	snd_VabOpenHeadCommon(p1,p2,0,0), returns short as int
+SLUS	80035a7c	float32_bits_to_float64_bits_convert	exponent rebias 0x380, mantissa shifts via math_Shift64, returns 64-bit value
+SLUS	80035f5c	compare_float_bits_return_0_or_minus1	sign/exponent/mantissa compares of two words, returns 0 or 0xffffffff
+SLUS	8003685c	loop_tim_blocks_id_0x10_LoadImage	while *p==0x10 calls tim_ParseHeader and LoadImage twice
+SLUS	8006bba4	set_busy_read_file_upload_tim_drawsync	g_mcard_busy=1, cd_FadeAndReadFile(7,0x8012d000), tim_UploadChain, DrawSync(0), busy=0
+SLUS	8006cf68	return_const_by_arg_0_or_1_else_idle	returns 0x8012d000 for 0, 0x8018a800 for 1, else sys_IdleForever(0x6e)
+SLUS	8006eb8c	copy_n_bytes_src_arg0_dst_arg2	loop copies bytes count param_2&0xff
+SLUS	8006ebc8	return_arg_or_ptr_plus_count_by_mode	mode 0 returns arg2, mode 1 returns arg1+arg2 via loop
+SLUS	80070630	call_snd_RemoveTickCallback_then_snd_Quit	two calls in body
+SLUS	800706a4	loop_voice_ranges_call_snd_KeyOnVoice_if_busy	ranges 6-14,15-23,0-5 by arg, tests g_sfx_voice_busy, clears it
+SLUS	80073c38	call_thread_Close_ten_slots	thread_Close on 3,4,6,5,7,8,9,0xb,0xc,0xd
+MOVIE	80105374	call_fnptr_at_v0_plus_0x14	indirect call through *(in_v0+0x14), no args
+MOVIE	801053d4	call_fnptr_at_v0_plus_0x18	indirect call through *(in_v0+0x18), no args
+MOVIE	80105e08	call_resetcallback_if_zero_then_decdctreset	if param_1==0 ResetCallback(); DecDCTReset(param_1)
+MOVIE	80106080	call_dmacallback_chan0_arg0	DMACallback(0,param_1)
+MOVIE	801060a4	call_dmacallback_chan1_arg0	DMACallback(1,param_1)
+MOVIE	80108020	call_dmacallback_chan3_arg0	DMACallback(3,param_1)
+OV00	8009554c	init_two_global_struct_pairs_via_call	two 2-iter loops store consts 10 and 1 + stride ptrs then func_0x8001d04c(0,2,p)
+OV00	800957e8	loop_dispatch_by_u16_tag_to_callees	loop over list; switch on ushort at entry+2 calling func_0x per tag with g_gfx_draw_buffer_idx
+OV00	8009d6a8	step_5x3_counters_call_table_fn_on_match	nested loops 5x3 inc counters, on equal reset and call fnptr table indexed by &7
+OV00	8009e4b4	loop_call_step_once_n_times_scaled_by_speed	fighter_StepAnimationOnce called iVar3 times, (speed+acc+500)/1000
+OV00	800a1834	diff_two_func_0x80023b3c_results_mask_0xfff	(f(p3,p4)&0xfff)-(f(p1,p2)&0xfff)&0xfff
+OV00	800a20b0	clamp_field_0xc_0_255_index_table_lookup	clamp *(p+0xc) to 0..0xff, index (>>4)+((p[0x28]>>7)&0x10) into table at p+0x40
+OV00	800a3164	clear_15_byte_pairs_then_fill_from_ff_terminated_list	loop 0xf zeroing pairs; while(byte!=0xff) store 2 bytes at index*2
+OV00	800a4228	build_identity_matrix_call_gte_helpers_store_masked_angles	locals set 0x1000 diag, calls func_0x8003a*, stores 0xfff-masked shorts
+OV00	800a5a10	store_idx_and1_call_fighter_updateaction_set_byte_1	g_framebuf_parity=idx&1; fighter_UpdateAction(); byte(param_1-0x7ff08198)=1
+OV00	800a648c	init_part_slots_stride_0x34_copy_entries_return_min_count	per-player 0x63c stride; zero 4 slots, copy 10-byte entries, calls model_InitFighterAnim, min with byte
+OV00	800ada44	loop_2_players_update_counter_and_push_ptrs_to_scratchpad_ptr	loop uVar8<2; compares g_p1_03_round_wins, writes ptr list via _g_scratchpad_ptr
+OV00	800ae138	init_prim_buffers_set_const_fields_loops	nested loops write 0x80 and consts via func_0x80018384/0x800180c8
+OV00	800af600	add_signed_const_to_18_entries_stride_0x24_by_state	_g_hud_banner_slide_state; adds +-0x21c or +-0x1e to short stride 0x24 x0x12
+OV00	800afc30	store_byte_arg1_at_index_arg0_stride_0xc	byte store at (p1&0xff)*0xc+const
+OV00	800bac88	store_g_cam_yaw_target_facing_minus_0x400_mask_0xfff	_g_cam_yaw = (g_p1_1c_target_facing[..]-0x400)&0xfff
+OV00	800bbf68	return_table16_entry_by_func_0x800161dc_low_nibble	table[(f()&0xf)*4] returned
+OV00	800c44a8	increment_counters_by_game_mode_switch_then_unlock_check	switch g_game_mode increments int table; calls unlock_CheckAllConditions
+OV00	800c6c84	set_flag_bits_when_g_play_time_seconds_exceeds_thresholds	compares _g_play_time_seconds_2f50 to 0x2a30,0x5460,0x7e90,0xa8c0,53999, ors g_opt_unlock_flags
+OV00	800c8b90	loop_2_clear_fields_in_g_ai_counter_tbl_set_999	g_ai_counter_tbl stride 0x21 shorts, puVar1[0x1e]=999
+OV00	800cae88	swap_bits_6_7_if_byte_at_g_cur_player_idx_is_1	param&0x3f|(p&0x80)>>1|(p&0x40)<<1 when byte==1 else &0xff
+OV00	800cb0c4	subtract_arg_from_u16_set_flag_if_neg_else_advance_ring	field+0xc -= p1; neg sets byte+4=1; else adds to +0x10,+0xe and loops ring idx &0xf
+OV00	800cb18c	add_arg_to_fields_0x10_0xe_advance_ring_idx_loop	adds param_1 to +0x10,+0xe; while limit<=value decrement ring idx &0xf
+OV00	800cb960	pop_byte_mirror_bits_seek_ring_entry_matching_any_bit	pops byte, bit swap if mirrored, loops until (mask & entry byte)!=0
+OV00	800cbf58	pop_two_bytes_seek_ring_entry_matching_all_bits_then_skip	loop until (mask & b)==mask, then add byte count to field 0x10
+OV00	800cd0d8	set_byte_plus4_if_byte_at_g_cur_player_idx_is_1	if byte==1 then *(p+4)=1
+OV00	800cff2c	call_ai_pickweightedscriptentry_if_table_entry_nonzero	table[(p&0xff)*4]!=0 then g_cpu_action_id=ai_PickWeightedScriptEntry()
+OV00	800d1450	decrement_short_at_8_zero_it_and_add_2_to_field_0xc	_g_ai_cur_fighter_ptr+8 -1; if <=0 set 0 and +0xc += 2
+OV00	800d18a8	decrement_short_by_idx_extra_minus4_on_ai_rollthreshold_clamp_0	ai_RollThreshold==1 then -4; clamp <0 to 0
+OV00	800d6400	branch_on_prev_move_ff_set_flags_else_call_fighter_startmoveandloadhit	checks g_p1_2c_prev_move==-1; calls fighter_IsFacingAway / fighter_StartMoveAndLoadHit
+OV00	800d99d0	return_byte_0xb_of_entry_stride_0x13_from_func_0x8006adbc	func_0x8006adbc(p2,2); byte at (p1&0xff)*0x13+base+0xb
+OV00	800db354	compute_atan_func_0x80023b3c_of_negated_offsets_mask_0xfff	uses _g_tile_wrap_shift_x/z, g_stage_tile_wrap_count %5 and /5; returns &0xfff
+OV00	800dc604	test_abs_diffs_then_squared_dist_le_sum_radius_squared	box abs-diff checks, then dx2+dy2+dz2<=r2; stores _g_hit_point_x/y/z
+OV00	800dcfa0	init_loop2_clear_block_set_g_fx_slot_vars_double_if_screen_h_gt_0xf0	loop 2 setting fields; func_0x80013318(0x800f7530,0,0x340); _g_gs_screen_h>0xf0 doubles
+OV00	800de4c0	store_table_word_into_slot_table_by_three_byte_args	slot[(p2&0xff)*4+(p1&0xff)*0x20]=tbl[(p3&0xff)*4]
+OV00	800de80c	call_func_0x8001c9fc_2_with_zeroed_struct	locals zeroed, local_10=1, func_0x8001c9fc(2,&local_18)
+OV00	800de84c	clear_dust_globals_two_rand_mod_90_clear_4_slot_shorts	func_0x800161dc()%0x5a twice; loop clears shorts at stride 0x10
+OV00	800df2e8	collect_active_slots_offset_draw_call_integrate_vel_life	scans 4 slots stride 0x10, adds g_fighter_pos_offset, func_0x80013048, updates pos by vel, life-1
+OV00	800e3450	loop_2x25_store_fighter_getmodeldataptr_result_stride_0x124	fighter_GetModelDataPtr results stored, loops 2 and 0x19
+OV00	800e40b8	return_1_if_abs_2x_or_2z_outside_limit_globals	doubled abs vs g_timer_p1_start,_g_stage_half_width,g_timer_p2_start,_g_stage_half_depth
+OV00	800e4144	call_func_0x8003a1a0_atan_diff_call_func_0x8003a588_negated	func_0x80023b3c(p1-_g_cam_param_a_target,p3-_g_cam_param_c_target); func_0x8003a588(-r)
+OV00	800e4d3c	return_cell_parity_bits_x_z_div_2000	x/2000 and z/2000 parities combined u1+u2*2 &0xff
+OV02	8009631c	call_menu_updatecursor_2_arg0	menu_UpdateCursor(2,param_1)
+OV02	80097790	call_menu_updatecursor_2_arg0	menu_UpdateCursor(2,param_1)
+OV04	801e85f8	build_local_packet_from_two_tables_call_func_0x800366dc	local_c/local_10 from tables, func_0x800366dc(&local_10,p2*0x20+c,p4)
+SLUS	80015dc0	clear_mask_bits_from_rcnt_regs_ptr_plus_4_return_1	*(rcnt_regs_ptr+4) &= ~rcnt_event_ptr[(p&0xffff)]; return 1
+SLUS	8001b68c	fill_bytes_ptr_value_count	loop writes param_2 to param_1 for param_3 bytes
+SLUS	8001e58c	compute_clamped_dq_values_call_setdqa_setdqb	SetDQA(clamped (-p1*p2/(p2-p1)<<8)/p3); SetDQB; only if p2-p1>99
+SLUS	80023b9c	table_lookup_short_flip_0x800_minus_and_negate_by_flags	0x800-v if param_3!=0, -v if param_4!=0
+SLUS	800241c4	swap_cd_debug_level_with_arg_return_old	cd_debug_level=param_1; returns old
+SLUS	80027418	call_fnptr_at_v0_plus_0x14	indirect call through *(in_v0+0x14), no args
+SLUS	8002806c	remove_snd_tick_callback_critical_section	snd_tick_* globals, EnterCriticalSection/ExitCriticalSection, etc_InterruptCallback
+SLUS	8003596c	compare_two_u64_return_minus1_0_1	hi/lo unsigned compares return 1, -1, 0
+SLUS	80035e9c	convert_signed_int_to_float_bits_normalize_shifts	shifts left by 4 and 1, exponent 0x9d base, sign 0x80000000
+SLUS	8003696c	loop_tim_parse_header_loadimage_relocate_xy_by_param2	tim_ParseHeader, LoadImage twice, x+=(p2&0xf)*0x40, y+=(p2>>4)*0x100
+SLUS	8006ad98	call_squareroot0_of_v0_plus_lo	SquareRoot0(in_v0+in_lo)
+SLUS	8006adbc	loop_forever_if_args_out_of_range_or_table_entry_null	param_1>1 or param_2>0x18 thread_Sleep loop; null entry infinite loop
+SLUS	80070888	shift_left_4_clamp_to_0x7f_at_0x80_field	(short)(p<<4); returns 0x7f if (p<<0x14)>>0x10==0x80
+SLUS	80073b80	call_thread_close_slots_3_4_6_5_7_8_9_0xb_0xc	nine thread_Close calls
+SLUS	80073be0	call_thread_close_slots_3_4_6_5_7_9_0xb_0xc	eight thread_Close calls, no slot 8
+MOVIE	801015bc	call_padstopcomwrap_only	body is single call PadStopComWrap()
+MOVIE	80101aa4	pack_masked_arg2_shl6_or_arg1_shr4	(p2&0x3ff)<<6 or p1>>4&0x3f
+MOVIE	80105d00	zero_n_words	loop stores 0 to *p1++ for p2 iterations
+MOVIE	80105ec8	copy_two_16word_blocks_to_qtab_bufs_then_two_dma_in	copies to buf_mdec_qtab_luma/chroma then mdec_DmaIn(...,0x20) twice
+OV00	800983d0	build_3x3_matrix_from_sin_table_scale_1000	many *0x1000/1000 products with sin table, calls func_0x8001effc/8001f04c
+OV00	800987dc	call_chain_with_negated_arg_and_negated_y	calls func_0x8003a588(-p1) and 8003a1a0(local_14,-local_10,local_c)
+OV00	800989e8	loop_4_calls_func_8003a350_stride_0x310_base	do-while iVar5<4 calls func_0x8003a350 on 0x310*p1 table
+OV00	80098d80	advance_byte_stream_countdown_call_fx_setspriteanimidbiased	decrements counter byte else reads stream then calls fx_SetSpriteAnimIdBiased
+OV00	8009d148	zero_two_fields_store_masked_halfword_indirect_call_by_low3bits	stores 0,0,*p2&~3 then calls fn table[(p2[1]&7)]
+OV00	8009fa78	compute_wrapped_angle_diff_div_per_axis_three_times	diff&0xfff wrap at 0x800 divided by short table then stored 3 ints
+OV00	800a13fc	loop_15_gte_helper_calls_stride_0x20	do-while iVar3<0xf calling func_0x8003a260/8003a1a0/8001f04c/8001effc
+OV00	800a200c	set_field_0x28_from_field_0x24_or_plus_0x800_masked_0xc00	branch on field+4==0, result &0xc00 stored at +0x28
+OV00	800a2714	call_fighter_drawshadowplayer_for_each_nonzero_flag	calls fighter_DrawShadowPlayer(0,..) and (1,..) if globals nonzero
+OV00	800a4ec0	call_fighter_initglobalstate_zero_two_12byte_entries	calls fighter_InitGlobalState then loop 2 zeroing 3 words each stride 0xc
+OV00	800a5ac8	store_hi_shr6_minus_v0_scale_two_table_entries	uses in_hi and in_v0, multiplies g_cam_param_x_scaled/param2 entries
+OV00	800a6b48	clear_byte_flag_by_g_p1_char_id_and_costume	compares g_p1_01_char_id 5/1/0xc and costume values, zeroes bytes
+OV00	800aa820	call_gte_rotatevec3_2_copy_three_words_then_loadhandrottables	calls gte_RotateVec3_2, copies 3 ints, fighter_LoadHandRotTables(p1,2)
+OV00	800afbec	loop_2_call_fx_setspriteanimidbiased_zero	do-while bVar1<2 calls fx_SetSpriteAnimIdBiased(i,0)
+OV00	800b6a94	adjust_g_cam_pitch_yaw_followdist_by_g_pad_held_p1_bits	tests 0x1000/0x4000/0x2000/0x8000/1/4/0x800 on _g_pad_held_p1
+OV00	800b7b84	zero_g_cam_globals_advance_ptr_camscr_script_4	zeroes _g_cam_* vars, ptr+=4
+OV00	800b7c58	zero_g_cam_follow_dist_advance_ptr_camscr_script_4	sets _g_cam_follow_dist=0, ptr+=4
+OV00	800bc5ac	return_arg_div2_times_0x3a7_div_0x160	return ((p1/2)*0x3a7)/0x160
+OV00	800c8144	set_per_player_halfword_from_byte_pair_table_lookup	reads g_cur_player_idx tables, scans entries until -1, writes halfword
+OV00	800ca87c	walk_ring_of_16_entries_return_byte_at_frame	index &0xf, subtracts ushort counts, returns byte +3 (maybe OR prev)
+OV00	800cb230	adjust_struct_counters_from_ring_entry_frame_delta	reads ushort from _ptr_cur_fighter_input ring, updates +0xc/+0xe/+0x10, sets +4
+OV00	800cb748	pop_byte_loop_step_ring_back_until_nibble_match_no_sync	pops *param_1--, loops until puVar3[1]&0xf0 or &0xf equals value
+OV00	800cbabc	pop_byte_loop_step_ring_back_until_nibblepair_match	calls input_GetBufferNibblePair, compares masked uVar8
+OV00	800cc46c	pop_byte_loop_step_ring_until_masked_byte3_match_or_abort	calls ai_ScriptSyncRingCursor, compares uVar4&uVar7&byte3, sets +4 on stray
+OV00	800cc8b8	pop_byte_loop_step_ring_until_byte2_match_or_abort	compares uVar4&byte2 to uVar4, sets +4 if byte2 nonzero
+OV00	800cd0ac	set_field_4_to_1_if_per_player_byte_zero	g_cur_player_idx+0x800f7d22==0 then *(p1+4)=1
+OV00	800d3440	update_byte_fields_on_arg_match_else_shift_and_divide_by_9_minus_g_cpu_difficulty	compares +0x20 to p1, adds clamp 0xff, else divides by 9-g_cpu_difficulty
+OV00	800d90d8	return_0_or_1_from_g_p1_state_and_flag_bytes_stride_0x58	checks g_p1_44_flag g_p1_30_flag g_p1_2d_state airborne_flag
+OV00	800d9518	store_arg_bytes_in_per_slot_arrays_call_move_getentryptr	writes 0x800ef93c-0x800ef944 bytes, calls move_GetEntryPtr
+OV00	800dabbc	return_byte_0x12_of_entry_index_times_0x13_via_func_8006adbc	(bVar1*0x13+iVar2+0x12)
+OV00	800dc590	call_hit_spheresphere_test_with_indexed_tables	args from _g_hit_sphere_pos_tbl_a/b and idx_tbl_a/b
+OV00	800dd590	call_fx_findfreeslot_init_0x34_byte_slot_fields_const_500	stores 500 and 0x2e808080 into slot stride 0x34
+OV00	800e3214	compute_vec3_from_two_sin_table_lookups_call_func_8001c9fc	local_18/14/10 from sin table products then func_0x8001c9fc
+OV00	800e3540	init_sprite_packet_fields_nested_loops_then_init_small_lists	nested loops calling func_0x80018320/80018294 then 0x800198f8/80018384
+OV00	800e4108	return_1_if_arg2_above_g_timer_p2_start_and_below_g_stage_half_depth	two compares on param_2 returning 0/1
+OV02	80096388	call_menu_updatecursor_mode_2	single call menu_UpdateCursor(2,p1)
+OV02	800963f4	call_menu_updatecursor_mode_2	single call menu_UpdateCursor(2,p1)
+OV02	80096884	call_menu_updatecursor_then_call_func_by_halfword_change	compares old byte +4 to new then calls func_0x80070524 or 80070574
+OV02	80096978	call_menu_updatecursor_then_branch_on_pad_press_0x40_0x80	uses _g_pad_press_p1 or p2, calls func_0x80050324/800503b0
+OV02	80096c84	switch_on_tbl_snd_vab_ids_pick_table_call_func_8002cf2c	switch on _tbl_snd_vab_ids-0x125, passes g_sfx_master_volume twice
+OV02	80097748	call_menu_updatecursor_mode_2	single call menu_UpdateCursor(2,p1)
+OV02	800977c4	if_in_v0_or_in_v1_bit_0x40_call_func_800708b8_0_0x29	register inputs, calls func_0x800708b8(0,0x29)
+OV02	800998dc	adjust_halfword_by_pad_held_bits_with_wrap_and_hold_counter	pad bits 0x1000/0x4000, wrap to 0/max, counter 5 or 10, func_0x800708b8(0,0x23)
+OV02	80099f94	draw_text_and_padded_decimals_three_blocks_via_math_pow10	loops 3 rows twice calling func_0x80082e64 with math_Pow10 digit loops
+OV02	8009ebb8	set_g_menu_title_fields_two_draw_calls	sets _g_menu_title_x/y/color/text twice, func_0x80082e64(..,5) and (..,3)
+SLUS	8001610c	jump_to_address_0xb0	calls SUB_000000b0
+SLUS	80018254	or_0xffffff_into_word	*p1 = *p1 or 0xffffff
+SLUS	8001cfec	call_setfarcolor_with_args_shr4	SetFarColor(p1>>4,p2>>4,p3>>4)
+SLUS	80023b48	atan2_table_lookup_with_negated_arg2	uVar1=-param_2, divides, table at -0x7ffbfed4, 0x400/0x800 fixups
+SLUS	80027478	call_function_pointer_at_v0_plus_0x18	(**(code**)(in_v0+0x18))()
+SLUS	800279e8	zero_n_words	loop stores 0 to *p1++ for p2 iterations
+SLUS	8002f39c	zero_three_fields_of_indexed_snd_voice_seq_id_entry	sets f_1d f_0 f_4 = 0 on array element p1&0xff
+SLUS	80036ae8	loop_tim_blocks_call_loadimage_with_xy_offsets	while *p==0x10, tim_ParseHeader, LoadImage twice with added offsets
+SLUS	8004eba0	verify_126byte_blocks_add_xor_checksum_then_copy	0x7d loop sum and xor compare, copy 0x7e chunks, biosA0_memcpy tail
+SLUS	8004f158	call_biosa0_strncpy_src_plus4_len_0x40	biosA0_strncpy(p1,p2+4,0x40)
+SLUS	8006ccc0	call_fighter_loadmodel_0_then_1	two calls fighter_LoadModel(0),(1)
+SLUS	8006d62c	call_thread_sleep_1_then_gs_graph_offset_swap_calls	thread_Sleep(1), gs_SetGraphParams(0x200,0x1e0,5,0,0), gs_SwapBuffers
+SLUS	800705c4	call_snd_seqclose0_allvoicesreset_zero_8_buf_sfx_voice_active	loop 8 zeroing buf_sfx_voice_active, g_sfx_queue_count=0
+SLUS	80073480	call_cd_loadifnotresident_and_func_801e9034_set_globals_add_play_time	cd_LoadIfNotResident(3,..), func_0x801e9034, g_total_score+=g_play_time_frames
+SLUS	8007e91c	return_pad_press_bit_0x40_for_player_chosen_by_g_continue_count	g_continue_count<100 selects index xor 1, tests &0x40
+SLUS	8007f408	call_thread_clearsuspended_five_times_clear_g_game_paused	args 6,5,4,7,0xc then g_game_paused=0
+MOVIE	80103164	call_fnptr_0x38_return_bit31	calls fn ptr at in_v0+0x38, returns result>>0x1f
+MOVIE	80105f6c	set_two_flag_bits_then_mdec_DmaIn	toggles bit27 and bit25 of *p by param bits, calls mdec_DmaIn
+MOVIE	80106008	mdec_WaitInSync_or_status_bit29	arg0==0 calls mdec_WaitInSync else mdec_ReadStatus>>29&1
+MOVIE	8010b148	call_PadStartCom	body only calls PadStartCom
+OV00	80095b44	return_param3_if_arg0_is_0x42	*p==0x42 -> call, return p[3]; else 0
+OV00	8009830c	loop_five_calls_matrix_helpers_over_table	do-while iVar3 2..6 calling func_0x8003a* with table fields and math_RotateYMatrixNeg
+OV00	8009ccec	seek_stream_groups_dispatch_by_low3_bits	5x3 nested loops, fn table indexed by (*p&7)*4, advance while count<target
+OV00	8009d244	init_segment_fields_div_by_length	writes +4,+8,+0x10 from words, indirect call, stores iVar1/iVar2 at +0xc with div trap
+OV00	8009d404	init_segment_fields_div_no_offset	same as sibling but +8=0 and +0xc=iVar2/iVar3
+OV00	8009d4bc	init_segment_count1_zero_deltas	+4=1,+0xc=0,+8=0,+0x10=*p&~3, indirect call
+OV00	800a1278	halve_three_angle_diffs_mask_0xfff	diffs &0xfff, >0x800 minus 0x1000, stores base+diff>>1 x3
+OV00	800a2040	load_word_by_bit9_mask4_offset	returns *(((f28>>9)&4)+f44)
+OV00	800a2100	return_field2c_signed_by_mask_0xe00_shr10	(f28-f24)&0xe00 picks +/- f2c, >>10
+OV00	800a9a10	loop_four_gte_matrix_ops_sqrt_atan2	do-while step 0x10 <0x40, math_SqrtLZCS, math_Atan2_3, gte_* calls
+OV00	800aa2d8	atan2_table_lookup_octant_div	abs of both args, compare, divide, short table lookup, 0x400/0x800 fixups
+OV00	800aa640	compute_two_angles_from_deltas_store_shorts	two func_0x80023b3c calls with deltas, stores shorts at param*4 offsets
+OV00	800b6930	call_cam_SnapSmoothedFighterPos_set_globals	calls it then _g_cam_yaw=-0x400, pitch=0, dist=0xdac x2
+OV00	800b9a68	copy_pos_start_to_cur_advance_ptr_4	_g_camscr_pos_*_cur=_start x3, key_ptr+=4
+OV00	800bbca0	set_cam_param_targets_sincos_then_cam_SetLookAtMatrix	max with y target, sin/cos*_g_cam_follow_dist into _g_cam_param_*_target, calls cam_SetLookAtMatrix
+OV00	800bc54c	clamp_int_at_ptr_between_min_max	reads *p, clamps to [p2,p3], stores back
+OV00	800c655c	write_digit_char_then_call_func	local[0]=param+hi-based*-10+'0', local[1]=0, ptr to param_2+4, func_0x80082e64
+OV00	800c8980	return_0_if_offset_point_within_half_extents	sin/cos table offsets added to pos, compared with +/-_g_stage_half_width/2 and depth/2
+OV00	800c8b28	random_call_mod_arg_masked16	func_0x800161dc result % (arg&0xffff), &0xffff, 0 if arg 0
+OV00	800cb3c4	pop_byte_scan_ring_until_high_or_low_nibble_match	pops byte, mirrors bits if side==1, loops cursor back until nibble equals
+OV00	800cc62c	pop_byte_scan_ring_abort_on_stray_nibble	pops byte, loop back, sets flag +4=1 if other nibble nonzero
+OV00	800ccc54	pop_byte_scan_ring_via_input_GetBufferNibblePair	calls input_GetBufferNibblePair in loop, masks 0xf0/0xf, abort on mismatch
+OV00	800d195c	conditional_store_2000_counter_cap_10	if counter<10 and ai_RollThreshold==1 store 2000 at +0x10 and counter++
+OV00	800d9a1c	return_byte_offset_10_stride_0x13	func_0x8006adbc(p2,2) base + (p1&0xff)*0x13+10
+OV00	800dc868	project_point_on_segment_store_g_hit_point_xyz	dot/len_sq*100, writes _g_hit_point_x/y/z, returns dist_sq<=(a+b)^2
+OV00	800dd4a8	find_free_slot_of_16_else_lowest_byte	scan stride 0x34 for zero byte, else min signed byte at +2
+OV00	800ddad8	init_slots_from_byte_list_until_0xff	loop to 0xff, calls fx_FindFreeSlot, writes constants 500,0x78,0x2e808080 into slot
+OV00	800ddea8	loop_16_slots_build_list_call_funcs_then_fx_ClearTimers	loops 0x10, calls func_0x80012128 etc, ends with fx_ClearTimers
+OV00	800de96c	zero_halfwords_stride_0x10_five_entries	iVar1 0x30 down by 0x10, stores 0 halfword
+OV00	800df504	zero_byte_stride_0x18_two_entries	iVar1 0x18 down by 0x18, stores 0 byte
+OV00	800e0e50	switch_state_over_16_entries_update_counters	switch on *puVar11 cases 1-5 over loop with uVar10==0xf
+OV00	800e2374	call_dist_func_then_call_range_func_600	func_0x8006ad28 on midpoint of two x/z, func_0x8001e58c(d,d+offset,600)
+OV00	800e25bc	call_func_with_three_g_light_ambient_shorts	passes _g_light_ambient_r/g/b
+OV00	800e2aa0	loop_entries_switch_type_0_1_4_5_6_7_call_funcs	switch on halfword +2, six cases calling func_0x8002*
+OV00	800e33c0	copy_six_table_bytes_to_g_clear_color	writes g_clear_color_b0..r1 from table index*6
+OV00	800e4af4	compute_scaled_color_call_func_8001c9fc	byte table * byte, calls func_0x8001c9fc(1,&local) if outside check true
+OV02	80096364	call_menu_UpdateCursor_with_2	only calls menu_UpdateCursor(2,arg)
+OV02	80096460	menu_UpdateCursor_then_pad_bit_checks_write_shorts	calls menu_UpdateCursor, tests pad bits 0x10/0x40, writes shorts at param+4,0x10..0x64
+OV02	80098220	call_func_then_call_ptr_stage_preview_callback	func_0x8004d014(1) then (*ptr_stage_preview_callback)()
+OV02	80098dc0	return_pad_press_bit4_clear_call_func_if_set	(p1|p2)&0x10==0 returned, else func_0x800708b8(0,0x24)
+OV02	80099bcc	load_image_by_index_mod_0x16_set_g_menu_cursor_color	arg>0x15 -> rand%0x16, loads to 0x8012d000, sets _g_menu_cursor_color
+OV02	80099e68	write_decimal_left_space_padded	math_Pow10 digit loop, spaces up to width, '0'+digit, NUL
+OV02	8009df44	draw_text_rows_div_mod_time_values	many func_0x80082e64 calls, /36000 /0xe10 /0x3c, "--" if ==360000
+OV02	8009ef10	build_poly_struct_queue_via_func_8001b93c	local struct 0x40000000, x/y from args and screen w/h, func_0x8001b93c
+OV04	801e8288	update_two_fields_float_calls_sine_scale_2000_add_1000	func_0x80035* soft-float calls, sine table *2000>>12 +1000
+OV04	801ea024	draw_string_chars_loop_skip_space_12px_step	loop until NUL, skip 0x20, x+=0xc per char, func_0x800181b8 per char
+SLUS	800133a4	copy_words_then_tail_bytes	count>>2 word loop then count&3 byte loop
+SLUS	8001604c	jump_to_address_0xb0	calls &SUB_000000b0
+SLUS	80016084	jump_to_address_0xc0	calls &LAB_000000c0
+SLUS	80016c50	call_biosB0_StopCard_then_kernel_PatchCardRoutines	two named callees
+SLUS	80019780	call_fnptr_0x38_return_bit31	calls fn ptr at table+0x38, returns >>0x1f
+SLUS	8001d9c8	call_SetRotMatrix_then_SetTransMatrix	two named callees
+SLUS	80027118	swap_cd_read_flags_with_arg	returns old cd_read_flags, stores arg
+SLUS	80029d4c	call_snd_SetReverbDepthL_with_stack_arg	in_stack_00000030 passed to snd_SetReverbDepthL
+SLUS	8002ad0c	call_snd_SetupTickTimer_0	calls snd_SetupTickTimer(0)
+SLUS	80035cdc	float32_to_int32_saturating	exponent extract, shift mantissa, 0x80000000/0x7fffffff on overflow, math_RaiseFpError
+SLUS	80035d9c	int32_to_float64_normalize	exponent 0x41d, shifts normalize, math_Shift64U, packs hi/lo
+SLUS	8004ca90	bcd_msf_to_index_75_4500	nibble*10 combine, *0x4b and *0x1194
+SLUS	8006ad30	call_SquareRoot0_sum_squared_diffs	(p2-p5)^2+(p3-p6)^2+in_lo passed to SquareRoot0
+SLUS	8006cb54	call_file_LoadCommonData_stage_LoadStageData_fighter_LoadBoth	three named callees
+SLUS	80070658	loop_24_call_snd_KeyOffVoice	loop 0..0x17 calling snd_KeyOffVoice
+SLUS	8007d5ac	loop_gs_SortTile_thread_Sleep_exit_after_16	do-while calls gs_SortTile, thread_Sleep(1), returns when counter>0x10
+MOVIE	80105a58	zero_n_words_loop	stores 0 to *p, p++ for param_2 iterations
+MOVIE	8010aef4	copy_n_words_loop	*dst++=*src++ while count<param_3
+MOVIE	8010b104	call_DMACallback_const3	calls DMACallback(3,param_1)
+MOVIE	8010b168	call_PadStopCom	body only calls PadStopCom()
+MOVIE	8010b3a0	index_table_by_five_switch_1_to_5	param_2*5 stride, switch param_3 1..5 reads byte 0..4, returns count byte at +0xe9 if param_2<0
+MOVIE	8010c878	call_sio_XferByte_minus2	calls sio_XferByte(0xfffffffe)
+OV00	8009cfd0	decode_segment_then_divide_with_offset	stores fields 8 and 0x10 from param_2 shorts, table indirect call, divides delta*0x100 by +4 minus +8 times divisor
+OV00	8009d0a0	decode_segment_zero_offset_divide	sets +8=0, +0x10=short, table indirect call, stores delta*0x100/+4 to +0xc
+OV00	8009d324	decode_segment_len_low3_plus3	+4=(short&7)+3, then same offset divide as sibling
+OV00	8009e1f0	loop4_call_helper_then_range_bump	loop 4x func_0x8003a394 and field set, then conditional stores of 0x44c or 0x4b0 when range checks pass
+OV00	8009fab8	three_axis_angle_delta_divide_store	three (a-b)&0xfff wrapped to signed then divided by short and stored
+OV00	800a1bf8	rotate_vector_pick_max_abs_axis_store	helper calls, abs compare of three components, writes 0x400 or 0xc00 to +0x24 and clamped product (0..110000) to +0x2c
+OV00	800a5030	call_stub_800a5058_args_0_1_return_0	calls stub_800a5058(0) and (1), returns 0
+OV00	800a5388	zero_six_shorts_two_entries_stride16	loop step 0x10 until 0x20 storing 0 to six shorts
+OV00	800a5a5c	call_game_ResetPairSlotTables_then_ClearPlayerEffectTables_0_1	calls game_ResetPairSlotTables then game_ClearPlayerEffectTables(0),(1)
+OV00	800a6b00	clear_byte_plus1_four_entries_stride_0x34	base param*0x63c, 4 iterations step 0x34 store 0 at +1
+OV00	800a6c24	atan2_height_over_horizontal_dist_with_fold	calls math_Atan2 and gte_RotateVec3 with sqrt-like helper, folds result via 0x800 and 0x1000 minus
+OV00	800ae0c8	zero_global_and_two_byte_arrays_conditional	zeroes _g_hud_banner_slide_state, 2 iter zero bytes, second array skipped if g_game_mode==9 and g_kumite_mode_flag set
+OV00	800af8c0	loop2_step_byte_script_emit_two_prims	loop 2, script pointer byte reads, 0xff sentinel, two func_0x800184bc and func_0x800181b8 call pairs
+OV00	800b1408	store_const_minus22_to_g_cam_pitch	_g_cam_pitch=0xffffffea
+OV00	800b149c	store_cam_yaw_facing_plus_0x800_if_flag_mask_fff	_g_cam_yaw=(_g_cam_facing_angle+0x800 if g_main_loop_extra_flag)&0xfff
+OV00	800b6bd8	pad_bits_adjust_cam_target_pitch_yaw_step_0x32	tests _g_pad_held_p1 bits, adds +-0x32 to _g_cam_target vars, +-8 to pitch and yaw, 0x800 bit calls cam_SnapSmoothedFighterPos
+OV00	800b7bf0	zero_cam_target_xyz_advance_script_ptr_4	stores 0 to three _g_cam_target vars, _ptr_camscr_script+=4
+OV00	800bc6b0	build_local_struct_call_func_0x8001d31c	stores in_v1 minus globals into locals, calls func_0x8001d31c
+OV00	800c13f0	call_func_0x8004d300_eight_consts	calls func_0x8004d300 with 9,0xc,7,6,5,4,0xd,0xb
+OV00	800c64d4	clamp_99_split_two_ascii_digits_call_helper	min(param_1,99), /10+0x30 and %10+0x30 into local string, func_0x80082e64
+OV00	800c7fec	set_two_flag_bytes_from_angle_windows	angle minus _g_cam_facing_angle, &0xfff window compares, writes bytes at 0x800f71b8 0x800f7d22 0x800f4e90
+OV00	800c9efc	walk_input_ring_set_flag_byte_if_low4_eq_7	ring idx &0xf stride 4, sets _g_cur_fighter_ptr+0x50 when (byte&0xf)==7
+OV00	800ca74c	walk_input_ring_back_return_byte_plus2	idx-1&0xf subtracting ushort counts, returns byte at +2
+OV00	800ca7d8	walk_input_ring_back_return_byte_plus3_if_last	same walk, returns byte +3 if remainder==count-1 else 0
+OV00	800cb5e4	script_pop_mask_wait_ring_entry_and_mask	pops byte from *param_1, steps ring until mask&entry byte3 nonzero, calls ai_ScriptAdvanceFramesChecked
+OV00	800cbc34	script_pop_mask_count_match_ring_then_skip	pops two bytes, matches (entry&0xf)==mask or &0xf0, then advances count along ring
+OV00	800ccf78	script_pop_byte_compare_opponent_fields_range	pops byte, compares to 0x801037c8 table byte, +0x2a, +0x2c==-1, short range check else sets +4=1
+OV00	800cd820	return_word_from_table_ptr_two_byte_indices	*(param_2*4 + *(param_1*0x84 + const))
+OV00	800cf5e4	switch_roll_result_compare_dist_call_ai_RunHandlerIfTableEntry	calls ai_WeightsRollCheck or ai_WeightsPickIndex, switch result 0..3, compares g_cam_fight_dist, calls ai_RunHandlerIfTableEntry
+OV00	800d14a8	select_g_cpu_action_id_from_timers_rolls_and_switch	calls ai_RollThreshold and ai_PickWeightedScriptEntry, writes g_cpu_action_id, switch on g_option_screen_index
+OV00	800d4b28	call_two_helpers_zero_flags_p1_p2	calls fighter_UpdateAutoFacing and fight_ApplyPendingDamage, zeroes g_p1_ and g_p2_ flag globals, conditional on state-8 and state-10 <2
+OV00	800d8834	read_byte_helper_table_row_stride_0xc	calls move_GetCurrentTable0Byte4 and func_0x8006adbc(,3), returns byte at row*0xc+col
+OV00	800d9344	loop2_store_move_GetEntryHalf0_if_flag_eq_1	loop 2 stride 0x58, if g_p1_36_flag==1 stores move_GetEntryHalf0 into g_p1_28_motion_id
+OV00	800da240	set_pos_xz_from_other_minus_sincos_times_value	g_p1_04_pos_x and 0c_pos_z = other minus (sin/cos table * value)>>12
+OV00	800dadd0	copy_four_shorts_to_g_hitbox_param_a_to_d	reads 4 shorts at table row*8, stores to _g_hitbox_param_a..d
+OV00	800de160	per_player_loop_call_fx_SpawnFighterEffects_by_state	loops 2, branches on g_screen_mode==3 and g_p1_2d_state values, calls fx_SpawnFighterEffects
+OV00	800e08f0	loop16_switch_by_byte_sincos_velocity_update	16 iterations stride 0x3c, switch on byte cases 1..4, sin/cos table >>12
+OV00	800e3f58	compute_two_angles_store_g_light_dir_x_y	two func_0x80023b3c calls, stores to g_light_dir_x and g_light_dir_y at index*8
+OV02	80093530	clamp_index_21_random_then_call_funcs_toggle_g_memcard_menu_entered	index>0x15 uses rand%0x16, g_memcard_menu_entered set 1 then 0, calls func_0x8004c8e4 80036ae8 80018ae8
+OV02	800962d4	call_menu_UpdateCursor_2_param	menu_UpdateCursor(2,param_1)
+OV02	800963ac	call_menu_UpdateCursor_2_param	menu_UpdateCursor(2,param_1)
+OV02	8009776c	call_menu_UpdateCursor_2_param	menu_UpdateCursor(2,param_1)
+OV02	80098488	menu_UpdateCursor_pad_check_reset_fields_zero_11_bytes	calls menu_UpdateCursor(2,p+0x54), pad bits 0x10 and 0x40, sets shorts, zeroes 0xb bytes at 0x80092fa6
+OV02	80099f54	return_10_pow_n_loop	multiplies by 10 param_1 times
+OV02	8009eac0	fill_prim_struct_from_table_row_stride10_call_func_0x8003875c	local struct from table index*10, consts 0x34 0x28 0x80, calls func_0x8003875c
+SLUS	80015d90	or_mask_into_reg_plus4_return_idx_lt_3	rcnt_regs_ptr+4 OR-assign rcnt_event_ptr[idx], returns idx<3
+SLUS	8001b93c	build_packet_0xe1_and_0x60_add_ofs_call_gs_AddPrimToOT	writes word with 0xe1000200, byte 0x60, adds g_gs_sprite_ofs_x and y, calls gs_AddPrimToOT
+SLUS	8001d1bc	copy_g_gs_unit_matrix_switch_set_entries	copies g_gs_unit_m words to param_1, switch (param_4-0x58) cases 0..2 and 0x20..0x22
+SLUS	8001fa0c	build_3x3_matrix_from_three_angles_tbl_rotmatrix_cos_sin	reads tbl_rotmatrix_cos_sin by &0xfff for three angles, writes 9 shorts >>12
+SLUS	8002803c	call_SsInitHot_short_arg	SsInitHot((int)param_1)
+SLUS	80029d1c	call_snd_SetReverbDepthR_stack_arg	snd_SetReverbDepthR(in_stack_00000030)
+SLUS	80030d9c	call_snd_VabOpenHeadCommon_const_1	snd_VabOpenHeadCommon(p1,(int)p2,1,p3)
+SLUS	8003125c	call_SpuIsTransferCompleted_return_int	SpuIsTransferCompleted((int)param_1)
+SLUS	8004f408	loop4_biosB0_CloseEvent_pairs_in_critical_section	EnterCriticalSection, 4 iter two biosB0_CloseEvent calls at p[i] and p[i+4], ExitCriticalSection
+SLUS	80069898	compare_GetODE_ResetGraph_gs_ClearOtTable_StopRCnt	GetODE vs g_gpu_odd_even_field, ResetGraph(1), gs_ClearOtTable, StopRCnt(0xf2000002)
+SLUS	8006eb54	copy_n_bytes_loop_return_0	byte loop while param_2!=0, returns 0
+SLUS	800703d8	call_snd_SeqPlaySeq0_g_snd_current_seq_1	snd_SeqPlaySeq0(g_snd_current_seq,1,param_1)
+SLUS	80070420	call_snd_SeqClose0	body only calls snd_SeqClose0()
+SLUS	8007f3bc	call_thread_SetSuspended_five_consts_set_g_game_paused	thread_SetSuspended 6 5 4 7 0xc, g_game_paused=1
+SLUS	80082cfc	loop2_text_SubmitFontPage_thread_Sleep_1	2 iter clear g_gpu_clear_pending, text_SubmitFontPage, thread_Sleep(1)
+MOVIE	80105068	store_byte_arg1_over_n_bytes	loop stores param_2 byte to param_1++ param_3 times
+MOVIE	80106044	call_mdec_wait_or_status_bit24	param_1==0 calls mdec_WaitOutSync else mdec_ReadStatus>>0x18&1
+MOVIE	80107b00	call_cd_ResetState	body only calls cd_ResetState
+MOVIE	8010a17c	call_st_SectorHandler	body only calls st_SectorHandler
+MOVIE	8010b1e8	call_v0_fnptr_return_byte49_remapped	calls in_v0 pointer; returns byte at +0x49 with 3,2->1 and 6->4 under condition
+OV00	80095644	set_model_ptr_tables_for_index	param_1*0x538 strides; loop 3..10 calls fighter_GetModelDataPtr
+OV00	80098834	compute_three_angles_from_vector_via_helpers	writes param_1[0..2] from func_0x calls and 0xfff masks
+OV00	800a1988	diff_three_words_store_scaled_by_10	iVar1=param_1*0xc; deltas times 10 stored; copies prev values
+OV00	800a2060	clamp_field_0_255_index_table_lookup	field+0xc clamped 0..0xff; reads table via +0x48 with >>4 index
+OV00	800a23c4	call_func_if_field_c_shifted_differs_field_10	compares (+0xc<<0x14)>>0x10 to +0x10 then func_0x800120ac and copies +0xc to +0x10
+OV00	800a6b1c	clear_byte1_four_entries_stride_0x34_index_v0	loop 4 times clears byte+1 stride 0x34 from in_v0*4
+OV00	800a78b0	update_two_axis_ring16_clamped_shift_damping	u16 pairs, ring index &0xf, _g_spring_chain_active, clamp +-0x555
+OV00	800a7d8c	compute_angle_from_two_ints_table_lookup	abs values, divide, table at iVar4*2, 0x400 and 0x800 adjustments
+OV00	800af3cc	fill_36byte_entries_from_table_by_index	table ptr by param_1&0xffff; stride 0x24 entries; pads to 0x12 for 2 passes
+OV00	800afc54	store_arg1_minus_0x80_byte_indexed_arg0_x0xc	byte at (param_1&0xff)*0xc store param_2-0x80
+OV00	800b7c24	zero_g_cam_pitch_yaw_roll_advance_script_4	sets _g_cam_pitch _g_cam_yaw _g_cam_ang_z_roll 0; _ptr_camscr_script+=4
+OV00	800b86a4	advance_ptr_camscr_script_8	only _ptr_camscr_script += 8
+OV00	800bb6c8	step_int_toward_target_deadzone_clamped	param_2-*param_1 vs +-param_3; divide by param_4; clamp param_5
+OV00	800bbf18	copy_g_cam_view_ang_to_param_targets_call_cam_SetLookAtMatrix	three global copies then cam_SetLookAtMatrix
+OV00	800be0a8	store_three_scaled_table_products_to_g_fighter_vel	writes _g_fighter_vel_x _z _x_alt from short table times args >>12
+OV00	800bfe78	save_or_restore_p1_p2_pos_by_distance_lt_6000	func_0x8006ad80 result <6000 saves to _g_saved_fighter_*; then restores
+OV00	800c1448	init_p1_p2_globals_then_hud_SetRoundWinMarkers	sets g_p1_/g_p2_ fields, calls hud_SetRoundWinMarkers
+OV00	800c8928	return_1_if_byte2d_zero_or_7_9_with_byte41_eq_1	reads _g_cur_fighter_ptr+0x2d and +0x41
+OV00	800c89c4	return_0_if_point_within_half_stage_width_depth	compares to _g_stage_half_width/2 and _g_stage_half_depth/2
+OV00	800c8a9c	return_0_if_xz_within_half_g_timer_start	compares to g_timer_p1_start/2 and g_timer_p2_start/2
+OV00	800ca4bc	set_field_0x10_2000_if_byte_lt_10_and_input_eq_1	counter byte at 0x800f74ec <10 and short==1 sets +0x10=2000 and increments
+OV00	800caed4	set_bit_in_byte6_call_ai_ScriptAdvanceFramesChecked	bVar1 1 or 2 from param_1&0xf; calls ai_ScriptAdvanceFramesChecked(1,param_2)
+OV00	800cc1c8	loop_step_ring_until_nibble_matches_or_abort	pops byte from *param_1; loops ai_ScriptSyncRingCursor compare nibble
+OV00	800cca54	loop_step_ring_until_high_nibble_of_either_arg	pops two bytes; match first returns, match second sets flag
+OV00	800cd45c	set_byte4c_by_angle_diff_lt_0x800	fighter_CalcAngleToTarget minus +0x1c masked 0xfff <0x800
+OV00	800d38c8	return_code_from_opponent_bytes_0_1_2_3_ff	reads _ptr_opponent_fighter+0x2d,0x2a,0x46; returns 2,3,0xff
+OV00	800d3bbc	return_math_RandomMod_sum_bytes_lt_byte0	math_RandomMod(p[1]+p[0]) < *p
+OV00	800d8f4c	return_value_times_per_mille_by_switch_div_1000	move_GetDamageValue*constant (0x4e2,800,0x5dc,500,0x2ee)/1000
+OV00	800d91dc	return_angle_masked_0xfff_from_cam_or_prev_facing	uses g_p1_18_prev_facing or _g_cam_facing_angle plus offset, &0xfff
+OV00	800d95d8	return_arg0_or_arg0_plus_1_by_flags	branches on g_p1_32/34_flag, returns param_1 or +1
+OV00	800dd1c8	clear_byte_16_entries_stride_0x34	iVar1 from 0x30c step -0x34 stores 0
+OV00	800dd1ec	fill_color_table_call_fx_SetEffectListPtr_by_g_clear_rect_index	g_cfg_lighting branch; fx_SetEffectListPtr(i,4,n) twice per case
+OV00	800ddd08	loop_alloc_fx_FindFreeSlot_fill_fields_from_list	loops until 0xff; fx_FindFreeSlot; sets pos 1000 and g_p1_04_pos_x
+OV00	800dfde8	update_eight_entry_state_machine_stride_0x3c	loop 8 entries switch on state byte; countdown bytes
+OV00	800e21f0	forever_loop_light_SetDirection_stage_update	calls gpu_InitOrderingTables then do-while true with stage_UpdateFrame
+OV00	800e40a0	store_in_lo_to_arg2_plus_8	*(param_3+8)=in_lo
+OV02	800962f8	call_menu_UpdateCursor_2_arg0	menu_UpdateCursor(2,param_1)
+OV02	800963d0	call_menu_UpdateCursor_2_arg0_b	menu_UpdateCursor(2,param_1)
+OV02	80098464	call_menu_UpdateCursor_2_arg0_c	menu_UpdateCursor(2,param_1)
+OV02	800993e4	switch_map_1to7_to_0_1_3_2_5_4_6_default_7	switch cases return 0,1,3,2,5,4,6, default 7
+OV02	80099d98	write_decimal_digits_math_Pow10_nul_terminated	calls math_Pow10, divides, '0' offset, writes '\0'
+SLUS	800160bc	jump_to_address_0xc0	calls LAB_000000c0
+SLUS	8001835c	store_3_at_off3_and_0x74_at_off7	byte stores 3 and 0x74
+SLUS	8001d01c	call_DrawOTag_field_0x10	DrawOTag(*(param_1+0x10))
+SLUS	8001d29c	store_four_args_to_gs_buf_origin_globals_zero_if_flag	assigns g_gs_buf_origin_*; zeros if g_gs_graph_flag_interlace
+SLUS	8001f35c	copy_three_words_to_arg0_offsets_0x14_0x18_0x1c	stores param_2[0..2] returns param_1
+SLUS	80027de4	store_zero_words_n_times	loop stores 0 to param_1++ param_2 times
+SLUS	80027e3c	float_to_int_with_0x4f000000_threshold	math_CmpFloat vs 0x4f000000; math_AddFloat 0xcf000000
+SLUS	80028018	call_SsInitHot_short_arg	SsInitHot((int)param_1)
+SLUS	80029cec	call_snd_SetReverbVolume_with_stack_arg	snd_SetReverbVolume(in_stack,in_stack)
+SLUS	8002acec	call_snd_SetupTickTimer_1	snd_SetupTickTimer(1)
+SLUS	80035f08	shift_left_normalize_pack_with_exponent_bits	loop shl while param_1<=param_2; or iVar1<<0x17
+SLUS	8004cb1c	convert_int_to_three_bcd_bytes_div_0x1194_0x4b	%0x1194, /0x4b, digit/10 packed <<4
+SLUS	8004f19c	open_enable_card_events_fill_fnptr_table	InitCARD biosB0_OpenEvent sprintf s_bu_1d_1d mcard_ function pointers
+SLUS	80050078	call_biosB0_TestEvent_on_four_words	loop 4 times biosB0_TestEvent(*param_1++)
+SLUS	80069694	call_sfx_cd_update_addprim_then_spin_forever	sfx_UpdateQueue cd_UpdateAudio AddPrim; do{}while(true)
+SLUS	800699fc	vsync_callback_toggle_field_call_gs_ClearOtTable	GetODE compare g_gpu_odd_even_field; ResetGraph; gs_ClearOtTable
+SLUS	8006b58c	loop_forever_thread_Sleep_1	do thread_Sleep(1) while true
+SLUS	8007ad70	decrement_u16_counters_60_frame_by_mode_flags	0x3c reload; g_game_mode checks; sets *param_1=0 when <0
+SLUS	8007c410	return_code_from_or_pad_press_bits_0x10_0x20	g_pad_press_p1	p2; returns 4,1 or (>>5&2)
+SLUS	8007f638	write_n_decimal_digits_into_buffer_nul_terminated	divisor loop, /10, +'0', param_1[param_3]=0
