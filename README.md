@@ -33,3 +33,6 @@ Non-commercial, for study and preservation. **No game data is included** (no dis
 | `tools/` | psxrules, injecthints, slice, mergehand, orphans, provctx3, srprovapply, glscan, glctx, glctxn, glmerge, glmerge_doa, glplan, findbase, psdoa_scan, evid, psyq_match, constmatch |
 
 MIT licence for notes, names and tools. Dead or Alive belongs to its rights holders.
+
+## Final status (11-02)
+2181 functions: 926 externally anchored, 1255 body-verified (642 names double-checked blind, 635 pass, 7 fixed). Stages: 11 named by arcade-opponent owner, 2 unused stubs, 2 unreached ids, id 13 = training fixed stage. Tables typed from reader code; blocked ones carry proof in evid/. 648 PsyQ library internals stay blocked (would need leaked SDK libs). See NOTES.md.

@@ -102,3 +102,7 @@ Evidence tier BODY = the name's every claim was checked against the function's o
 ## Round 7 (11-02)
 - Stages are nameless officially (fandom {{Nameless}}, via api.php; fans: "<fighter>'s stage"). Named by owner from code: arcade opponent table SLUS 0x80083424[count] (00 04 0c 02 06 01 08 09 05 0d 0b), stage = tblA 0x800ebc54[count]; fight_InitMatchOpponents 0x800c09a4 -> SelectOpponentFighters 0x800c381c, SelectStageIndex 0x800c113c. Verified headless (evid/stage_shots/arcade_round*.png).
 - NAMED: 5 zack, 11 hayabusa, 7 lei_fang, 8 jann_lee, 4 gen_fu, 9 tina, 3 bayman, 10 bass, 0 kasumi, 12 ayane, 6 raidou; 14/15 stage_unused (stub files, 4199/3295 B nonzero of 104820). OPEN: 1, 2 (no producer), 13 (mode 7 fixed, owner unproven).
+
+## Round 8 (11-02) final stage status
+- 15 of 16 ids named: 11 owner stages (zack, hayabusa, lei_fang, jann_lee, gen_fu, tina, bayman, bass, kasumi, ayane, raidou), stage_unused_14/15 (stub files), stage_unreached_01/02 (no producer), stage_mode7_fixed = id 13 (Training, game_mode 7; Dojo wiki text fits but shot is red/gold carpet, Tatami.jpg compare unproven, so not named dojo).
+- Fandom: stages nameless ({{Nameless}}); pages found for Zack, Raidou, Jann Lee, Tina, Bayman, Lei Fang, Hayabusa; missing for Gen Fu, Bass, Kasumi, Ayane (api queries in evid/stage_names.tsv).
