@@ -1,7 +1,7 @@
 NAME	ADDR	TYPE	READER	PROOF	STATUS
 snd_voice_seq_id	0x80049758	DOA_SndVoice[24]	spu_SetVoiceBitmask 0x80032cfc; init loop	24*0x36=0x510 ends 0x80049c68; voice[23].f_32 IS 0x80049c38. spu_voice_bit_table read only when spu_voice_attr_flags(0x80042518)&1; flag written only =0 at init, never set -> branch dead, symbol phantom (callers idx 0xca..0xcd would span >0x19a bytes). Renamed spu_shadow_regs_dead_80049c38, untyped	PROVEN
 tbl_sfx_a	0x80083dc0	DOA_SfxEntry[46]	sound_PlaySfx const callers	const call idx 0x2d=45 used; next table tbl_sfx_b at 0x80083ed4, 0x114=46*6	PROVEN
-tbl_sfx_b/c/d/e	0x80083ed4..	DOA_SfxEntry	select_sfx_entry_by_bank_and_id 0x8006f0b4	spacing 0x30=8 entries by tiling but index is runtime bank/id; max not provable	BLOCKED: runtime index
+tbl_sfx_b/c/d/e	0x80083ed4/f04/f34/84260	DOA_SfxEntry[8],[8],[8],[18]	sound_PlaySfx 0x800708b8 sfx lookup	stride 6 (f_4 sequential index with resets); extents by adjacency: next-table literals 0x80083f64, 0x800842cc; e ends where 0x800842cc begins (0x6c=18*6)	PROVEN (extent by adjacency)
 tbl_stage_anim_tex_enable/frames/frames_b	0x80083a54/6c/d54	byte[21]	stage_UpdateAnimatedTextures 0x8006d688	enable[id]=slot count of group at id; max id+enable-1=13+8-1=20 -> 21 entries	PROVEN
 tbl_stage_anim_tex_b/vram	0x80083a84/ab0	ushort[21]	stage_UpdateAnimatedTextures	same index id+k, 21 entries	PROVEN
 tbl_stage_anim_tex_seq	0x80083adc	byte[630]	stage_UpdateAnimatedTextures	stride 0x1e x 21	PROVEN
@@ -16,7 +16,7 @@ tbl_stage_data_cd_index	0x80083434	short[16]	stage_LoadStageData 0x8006cbb4	valu
 tbl_snd_vab_load_flags	0x80084c6c	DOA_VabLoadRec[4]	snd_LoadVab 0x8006ee54	stride 0x10; callers pass 0,1,2,(p1&0xff)+2 (p1 0/1) -> 4; ends at prog_map 0x80084cac	PROVEN
 tbl_snd_vab_prog_map	0x80084cac	ushort[42]	snd_LoadVab	index (p&0xff) runtime; extent by data (perm of 0x125..0x14e) + string at 0x80084d00	PROVEN (extent by data)
 tbl_movie_a/tbl_movie_b	0x80084eac/b0	uint (scalar)	SLUS dec13 39754-39755	copied to exec header +0x30/+0x34 (PSX-EXE sp base/offs): values 0x801ff000, 0 -> scalars, not tables	PROVEN scalar (types left untyped)
-tbl_movie_file_entry / tbl_movie_play_frames	0x80084ec8/ee0	?	dec13 SLUS 39806, 39931	stride 0x30 indexed by movie id; count of movies not bounded by reader; not typed	BLOCKED: count runtime
+tbl_movie_file_entry / tbl_movie_play_frames	0x80084eb4 base (fields +0x14/+0x2c)	DOA_MovieEntry[2]	cd_SearchMovieFiles 0x80076e14 loop <2; exe_LoadAndExec 0x80076838 id*0x30	loop bound 2 and stride 0x30 both in code	PROVEN
 tbl_part_flags_by_move_a	0x800ea6b8	byte[N]	OV00	N=*(byte*)(model_hdr+9) runtime	BLOCKED: runtime size
-tbl_effect_piece_set	0x800ee008	?	effect_InitPieceSet (OV00)	16 bytes/set, sets spaced 0x18; set count not proven	BLOCKED: count unproven
-tbl_vibration_script_0..9	0x800eca28	?	OV00	scalar words read individually; no stride/index proven	BLOCKED: no indexed reader
+tbl_effect_piece_set	0x800edff0	byte[72] (3 sets x 0x18)	init_sixteen_piece_array_800e0244 (kinds 2,3,5 -> 0x800edff0/ee008/ee020; reads 16 of 0x18); init_effect_records_by_kind reads 8	3 consecutive 24-byte sets, unrelated table at 0x800ee038	PROVEN (extent by adjacency)
+tbl_vibration_script_0..11	0x800eca28	pointer[12]	pad_UpdateVibrationScripts 0x800db578 reads each by constant index 0..11	12 pointers to 0x800ec940..0x800eca18; next data at 0x800eca58 is script bytes	PROVEN pointer table (script byte format BLOCKED, see tables_proof.tsv)

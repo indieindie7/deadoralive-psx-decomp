@@ -1,0 +1,34 @@
+F 801e8288 update_two_fields_float_calls_sine_scale_2000_add_1000_801e8288 USER_DEFINED 340
+F 801e83dc fx_InitOrbitTarget USER_DEFINED 212
+F 801e84b0 gfx_init_four_tables_for_draw_buffer_801e84b0 USER_DEFINED 328
+F 801e85f8 build_local_packet_from_two_tables_call_func_0x800366dc_801e85f8 USER_DEFINED 140
+F 801e9190 dbgpad_Init USER_DEFINED 132
+C 801ea614
+C 801e982c
+F 801e9214 dbgpad_Update USER_DEFINED 276
+C 801e9328
+C 801e9858
+F 801e9328 dbgpad_UpdateHistoryStub USER_DEFINED 16
+F 801e9338 dbgpad_UpdateHistoryDraw USER_DEFINED 1268
+C 801e982c
+C 801e9d34
+C 801e9d34
+C 801e9d34
+C 801e9d34
+C 801e9d34
+C 801e9d34
+C 801e9d34
+S ~cff0
+C 801e9d34
+C 801e9d34
+F 801e982c dbgpad_ClearHistory USER_DEFINED 44
+F 801e9858 dbgpad_DrawFrameCounters USER_DEFINED 1244
+C 801ea024
+C 801ea024
+C 801ea024
+F 801e9d34 dbgpad_PutChar USER_DEFINED 328
+C 801e9e7c
+F 801e9e7c loop_chars_queue_sprite_fields_from_font_table_801e9e7c USER_DEFINED 424
+F 801ea024 draw_string_chars_loop_skip_space_12px_step_801ea024 USER_DEFINED 444
+F 801ea1e0 dbgpad_DrawHexGrid USER_DEFINED 1076
+F 801ea614 dbgpad_InitFontTables USER_DEFINED 492

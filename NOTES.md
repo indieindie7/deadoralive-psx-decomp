@@ -93,3 +93,8 @@ Evidence tier BODY = the name's every claim was checked against the function's o
 - Tables: evid/tables_proof2.tsv, pass13.sh, dec14_*.c. 14 typed, 5 BLOCKED (tbl_sfx_b..e runtime index; movie entry/frames count unbounded; part_flags size from runtime header; effect_piece_set count; vibration scripts no reader). snd_voice_seq_id = DOA_SndVoice[24]; spu_voice_bit_table dead (flag never set) -> spu_shadow_regs_dead_80049c38. cd entries >=16 = fighter model tables, typed.
 - Full blind review of remaining 542: 536 PASS, 6 FAIL (1.1%), fails renamed. Combined 642 names: 635 pass, 7 fixed.
 - PsyQ names (evid/psyq_open_names.tsv, open sources only: psx-spx BIOS tables, PSn00bSDK): 10 APPLY (8 applied, 2 need function creation at 80015b0c, 800161ec), 648 BLOCKED (libgpu/pad/cd/snd/mdec/libc internals need leaked lib to match).
+
+## Round 6 (11-02)
+- Ghidra: functions created at 80015b0c (biosA0_InitHeap) and 800161ec (biosA0_srand); 2183 hand names re-applied, 0 mismatches vs funcs14_*.tsv (pass14.sh).
+- Tables: 7 more typed (sfx_b/c/d, sfx_e, movie_entry, effect_piece_sets, vibration pointer[12]); 2 BLOCKED with proof lines in evid/tables_proof.tsv (part_flags_a, vibration script bodies).
+- Stages: still 1 NAMED (id 5), 15 OPEN. Searched: fandom (HTTP 402), web.archive (refused), strategywiki (403), GameFAQs/Prima guide, psxdatacenter, Wikipedia, Saturn port stage map (no provable id map), exe tables (stage-sequence 5,11,7,8,4,9,3,10,0,12,6, not fighter-indexed). No longplay transcripts found.

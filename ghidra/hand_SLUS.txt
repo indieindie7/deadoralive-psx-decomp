@@ -1009,3 +1009,5 @@
 0x8004c6dc func cd_init_state3_to_state4_8004c6dc hand BODY-proof: loops CdControl_Internal(2,..), g_cd_init_state=4, tail-calls StartRead; no seek shown (prior unproven name: cd_InitStateStartSeek) [ev:BODY]
 0x8004c728 func cd_init_state4_set_state5_8004c728 hand BODY-proof: zeroes retry, loops CdReadCallback(2,..), sets g_cd_init_state=5; no read start shown (prior unproven name: cd_InitStateStartRead) [ev:BODY]
 0x8004c77c func cd_InitStateCheckReadDone hand state 5 step: cd_ReadFinish, sector count compare, retry limit then cd_InitMode, falls into state switch | BODY-proof: cd_ReadFinish compare, retry counter, state switch [ev:ctxCHAIN,ctxGLOB,BODY]
+0x80015b0c func biosA0_InitHeap hand R5-proof: BIOS stub SLUS => A(39h) = InitHeap(addr, size) [psx-spx(nocash) https://psx-spx.consoledev.net/kernelbios/]; code addiu t2,zero,0xA0;jr t2;addiu t1,zero,0x39 (bytes verified ram_main.bin) [ev:TRIV]
+0x800161ec func biosA0_srand hand R5-proof: BIOS stub SLUS => A(30h) = srand(seed) [psx-spx(nocash) https://psx-spx.consoledev.net/kernelbios/]; code addiu t2,zero,0xA0;jr t2;addiu t1,zero,0x30 (bytes verified ram_main.bin) [ev:TRIV]

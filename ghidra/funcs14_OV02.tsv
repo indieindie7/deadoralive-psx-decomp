@@ -1,0 +1,352 @@
+F 80093530 clamp_index_21_random_then_call_funcs_toggle_g_memcard_m_80093530 USER_DEFINED 240
+F 800949d4 opt_MenuMain USER_DEFINED 760
+C 80094ccc
+C 80094ee0
+C 8009527c
+C 80096418
+C 80095510
+C 80095a5c
+C 80095cf8
+C 80099bcc
+F 80094ccc opt_DrawMainMenu USER_DEFINED 532
+S Option Menu 
+S GAME CONFIG
+S Audio Config
+S RANDOM
+C 8009f364
+F 80094ee0 opt_GameConfigMenu USER_DEFINED 924
+C 80099bc4
+C 80099c98
+C 80098dc0
+C 80095e98
+C 8009efd4
+C 8009efd4
+C 8009f364
+C 800962d4
+C 800962f8
+C 800962f8
+C 8009631c
+C 80096340
+C 80096364
+C 80096388
+C 800963ac
+C 800963d0
+C 80096460
+F 8009527c opt_AudioConfigMenu USER_DEFINED 660
+C 80099bc4
+C 80099c98
+C 80098dc0
+C 80096548
+C 8009f7f8
+C 8009efd4
+C 8009efd4
+C 8009f364
+C 80096884
+C 800968f0
+C 80096934
+C 80096978
+C 80096a30
+C 80096e90
+F 80095510 opt_ExtraConfigMenu USER_DEFINED 1356
+S NOW SYSTEM VOICE LOADING
+S SYSTEM VOICE LOADING
+S EM VOICE LOADING
+S OICE LOADING
+S  LOADING
+S DING
+C 80099bc4
+C 80099c98
+C 80098dc0
+C 80096fc4
+C 8009efd4
+C 8009efd4
+C 8009f364
+C 800983d4
+C 80097748
+C 8009776c
+C 80097790
+C 80097660
+C 800977f4
+C 800977b4
+C 80097ea8
+C 80098488
+F 80095a5c opt_MemoryCardMenu USER_DEFINED 668
+C 80099bc4
+C 80099c98
+C 80098dc0
+C 80098bc4
+C 8009f364
+C 800999f4
+F 80095cf8 opt_RecordsMenu USER_DEFINED 416
+C 80099bc4
+C 80099c98
+C 80098dc0
+C 800999f4
+C 8009a95c
+C 8009df44
+C 8009a95c
+C 8009df44
+C 8009e508
+C 8009e508
+C 80099f94
+C 8009b22c
+C 8009c24c
+C 8009d298
+C 8009f62c
+F 80095e98 opt_DrawGameConfig USER_DEFINED 1084
+C 800999f4
+S GAME CONFIG
+S Cpu Level    
+S P1 LIFE GAUGE
+S Exit
+S Default
+F 800962d4 call_menu_updatecursor_2_param_800962d4 USER_DEFINED 36
+C 800999f4
+F 800962f8 call_menu_updatecursor_2_arg0_800962f8 USER_DEFINED 36
+C 800999f4
+F 8009631c call_menu_updatecursor_2_arg0_8009631c USER_DEFINED 36
+C 800999f4
+F 80096340 call_menu_updatecursor_with_2_80096340 USER_DEFINED 36
+C 800999f4
+F 80096364 call_menu_updatecursor_with_2_80096364 USER_DEFINED 36
+C 800999f4
+F 80096388 call_menu_updatecursor_mode_2_80096388 USER_DEFINED 36
+C 800999f4
+F 800963ac call_menu_updatecursor_2_param_800963ac USER_DEFINED 36
+C 800999f4
+F 800963d0 call_menu_updatecursor_2_arg0_b_800963d0 USER_DEFINED 36
+C 800999f4
+F 800963f4 call_menu_updatecursor_mode_2_800963f4 USER_DEFINED 36
+C 800999f4
+F 80096418 opt_KeyConfigEntry USER_DEFINED 16
+F 80096428 if_inreg_bit0x40_call_func_and_opt_keyconfigmenu_80096428 USER_DEFINED 56
+C 80098e08
+F 80096460 menu_updatecursor_then_pad_bit_checks_write_shorts_80096460 USER_DEFINED 232
+C 800999f4
+F 80096548 opt_DrawAudioConfig USER_DEFINED 828
+C 800999f4
+S Audio Config
+S SPEAKER OUT
+S BGM VOLUME
+S Exit
+S Default
+C 80099d98
+C 80099d98
+C 80099d98
+C 80099d98
+F 80096884 call_menu_updatecursor_then_call_func_by_halfword_change_80096884 USER_DEFINED 108
+C 800999f4
+F 800968f0 opt_update_cd_music_volume_800968f0 USER_DEFINED 68
+C 800999f4
+F 80096934 opt_UpdateSeVolume USER_DEFINED 68
+C 800999f4
+F 80096978 call_menu_updatecursor_then_branch_on_pad_press_0x40_0x8_80096978 USER_DEFINED 184
+C 800999f4
+F 80096a30 opt_UpdateVoiceTest USER_DEFINED 132
+C 800999f4
+C 80096ab4
+C 80096c84
+F 80096ab4 opt_SelectVoiceBank USER_DEFINED 464
+F 80096c84 switch_on_tbl_snd_vab_ids_pick_table_call_func_8002cf2c_80096c84 USER_DEFINED 524
+F 80096e90 opt_AudioConfigExitItem USER_DEFINED 308
+C 800999f4
+F 80096fc4 opt_DrawExtraConfig USER_DEFINED 1692
+C 800999f4
+S Extra Config
+S SAFETY ZONE SIZE
+S ? ? ? ? ?
+S Exit
+S Default
+C 80099e68
+F 80097660 opt_UpdateExtraExclusiveItem USER_DEFINED 232
+C 800999f4
+F 80097748 call_menu_updatecursor_mode_2_80097748 USER_DEFINED 36
+C 800999f4
+F 8009776c call_menu_updatecursor_2_param_8009776c USER_DEFINED 36
+C 800999f4
+F 80097790 call_menu_updatecursor_2_arg0_80097790 USER_DEFINED 36
+C 800999f4
+F 800977b4 opt_LockedItemBeep USER_DEFINED 16
+F 800977c4 if_in_v0_or_in_v1_bit_0x40_call_func_800708b8_0_0x29_800977c4 USER_DEFINED 48
+F 800977f4 opt_ExtraSubmenuEntry USER_DEFINED 16
+F 80097804 if_inreg_bit0x40_call_func_and_opt_extrasecretmenu_80097804 USER_DEFINED 56
+C 8009783c
+F 8009783c opt_ExtraSecretMenu USER_DEFINED 1644
+C 80099bc4
+C 80099c98
+C 80098dc0
+C 800999f4
+C 8009f364
+C 800999f4
+S Extra Config
+S Default
+S Exit
+F 80097ea8 opt_StageListEntry USER_DEFINED 16
+F 80097eb8 if_inreg_bit0x40_call_func_and_opt_stagelistmenu_80097eb8 USER_DEFINED 56
+C 80097ef0
+F 80097ef0 opt_StageListMenu USER_DEFINED 816
+C 80099bc4
+C 80099c98
+C 80098dc0
+C 800999f4
+C 8009f364
+C 80098220
+S Extra Config
+S Exit
+F 80098220 call_func_then_call_ptr_stage_preview_callback_80098220 USER_DEFINED 188
+F 800983d4 opt_UpdateExtraModeItem USER_DEFINED 144
+C 800999f4
+C 80098588
+F 80098464 call_menu_updatecursor_2_arg0_c_80098464 USER_DEFINED 36
+C 800999f4
+F 80098488 menu_updatecursor_pad_check_reset_fields_zero_11_bytes_80098488 USER_DEFINED 256
+C 800999f4
+F 80098588 opt_FightingOrderMenu USER_DEFINED 1596
+C 80099bc4
+C 80099c98
+C 80098dc0
+C 800999f4
+C 8009efd4
+C 8009efd4
+C 8009f364
+S Extra Config
+S FIGHTING ORDER
+S Exit
+S Default
+C 800999f4
+F 80098bc4 opt_DrawMemoryCard USER_DEFINED 508
+C 800999f4
+S Memory Card 
+S Save Data
+S Load Data
+S Exit
+F 80098dc0 return_pad_press_bit4_clear_call_func_if_set_80098dc0 USER_DEFINED 72
+F 80098e08 opt_KeyConfigMenu USER_DEFINED 1500
+C 80099bc4
+C 80099c98
+C 800998dc
+C 800993e4
+C 80099454
+C 8009f364
+C 8009f29c
+F 800993e4 switch_map_1to7_to_0_1_3_2_5_4_6_default_7_800993e4 USER_DEFINED 112
+F 80099454 opt_DrawKeyConfig USER_DEFINED 1160
+S KEY CONFIG
+F 800998dc adjust_halfword_by_pad_held_bits_with_wrap_and_hold_coun_800998dc USER_DEFINED 280
+F 800999f4 pad_mask_update_short_index_wrap_with_repeat_800999f4 USER_DEFINED 464
+F 80099bc4 stub_80099bc4 USER_DEFINED 8
+F 80099bcc load_image_by_index_mod_0x16_set_g_menu_cursor_color_80099bcc USER_DEFINED 204
+F 80099c98 opt_AddBackgroundTiles USER_DEFINED 256
+F 80099d98 write_decimal_digits_math_pow10_nul_terminated_80099d98 USER_DEFINED 208
+C 80099f54
+C 80099f54
+F 80099e68 write_decimal_left_space_padded_80099e68 USER_DEFINED 236
+C 80099f54
+C 80099f54
+F 80099f54 return_10_pow_n_loop_80099f54 USER_DEFINED 56
+F 80099f94 draw_text_and_padded_decimals_three_blocks_via_math_pow1_80099f94 USER_DEFINED 2504
+C 80099f54
+C 80099f54
+C 80099f54
+C 80099f54
+C 80099f54
+C 80099f54
+C 80099f54
+C 80099f54
+C 80099f54
+C 80099f54
+C 80099f54
+C 80099f54
+F 8009a95c rec_DrawBestTimes USER_DEFINED 2256
+C 8009eac0
+F 8009b22c rec_DrawVersusRanking USER_DEFINED 4128
+S VERSUS RANKING
+S RANK
+S CHARACTER
+S PER.
+S WIN
+S LOSE
+C 8009ec5c
+C 8009ec5c
+C 8009eac0
+S PER.
+S WIN
+S LOSE
+S 1ST
+F 8009c24c rec_DrawVersusData USER_DEFINED 4172
+C 800999f4
+S VERSUS DATA
+S CHARACTER
+S PER.
+S WIN
+S LOSE
+C 8009ec5c
+C 8009ec5c
+C 8009eac0
+S PER.
+S WIN
+S LOSE
+F 8009d298 rec_DrawCharacterUsage USER_DEFINED 3244
+C 8009eac0
+C 80099f54
+C 80099f54
+C 80099f54
+C 80099f54
+F 8009df44 draw_text_rows_div_mod_time_values_8009df44 USER_DEFINED 1476
+F 8009e508 rec_DrawScoreRanking USER_DEFINED 1464
+C 8009eac0
+C 80099f54
+C 80099f54
+C 80099f54
+C 80099f54
+F 8009eac0 fill_prim_struct_from_table_row_stride10_call_func_0x800_8009eac0 USER_DEFINED 248
+F 8009ebb8 set_g_menu_title_fields_two_draw_calls_8009ebb8 USER_DEFINED 164
+F 8009ec5c write_rounded_percent_string_three_digits_8009ec5c USER_DEFINED 204
+F 8009ed28 opt_ResetPageIndex USER_DEFINED 16
+F 8009ed38 opt_DrawButtonHint USER_DEFINED 472
+F 8009ef10 build_poly_struct_queue_via_func_8001b93c_8009ef10 USER_DEFINED 196
+F 8009efd4 opt_DrawConfirmExitFooter USER_DEFINED 712
+C 8009ed38
+C 8009ed38
+S CONFIRM
+S NO USE
+S EXIT
+S NO USE
+F 8009f29c opt_draw_black_rect_two_hints_8009f29c USER_DEFINED 200
+C 8009ed38
+C 8009ed38
+F 8009f364 opt_DrawConfirmExitFooter_2 USER_DEFINED 712
+C 8009ed38
+C 8009ed38
+S CONFIRM
+S NO USE
+S EXIT
+S NO USE
+F 8009f62c opt_DrawExitFooter USER_DEFINED 460
+C 8009ed38
+C 8009ed38
+S EXIT
+S NO USE
+F 8009f7f8 opt_DrawPlayStopFooter USER_DEFINED 944
+C 8009ed38
+C 8009ed38
+S EXIT
+S NO USE
+S STOP
+S NO USE
+S NO USE
+F 8009fba8 mc_RunStateMachine USER_DEFINED 292
+C 8009fccc
+C 8009fd78
+C 8009fe94
+C 8009fe20
+C 800a0488
+F 8009fccc mc_StateInitCard USER_DEFINED 172
+F 8009fd78 mc_StateOpenFile USER_DEFINED 168
+F 8009fe20 mc_state_end_pump_pick_next_8009fe20 USER_DEFINED 116
+F 8009fe94 mc_StateReadLoop USER_DEFINED 288
+C 800a02dc
+C 8009ffb4
+F 8009ffb4 mc_DecodeBlockToImage USER_DEFINED 808
+F 800a02dc mc_SectorPumpStep USER_DEFINED 428
+F 800a0488 mc_load_rect_512x480_clear_state_800a0488 USER_DEFINED 72

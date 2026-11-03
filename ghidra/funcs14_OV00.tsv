@@ -1,0 +1,2341 @@
+F 8009554c init_two_global_struct_pairs_via_call_8009554c USER_DEFINED 248
+F 80095644 set_model_ptr_tables_for_index_80095644 USER_DEFINED 420
+C 80095b44
+C 80095b44
+C 80095b44
+F 800957e8 loop_dispatch_by_u16_tag_to_callees_800957e8 USER_DEFINED 860
+F 80095b44 return_param3_if_arg0_is_0x42_80095b44 USER_DEFINED 64
+F 80095b84 fighter_UpdateAction USER_DEFINED 956
+C 80098e6c
+C 80097a94
+C 8009bc04
+C 80097bf8
+C 8009ee84
+C 8009fdf4
+C 80095f40
+C 8009e4b4
+C 8009d8e4
+C 800a0624
+C 80097d28
+F 80095f40 fighter_StepMotionFrames USER_DEFINED 612
+C 8009d544
+C 800961a4
+C 8009d544
+C 800963ac
+C 80096820
+C 80097638
+C 80097a48
+F 800961a4 motion_AdvanceFrameFixed USER_DEFINED 520
+C 8009d6a8
+F 800963ac motion_StepJointPolynomials USER_DEFINED 72
+F 800963f4 motion_StepJointPolynomialsTail USER_DEFINED 1068
+F 80096820 motion_unpack_angle_words_80096820 USER_DEFINED 3080
+C 80097428
+F 80097428 motion_ReadStreamAngleOffsets USER_DEFINED 528
+F 80097638 unpack_words_bytes_to_tables_80097638 USER_DEFINED 1040
+F 80097a48 fighter_SetMotionEndFlag USER_DEFINED 76
+F 80097a94 motion_SkipToFrame USER_DEFINED 356
+C 8009a330
+F 80097bf8 fighter_ConsumePendingFlags USER_DEFINED 304
+F 80097d28 fighter_FinishFrameUpdate USER_DEFINED 344
+C 80097e80
+C 80098bd8
+C 80098d80
+F 80097e80 fighter_UpdateFacingAngle USER_DEFINED 1164
+C 80098a98
+C 8009830c
+C 800989e8
+C 80098a98
+F 8009830c loop_five_calls_matrix_helpers_over_table_8009830c USER_DEFINED 196
+C 800987dc
+C 80098834
+F 800983d0 build_3x3_matrix_from_sin_table_scale_1000_800983d0 USER_DEFINED 1036
+F 800987dc call_chain_with_negated_arg_and_negated_y_800987dc USER_DEFINED 88
+F 80098834 compute_three_angles_from_vector_via_helpers_80098834 USER_DEFINED 436
+F 800989e8 loop_4_calls_func_8003a350_stride_0x310_base_800989e8 USER_DEFINED 176
+F 80098a98 fighter_state_move_match_check_80098a98 USER_DEFINED 320
+F 80098bd8 fighter_UpdateDistanceFlag USER_DEFINED 116
+F 80098c4c conditional_set_flags_by_char_id_mod_80098c4c USER_DEFINED 308
+F 80098d80 advance_byte_stream_countdown_call_fx_setspriteanimidbia_80098d80 USER_DEFINED 236
+C 800afc54
+F 80098e6c fighter_update_move_state_flags_80098e6c USER_DEFINED 2472
+C 80099814
+C 8009a1c4
+C 8009a14c
+C 800db104
+C 8009a330
+F 80099814 fighter_StartMotionHeader USER_DEFINED 1464
+C 80099dcc
+C 80099f30
+C 800a2e14
+S BUFF IS EMPTY!!
+
+S      OR
+
+S NO POINTER SET!!!
+
+F 80099dcc fighter_RecordHitHistory USER_DEFINED 356
+F 80099f30 fighter_ResetPlayerState USER_DEFINED 540
+C 800afc54
+F 8009a14c fighter_state3_or_5_check_8009a14c USER_DEFINED 120
+F 8009a1c4 fighter_GetHitReactionIndex USER_DEFINED 364
+F 8009a330 fighter_MotionCommandDispatch USER_DEFINED 6356
+C 800a3164
+C 800afc54
+C 800a3230
+C 800a3164
+C 800a32d8
+C 800a3164
+C 800a3380
+C 800df530
+C 800ddad8
+C 800afc30
+F 8009bc04 fighter_SelectMotionPointer USER_DEFINED 368
+C 8009c2d0
+C 8009bd74
+F 8009bd74 fighter_InitMotionPointers USER_DEFINED 1372
+C 8009cadc
+C 8009cadc
+C 8009ccec
+F 8009c2d0 fighter_InitMotionPointersAlt USER_DEFINED 2060
+C 8009cadc
+C 8009cadc
+C 8009ccec
+F 8009cadc loop3_indirect_dispatch_interp_poly_8009cadc USER_DEFINED 528
+F 8009ccec seek_stream_groups_dispatch_by_low3_bits_8009ccec USER_DEFINED 532
+F 8009cf00 decode_fields_then_divide_slope_8009cf00 USER_DEFINED 208
+F 8009cfd0 decode_segment_then_divide_with_offset_8009cfd0 USER_DEFINED 208
+F 8009d0a0 decode_segment_zero_offset_divide_8009d0a0 USER_DEFINED 168
+F 8009d148 zero_two_fields_store_masked_halfword_indirect_call_by_l_8009d148 USER_DEFINED 92
+F 8009d244 init_segment_fields_div_by_length_8009d244 USER_DEFINED 224
+F 8009d324 decode_segment_len_low3_plus3_8009d324 USER_DEFINED 224
+F 8009d404 init_segment_fields_div_no_offset_8009d404 USER_DEFINED 184
+F 8009d4bc init_segment_count1_zero_deltas_8009d4bc USER_DEFINED 100
+F 8009d544 motion_advance_pos_check_limit_8009d544 USER_DEFINED 356
+F 8009d6a8 step_5x3_counters_call_table_fn_on_match_8009d6a8 USER_DEFINED 572
+F 8009d8e4 fighter_UpdateTransform USER_DEFINED 1848
+C 800a182c
+C 8009e01c
+C 800df538
+C 800a13fc
+C 800ab620
+C 8009e1f0
+C 800aae98
+C 800de4fc
+C 800a14e8
+C 800de80c
+F 8009e01c fighter_angles_from_pos_diffs_8009e01c USER_DEFINED 468
+F 8009e1f0 loop4_call_helper_then_range_bump_8009e1f0 USER_DEFINED 708
+F 8009e4b4 loop_call_step_once_n_times_scaled_by_speed_8009e4b4 USER_DEFINED 280
+C 8009e5cc
+C 8009e5cc
+F 8009e5cc step_accumulate_fixed_point_tables_8009e5cc USER_DEFINED 2232
+C 8009a330
+C 80097bf8
+C 80097a48
+F 8009ee84 fighter_decode_packed_motion_values_8009ee84 USER_DEFINED 3060
+C 8009fca0
+C 8009fa78
+C 8009fa78
+C 8009fa78
+C 8009fa78
+F 8009fa78 compute_wrapped_angle_diff_div_per_axis_three_times_8009fa78 USER_DEFINED 64
+F 8009fab8 three_axis_angle_delta_divide_store_8009fab8 USER_DEFINED 488
+F 8009fca0 fighter_LoadPostureTable USER_DEFINED 340
+F 8009fdf4 fighter_flip_and_step_deltas_8009fdf4 USER_DEFINED 2096
+C 8009fca0
+C 8009fa78
+C 8009fa78
+F 800a0624 fighter_PackStateSnapshot USER_DEFINED 1028
+F 800a0b64 fighter_UnpackStateSnapshot USER_DEFINED 1800
+C 800dd1c8
+C 800dd1c8
+C 800afc54
+F 800a1278 halve_three_angle_diffs_mask_0xfff_800a1278 USER_DEFINED 388
+F 800a13fc loop_15_gte_helper_calls_stride_0x20_800a13fc USER_DEFINED 188
+F 800a14e8 fighter_pose_and_draw_parts_800a14e8 USER_DEFINED 836
+C 800e4af4
+C 800a3680
+C 800a9a10
+C 800aa4c4
+C 800a1890
+C 800a6d34
+C 800ab9a4
+C 800a8360
+C 800e4ce0
+F 800a182c stub_800a182c USER_DEFINED 8
+F 800a1834 diff_two_func_0x80023b3c_results_mask_0xfff_800a1834 USER_DEFINED 92
+F 800a1890 fighter_UpdateSwayEffect USER_DEFINED 248
+C 800a1988
+C 800a1a84
+F 800a1988 diff_three_words_store_scaled_by_10_800a1988 USER_DEFINED 252
+F 800a1a84 fighter_UpdateSwayParams USER_DEFINED 372
+C 800a247c
+C 800a1bf8
+C 800a1d70
+C 800a23c4
+F 800a1bf8 rotate_vector_pick_max_abs_axis_store_800a1bf8 USER_DEFINED 376
+F 800a1d70 fighter_StepSwayPhysics USER_DEFINED 224
+C 800a1e50
+C 800a200c
+F 800a1e50 fighter_UpdateSwaySpeed USER_DEFINED 444
+C 800a2100
+C 800a2040
+C 800a2060
+C 800a20b0
+F 800a200c set_field_0x28_from_field_0x24_or_plus_0x800_masked_0xc0_800a200c USER_DEFINED 52
+F 800a2040 load_word_by_bit9_mask4_offset_800a2040 USER_DEFINED 32
+F 800a2060 clamp_field_0_255_index_table_lookup_800a2060 USER_DEFINED 80
+F 800a20b0 clamp_field_0xc_0_255_index_table_lookup_800a20b0 USER_DEFINED 80
+F 800a2100 return_field2c_signed_by_mask_0xe00_shr10_800a2100 USER_DEFINED 72
+F 800a2148 fighter_InitSwayState USER_DEFINED 244
+F 800a223c copy_model_sway_entries_800a223c USER_DEFINED 392
+F 800a23c4 call_func_if_field_c_shifted_differs_field_10_800a23c4 USER_DEFINED 184
+F 800a247c fighter_LookupAnimEventOffset USER_DEFINED 372
+F 800a25f0 light_dir_update_shadow_matrix_800a25f0 USER_DEFINED 292
+F 800a2714 call_fighter_drawshadowplayer_for_each_nonzero_flag_800a2714 USER_DEFINED 88
+C 800a276c
+C 800a276c
+F 800a276c fighter_DrawShadowPlayer USER_DEFINED 624
+C 800a29dc
+C 800a2d60
+C 800a2a24
+C 800a29dc
+C 800a2a6c
+C 800a2a24
+C 800a29dc
+C 800a2a6c
+C 800a2c6c
+F 800a29dc gte_LoadControlRegs USER_DEFINED 72
+F 800a2a24 gte_StoreControlRegs USER_DEFINED 72
+F 800a2a6c math_MulMatrixGte USER_DEFINED 276
+F 800a2c6c gpu_AddShadowPolyG4 USER_DEFINED 244
+F 800a2d60 math_RotateYMatrixGte USER_DEFINED 180
+F 800a2e14 fighter_SelectReactionTables USER_DEFINED 848
+C 800db1d0
+C 800a3230
+C 800a32d8
+C 800db1d0
+C 800a3380
+F 800a3164 clear_15_byte_pairs_then_fill_from_ff_terminated_list_800a3164 USER_DEFINED 204
+F 800a3230 load_byte_pair_table_by_id_800a3230 USER_DEFINED 168
+F 800a32d8 fighter_fill_reaction_flags_800a32d8 USER_DEFINED 168
+F 800a3380 fighter_LoadReactionTableC USER_DEFINED 160
+F 800a3420 fighter_IsHeadTrackingBlocked USER_DEFINED 608
+F 800a3680 fighter_UpdateHeadTracking USER_DEFINED 2612
+C 800a3420
+C 800a4228
+C 800a40b4
+F 800a40b4 fighter_ComputeHeadTrackAngles USER_DEFINED 372
+F 800a4228 build_identity_matrix_call_gte_helpers_store_masked_angl_800a4228 USER_DEFINED 396
+F 800a43bc stub_800a43bc USER_DEFINED 16
+F 800a43cc fighter_InitGlobalState USER_DEFINED 2736
+C 8009554c
+C 800a5388
+F 800a4ec0 call_fighter_initglobalstate_zero_two_12byte_entries_800a4ec0 USER_DEFINED 92
+C 800a43cc
+F 800a4f1c game_clear_player_tables_12b_800a4f1c USER_DEFINED 276
+F 800a5030 call_stub_800a5058_args_0_1_return_0_800a5030 USER_DEFINED 40
+C 800a5058
+C 800a5058
+F 800a5058 stub_800a5058 USER_DEFINED 8
+F 800a5068 stub_800a5068 USER_DEFINED 8
+F 800a5070 game_UpdateFightSetupState USER_DEFINED 224
+C 800a43cc
+C 800a4f1c
+C 800a4f1c
+C 800a2148
+C 800a2148
+C 800a678c
+C 800a678c
+C 800ab554
+C 800ab554
+F 800a5260 game_InitFightSetup USER_DEFINED 296
+C 800a43cc
+C 800a4f1c
+C 800a4f1c
+C 800a2148
+C 800a2148
+C 800a53ec
+C 800a53ec
+C 800a648c
+C 800a648c
+C 800a689c
+F 800a5388 zero_six_shorts_two_entries_stride16_800a5388 USER_DEFINED 100
+F 800a53ec call_setup_model_pointers_and_secondary_table_800a53ec USER_DEFINED 56
+C 80095644
+C 800a223c
+F 800a5424 game_CheckFighterChange USER_DEFINED 228
+C 80095644
+C 800a223c
+C 80095644
+C 800a223c
+C 800a648c
+C 800a648c
+C 800a689c
+F 800a5508 game_FightMainLoop USER_DEFINED 868
+C 800a5260
+C 800afbec
+C 800a25f0
+C 800af8c0
+C 800a5424
+C 800a5070
+C 800a5068
+C 800a5070
+C 800a5068
+C 800a611c
+C 80095b84
+C 80095b84
+C 800a5884
+C 800a5884
+C 800a2714
+C 800a5ce0
+C 800a80ac
+F 800a5884 fighter_UpdatePlayerFrame USER_DEFINED 160
+C 800a678c
+C 800ab554
+C 8009d8e4
+C 800a5924
+C 800a0b64
+F 800a5924 fighter_spawn_effect_outside_bounds_800a5924 USER_DEFINED 236
+C 800d98a0
+C 800d98a0
+C 800ddad8
+F 800a5a10 store_idx_and1_call_fighter_updateaction_set_byte_1_800a5a10 USER_DEFINED 76
+C 80095b84
+F 800a5a5c call_game_resetpairslottables_then_clearplayereffecttabl_800a5a5c USER_DEFINED 48
+C 800a4ec0
+C 800a4f1c
+C 800a4f1c
+F 800a5a8c stub_800a5a8c USER_DEFINED 8
+F 800a5ac8 store_hi_shr6_minus_v0_scale_two_table_entries_800a5ac8 USER_DEFINED 88
+F 800a5ce0 copy_player_state_to_prev_arrays_800a5ce0 USER_DEFINED 456
+C 800a5ea8
+F 800a5ea8 fighter_ramp_yaw_speed_by_motion_800a5ea8 USER_DEFINED 620
+F 800a611c camera_SetupFightCamera USER_DEFINED 768
+C 800a641c
+C 800a641c
+F 800a641c store_table_ptr_indexed_by_char_id_and_bits_800a641c USER_DEFINED 112
+F 800a648c init_part_slots_stride_0x34_copy_entries_return_min_coun_800a648c USER_DEFINED 768
+C 800ab190
+F 800a678c model_ResetPartSprings USER_DEFINED 272
+F 800a689c fighter_UpdatePartFlagsByPairValue USER_DEFINED 16
+F 800a68ac fighter_part_size_threshold_disable_800a68ac USER_DEFINED 384
+C 800a6a2c
+C 800a6b48
+C 800a6a2c
+C 800a6b48
+C 800a6b48
+F 800a6a2c model_DisableParts USER_DEFINED 212
+F 800a6b00 clear_byte_plus1_four_entries_stride_0x34_800a6b00 USER_DEFINED 28
+F 800a6b1c clear_byte1_four_entries_stride_0x34_index_v0_800a6b1c USER_DEFINED 44
+F 800a6b48 clear_byte_flag_by_g_p1_char_id_and_costume_800a6b48 USER_DEFINED 220
+F 800a6c24 atan2_height_over_horizontal_dist_with_fold_800a6c24 USER_DEFINED 272
+C 800a7d50
+C 800a7d8c
+F 800a6d34 model_UpdatePartSprings USER_DEFINED 1684
+C 800a7cc4
+C 800a8070
+C 800a7d0c
+C 800a7d50
+C 800a7d8c
+C 800a7d8c
+C 800a7414
+C 800a7cc4
+C 800a73c8
+C 800a7d50
+C 800a7cc4
+C 800a7d50
+C 800a7d8c
+C 800a78b0
+C 800a73c8
+F 800a73c8 gte_ApplyYawPitchRot USER_DEFINED 76
+C 800a7f08
+C 800a7fc4
+C 800a7d0c
+F 800a7414 model_UpdateSpringAxis USER_DEFINED 1180
+C 800a7c20
+C 800a7d8c
+C 800a7d8c
+F 800a78b0 update_two_axis_ring16_clamped_shift_damping_800a78b0 USER_DEFINED 880
+F 800a7c20 gte_RotateVecByMatrix USER_DEFINED 164
+F 800a7cc4 gte_LoadRotTrans USER_DEFINED 72
+F 800a7d0c gte_StoreRotTrans USER_DEFINED 68
+F 800a7d50 gte_RotateVec3 USER_DEFINED 60
+F 800a7d8c compute_angle_from_two_ints_table_lookup_800a7d8c USER_DEFINED 380
+F 800a7f08 gte_RotMatrixYaw USER_DEFINED 188
+F 800a7fc4 gte_RotMatrixPitch USER_DEFINED 172
+F 800a8070 gte_TranslateByRotatedVec USER_DEFINED 60
+F 800a80ac gpu_LinkDepthMarkers USER_DEFINED 692
+F 800a8360 model_DrawFighterParts USER_DEFINED 1212
+C 800a9104
+C 800a8a50
+C 800a881c
+C 800a88f4
+C 800a893c
+C 800a8a80
+C 800a8bf8
+C 800a8eb4
+C 800a92d4
+C 800a94b0
+C 800a965c
+C 800a98f0
+C 800a97bc
+F 800a881c gte_BuildLightMatrix USER_DEFINED 216
+F 800a88f4 gte_LoadRotTrans_2 USER_DEFINED 72
+F 800a893c gte_MulMatrixLoad USER_DEFINED 276
+F 800a8a50 gte_LoadRotMatrix USER_DEFINED 48
+F 800a8a80 gte_TransformVerticesRTPT USER_DEFINED 376
+F 800a8bf8 model_DrawGT4Lit USER_DEFINED 700
+F 800a8eb4 model_DrawGT3Alpha USER_DEFINED 592
+F 800a9104 model_DrawGT3Tex USER_DEFINED 464
+F 800a92d4 model_DrawGT4Flat USER_DEFINED 476
+F 800a94b0 model_DrawGT3Flat USER_DEFINED 428
+F 800a965c model_DrawPolyF3 USER_DEFINED 352
+F 800a97bc model_DrawFT4 USER_DEFINED 308
+F 800a98f0 model_DrawFT3 USER_DEFINED 288
+F 800a9a10 loop_four_gte_matrix_ops_sqrt_atan2_800a9a10 USER_DEFINED 1204
+C 800aa454
+C 800aa2d8
+C 800aa2d8
+C 800a9f04
+C 800aa008
+C 800a9f68
+C 800aa218
+C 800aa0a8
+C 800aa168
+C 800aa218
+C 800a9f68
+C 800a9fb8
+C 800a9ec4
+C 800aa218
+C 800aa168
+C 800aa218
+C 800aa0a8
+C 800a9f68
+C 800a9fb8
+C 800a9ec4
+C 800aa218
+C 800aa0a8
+C 800aa168
+C 800aa218
+C 800a9ec4
+C 800a9f68
+F 800a9ec4 gte_TranslateByRotatedVec_2 USER_DEFINED 60
+F 800a9f04 gte_SetTransIdentity USER_DEFINED 48
+F 800a9f34 gte_SetIdentityMatrix USER_DEFINED 48
+F 800a9f68 gte_StoreRotTrans_2 USER_DEFINED 72
+F 800a9fb8 gte_LoadRotTrans_3 USER_DEFINED 72
+F 800aa008 gte_ScaleMatrix USER_DEFINED 156
+F 800aa0a8 gte_RotMatrixYaw_2 USER_DEFINED 188
+F 800aa168 gte_RotMatrixPitch_2 USER_DEFINED 172
+F 800aa218 gte_RotMatrixRoll USER_DEFINED 180
+F 800aa2d8 atan2_table_lookup_octant_div_800aa2d8 USER_DEFINED 380
+F 800aa454 math_SqrtLZCS USER_DEFINED 104
+F 800aa4c4 fighter_store_pos_and_prev_pos_800aa4c4 USER_DEFINED 380
+C 800ab0dc
+C 800ab12c
+C 800aa930
+F 800aa640 compute_two_angles_from_deltas_store_shorts_800aa640 USER_DEFINED 340
+C 800ab14c
+C 800ab14c
+F 800aa794 rotate_vec_then_copy_three_words_800aa794 USER_DEFINED 140
+C 800ab14c
+F 800aa820 call_gte_rotatevec3_2_copy_three_words_then_loadhandrott_800aa820 USER_DEFINED 200
+C 800ab14c
+C 800aa8e8
+C 800ab12c
+C 800aae98
+F 800aa8e8 fighter_is_state9_move_76_77_800aa8e8 USER_DEFINED 72
+F 800aa930 fighter_LoadBoneRotTables USER_DEFINED 244
+C 800aaa24
+C 800aab2c
+C 800aaba4
+F 800aaa24 fighter_LoadBoneRotTable_A USER_DEFINED 264
+C 800ab14c
+F 800aab2c fighter_LoadBoneRotSingleOrPair USER_DEFINED 120
+C 800aacac
+C 800aad88
+F 800aaba4 fighter_LoadBoneRotTable_C USER_DEFINED 264
+C 800ab14c
+F 800aacac fighter_LoadBoneRotSingle USER_DEFINED 220
+C 800ab14c
+F 800aad88 fighter_LoadBoneRotPair USER_DEFINED 272
+C 800ab14c
+C 800ab14c
+F 800aae98 fighter_LoadHandRotTables USER_DEFINED 120
+C 800aaf10
+C 800aafdc
+F 800aaf10 load_rot_vec_table_0x12_flip_x_800aaf10 USER_DEFINED 204
+C 800ab14c
+F 800aafdc fighter_rotate_vec_pair_to_table_800aafdc USER_DEFINED 256
+C 800ab14c
+C 800ab14c
+F 800ab0dc gte_LoadRotTrans_4 USER_DEFINED 72
+F 800ab12c gte_StoreTrans USER_DEFINED 32
+F 800ab14c gte_RotateVec3_2 USER_DEFINED 64
+F 800ab190 model_InitFighterAnim USER_DEFINED 964
+F 800ab554 model_ClearAnimState USER_DEFINED 48
+F 800ab584 model_ClearAnimState_2 USER_DEFINED 156
+F 800ab620 model_ResetPartAngles USER_DEFINED 284
+F 800ab73c model_SetBoneTranslation USER_DEFINED 260
+C 800aceb8
+F 800ab840 model_LoadPartFlagsByMove USER_DEFINED 44
+F 800ab86c model_LoadPartFlagsByMove_2 USER_DEFINED 312
+F 800ab9a4 model_UpdateFighterPose USER_DEFINED 4284
+C 800ab840
+C 800aca60
+C 800acbcc
+C 800acbcc
+C 800aca60
+C 800acbcc
+C 800acbcc
+C 800acb04
+C 800ace04
+C 800acb4c
+C 800aca60
+C 800acbcc
+C 800aceb8
+C 800ace04
+C 800acb4c
+C 800acd48
+C 800acb90
+C 800acb04
+C 800acd48
+C 800acb90
+F 800aca60 gte_RotateVecByMatrix_2 USER_DEFINED 164
+F 800acb04 gte_LoadRotTrans_5 USER_DEFINED 72
+F 800acb4c gte_StoreRotTrans_3 USER_DEFINED 68
+F 800acb90 gte_RotateVec3_3 USER_DEFINED 60
+F 800acbcc atan_lookup_from_two_abs_args_800acbcc USER_DEFINED 380
+F 800acd48 gte_RotMatrixYaw_3 USER_DEFINED 188
+F 800ace04 gte_RotMatrixRoll_2 USER_DEFINED 180
+F 800aceb8 gte_SetTransIdentity_2 USER_DEFINED 48
+F 800acee8 gpu_LinkOTPrim USER_DEFINED 60
+F 800acf24 game_DrawMainLoop USER_DEFINED 552
+C 800ae138
+C 800ae0c8
+C 800ad164
+C 800afc7c
+C 800af20c
+C 800af72c
+C 800ad454
+C 800ade20
+C 800ad7f8
+C 800ada44
+C 800addac
+C 800acee8
+F 800ad164 hud_map_substate_to_message_800ad164 USER_DEFINED 752
+F 800ad454 write_time_digit_bytes_and_push_ptrs_800ad454 USER_DEFINED 932
+F 800ad7f8 hud_build_timer_digit_sprites_800ad7f8 USER_DEFINED 588
+F 800ada44 loop_2_players_update_counter_and_push_ptrs_to_scratchpa_800ada44 USER_DEFINED 872
+F 800addac push_two_ptrs_to_scratchpad_800addac USER_DEFINED 116
+F 800ade20 hud_UpdateLifeGaugeWidths USER_DEFINED 680
+F 800ae0c8 zero_global_and_two_byte_arrays_conditional_800ae0c8 USER_DEFINED 112
+F 800ae138 init_prim_buffers_set_const_fields_loops_800ae138 USER_DEFINED 3096
+F 800aed50 hud_InitFighterNames USER_DEFINED 788
+C 800af064
+F 800af064 hud_SetRoundWinMarkers USER_DEFINED 424
+F 800af20c hud_UpdateMessageBanner USER_DEFINED 448
+C 800af3cc
+C 800af3cc
+C 800af600
+F 800af3cc fill_36byte_entries_from_table_by_index_800af3cc USER_DEFINED 564
+F 800af600 add_signed_const_to_18_entries_stride_0x24_by_state_800af600 USER_DEFINED 300
+F 800af72c hud_queue_life_gauge_prims_800af72c USER_DEFINED 404
+F 800af8c0 loop2_step_byte_script_emit_two_prims_800af8c0 USER_DEFINED 812
+F 800afbec loop_2_call_fx_setspriteanimidbiased_zero_800afbec USER_DEFINED 68
+C 800afc54
+F 800afc30 store_byte_arg1_at_index_arg0_stride_0xc_800afc30 USER_DEFINED 36
+F 800afc54 store_arg1_minus_0x80_byte_indexed_arg0_x0xc_800afc54 USER_DEFINED 40
+F 800afc7c menu_DrawPauseMenu USER_DEFINED 676
+S PAUSED P1
+S PAUSED P2
+S CONTINUE
+S QUIT
+S CONTINUE
+S QUIT
+S YES
+F 800aff20 game_RunFrameLoop USER_DEFINED 40
+C 800aff58
+C 800b0074
+F 800aff58 game_ClearPlayerSlotPtrs USER_DEFINED 120
+C 800affd0
+F 800affd0 game_InitRoundVars USER_DEFINED 156
+F 800b0074 game_UpdateRoundOutcome USER_DEFINED 1900
+C 800affd0
+C 800b0994
+C 800b07e0
+F 800b07e0 game_TickRoundTimer USER_DEFINED 436
+F 800b0994 game_ApplyPendingDamage USER_DEFINED 400
+F 800b0b44 game_RunMainLoop USER_DEFINED 884
+C 800b752c
+C 800bfe78
+C 800bc744
+C 800bc9f0
+C 800bb480
+C 800bb418
+C 800b752c
+C 800b6798
+C 800b76f4
+C 800b0ecc
+F 800b0ecc game_RunStateMachine USER_DEFINED 1148
+C 800bb504
+C 800b1570
+C 800b15cc
+C 800b1348
+C 800bb504
+C 800b1570
+C 800b1348
+C 800bb8b4
+C 800b1408
+C 800b149c
+C 800b141c
+C 800b4c80
+C 800bbb38
+C 800bb56c
+C 800b1644
+C 800b1644
+C 800b2010
+C 800bc408
+C 800b45c0
+C 800b4058
+C 800b39a8
+C 800b3d78
+C 800bb504
+C 800bb504
+C 800bb504
+C 800bb56c
+C 800b1ac0
+C 800bb504
+C 800b4d40
+C 800b5030
+C 800bb504
+C 800b7750
+C 800b77b4
+F 800b1348 cam_LoadTargetPos USER_DEFINED 56
+C 800bb7ac
+F 800b1380 cam_ApproachTargetPos USER_DEFINED 136
+C 800bb7ac
+C 800bb6c8
+C 800bb6c8
+C 800bb6c8
+F 800b1408 store_const_minus22_to_g_cam_pitch_800b1408 USER_DEFINED 20
+F 800b141c cam_ClearRoll USER_DEFINED 16
+F 800b142c cam_ApproachPitch USER_DEFINED 56
+C 800bc43c
+F 800b1464 cam_ApproachRoll USER_DEFINED 56
+C 800bc43c
+F 800b149c store_cam_yaw_facing_plus_0x800_if_flag_mask_fff_800b149c USER_DEFINED 72
+F 800b14e4 cam_ApproachFacingAngle USER_DEFINED 140
+C 800bc43c
+F 800b1570 cam_CalcFollowDistanceClamped USER_DEFINED 92
+C 800bb92c
+F 800b15cc cam_CalcFollowDistanceSmooth USER_DEFINED 120
+C 800bb92c
+C 800bb6c8
+F 800b1644 cam_RunCameraMode USER_DEFINED 1148
+C 800b1f38
+C 800b1f38
+C 800b262c
+C 800b2c10
+C 800b3354
+C 800b2854
+C 800b29d8
+C 800b2aec
+C 800b30a4
+C 800b31fc
+C 800b3710
+C 800b2e10
+F 800b1ac0 title_DrawLogoScreen USER_DEFINED 1144
+C 800b58f8
+C 800b5ae0
+C 800b5c68
+S DEAD OR ALIVE
+F 800b1f38 cam_SelectModeFromTable USER_DEFINED 216
+F 800b2010 cam_UpdateDefaultFollow USER_DEFINED 16
+F 800b2020 cam_UpdateDefaultFollow_2 USER_DEFINED 848
+C 800bb86c
+C 800bb92c
+C 800bb6c8
+C 800bb7ac
+C 800bb6c8
+C 800bb6c8
+C 800bb6c8
+C 800bc43c
+C 800bc43c
+C 800bc43c
+C 800b4c80
+C 800bbb38
+F 800b2380 cam_UpdateDefaultFollow_3 USER_DEFINED 684
+C 800bb86c
+C 800bb92c
+C 800bb6c8
+C 800bb7ac
+C 800bb6c8
+C 800bb6c8
+C 800bb6c8
+C 800bc43c
+C 800bc43c
+C 800bc43c
+C 800b4c80
+C 800bbb38
+F 800b262c cam_update_random_orbit_800b262c USER_DEFINED 512
+C 800bc008
+C 800bc408
+C 800bc408
+C 800bb56c
+C 800bb86c
+C 800bb7ac
+C 800bb92c
+C 800bb6c8
+C 800b4c80
+C 800bbb38
+F 800b2854 cam_random_orbit_follow_update_800b2854 USER_DEFINED 340
+C 800bc008
+C 800bb56c
+C 800bb86c
+C 800bb7ac
+C 800bc43c
+C 800bc43c
+C 800bb92c
+C 800bb6c8
+C 800b4c80
+C 800bbb38
+F 800b29ac stub_800b29ac USER_DEFINED 12
+F 800b29bc stub_800b29bc USER_DEFINED 12
+F 800b29d8 cam_update_fixed_side_offset_800b29d8 USER_DEFINED 276
+C 800bc408
+C 800bc008
+C 800bb56c
+C 800bb86c
+C 800bb7ac
+C 800b4c80
+C 800bbb38
+F 800b2aec cam_update_orbit_offset_0x100_800b2aec USER_DEFINED 276
+C 800bc408
+C 800bc008
+C 800bb56c
+C 800bb86c
+C 800bb7ac
+C 800b4c80
+C 800bbb38
+F 800b2c10 cam_random_side_orbit_update_800b2c10 USER_DEFINED 512
+C 800bc090
+C 800bc408
+C 800bc408
+C 800bb56c
+C 800bb86c
+C 800bb7ac
+C 800bb92c
+C 800bb6c8
+C 800b4c80
+C 800bbb38
+F 800b2e10 cam_update_random_orbit_800b2e10 USER_DEFINED 660
+C 800bc408
+C 800bc408
+C 800bb56c
+C 800bb86c
+C 800bb7ac
+C 800bb7ac
+C 800bb6c8
+C 800bb92c
+C 800bb6c8
+C 800b4c80
+C 800bbb38
+F 800b30a4 cam_update_orbit_offset_0x900_800b30a4 USER_DEFINED 344
+C 800bc408
+C 800bb56c
+C 800bb86c
+C 800bb7ac
+C 800bb6c8
+C 800b4c80
+C 800bbb38
+F 800b31fc cam_orbit_offset_half_fightdist_800b31fc USER_DEFINED 344
+C 800bc408
+C 800bb56c
+C 800bb86c
+C 800bb7ac
+C 800bb6c8
+C 800b4c80
+C 800bbb38
+F 800b3354 cam_UpdateMode2Midpoint USER_DEFINED 956
+C 800bb56c
+C 800bb86c
+C 800bc408
+C 800bb6c8
+C 800bb6c8
+C 800bb6c8
+C 800bb6c8
+C 800bb6c8
+C 800bb6c8
+C 800b4c80
+C 800bc294
+C 800bc690
+F 800b3710 cam_fighter_midpoint_follow_800b3710 USER_DEFINED 664
+C 800bc408
+C 800bb56c
+C 800bb86c
+C 800bb6c8
+C 800bb6c8
+C 800bb6c8
+C 800bb6c8
+C 800bc43c
+C 800b4c80
+C 800bbb38
+F 800b39a8 cam_InitKOCamera USER_DEFINED 976
+C 800bb504
+C 800bb86c
+C 800b4c80
+C 800bbb38
+F 800b3d78 cam_UpdateKOCamera USER_DEFINED 736
+C 800bb504
+C 800bb86c
+C 800b4c80
+C 800bbb38
+F 800b4058 cam_UpdateWinnerOrbit USER_DEFINED 16
+F 800b4068 cam_UpdateWinnerOrbit_2 USER_DEFINED 564
+C 800bb504
+C 800bb56c
+C 800bc43c
+C 800bc43c
+C 800b4c80
+C 800bbb38
+F 800b429c cam_FrameBothFighters USER_DEFINED 804
+C 800bb6c8
+C 800bb6c8
+C 800bb6c8
+C 800bb6c8
+C 800bb6c8
+C 800bb6c8
+C 800bb86c
+C 800bb6c8
+C 800bb6c8
+C 800bb6c8
+C 800bc43c
+C 800bc43c
+C 800bb6c8
+C 800b4c80
+C 800bbb38
+F 800b45c0 cam_UpdatePresetCloseup USER_DEFINED 1728
+C 800bb504
+C 800bb56c
+C 800bb6c8
+C 800bb6c8
+C 800bb6c8
+C 800bc43c
+C 800bc43c
+C 800bb6c8
+C 800b7244
+C 800bb6c8
+C 800b4c80
+C 800bbb38
+F 800b4c80 cam_StepShakeTable USER_DEFINED 192
+F 800b4d40 cam_UpdateTrackFighterA USER_DEFINED 16
+F 800b4d50 cam_track_player_pos_clamped_2_800b4d50 USER_DEFINED 736
+C 800bb6c8
+C 800bb6c8
+C 800bb6c8
+C 800bc43c
+C 800bc43c
+C 800bc43c
+C 800bb6c8
+C 800bbb38
+F 800b5030 cam_UpdateTrackFighterB USER_DEFINED 664
+C 800bb6c8
+C 800bb6c8
+C 800bb6c8
+C 800bc43c
+C 800bc43c
+C 800bc43c
+C 800bb6c8
+C 800bbb38
+F 800b52c8 cam_UpdateOrbitAroundFighter USER_DEFINED 788
+C 800bb56c
+C 800bb86c
+C 800bbb38
+F 800b55e0 cam_UpdateFightCamera USER_DEFINED 12
+F 800b55ec cam_idle_timer_ease_shake_800b55ec USER_DEFINED 780
+C 800bb504
+C 800bb7ac
+C 800bb56c
+C 800bb86c
+C 800bb7ac
+C 800bb6c8
+C 800bb6c8
+C 800bb6c8
+C 800bc43c
+C 800bc43c
+C 800bb6c8
+C 800bbb38
+F 800b58f8 cam_UpdateAttractOrbitA USER_DEFINED 488
+C 800bb56c
+C 800bb86c
+C 800bb7ac
+C 800bbb38
+F 800b5ae0 cam_UpdateAttractOrbitB USER_DEFINED 392
+C 800bb56c
+C 800bb86c
+C 800bb7ac
+C 800bbb38
+F 800b5c68 cam_update_follow_random_yaw_800b5c68 USER_DEFINED 896
+C 800bb504
+C 800bb92c
+C 800bb7ac
+C 800bb56c
+C 800bb86c
+C 800bb92c
+C 800bb6c8
+C 800bb7ac
+C 800bb6c8
+C 800bb6c8
+C 800bb6c8
+C 800bc43c
+C 800bbb38
+F 800b5fe8 cam_RunFreeCameraLoop USER_DEFINED 500
+S GAME
+S GAME
+S KEEP
+S OFS1
+S GAME
+S KEEP
+S OFS1
+S OFS2
+S ANGK
+S KAO1
+S KAO1
+S OFS2
+S ANGK
+S KAO1
+S KAO2
+S KAO2
+C 800b61dc
+C 800bbde4
+F 800b61dc cam_UpdateFreeCameraPad USER_DEFINED 1468
+C 800bb7ac
+F 800b6798 game_RunViewerState USER_DEFINED 408
+C 800b6930
+C 800b6a94
+C 800b6978
+C 800b6bd8
+C 800bbde4
+C 800b6fd0
+F 800b6930 call_cam_snapsmoothedfighterpos_set_globals_800b6930 USER_DEFINED 72
+C 800bb504
+F 800b6978 cam_UpdateViewerFollow USER_DEFINED 284
+C 800bb56c
+C 800bbde4
+F 800b6a94 adjust_g_cam_pitch_yaw_followdist_by_g_pad_held_p1_bits_800b6a94 USER_DEFINED 324
+C 800bb504
+F 800b6bd8 pad_bits_adjust_cam_target_pitch_yaw_step_0x32_800b6bd8 USER_DEFINED 1016
+C 800bb504
+F 800b6fd0 cam_UpdateModelViewerCamera USER_DEFINED 16
+F 800b6fe0 cam_UpdateModelViewerCamera_2 USER_DEFINED 612
+C 800bbf18
+F 800b7244 cam_UpdateViewerPadYawZoom USER_DEFINED 744
+F 800b752c camscr_InitScriptState USER_DEFINED 456
+C 800bc720
+F 800b76f4 camscr_StartOrContinue USER_DEFINED 16
+F 800b7704 camscr_StartOrContinue_2 USER_DEFINED 76
+C 800b752c
+C 800bb504
+C 800b7750
+C 800bb56c
+C 800b77b4
+F 800b7750 camscr_ClearTrackFlags USER_DEFINED 100
+F 800b77b4 camscr_RunScript USER_DEFINED 948
+C 800b7b84
+C 800b7bf0
+C 800b7c24
+C 800b7c58
+C 800b7dbc
+C 800b7e34
+C 800b7eb0
+C 800b7c7c
+C 800b7ccc
+C 800b7d1c
+C 800b7d6c
+C 800b82c0
+C 800b8330
+C 800b83a4
+C 800b8438
+C 800b8190
+C 800b81dc
+C 800b8228
+C 800b8274
+C 800b85c0
+C 800b860c
+C 800b8658
+C 800b86a4
+C 800b8754
+C 800b87a8
+C 800b87e0
+C 800b889c
+C 800b88f0
+C 800b892c
+C 800b8a20
+C 800ba1b4
+C 800b8960
+C 800b8a20
+C 800ba1b4
+C 800bc294
+C 800b4c80
+C 800bbf18
+C 800b8960
+C 800ba1b4
+C 800bad38
+C 800b4c80
+C 800bbde4
+F 800b7b84 zero_g_cam_globals_advance_ptr_camscr_script_4_800b7b84 USER_DEFINED 108
+F 800b7bf0 zero_cam_target_xyz_advance_script_ptr_4_800b7bf0 USER_DEFINED 52
+F 800b7c24 zero_g_cam_pitch_yaw_roll_advance_script_4_800b7c24 USER_DEFINED 52
+F 800b7c58 zero_g_cam_follow_dist_advance_ptr_camscr_script_4_800b7c58 USER_DEFINED 36
+F 800b7c7c camscr_OpSetPosTrack USER_DEFINED 80
+C 800b7f50
+F 800b7ccc camscr_OpSetTargetTrack USER_DEFINED 80
+C 800b8004
+F 800b7d1c camscr_OpSetAngleTrack USER_DEFINED 80
+C 800b80b8
+F 800b7d6c script_read_byte_call_set_dist_track_800b7d6c USER_DEFINED 80
+C 800b8148
+F 800b7dbc camscr_OpSetTargetAngleMode0 USER_DEFINED 120
+C 800b8004
+C 800b80b8
+F 800b7e34 camscr_OpSetPosTargetMode1 USER_DEFINED 124
+C 800b7f50
+C 800b8004
+F 800b7eb0 camscr_OpSetPosAngleDistMode2 USER_DEFINED 160
+C 800b7f50
+C 800b80b8
+C 800b8148
+F 800b7f50 camscr_SetPosTrack USER_DEFINED 180
+F 800b8004 camscr_SetTargetTrack USER_DEFINED 180
+F 800b80b8 camscr_SetAngleTrack USER_DEFINED 144
+F 800b8148 camscr_SetDistTrack USER_DEFINED 72
+F 800b8190 camscr_OpRunSubA USER_DEFINED 76
+C 800b8440
+F 800b81dc camscr_OpRunSubB USER_DEFINED 76
+C 800b84b4
+F 800b8228 camscr_skip_start_angle_track_800b8228 USER_DEFINED 76
+C 800b8528
+F 800b8274 camscr_OpRunSubD USER_DEFINED 76
+C 800b857c
+F 800b82c0 camscr_OpSetTargetAngleInline USER_DEFINED 112
+C 800b84b4
+C 800b8528
+F 800b8330 camscr_OpSetPosTargetInline USER_DEFINED 116
+C 800b8440
+C 800b84b4
+F 800b83a4 camscr_OpSetPosAngleDistInline USER_DEFINED 148
+C 800b8440
+C 800b8528
+C 800b857c
+F 800b8438 stub_800b8438 USER_DEFINED 8
+F 800b8440 camscr_StartPosTrackFromPtr USER_DEFINED 116
+F 800b84b4 camscr_StartTargetTrackFromPtr USER_DEFINED 116
+F 800b8528 camscr_StartAngleTrackFromPtr USER_DEFINED 84
+F 800b857c camscr_StartDistTrackFromPtr USER_DEFINED 68
+F 800b85c0 camscr_OpRunAltPosTrack USER_DEFINED 76
+C 800b86c4
+F 800b860c camscr_OpRunAltTargetTrack USER_DEFINED 76
+C 800b86f4
+F 800b8658 camscr_OpRunAltAngleTrack USER_DEFINED 76
+C 800b8724
+F 800b86a4 advance_ptr_camscr_script_8_800b86a4 USER_DEFINED 32
+F 800b86c4 camscr_StartAltPosTrackFromPtr USER_DEFINED 48
+F 800b86f4 camscr_StartAltTargetTrackFromPtr USER_DEFINED 48
+F 800b8724 camscr_StartAltAngleTrackFromPtr USER_DEFINED 48
+F 800b8754 camscr_OpSetFighterByte USER_DEFINED 84
+F 800b87a8 camscr_OpSetTrackMode USER_DEFINED 56
+F 800b87e0 camscr_OpWaitTracksDone USER_DEFINED 188
+F 800b889c camscr_OpWaitFrames USER_DEFINED 84
+F 800b88f0 camscr_OpEndScriptSetState USER_DEFINED 60
+F 800b892c camscr_OpEndScript USER_DEFINED 28
+F 800b8960 camscr_ApplyPosTracks USER_DEFINED 192
+C 800b8ae0
+F 800b8a20 camscr_ApplyTargetTracks USER_DEFINED 192
+C 800b8ae0
+F 800b8ae0 camscr_RunTrackInterpreter USER_DEFINED 1188
+C 800b8f84
+C 800b8ff8
+C 800b9094
+C 800b919c
+C 800b92d8
+C 800b9450
+C 800b95e0
+C 800b976c
+C 800b98e0
+C 800b9a68
+C 800b9ab4
+C 800b9b30
+C 800b9bf4
+C 800b9d24
+C 800b9ebc
+C 800b9f14
+C 800ba144
+C 800ba198
+C 800bb6c8
+C 800bb6c8
+C 800bb6c8
+F 800b8f84 camscr_KeySetXYZ USER_DEFINED 116
+F 800b8ff8 camscr_KeyAddXYZOverTime USER_DEFINED 156
+F 800b9094 camscr_KeyAddXYZAccel USER_DEFINED 264
+F 800b919c camscr_KeyLerpToXYZ USER_DEFINED 316
+F 800b92d8 camscr_KeyLerpFixedXYZ USER_DEFINED 376
+F 800b9450 camscr_key_table_interp_xyz_800b9450 USER_DEFINED 400
+F 800b95e0 camscr_key_interp_xyz_table_800b95e0 USER_DEFINED 396
+F 800b976c camscr_KeyOrbitOffsetConst USER_DEFINED 372
+F 800b98e0 camscr_key_spherical_offset_radius_step_800b98e0 USER_DEFINED 392
+F 800b9a68 copy_pos_start_to_cur_advance_ptr_4_800b9a68 USER_DEFINED 76
+F 800b9ab4 camscr_KeyFollowFighterHold USER_DEFINED 124
+C 800b9f38
+F 800b9b30 camscr_KeyFollowFighterAddXYZ USER_DEFINED 196
+C 800b9f38
+F 800b9bf4 camscr_KeyFollowFighterAccel USER_DEFINED 304
+C 800b9f38
+F 800b9d24 camscr_KeyFollowFighterLerp USER_DEFINED 408
+C 800b9f38
+F 800b9ebc camscr_KeySmoothOn USER_DEFINED 88
+F 800b9f14 camscr_KeySmoothOff USER_DEFINED 36
+F 800b9f38 camscr_SelectFighterPoint USER_DEFINED 412
+C 800bc188
+C 800bc188
+C 800bc188
+F 800ba144 camscr_KeyWaitFrames USER_DEFINED 84
+F 800ba198 camscr_KeyEndTrack USER_DEFINED 28
+F 800ba1b4 camscr_RunAngleTrack USER_DEFINED 396
+C 800ba340
+C 800ba3b4
+C 800ba450
+C 800ba558
+C 800ba6d0
+C 800ba860
+C 800ba9ec
+C 800bab28
+C 800bacc8
+C 800bad1c
+F 800ba340 camscr_AngKeySet USER_DEFINED 116
+F 800ba3b4 camscr_AngKeyAddOverTime USER_DEFINED 156
+F 800ba450 camscr_AngKeyAddAccel USER_DEFINED 264
+F 800ba558 camscr_AngKeyLerp USER_DEFINED 376
+F 800ba6d0 camscr_ang_key_table_interp_800ba6d0 USER_DEFINED 400
+F 800ba860 camscr_ang_key_table_interp_800ba860 USER_DEFINED 396
+F 800ba9ec camscr_AngKeyLerpToTarget USER_DEFINED 316
+F 800bab28 camscr_AngKeyFaceFighter USER_DEFINED 68
+C 800bab6c
+F 800bab6c camscr_SelectFacingByMode USER_DEFINED 284
+C 800b149c
+C 800bac88
+C 800b149c
+F 800bac88 store_g_cam_yaw_target_facing_minus_0x400_mask_0xfff_800bac88 USER_DEFINED 64
+F 800bacc8 camscr_AngKeyWaitFrames USER_DEFINED 84
+F 800bad1c camscr_AngKeyEnd USER_DEFINED 28
+F 800bad38 camscr_RunDistTrack USER_DEFINED 304
+C 800bae68
+C 800baec4
+C 800baf30
+C 800bafc0
+C 800bb090
+C 800bb188
+C 800bb27c
+C 800bb328
+C 800bb3a8
+C 800bb3fc
+F 800bae68 camscr_DistKeySet USER_DEFINED 92
+F 800baec4 camscr_DistKeyAddOverTime USER_DEFINED 108
+F 800baf30 camscr_DistKeyAddAccel USER_DEFINED 144
+F 800bafc0 camscr_DistKeyLerp USER_DEFINED 208
+F 800bb090 camscr_dist_key_interp_table_800bb090 USER_DEFINED 248
+F 800bb188 camscr_dist_track_table_step_800bb188 USER_DEFINED 244
+F 800bb27c camscr_DistKeyLerpToTarget USER_DEFINED 172
+F 800bb328 camscr_DistKeyCallStub USER_DEFINED 120
+C 800bb3a0
+F 800bb3a0 stub_800bb3a0 USER_DEFINED 8
+F 800bb3a8 camscr_DistKeyWaitFrames USER_DEFINED 84
+F 800bb3fc camscr_DistKeyEnd USER_DEFINED 28
+F 800bb418 zero_twelve_g_cam_globals_800bb418 USER_DEFINED 104
+F 800bb480 cam_CalcFighterPairAngleDist USER_DEFINED 132
+F 800bb504 cam_SnapSmoothedFighterPos USER_DEFINED 104
+F 800bb56c cam_SmoothFighterPositions USER_DEFINED 348
+C 800bb6c8
+C 800bb6c8
+C 800bb6c8
+F 800bb6c8 step_int_toward_target_deadzone_clamped_800bb6c8 USER_DEFINED 228
+F 800bb7ac cam_CalcFramingCenter USER_DEFINED 192
+F 800bb86c set_flag_if_yaw_delta_over_0x800_800bb86c USER_DEFINED 72
+F 800bb8b4 cam_SetSideFlagFromAngles USER_DEFINED 16
+F 800bb8c4 set_flag_from_angle_diff_gt_800_800bb8c4 USER_DEFINED 104
+F 800bb92c cam_CalcFollowDistanceByHeightGap USER_DEFINED 268
+F 800bba38 cam_CalcFollowDistanceByHeightDiff USER_DEFINED 256
+F 800bbb38 cam_ApplyFollowEyeClamped USER_DEFINED 352
+C 800bc294
+C 800bc690
+F 800bbc98 cam_ApplyFollowEyeMinHeight USER_DEFINED 8
+F 800bbca0 set_cam_param_targets_sincos_then_cam_setlookatmatrix_800bbca0 USER_DEFINED 324
+C 800bc690
+F 800bbde4 cam_ApplyFollowEye USER_DEFINED 308
+C 800bc690
+F 800bbf18 copy_g_cam_view_ang_to_param_targets_call_cam_setlookatm_800bbf18 USER_DEFINED 24
+F 800bbf30 store_three_regs_to_g_cam_param_targets_then_call_800bbf30 USER_DEFINED 56
+C 800bc690
+F 800bbf68 return_table16_entry_by_func_0x800161dc_low_nibble_800bbf68 USER_DEFINED 52
+F 800bbf9c math_RandomFromTable16Copy USER_DEFINED 108
+F 800bc008 math_RandomFromTableRow USER_DEFINED 136
+F 800bc090 math_RandomFromTableRow_2 USER_DEFINED 136
+F 800bc118 return_arg0_plus_rand_mod_masked_span_800bc118 USER_DEFINED 112
+F 800bc188 fighter_get_point_xyz_800bc188 USER_DEFINED 268
+F 800bc294 cam_CalcPitchYawToward USER_DEFINED 136
+F 800bc31c add_rotated_offset_to_two_ptrs_sintable_800bc31c USER_DEFINED 168
+F 800bc408 fighter_GetFacingMinus400 USER_DEFINED 52
+F 800bc43c step_angle_toward_target_clamped_800bc43c USER_DEFINED 272
+F 800bc54c clamp_int_at_ptr_between_min_max_800bc54c USER_DEFINED 40
+F 800bc5ac return_arg_div2_times_0x3a7_div_0x160_800bc5ac USER_DEFINED 72
+F 800bc690 cam_pass_eye_target_vectors_800bc690 USER_DEFINED 32
+F 800bc6b0 build_local_struct_call_func_0x8001d31c_800bc6b0 USER_DEFINED 96
+F 800bc720 stage_InitTileWrap USER_DEFINED 36
+F 800bc744 stage_CalcTileWrapShift USER_DEFINED 684
+F 800bc9f0 stage_ApplyTileWrapShift USER_DEFINED 536
+F 800bcc08 stage_UpdateTileFromCameraYaw USER_DEFINED 32
+F 800bcc28 stage_UpdateTileFromCameraYaw_2 USER_DEFINED 612
+F 800bce8c fighter_RunTaskLoop USER_DEFINED 156
+C 800bcf3c
+C 800bfe78
+C 800bd01c
+C 800bd108
+C 800bd850
+C 800bcf3c
+F 800bcf3c fighter_ClearTaskState USER_DEFINED 224
+F 800bd01c update_recoil_both_fighters_800bd01c USER_DEFINED 236
+C 800db1d0
+C 800bfc0c
+C 800bfd98
+F 800bd108 fighter_CalcPushApartSpeeds USER_DEFINED 1864
+C 800bddec
+C 800bdae8
+C 800bdae8
+C 800bdae8
+F 800bd850 fighter_UpdateAirborneStates USER_DEFINED 664
+C 800be6c0
+C 800bf348
+C 800daeb0
+C 800be14c
+C 800be494
+C 800bf680
+C 800bfa50
+F 800bdae8 fighter_ApplyFacingPush USER_DEFINED 772
+F 800bddec hit_ResolveTradePriority USER_DEFINED 656
+C 800dae3c
+F 800be0a8 store_three_scaled_table_products_to_g_fighter_vel_800be0a8 USER_DEFINED 164
+F 800be14c fighter_InitKnockbackVelocity USER_DEFINED 840
+C 800daeb0
+F 800be494 fighter_StepKnockbackFlight USER_DEFINED 556
+F 800be6c0 fighter_init_knock_vel_from_table_800be6c0 USER_DEFINED 92
+F 800be71c fragment_store_knock_vel_tbl_from_regs_800be71c USER_DEFINED 304
+F 800be84c clip_distance_vs_stage_half_extents_800be84c USER_DEFINED 2812
+F 800bf348 fighter_StepLaunchedFlight USER_DEFINED 824
+F 800bf680 fighter_InitLaunchVelocity USER_DEFINED 976
+F 800bfa50 fighter_StepSlideFlight USER_DEFINED 444
+F 800bfc0c fighter_InitRecoilVelocity USER_DEFINED 396
+F 800bfd98 fighter_StepRecoilDecay USER_DEFINED 224
+F 800bfe78 save_or_restore_p1_p2_pos_by_distance_lt_6000_800bfe78 USER_DEFINED 180
+F 800bff2c fight_MainLoop USER_DEFINED 160
+C 800bffe8
+C 800c1390
+C 800c0504
+C 800c07c4
+C 800c08f8
+C 800c0908
+F 800bffe8 fight_InitMatchByMode USER_DEFINED 1308
+S PLAYER1 WINS!
+C 800c590c
+C 800c5eb0
+C 800dcfa0
+C 800c4f9c
+F 800c0504 fight_HandleMatchEndTimer USER_DEFINED 704
+C 800c4498
+C 800c1390
+C 800c4498
+F 800c07c4 fight_TickContinueCountdown USER_DEFINED 308
+F 800c08f8 fight_ClearPauseFlag USER_DEFINED 16
+F 800c0908 fight_DispatchRoundState USER_DEFINED 156
+C 800c1aac
+C 800c1e84
+C 800c2088
+C 800c2114
+C 800c2688
+C 800c09a4
+F 800c09a4 fight_InitMatchOpponents USER_DEFINED 1944
+C 800c381c
+C 800c113c
+C 800c12e0
+C 800ae0c8
+C 800c1390
+C 800c3f94
+C 800aed50
+C 800afbec
+C 800c4910
+C 800c13f0
+C 800c496c
+C 800c1448
+F 800c113c fight_SelectStageIndex USER_DEFINED 420
+F 800c12e0 fight_InitMaxHealthFromHandicap USER_DEFINED 176
+F 800c1390 call_8004d2d4_nine_ids_800c1390 USER_DEFINED 96
+F 800c13f0 call_func_0x8004d300_eight_consts_800c13f0 USER_DEFINED 88
+F 800c1448 init_p1_p2_globals_then_hud_setroundwinmarkers_800c1448 USER_DEFINED 1636
+C 800af064
+F 800c1aac set_round_globals_wait_frames_state1_800c1aac USER_DEFINED 984
+C 800c4824
+C 800c1448
+C 800c4824
+C 800c4824
+C 800c1448
+F 800c1e84 fight_RoundStateWaitKO USER_DEFINED 516
+C 800c4fc4
+F 800c2088 fight_set_round_state_after_delay_800c2088 USER_DEFINED 140
+F 800c2114 fight_RoundStateContinuePrompt USER_DEFINED 1396
+C 800db104
+C 800c4dd0
+F 800c2688 fight_set_substate_by_round_wins_800c2688 USER_DEFINED 4500
+C 800c5938
+C 800c5938
+C 800c5f00
+C 800c43b8
+C 800af064
+C 800c47b0
+C 800afbec
+F 800c381c fight_SelectOpponentFighters USER_DEFINED 1912
+C 800c4e34
+C 800c4e34
+C 800c4e34
+C 800c4e34
+C 800c4e34
+F 800c3f94 fight_LoadFightersIfChanged USER_DEFINED 1060
+F 800c43b8 reset_play_time_add_total_inc_two_counters_800c43b8 USER_DEFINED 224
+F 800c4498 stat_CountFighterPlays USER_DEFINED 16
+F 800c44a8 increment_counters_by_game_mode_switch_then_unlock_check_800c44a8 USER_DEFINED 776
+C 800c65ac
+F 800c47b0 store_play_time_by_continue_count_800c47b0 USER_DEFINED 116
+F 800c4824 fight_InitRoundTimeLimit USER_DEFINED 236
+F 800c4910 mem_CopyTeamBattleTable USER_DEFINED 92
+F 800c496c fight_pick_track_or_restore_volume_800c496c USER_DEFINED 160
+F 800c4a0c gfx_build_two_sprite_prims_from_buf_800c4a0c USER_DEFINED 964
+F 800c4dd0 increment_continue_timer_until_limit_800c4dd0 USER_DEFINED 100
+F 800c4e34 fighter_PickRandomCostume USER_DEFINED 360
+F 800c4f9c team_ClearBattleResults USER_DEFINED 40
+F 800c4fc4 team_StoreBattleResult USER_DEFINED 48
+F 800c4ff4 team_DrawBattleReportLoop USER_DEFINED 160
+C 800c5548
+C 800c50fc
+S TEAM BATTLE REPORT
+F 800c5094 team_DrawBattleResult USER_DEFINED 104
+C 800c576c
+C 800c50fc
+S TEAM BATTLE RESULT
+F 800c50fc team_DrawRosterPanels USER_DEFINED 16
+F 800c510c team_DrawRosterPanelsTail USER_DEFINED 1084
+S PLAYER1
+S CPU
+S PLAYER2
+S CPU
+C 800c63c8
+C 800c64d4
+C 800c654c
+F 800c5548 team_DrawNextMatchLabel USER_DEFINED 548
+S NEXT MATCH
+F 800c576c team_DrawResultText USER_DEFINED 416
+S DRAW
+S YOU LOSE
+S YOU WIN!
+S PLAYER1 WINS!
+S PLAYER2 WINS!
+S AGAIN
+S EXIT
+F 800c590c team_ClearWinCounts USER_DEFINED 44
+F 800c5938 team_RecordRoundWin USER_DEFINED 124
+F 800c59b4 kumite_DrawResultScreen USER_DEFINED 1276
+S EXIT
+S TOTAL
+S 100
+S 100
+C 800c64d4
+C 800c64d4
+S PER.
+C 800c64d4
+C 800c654c
+S 100%
+C 800c63c8
+C 800c64d4
+C 800c64d4
+S KUMITE RESULT
+F 800c5eb0 timeattack_ClearStageTimes USER_DEFINED 80
+F 800c5f00 timeattack_RecordStageTime USER_DEFINED 172
+F 800c5fac timeattack_CalcSegmentTimeTail USER_DEFINED 232
+F 800c6094 timeattack_DrawResultScreen USER_DEFINED 820
+S TOTAL TIME
+C 800c64d4
+C 800c64d4
+C 800c64d4
+S EXIT
+C 800c63c8
+S STAGE
+C 800c64d4
+C 800c64d4
+C 800c64d4
+C 800c64d4
+S TIME ATTACK RESULT
+F 800c63c8 build_sprite_packet_from_byte_table_submit_800c63c8 USER_DEFINED 268
+F 800c64d4 clamp_99_split_two_ascii_digits_call_helper_800c64d4 USER_DEFINED 120
+F 800c654c text_DrawDigit USER_DEFINED 16
+F 800c655c write_digit_char_then_call_func_800c655c USER_DEFINED 80
+F 800c65ac unlock_CheckAllConditions USER_DEFINED 80
+C 800c65fc
+C 800c68f4
+C 800c6974
+C 800c6a0c
+C 800c6a90
+C 800c6b44
+C 800c6c24
+F 800c65fc cfg_update_costume_counts_roster_flags_800c65fc USER_DEFINED 760
+F 800c68f4 set_unlock_bit0_on_mode2_end_or_time_800c68f4 USER_DEFINED 128
+F 800c6974 set_unlock_flag_a_bit2_by_play_time_800c6974 USER_DEFINED 152
+F 800c6a0c unlock_CheckSurvivalFlag4 USER_DEFINED 132
+F 800c6a90 unlock_CheckKumiteFlag8 USER_DEFINED 180
+F 800c6b44 unlock_check_counter_or_roster_set_flag10_800c6b44 USER_DEFINED 224
+F 800c6c24 unlock_check_equal_bytes_set_flag40_800c6c24 USER_DEFINED 96
+F 800c6c84 set_flag_bits_when_g_play_time_seconds_exceeds_threshold_800c6c84 USER_DEFINED 372
+F 800c6df8 fight_UpdateAllFighters USER_DEFINED 4048
+C 800cd4d8
+C 800c7df4
+C 800c7f9c
+C 800db104
+C 800c8c3c
+C 800cd854
+F 800c7df4 fight_ResetOnRoundStateChange USER_DEFINED 16
+F 800c7e04 reset_round_flags_tail_800c7e04 USER_DEFINED 408
+C 800cd4d8
+C 800cd63c
+C 800c8b90
+F 800c7f9c fighter_UpdateFacingBothSides USER_DEFINED 80
+C 800c7fec
+C 800c7fec
+F 800c7fec set_two_flag_bytes_from_angle_windows_800c7fec USER_DEFINED 344
+F 800c8144 set_per_player_halfword_from_byte_pair_table_lookup_800c8144 USER_DEFINED 684
+F 800c83f0 check_opponent_fields_vs_table_row_return_bool_800c83f0 USER_DEFINED 964
+C 800c8848
+F 800c87b4 set_byte_0x3a_from_opponent_byte_0x46_800c87b4 USER_DEFINED 148
+F 800c8848 fighter_IsStateInRange1a USER_DEFINED 16
+F 800c8858 fighter_IsStateInRangeNeg USER_DEFINED 16
+F 800c8868 fighter_IsStateInRange34 USER_DEFINED 16
+F 800c8928 return_1_if_byte2d_zero_or_7_9_with_byte41_eq_1_800c8928 USER_DEFINED 88
+F 800c8980 return_0_if_offset_point_within_half_extents_800c8980 USER_DEFINED 68
+F 800c89c4 return_0_if_point_within_half_stage_width_depth_800c89c4 USER_DEFINED 216
+F 800c8a9c return_0_if_xz_within_half_g_timer_start_800c8a9c USER_DEFINED 140
+F 800c8b28 random_call_mod_arg_masked16_800c8b28 USER_DEFINED 104
+F 800c8b90 loop_2_clear_fields_in_g_ai_counter_tbl_set_999_800c8b90 USER_DEFINED 68
+F 800c8c3c cpu_UpdateFighterAi USER_DEFINED 2288
+C 800cd4d8
+C 800c984c
+C 800cd530
+C 800c952c
+C 800d9c20
+C 800cd530
+C 800ca7d8
+C 800ca87c
+C 800ca958
+C 800cd60c
+C 800ca958
+C 800ca7d8
+C 800ca958
+C 800ca7d8
+C 800ca958
+C 800ca570
+C 800ca094
+C 800ca4bc
+C 800c8848
+C 800ca408
+C 800ca958
+C 800ca7d8
+C 800ca9f0
+C 800ca87c
+C 800ca9f0
+C 800ca9f0
+C 800cd530
+C 800c952c
+C 800c9ed0
+C 800ca144
+F 800c952c cpu_ChooseActionFromInput USER_DEFINED 800
+C 800ca7d8
+C 800ca74c
+C 800ca958
+C 800ca74c
+C 800cae88
+C 800ca87c
+C 800ca7d8
+C 800ca74c
+C 800ca958
+C 800ca74c
+C 800cae88
+C 800ca958
+C 800cd530
+C 800ca570
+F 800c984c cpu_ParseInputHistory USER_DEFINED 1668
+C 800ca87c
+C 800ca958
+C 800ca958
+C 800ca958
+C 800ca958
+C 800ca958
+C 800ca958
+C 800ca958
+C 800ca958
+C 800ca958
+C 800ca74c
+C 800cae88
+C 800ca958
+C 800ca74c
+C 800cae88
+C 800d9c20
+F 800c9ed0 cpu_ScanInputBufferForThrow USER_DEFINED 44
+F 800c9efc walk_input_ring_set_flag_byte_if_low4_eq_7_800c9efc USER_DEFINED 388
+F 800ca094 choose_script_by_fighter_byte_run_800ca094 USER_DEFINED 176
+C 800ca7d8
+C 800ca958
+C 800cd530
+F 800ca144 cpu_HandleGuardInput USER_DEFINED 16
+F 800ca154 timer_state_machine_run_script_or_pick_command_800ca154 USER_DEFINED 400
+C 800c8144
+C 800ca43c
+C 800ca7d8
+C 800ca958
+C 800cd530
+C 800ca2e4
+F 800ca2e4 store_byte_from_table_chosen_by_input_high_nibble_800ca2e4 USER_DEFINED 292
+F 800ca408 cpu_run_script_f_if_buffered_dir_800ca408 USER_DEFINED 52
+C 800ca74c
+C 800ca958
+F 800ca43c decrement_per_player_short_clamp_zero_800ca43c USER_DEFINED 128
+F 800ca4bc set_field_0x10_2000_if_byte_lt_10_and_input_eq_1_800ca4bc USER_DEFINED 180
+F 800ca570 cpu_UpdateFacingFromInput USER_DEFINED 476
+C 800c87b4
+F 800ca74c walk_input_ring_back_return_byte_plus2_800ca74c USER_DEFINED 140
+F 800ca7d8 walk_input_ring_back_return_byte_plus3_if_last_800ca7d8 USER_DEFINED 164
+F 800ca87c walk_ring_of_16_entries_return_byte_at_frame_800ca87c USER_DEFINED 220
+F 800ca958 cpu_RunMoveScript USER_DEFINED 152
+C 800caa88
+C 800caa88
+F 800ca9f0 cpu_RunMoveScriptOpponent USER_DEFINED 152
+C 800caa88
+C 800caa88
+F 800caa88 cpu_ExecScriptOpcodes USER_DEFINED 1024
+C 800cb18c
+C 800cb2c4
+C 800cb2e0
+C 800cb3c4
+C 800cb5e4
+C 800cb748
+C 800cb960
+C 800cbc34
+C 800cbf58
+C 800cc1c8
+C 800cc46c
+C 800cc62c
+C 800cc8b8
+C 800cbabc
+C 800cca54
+C 800ccc54
+C 800ccdec
+C 800cce60
+C 800ccea0
+C 800ccf3c
+C 800ccf78
+C 800cd020
+C 800cd0ac
+C 800cd104
+C 800cd16c
+C 800cd1d4
+C 800cd20c
+C 800cd26c
+C 800cd294
+C 800cd4b8
+C 800cd0d8
+F 800cae88 swap_bits_6_7_if_byte_at_g_cur_player_idx_is_1_800cae88 USER_DEFINED 76
+F 800caed4 set_bit_in_byte6_call_ai_scriptadvanceframeschecked_800caed4 USER_DEFINED 108
+C 800cb0c4
+F 800caf60 call_sync_then_return_input_ring_byte3_800caf60 USER_DEFINED 64
+C 800cb230
+F 800cafa0 call_sync_then_combine_ring_entry_bytes_800cafa0 USER_DEFINED 176
+C 800cb230
+F 800cb0c4 subtract_arg_from_u16_set_flag_if_neg_else_advance_ring_800cb0c4 USER_DEFINED 200
+F 800cb18c add_arg_to_fields_0x10_0xe_advance_ring_idx_loop_800cb18c USER_DEFINED 164
+F 800cb230 adjust_struct_counters_from_ring_entry_frame_delta_800cb230 USER_DEFINED 148
+F 800cb2c4 ai_ScriptPopWord USER_DEFINED 28
+F 800cb2e0 ai_ScriptPopWordStepBack USER_DEFINED 228
+F 800cb3c4 pop_byte_scan_ring_until_high_or_low_nibble_match_800cb3c4 USER_DEFINED 544
+C 800cb0c4
+C 800cb230
+C 800cb230
+F 800cb5e4 script_pop_mask_wait_ring_entry_and_mask_800cb5e4 USER_DEFINED 356
+C 800cb0c4
+C 800cb230
+F 800cb748 pop_byte_loop_step_ring_back_until_nibble_match_no_sync_800cb748 USER_DEFINED 536
+C 800cb0c4
+F 800cb960 pop_byte_mirror_bits_seek_ring_entry_matching_any_bit_800cb960 USER_DEFINED 348
+C 800cb0c4
+F 800cbabc pop_byte_loop_step_ring_back_until_nibblepair_match_800cbabc USER_DEFINED 376
+C 800cb0c4
+C 800cafa0
+F 800cbc34 script_pop_mask_count_match_ring_then_skip_800cbc34 USER_DEFINED 804
+C 800cb0c4
+F 800cbf58 pop_two_bytes_seek_ring_entry_matching_all_bits_then_ski_800cbf58 USER_DEFINED 624
+C 800cb0c4
+F 800cc1c8 loop_step_ring_until_nibble_matches_or_abort_800cc1c8 USER_DEFINED 676
+C 800cb0c4
+C 800cb230
+C 800cb230
+C 800cb230
+C 800cb230
+F 800cc46c pop_byte_loop_step_ring_until_masked_byte3_match_or_abor_800cc46c USER_DEFINED 448
+C 800cb0c4
+C 800cb230
+C 800cb230
+F 800cc62c pop_byte_scan_ring_abort_on_stray_nibble_800cc62c USER_DEFINED 652
+C 800cb0c4
+F 800cc8b8 pop_byte_loop_step_ring_until_byte2_match_or_abort_800cc8b8 USER_DEFINED 412
+C 800cb0c4
+F 800cca54 loop_step_ring_until_high_nibble_of_either_arg_800cca54 USER_DEFINED 512
+C 800cb0c4
+C 800cb230
+C 800cb230
+F 800ccc54 pop_byte_scan_ring_via_input_getbuffernibblepair_800ccc54 USER_DEFINED 408
+C 800cb0c4
+C 800cafa0
+C 800cafa0
+F 800ccdec ai_ScriptCheckMoveAndFrame USER_DEFINED 116
+F 800cce60 ai_ScriptCheckMoveEqual USER_DEFINED 64
+F 800ccea0 ai_ScriptCheckMoveStateWindow USER_DEFINED 156
+F 800ccf3c ai_ScriptCheckCurrentMove USER_DEFINED 60
+F 800ccf78 script_pop_byte_compare_opponent_fields_range_800ccf78 USER_DEFINED 168
+F 800cd020 ai_script_store_move_condition_inverted_800cd020 USER_DEFINED 140
+C 800c83f0
+F 800cd0ac set_field_4_to_1_if_per_player_byte_zero_800cd0ac USER_DEFINED 44
+F 800cd0d8 set_byte_plus4_if_byte_at_g_cur_player_idx_is_1_800cd0d8 USER_DEFINED 44
+F 800cd104 ai_ScriptCheckPosBelowLimit USER_DEFINED 104
+F 800cd16c ai_ScriptCheckPosBelowLimitAlt USER_DEFINED 104
+F 800cd1d4 ai_ScriptCheckStateAndQueuedMove USER_DEFINED 56
+F 800cd20c ai_ScriptCheckValueInRange USER_DEFINED 96
+F 800cd26c ai_ScriptSetFlagIfNoField43 USER_DEFINED 40
+F 800cd294 ai_ScriptCheckFacingMode USER_DEFINED 456
+C 800cd45c
+F 800cd45c set_byte4c_by_angle_diff_lt_0x800_800cd45c USER_DEFINED 92
+C 800db354
+F 800cd4b8 ai_ScriptSetFlagCopyByte USER_DEFINED 32
+F 800cd4d8 input_ClearMoveQueue USER_DEFINED 88
+F 800cd530 ai_ScriptDequeueMove USER_DEFINED 220
+F 800cd60c clear_two_per_player_bytes_800cd60c USER_DEFINED 48
+F 800cd63c ai_InitScriptContext USER_DEFINED 484
+C 800d3988
+C 800d3988
+F 800cd820 return_word_from_table_ptr_two_byte_indices_800cd820 USER_DEFINED 52
+F 800cd854 ai_UpdateCpuMain USER_DEFINED 4928
+C 800d3988
+C 800d3440
+C 800d3440
+C 800d3a54
+C 800c8858
+C 800c8868
+C 800d39cc
+C 800d3440
+C 800d3a54
+C 800c8868
+C 800d3440
+C 800d3a54
+C 800c8858
+C 800d1cd0
+C 800c8858
+C 800c8858
+C 800c8848
+C 800d1cd0
+C 800d3988
+C 800c8848
+C 800d03e0
+C 800c8b28
+C 800c8b28
+C 800c8b28
+C 800d3208
+C 800d2bc8
+C 800d2ef8
+C 800ced84
+C 800ceb94
+C 800d28a8
+C 800c8b28
+C 800d28a8
+C 800cefc0
+C 800d2ce4
+C 800d3d90
+C 800d3d90
+C 800c87b4
+C 800c87b4
+C 800cff74
+C 800cff74
+C 800d195c
+C 800d1cd0
+C 800d0160
+C 800d1a20
+C 800d0160
+C 800d1a20
+C 800d1498
+C 800c8848
+C 800d1b88
+F 800ceb94 ai_SelectBehaviorByState USER_DEFINED 496
+C 800c8858
+C 800c8868
+C 800cf868
+C 800cfb98
+C 800cf33c
+C 800cfc8c
+C 800c8848
+C 800cfe20
+C 800cf1ac
+F 800ced84 ai_select_pick_by_opponent_state_800ced84 USER_DEFINED 572
+C 800cfb98
+C 800cfc8c
+C 800c8848
+C 800c8858
+C 800cf33c
+C 800d1cd0
+C 800d39cc
+C 800cf868
+C 800d3988
+F 800cefc0 ai_CheckInputCommandStart USER_DEFINED 492
+C 800c8848
+C 800cfec8
+C 800cfec8
+C 800d1cd0
+C 800d1cd0
+F 800cf1ac ai_pick_attack_tier_by_state_800cf1ac USER_DEFINED 400
+C 800d3bfc
+C 800d3a54
+C 800cf5e4
+C 800d3bfc
+C 800cf5e4
+C 800cf868
+C 800cf33c
+F 800cf33c ai_pick_entry_by_distance_800cf33c USER_DEFINED 680
+C 800d3b2c
+C 800cfec8
+C 800cfec8
+C 800d3d6c
+C 800d3d6c
+C 800cfec8
+F 800cf5e4 switch_roll_result_compare_dist_call_ai_runhandleriftabl_800cf5e4 USER_DEFINED 644
+C 800d3b2c
+C 800d3bbc
+C 800d3d6c
+C 800d3d6c
+C 800cfec8
+F 800cf868 ai_pick_handler_by_style_roll_800cf868 USER_DEFINED 816
+C 800d1cd0
+C 800d38c8
+C 800d351c
+C 800d1cd0
+C 800d1cd0
+C 800cfec8
+C 800d3d6c
+C 800cfec8
+F 800cfb98 ai_pick_table_entry_by_opp_height_800cfb98 USER_DEFINED 244
+C 800cf33c
+C 800d1cd0
+C 800cfec8
+F 800cfc8c ai_PickWeightedEntry USER_DEFINED 404
+C 800d1cd0
+C 800c8b28
+F 800cfe20 ai_StartMove4Or5Compare USER_DEFINED 168
+C 800cff2c
+F 800cfec8 ai_RunHandlerIfTableEntry USER_DEFINED 100
+C 800d1d14
+F 800cff2c call_ai_pickweightedscriptentry_if_table_entry_nonzero_800cff2c USER_DEFINED 72
+C 800d1d14
+F 800cff74 ai_TickDelayedAction USER_DEFINED 396
+C 800d1cd0
+C 800c8b28
+C 800d0100
+F 800d0100 ai_LookupActionByMove USER_DEFINED 96
+F 800d0160 ai_TickDelayedActionAlt USER_DEFINED 456
+C 800d1cd0
+C 800c8b28
+C 800d0328
+F 800d0328 ai_LookupActionByOpponentMove USER_DEFINED 96
+F 800d03e0 ai_RunScriptOpcodes USER_DEFINED 4208
+C 800c8928
+C 800c8928
+C 800c8928
+C 800c83f0
+C 800c8928
+C 800c8928
+C 800c8928
+C 800d1450
+C 800c8928
+C 800c8b28
+C 800d1450
+C 800c8928
+C 800d1450
+C 800d1450
+C 800c8b28
+C 800c8b28
+C 800d1450
+C 800c8928
+C 800d1d14
+C 800d1d14
+F 800d1450 decrement_short_at_8_zero_it_and_add_2_to_field_0xc_800d1450 USER_DEFINED 64
+F 800d1498 ai_UpdateDefenseChoiceEntry USER_DEFINED 16
+F 800d14a8 select_g_cpu_action_id_from_timers_rolls_and_switch_800d14a8 USER_DEFINED 1024
+C 800c8144
+C 800d18a8
+C 800d1cd0
+C 800d1d14
+C 800c8858
+C 800cd45c
+C 800c8980
+F 800d18a8 decrement_short_by_idx_extra_minus4_on_ai_rollthreshold_800d18a8 USER_DEFINED 180
+C 800d1cd0
+F 800d195c conditional_store_2000_counter_cap_10_800d195c USER_DEFINED 196
+C 800d1cd0
+F 800d1a20 scaled_threshold_roll_set_flag_bytes_800d1a20 USER_DEFINED 360
+C 800d1cd0
+F 800d1b88 ai_PickReactionFromMoveTable USER_DEFINED 328
+C 800d1cd0
+C 800c8b28
+F 800d1cd0 ai_RollThreshold USER_DEFINED 68
+F 800d1d14 ai_PickWeightedScriptEntry USER_DEFINED 288
+C 800c8b28
+C 800d1e34
+F 800d1e34 ai_ResolveScriptParam USER_DEFINED 2676
+C 800db104
+C 800db104
+C 800c83f0
+C 800c83f0
+C 800c83f0
+C 800d03e0
+F 800d28a8 ai_PickRangeAction USER_DEFINED 624
+C 800c8848
+C 800c8858
+C 800d2b18
+F 800d2b18 rand_check_then_set_g_cpu_action_id_by_distance_800d2b18 USER_DEFINED 176
+F 800d2bc8 ai_PickApproachMove USER_DEFINED 284
+F 800d2ce4 ai_CheckMoveReachEntry USER_DEFINED 16
+F 800d2cf4 switch_g_cpu_action_id_cancel_if_outside_bounds_800d2cf4 USER_DEFINED 516
+C 800c8980
+C 800c8980
+C 800c8980
+C 800c8980
+C 800c8980
+C 800c8980
+F 800d2ef8 ai_UpdateAttackChoice USER_DEFINED 784
+C 800d1d14
+C 800cf868
+C 800d28a8
+F 800d3208 ai_set_timer_by_state_800d3208 USER_DEFINED 568
+C 800c8b28
+C 800d3778
+C 800d3778
+C 800c8b28
+F 800d3440 update_byte_fields_on_arg_match_else_shift_and_divide_by_800d3440 USER_DEFINED 220
+F 800d351c ai_ChooseStyleFromWeights USER_DEFINED 256
+C 800d3778
+C 800d3778
+C 800d3b2c
+F 800d3778 ai_CheckStateCondition USER_DEFINED 336
+F 800d38c8 return_code_from_opponent_bytes_0_1_2_3_ff_800d38c8 USER_DEFINED 192
+C 800c8868
+F 800d3988 ai_WeightsInit USER_DEFINED 68
+F 800d39cc ai_WeightAdjustClamped USER_DEFINED 136
+F 800d3a54 ai_WeightsAddClamp USER_DEFINED 216
+F 800d3b2c ai_WeightsPickIndex USER_DEFINED 144
+C 800c8b28
+F 800d3bbc return_math_randommod_sum_bytes_lt_byte0_800d3bbc USER_DEFINED 64
+C 800c8b28
+F 800d3bfc ai_RollCounterHold USER_DEFINED 368
+F 800d3d6c ai_fighter_bytes_44_30_zero_800d3d6c USER_DEFINED 36
+F 800d3d90 ai_set_cpu_action_by_option_index_800d3d90 USER_DEFINED 312
+F 800d3ec8 fight_MainLoop_800d3ec8 USER_DEFINED 800
+C 800d4200
+C 800d9344
+C 800db4b4
+C 800d4200
+C 800d9344
+C 800d4b28
+C 800da7cc
+C 800d66c8
+C 800d8898
+C 800d4bec
+C 800d9344
+C 800db578
+C 800d4b28
+C 800da7cc
+C 800d66c8
+C 800d4360
+C 800d8898
+C 800d4bec
+C 800d9344
+C 800de160
+F 800d4200 init_once_clear_state_history_reset_idle_800d4200 USER_DEFINED 352
+C 800db4b4
+C 800d93bc
+C 800d93bc
+F 800d4360 fight_PickRoundEndReaction USER_DEFINED 1992
+F 800d4b28 call_two_helpers_zero_flags_p1_p2_800d4b28 USER_DEFINED 196
+C 800d9e10
+C 800d8c74
+F 800d4bec fight_DispatchPlayerStates USER_DEFINED 288
+C 800d4d0c
+C 800d5640
+C 800d5bcc
+C 800d5d80
+C 800d53e4
+C 800d5714
+C 800d61f4
+C 800d6400
+C 800d6524
+F 800d4d0c fight_apply_queued_move_resolve_clash_800d4d0c USER_DEFINED 1752
+C 800d9c20
+C 800d9c20
+C 800d9728
+C 800d9728
+C 800d9a68
+C 800da5bc
+C 800daf64
+C 800d9b44
+C 800d93bc
+C 800d93bc
+C 800da5bc
+F 800d53e4 fight_update_state1_2_queued_move_800d53e4 USER_DEFINED 604
+C 800da5bc
+C 800d93bc
+C 800da5bc
+C 800d9a68
+C 800d9c20
+C 800da5bc
+F 800d5640 fight_UpdateState3 USER_DEFINED 212
+C 800d93bc
+C 800da3e8
+C 800da5bc
+F 800d5714 fight_resolve_paired_move_end_800d5714 USER_DEFINED 1208
+C 800d93bc
+C 800d9c20
+C 800d9c20
+C 800d9728
+C 800d9c20
+C 800d9c20
+C 800d9728
+C 800d80b0
+C 800da930
+C 800da674
+C 800db354
+C 800daf64
+C 800daf64
+C 800da5bc
+C 800da5bc
+F 800d5bcc fight_UpdateState7 USER_DEFINED 436
+C 800d93bc
+C 800d4d0c
+C 800dadd0
+F 800d5d80 fight_update_fighter_move_by_life_800d5d80 USER_DEFINED 1140
+C 800d93bc
+C 800d4d0c
+C 800da674
+C 800da674
+C 800db354
+C 800daf64
+C 800daf64
+C 800da5bc
+C 800da5bc
+C 800dadd0
+F 800d61f4 fight_state_e_pick_move_from_table_800d61f4 USER_DEFINED 524
+C 800d9a68
+C 800d93bc
+C 800d9a68
+C 800da5bc
+F 800d6400 branch_on_prev_move_ff_set_flags_else_call_fighter_start_800d6400 USER_DEFINED 292
+C 800da5bc
+C 800daf64
+C 800daf64
+F 800d6524 fight_resolve_queued_move_pair_800d6524 USER_DEFINED 420
+C 800d93bc
+C 800d9c20
+C 800d9c20
+C 800d9c20
+C 800da5bc
+C 800d9728
+F 800d66c8 fight_select_reaction_moves_800d66c8 USER_DEFINED 1924
+C 800daccc
+C 800d6e4c
+C 800d6e4c
+C 800d6e4c
+C 800d6e4c
+C 800d7bdc
+C 800d6e4c
+C 800d6e4c
+C 800d82b4
+C 800d6e4c
+C 800d82b4
+C 800da5bc
+C 800d6e4c
+C 800d6e4c
+C 800d7bdc
+C 800d6e4c
+C 800d7da4
+C 800d82b4
+C 800d6e4c
+C 800d82b4
+C 800d82b4
+C 800d82b4
+C 800d82b4
+C 800d82b4
+C 800da5bc
+C 800d6e4c
+C 800d6e4c
+C 800d7bdc
+C 800d7da4
+C 800d8834
+C 800da738
+C 800d8834
+C 800da738
+C 800d82b4
+C 800d82b4
+C 800d80b0
+F 800d6e4c fight_ChooseCounterMove USER_DEFINED 3472
+C 800daf64
+C 800d9a68
+C 800d90d8
+C 800d9518
+C 800d95d8
+C 800d9518
+C 800d95d8
+C 800d9518
+C 800d91dc
+C 800d9518
+C 800d95d8
+C 800d9518
+C 800d95d8
+C 800d9518
+C 800d9c8c
+C 800dabbc
+C 800dabbc
+C 800d9c8c
+C 800dabbc
+C 800dabbc
+C 800dabbc
+C 800d9c8c
+C 800dabbc
+C 800d9c8c
+C 800dabbc
+C 800dabbc
+C 800dabbc
+C 800d95d8
+C 800d9518
+C 800d91dc
+C 800dae3c
+F 800d7bdc fight_copy_fields_to_fighter_check_life_800d7bdc USER_DEFINED 456
+C 800d8f4c
+C 800da674
+F 800d7da4 fight_StartHitReaction USER_DEFINED 780
+C 800d90d8
+C 800daf64
+C 800d9a68
+C 800d9bbc
+C 800dae3c
+C 800da674
+F 800d80b0 fight_StartPairedMoves USER_DEFINED 516
+C 800d9a68
+C 800d9c20
+C 800d9c20
+C 800da240
+F 800d82b4 select_move_id_from_opponent_state_800d82b4 USER_DEFINED 1408
+C 800daf64
+C 800d9a68
+C 800d9c20
+C 800d9a68
+C 800d9c20
+C 800d8834
+F 800d8834 read_byte_helper_table_row_stride_0xc_800d8834 USER_DEFINED 100
+C 800d9a68
+F 800d8898 fight_ApplyHitDamage USER_DEFINED 988
+C 800d98a0
+C 800d98a0
+C 800da85c
+C 800daa04
+C 800d9a68
+C 800ddad8
+F 800d8c74 fight_ApplyPendingDamage USER_DEFINED 728
+C 800daa04
+F 800d8f4c return_value_times_per_mille_by_switch_div_1000_800d8f4c USER_DEFINED 396
+C 800daa04
+F 800d90d8 return_0_or_1_from_g_p1_state_and_flag_bytes_stride_0x58_800d90d8 USER_DEFINED 260
+C 800daeb0
+F 800d91dc return_angle_masked_0xfff_from_cam_or_prev_facing_800d91dc USER_DEFINED 360
+C 800dae3c
+C 800d9a68
+F 800d9344 loop2_store_move_getentryhalf0_if_flag_eq_1_800d9344 USER_DEFINED 120
+C 800dafd4
+F 800d93bc fighter_reset_move_from_table_800d93bc USER_DEFINED 348
+C 800dac14
+C 800da5bc
+C 800d9ce8
+C 800d9b44
+C 800d9bbc
+C 800daf64
+C 800daf64
+F 800d9518 store_arg_bytes_in_per_slot_arrays_call_move_getentryptr_800d9518 USER_DEFINED 192
+C 800dae3c
+F 800d95d8 return_arg0_or_arg0_plus_1_by_flags_800d95d8 USER_DEFINED 336
+F 800d9728 fight_swap_paired_move_ids_800d9728 USER_DEFINED 376
+C 800d9c20
+C 800d9c20
+C 800da240
+F 800d98a0 pos_exceeds_half_limits_with_tile_shift_800d98a0 USER_DEFINED 304
+F 800d99d0 return_byte_0xb_of_entry_stride_0x13_from_func_0x8006adb_800d99d0 USER_DEFINED 76
+F 800d9a1c return_byte_offset_10_stride_0x13_800d9a1c USER_DEFINED 76
+F 800d9a68 move_GetCurrentTable0Byte4 USER_DEFINED 120
+F 800d9ae0 move_GetCurrentMoveByte4 USER_DEFINED 100
+C 800dae3c
+F 800d9b44 move_GetCurrentTable0Byte3 USER_DEFINED 120
+F 800d9bbc move_GetCurrentMoveByte3 USER_DEFINED 100
+C 800dae3c
+F 800d9c20 move_GetTable0Byte3ById USER_DEFINED 108
+F 800d9c8c move_get_entry_byte3_800d9c8c USER_DEFINED 92
+C 800dae3c
+F 800d9ce8 fighter_LoadMoveTransition USER_DEFINED 296
+C 800dae3c
+F 800d9e10 fighter_UpdateAutoFacing USER_DEFINED 452
+C 800d9fd4
+C 800d9fd4
+C 800d9fd4
+F 800d9fd4 adjust_facing_angle_toward_cam_angle_800d9fd4 USER_DEFINED 620
+F 800da240 set_pos_xz_from_other_minus_sincos_times_value_800da240 USER_DEFINED 424
+F 800da3e8 fighter_LoadMoveHitData USER_DEFINED 468
+F 800da5bc fighter_StartMoveAndLoadHit USER_DEFINED 184
+C 800da3e8
+F 800da674 fighter_StartMoveSided USER_DEFINED 196
+C 800dae3c
+F 800da738 fighter_start_move_side0_800da738 USER_DEFINED 148
+C 800dae3c
+F 800da7cc fight_ShiftStateHistory USER_DEFINED 136
+F 800da85c move_get_opp_table67_byte4_800da85c USER_DEFINED 212
+F 800da930 move_get_opp_table_byte5_800da930 USER_DEFINED 212
+F 800daa04 move_get_opp_table_byte_by_state_800daa04 USER_DEFINED 440
+F 800dabbc return_byte_0x12_of_entry_index_times_0x13_via_func_8006_800dabbc USER_DEFINED 88
+F 800dac14 move_GetTable2Byte0C USER_DEFINED 184
+F 800daccc move_compare_entry_byte_0d_800daccc USER_DEFINED 260
+F 800dadd0 copy_four_shorts_to_g_hitbox_param_a_to_d_800dadd0 USER_DEFINED 108
+F 800dae3c move_GetEntryPtr USER_DEFINED 116
+F 800daeb0 move_GetEntryByte0C USER_DEFINED 180
+F 800daf64 fighter_IsFacingAway USER_DEFINED 112
+F 800dafd4 move_GetEntryHalf0 USER_DEFINED 304
+F 800db104 zero_hitbox_params_then_load_four_shorts_if_type_800db104 USER_DEFINED 204
+F 800db1d0 table_values_zero_or_ten_800db1d0 USER_DEFINED 388
+F 800db354 compute_atan_func_0x80023b3c_of_negated_offsets_mask_0xf_800db354 USER_DEFINED 352
+F 800db4b4 pad_clear_vibration_state_800db4b4 USER_DEFINED 120
+F 800db578 pad_UpdateVibrationScripts USER_DEFINED 1900
+C 800d8f4c
+F 800dbce4 fight_MainLoop_800dbce4 USER_DEFINED 176
+C 800dcfa0
+C 800df504
+C 800de84c
+C 800dbda8
+F 800dbda8 fight_UpdateFrame USER_DEFINED 924
+C 800dd1c8
+C 800de96c
+C 800dea20
+C 800ded9c
+C 800ddea8
+C 800df4c8
+C 800df2e8
+C 800dc144
+C 800dcae8
+F 800dc144 hit_CheckAttackVsBody USER_DEFINED 948
+C 800dc6f0
+C 800dc604
+C 800dc4f8
+F 800dc4f8 hit_SetHitLevelFromPart USER_DEFINED 152
+F 800dc590 call_hit_spheresphere_test_with_indexed_tables_800dc590 USER_DEFINED 116
+C 800dc604
+F 800dc604 test_abs_diffs_then_squared_dist_le_sum_radius_squared_800dc604 USER_DEFINED 236
+F 800dc6f0 hit_CapsuleSphereTest USER_DEFINED 364
+C 800dc85c
+F 800dc85c hit_CapsuleClosestPointTest USER_DEFINED 12
+F 800dc868 project_point_on_segment_store_g_hit_point_xyz_800dc868 USER_DEFINED 544
+F 800dcae8 hit_CheckBodyVsObjects USER_DEFINED 1208
+C 800dc6f0
+C 800dc6f0
+F 800dcfa0 init_loop2_clear_block_set_g_fx_slot_vars_double_if_scre_800dcfa0 USER_DEFINED 552
+C 800dd1ec
+F 800dd1c8 clear_byte_16_entries_stride_0x34_800dd1c8 USER_DEFINED 36
+F 800dd1ec fill_color_table_call_fx_seteffectlistptr_by_g_clear_rec_800dd1ec USER_DEFINED 700
+C 800de4c0
+C 800de4c0
+C 800de4c0
+C 800de4c0
+C 800de4c0
+C 800de4c0
+F 800dd4a8 find_free_slot_of_16_else_lowest_byte_800dd4a8 USER_DEFINED 232
+F 800dd590 call_fx_findfreeslot_init_0x34_byte_slot_fields_const_50_800dd590 USER_DEFINED 216
+C 800dd4a8
+F 800dd668 fx_SpawnFighterEffects USER_DEFINED 1136
+C 800dd4a8
+F 800ddad8 init_slots_from_byte_list_until_0xff_800ddad8 USER_DEFINED 560
+C 800e4d3c
+C 800de4c0
+C 800de4c0
+C 800dd4a8
+F 800ddd08 loop_alloc_fx_findfreeslot_fill_fields_from_list_800ddd08 USER_DEFINED 416
+C 800dd4a8
+F 800ddea8 loop_16_slots_build_list_call_funcs_then_fx_cleartimers_800ddea8 USER_DEFINED 696
+C 800de96c
+F 800de160 per_player_loop_call_fx_spawnfightereffects_by_state_800de160 USER_DEFINED 864
+C 800dd668
+C 800db1d0
+C 800dd668
+F 800de4c0 store_table_word_into_slot_table_by_three_byte_args_800de4c0 USER_DEFINED 60
+F 800de4fc sum_slot_colors_by_inv_sq_dist_call_func_800de4fc USER_DEFINED 784
+F 800de80c call_func_0x8001c9fc_2_with_zeroed_struct_800de80c USER_DEFINED 64
+F 800de84c clear_dust_globals_two_rand_mod_90_clear_4_slot_shorts_800de84c USER_DEFINED 288
+F 800de96c zero_halfwords_stride_0x10_five_entries_800de96c USER_DEFINED 36
+F 800dea20 fx_UpdateMotionDust USER_DEFINED 892
+C 800df228
+C 800df228
+F 800ded9c fx_UpdateDustTriggers USER_DEFINED 424
+C 800def44
+C 800def44
+F 800def44 fx_spawn_particle_with_budget_check_800def44 USER_DEFINED 32
+F 800def64 fx_SpawnGroundDustTail USER_DEFINED 708
+C 800df228
+F 800df228 fx_AddParticleSlot USER_DEFINED 192
+F 800df2e8 collect_active_slots_offset_draw_call_integrate_vel_life_800df2e8 USER_DEFINED 480
+F 800df4c8 stub_800df4c8 USER_DEFINED 8
+F 800df504 zero_byte_stride_0x18_two_entries_800df504 USER_DEFINED 36
+F 800df530 stub_800df530 USER_DEFINED 8
+F 800df538 effect_UpdateByType USER_DEFINED 364
+C 800df6a4
+C 800dfbf0
+C 800e17c8
+C 800df538
+C 800dfde8
+C 800e0244
+C 800e08f0
+C 800e1474
+C 800e0e50
+F 800df6a4 init_effect_records_by_kind_800df6a4 USER_DEFINED 1356
+F 800dfbf0 loop8_switch_state_update_fields_sintable_800dfbf0 USER_DEFINED 504
+F 800dfde8 update_eight_entry_state_machine_stride_0x3c_800dfde8 USER_DEFINED 1108
+F 800e0244 init_sixteen_piece_array_800e0244 USER_DEFINED 1708
+F 800e08f0 loop16_switch_by_byte_sincos_velocity_update_800e08f0 USER_DEFINED 1376
+F 800e0e50 switch_state_over_16_entries_update_counters_800e0e50 USER_DEFINED 1564
+F 800e1474 effect_DrawSixteenPieces USER_DEFINED 852
+C 800e1e40
+C 800e1e90
+C 800e1f20
+C 800e1ed0
+C 800e1e40
+C 800e1e90
+C 800e1fc0
+C 800e2130
+C 800e2080
+C 800e1fc0
+C 800e2130
+C 800e2080
+C 800e1d38
+F 800e17c8 effect_DrawEightPieces USER_DEFINED 1132
+C 800e1e40
+C 800e1e90
+C 800e1ed0
+C 800e1e40
+C 800e1e90
+C 800e1fc0
+C 800e2130
+C 800e2080
+C 800e1c34
+F 800e1c34 gpu_AddPolyFT4Sprite USER_DEFINED 260
+F 800e1d38 gpu_AddPolyFT4SpriteSemiTrans USER_DEFINED 264
+F 800e1e40 gte_LoadRotTransMatrix USER_DEFINED 72
+F 800e1e90 gte_SetTransFromRotatedVec USER_DEFINED 60
+F 800e1ed0 gte_StoreRotTransMatrix USER_DEFINED 72
+F 800e1f20 gte_ScaleMatrix_800e1f20 USER_DEFINED 156
+F 800e1fc0 gte_RotMatrixY USER_DEFINED 188
+F 800e2080 gte_RotMatrixX USER_DEFINED 172
+F 800e2130 gte_RotMatrixZ USER_DEFINED 180
+F 800e21f0 forever_loop_light_setdirection_stage_update_800e21f0 USER_DEFINED 164
+C 800e2c84
+C 8009554c
+C 800e3214
+C 800bcc08
+C 800e22ac
+C 800e2374
+C 800e2414
+C 800e3214
+F 800e22ac call_8001d04c_four_buffers_800e22ac USER_DEFINED 200
+F 800e2374 call_dist_func_then_call_range_func_600_800e2374 USER_DEFINED 160
+F 800e2414 stage_UpdateFrame USER_DEFINED 424
+C 800e2dd8
+C 800e2e18
+C 800e2a98
+C 800e25bc
+C 800e3a20
+C 800e3510
+C 800e25f4
+C 800e419c
+F 800e25bc call_func_with_three_g_light_ambient_shorts_800e25bc USER_DEFINED 56
+F 800e25f4 stage_build_scroll_layer_packets_800e25f4 USER_DEFINED 1188
+F 800e2a98 stub_800e2a98 USER_DEFINED 8
+F 800e2aa0 loop_entries_switch_type_0_1_4_5_6_7_call_funcs_800e2aa0 USER_DEFINED 468
+F 800e2c84 init_three_double_buffer_structs_800e2c84 USER_DEFINED 340
+F 800e2dd8 stage_RestartScene USER_DEFINED 56
+C 800e2e18
+C 800e32e0
+F 800e2e18 stage_ResetCamera USER_DEFINED 92
+C 800e3510
+C 800e2e74
+F 800e2e74 stage_LoadCameraAndLights USER_DEFINED 928
+C 800e3214
+C 800e403c
+F 800e3214 compute_vec3_from_two_sin_table_lookups_call_func_8001c9_800e3214 USER_DEFINED 204
+F 800e32e0 stage_InitResources USER_DEFINED 224
+C 800e3510
+C 800e33c0
+C 800e3450
+C 800e3540
+C 800e2e74
+F 800e33c0 copy_six_table_bytes_to_g_clear_color_800e33c0 USER_DEFINED 144
+F 800e3450 loop_2x25_store_fighter_getmodeldataptr_result_stride_0x_800e3450 USER_DEFINED 192
+C 80095b44
+F 800e3510 get_clear_rect_index_clamped_800e3510 USER_DEFINED 48
+F 800e3540 init_sprite_packet_fields_nested_loops_then_init_small_l_800e3540 USER_DEFINED 1248
+F 800e3a20 stage_UpdateCameraFade USER_DEFINED 644
+C 800e3214
+C 800e3cac
+F 800e3cac stage_begin_flash_each_flagged_fighter_800e3cac USER_DEFINED 184
+C 800e3d64
+F 800e3d64 swap_light_globals_set_timer_0x60_800e3d64 USER_DEFINED 500
+C 800e3214
+F 800e3f58 compute_two_angles_store_g_light_dir_x_y_800e3f58 USER_DEFINED 228
+F 800e403c write_three_words_from_sintable_two_angles_800e403c USER_DEFINED 100
+F 800e40a0 store_in_lo_to_arg2_plus_8_800e40a0 USER_DEFINED 24
+F 800e40b8 return_1_if_abs_2x_or_2z_outside_limit_globals_800e40b8 USER_DEFINED 80
+F 800e4108 return_1_if_arg2_above_g_timer_p2_start_and_below_g_stag_800e4108 USER_DEFINED 60
+F 800e4144 call_func_0x8003a1a0_atan_diff_call_func_0x8003a588_nega_800e4144 USER_DEFINED 88
+F 800e419c stage_DrawFloorTiles USER_DEFINED 2392
+C 800e4e24
+C 800e4eb4
+C 800e4e24
+C 800e4e74
+C 800e4f04
+C 800e5350
+F 800e4af4 compute_scaled_color_call_func_8001c9fc_800e4af4 USER_DEFINED 492
+C 800d98a0
+C 800e4d3c
+F 800e4ce0 light_set_light1_black_if_entry_valid_800e4ce0 USER_DEFINED 92
+F 800e4d3c return_cell_parity_bits_x_z_div_2000_800e4d3c USER_DEFINED 232
+F 800e4e24 gte_LoadRotTransMatrix_2 USER_DEFINED 72
+F 800e4e74 gte_SetTransFromRotatedVec_2 USER_DEFINED 60
+F 800e4eb4 gte_StoreRotTransMatrix_2 USER_DEFINED 72
+F 800e4f04 gpu_DrawTileMesh USER_DEFINED 1096
+F 800e5350 gpu_CalcQuadScreenXY USER_DEFINED 76

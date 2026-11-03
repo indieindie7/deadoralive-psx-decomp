@@ -26,3 +26,6 @@ ADDR	NAME	STATUS	LAYOUT_OR_BLOCKED_REASON	PROOF
 0x80084eac	tbl_movie_a	BLOCKED	single word (movie ptr) read with tbl_movie_b; array not shown	single site ghidra/dec9_SLUS.c:39465-39466, no index arithmetic
 0x80084cac	tbl_snd_vab_prog_map	BLOCKED	ushort[?], stride 2; count unproven	single site ghidra/dec9_SLUS.c:35218 ((param_1&0xff)*2), no bounds check, no terminator
 0x80084c78	tbl_snd_vab_load_b	BLOCKED	stride 0x10 (param_2*0x10) with sibling tables; count unproven	single function ghidra/dec9_SLUS.c:35214-35246; param_2 branches 0,1,2,else with no bound on else
+
+0x800ea6b8	tbl_part_flags_by_move_a	BLOCKED	byte[N], N=*(byte*)(model_hdr+9), runtime	searched SLUS+OV00 lui/addiu refs and model_LoadPartFlagsByMove 0x800ab840 in dec14_OV00.c; only reader uses header byte +9 of runtime-loaded model; model header format not proven (cd entries are not plain model headers), so count not provable
+0x800ec940..0x800eca28	tbl_vibration_script bodies	BLOCKED	script byte format	pointer table proven (12 entries); script bodies are parsed by pad_UpdateVibrationScripts with no terminator/length field proven in data; length per script unbounded without a decoded stepper

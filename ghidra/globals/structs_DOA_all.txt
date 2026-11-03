@@ -174,3 +174,7 @@ struct DOA_VabLoadRec 0x10
 4 uint dest
 8 uint f_8
 0xc uint size
+
+struct DOA_MovieEntry 0x30
+0x14 uint file_entry
+0x2c uint play_frames
