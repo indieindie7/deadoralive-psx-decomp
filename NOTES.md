@@ -98,3 +98,7 @@ Evidence tier BODY = the name's every claim was checked against the function's o
 - Ghidra: functions created at 80015b0c (biosA0_InitHeap) and 800161ec (biosA0_srand); 2183 hand names re-applied, 0 mismatches vs funcs14_*.tsv (pass14.sh).
 - Tables: 7 more typed (sfx_b/c/d, sfx_e, movie_entry, effect_piece_sets, vibration pointer[12]); 2 BLOCKED with proof lines in evid/tables_proof.tsv (part_flags_a, vibration script bodies).
 - Stages: still 1 NAMED (id 5), 15 OPEN. Searched: fandom (HTTP 402), web.archive (refused), strategywiki (403), GameFAQs/Prima guide, psxdatacenter, Wikipedia, Saturn port stage map (no provable id map), exe tables (stage-sequence 5,11,7,8,4,9,3,10,0,12,6, not fighter-indexed). No longplay transcripts found.
+
+## Round 7 (11-02)
+- Stages are nameless officially (fandom {{Nameless}}, via api.php; fans: "<fighter>'s stage"). Named by owner from code: arcade opponent table SLUS 0x80083424[count] (00 04 0c 02 06 01 08 09 05 0d 0b), stage = tblA 0x800ebc54[count]; fight_InitMatchOpponents 0x800c09a4 -> SelectOpponentFighters 0x800c381c, SelectStageIndex 0x800c113c. Verified headless (evid/stage_shots/arcade_round*.png).
+- NAMED: 5 zack, 11 hayabusa, 7 lei_fang, 8 jann_lee, 4 gen_fu, 9 tina, 3 bayman, 10 bass, 0 kasumi, 12 ayane, 6 raidou; 14/15 stage_unused (stub files, 4199/3295 B nonzero of 104820). OPEN: 1, 2 (no producer), 13 (mode 7 fixed, owner unproven).
